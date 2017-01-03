@@ -28,25 +28,7 @@ OuterSpatial.js is versioned using [semantic versioning](http://semver.org). Thi
 
 ## Changelog
 
-- [v2.0.0](https://github.com/trailheadlabs/outerspatial.js/issues?q=milestone%3A2.0.0+is%3Aclosed)
-- [v2.0.1](https://github.com/trailheadlabs/outerspatial.js/issues?q=milestone%3A2.0.1+is%3Aclosed)
-- [v3.0.0](https://github.com/trailheadlabs/outerspatial.js/issues?q=milestone%3A3.0.0+is%3Aclosed)
-- [v3.0.1](https://github.com/trailheadlabs/outerspatial.js/issues?q=milestone%3A3.0.1+is%3Aclosed)
-- [v3.0.2](https://github.com/trailheadlabs/outerspatial.js/issues?q=milestone%3A3.0.2+is%3Aclosed)
-- [v3.0.3](https://github.com/trailheadlabs/outerspatial.js/issues?q=milestone%3A3.0.3+is%3Aclosed)
-- [v3.0.4](https://github.com/trailheadlabs/outerspatial.js/issues?q=milestone%3A3.0.4+is%3Aclosed)
-- [v3.0.7](https://github.com/trailheadlabs/outerspatial.js/issues?q=milestone%3A3.0.7+is%3Aclosed)
-- [v3.0.8](https://github.com/trailheadlabs/outerspatial.js/issues?q=milestone%3A3.0.8+is%3Aclosed)
-- [v3.0.9](https://github.com/trailheadlabs/outerspatial.js/issues?q=milestone%3A3.0.9+is%3Aclosed)
-- [v3.0.10](https://github.com/trailheadlabs/outerspatial.js/issues?q=milestone%3A3.0.10+is%3Aclosed)
-- v3.0.11
-- [v3.0.12](https://github.com/trailheadlabs/outerspatial.js/issues?q=milestone%3A3.0.12+is%3Aclosed)
-- [v3.0.13](https://github.com/trailheadlabs/outerspatial.js/issues?q=milestone%3A3.0.13+is%3Aclosed)
-- [v3.0.14](https://github.com/trailheadlabs/outerspatial.js/issues?q=milestone%3A3.0.14+is%3Aclosed)
-- [v3.0.15](https://github.com/trailheadlabs/outerspatial.js/issues?q=milestone%3A3.0.15+is%3Aclosed)
-- [v3.0.16](https://github.com/trailheadlabs/outerspatial.js/issues?q=milestone%3A3.0.16+is%3Aclosed)
-- v3.0.17
-- [v3.0.18](https://github.com/trailheadlabs/outerspatial.js/issues?q=milestone%3A3.0.18+is%3Aclosed)
+- v3.0.18: The first version imported into the new repository
 
 ## Keys
 
