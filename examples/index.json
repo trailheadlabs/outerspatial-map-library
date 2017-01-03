@@ -1,0 +1,298 @@
+[{
+  "category": "Examples",
+  "description": "",
+  "css": true,
+  "id": "legend-control-arcgisserver",
+  "include": true,
+  "title": "Adding an ArcGIS Server Legend",
+  "under_development": true
+}, {
+  "category": "Layers",
+  "description": "",
+  "id": "arcgisserver-layer",
+  "include": true,
+  "title": "ArcGIS Server Layer"
+}, {
+  "category": "Presets",
+  "description": "",
+  "id": "baselayer-presets",
+  "include": true,
+  "title": "baseLayers"
+}, {
+  "category": "Getting Started",
+  "description": "",
+  "id": "basic",
+  "include": true,
+  "title": "Basic"
+}, {
+  "category": "Layers",
+  "description": "",
+  "id": "bing-layer",
+  "include": true,
+  "title": "Bing Layer"
+}, {
+  "category": "Examples",
+  "description": "",
+  "id": "mapillary",
+  "include": true,
+  "title": "Bringing in Mapillary Data"
+}, {
+  "category": "Layers",
+  "description": "",
+  "id": "cartodb-layer",
+  "include": true,
+  "title": "CartoDB Layer"
+}, {
+  "category": "Examples",
+  "description": "",
+  "id": "infobox",
+  "include": true,
+  "title": "Configuring Infoboxes"
+}, {
+  "category": "Examples",
+  "description": "",
+  "id": "popups",
+  "include": true,
+  "title": "Configuring Popups"
+}, {
+  "category": "Examples",
+  "description": "",
+  "id": "tooltips",
+  "include": true,
+  "title": "Configuring Tooltips"
+}, {
+  "category": "Layers",
+  "description": "",
+  "id": "csv-layer",
+  "include": true,
+  "title": "CSV Layer"
+}, {
+  "category": "Layers",
+  "description": "",
+  "id": "csv-layer-clustered",
+  "include": true,
+  "title": "CSV Layer (Clustered)"
+}, {
+  "category": "Modules",
+  "description": "",
+  "id": "custom-modules",
+  "include": true,
+  "title": "Custom Modules"
+}, {
+  "category": "Modules",
+  "description": "",
+  "id": "directions-module",
+  "include": true,
+  "title": "Directions Module",
+  "under_development": true
+}, {
+  "category": "Examples",
+  "description": "",
+  "id": "notifications",
+  "include": true,
+  "title": "Displaying Notifications"
+}, {
+  "category": "Controls",
+  "description": "",
+  "id": "download-control",
+  "include": true,
+  "title": "Download Control",
+  "under_development": true
+}, {
+  "category": "Controls",
+  "description": "",
+  "id": "edit-control",
+  "include": true,
+  "title": "Edit Control"
+}, {
+  "category": "Advanced",
+  "css": true,
+  "description": "",
+  "html": true,
+  "id": "events",
+  "include": true,
+  "title": "Events"
+}, {
+  "category": "Controls",
+  "description": "",
+  "id": "fullscreen-control",
+  "include": true,
+  "title": "Fullscreen Control"
+}, {
+  "category": "Controls",
+  "description": "",
+  "id": "fullscreen-control-iframe",
+  "include": false,
+  "title": "Fullscreen Control (Iframe)"
+}, {
+  "category": "Controls",
+  "description": "",
+  "id": "geocoder-control",
+  "include": true,
+  "title": "Geocoder Control"
+}, {
+  "category": "Layers",
+  "description": "",
+  "id": "geojson-layer",
+  "include": true,
+  "title": "GeoJSON Layer"
+}, {
+  "category": "Layers",
+  "description": "",
+  "id": "geojson-layer-clustered",
+  "include": true,
+  "title": "GeoJSON Layer (Clustered)"
+}, {
+  "category": "Layers",
+  "description": "",
+  "id": "github-layer",
+  "include": true,
+  "title": "GitHub Layer"
+}, {
+  "category": "Controls",
+  "description": "",
+  "id": "hash-control",
+  "include": true,
+  "title": "Hash Control"
+}, {
+  "category": "Controls",
+  "description": "",
+  "id": "hash-control-iframe",
+  "include": false,
+  "title": "Hash Control (Iframe)"
+}, {
+  "category": "Advanced",
+  "description": "",
+  "id": "hooks",
+  "include": true,
+  "title": "Hooks"
+}, {
+  "category": "Layers",
+  "description": "",
+  "id": "kml-layer",
+  "include": true,
+  "title": "KML Layer"
+}, {
+  "category": "Layers",
+  "description": "",
+  "id": "kml-layer-clustered",
+  "include": true,
+  "title": "KML Layer (Clustered)"
+}, {
+  "category": "Controls",
+  "description": "",
+  "id": "legend-control",
+  "include": true,
+  "title": "Legend Control"
+}, {
+  "category": "Controls",
+  "description": "",
+  "id": "locate-control",
+  "include": true,
+  "title": "Locate Control"
+}, {
+  "category": "Layers",
+  "description": "",
+  "id": "mapbox-layer",
+  "include": true,
+  "title": "Mapbox Layer"
+}, {
+  "category": "Controls",
+  "description": "",
+  "id": "measure-control",
+  "include": true,
+  "title": "Measure Control"
+}, {
+  "category": "Examples",
+  "css": true,
+  "description": "",
+  "html": true,
+  "id": "multiple-maps",
+  "include": true,
+  "title": "Multiple Maps"
+}, {
+  "category": "Controls",
+  "description": "",
+  "id": "overview-control",
+  "include": true,
+  "title": "Overview Control"
+}, {
+  "category": "Examples",
+  "description": "",
+  "id": "plugins",
+  "include": true,
+  "title": "Plugins"
+}, {
+  "category": "Presets",
+  "description": "",
+  "id": "places-pois-preset",
+  "include": true,
+  "title": "Places Points of Interest Preset"
+}, {
+  "category": "Controls",
+  "description": "",
+  "id": "print-control",
+  "include": true,
+  "title": "Print Control"
+}, {
+  "category": "Controls",
+  "description": "",
+  "id": "scale-control",
+  "include": true,
+  "title": "Scale Control"
+}, {
+  "category": "Controls",
+  "description": "",
+  "id": "share-control",
+  "include": true,
+  "title": "Share Control",
+  "under_development": true
+}, {
+  "category": "Layers",
+  "description": "",
+  "id": "spot-layer",
+  "include": true,
+  "title": "SPOT Layer"
+}, {
+  "category": "Examples",
+  "description": "",
+  "id": "styling-vectors",
+  "include": true,
+  "title": "Styling Vectors"
+}, {
+  "category": "Examples",
+  "description": "",
+  "id": "styling-vectors-advanced",
+  "include": false,
+  "title": "Styling Vectors (Advanced)"
+}, {
+  "category": "Layers",
+  "description": "",
+  "id": "tiled-layer",
+  "include": true,
+  "title": "Tiled Layer"
+}, {
+  "category": "Examples",
+  "description": "",
+  "id": "handlebars",
+  "include": true,
+  "title": "Using Handlebars"
+}, {
+  "category": "Layers",
+  "description": "",
+  "id": "wms-layer",
+  "include": true,
+  "title": "WMS Layer"
+}, {
+  "category": "Controls",
+  "description": "",
+  "id": "zoomdisplay-control",
+  "include": true,
+  "title": "ZoomDisplay Control"
+}, {
+  "category": "Layers",
+  "description": "",
+  "id": "zoomify-layer",
+  "include": true,
+  "title": "Zoomify Layer"
+}]

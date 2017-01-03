@@ -1,0 +1,266 @@
+{
+  "marigold": {
+    "color": "#fff4ad",
+    "colorBlind": true,
+    "fill": true,
+    "fillColor": "#fff4ad",
+    "fillOpacity": 0.2,
+    "opacity": 0.5,
+    "stroke": true,
+    "weight": 3
+  },
+  "daisy": {
+    "color": "#ddcc77",
+    "colorBlind": true,
+    "fill": true,
+    "fillColor": "#ddcc77",
+    "fillOpacity": 0.2,
+    "opacity": 0.5,
+    "stroke": true,
+    "weight": 3
+  },
+  "mustard": {
+    "color": "#d98d38",
+    "fill": true,
+    "fillColor": "#d98d38",
+    "fillOpacity": 0.2,
+    "opacity": 0.5,
+    "stroke": true,
+    "weight": 3
+  },
+  "gold": {
+    "color": "#d39800",
+    "fill": true,
+    "fillColor": "#d39800",
+    "fillOpacity": 0.2,
+    "opacity": 0.5,
+    "stroke": true,
+    "weight": 3
+  },
+  "chesnut": {
+    "color": "#bf815d",
+    "fill": true,
+    "fillColor": "#bf815d",
+    "fillOpacity": 0.2,
+    "opacity": 0.5,
+    "stroke": true,
+    "weight": 3
+  },
+  "clementine": {
+    "color": "#d95f02",
+    "fill": true,
+    "fillColor": "#d95f02",
+    "fillOpacity": 0.2,
+    "opacity": 0.5,
+    "stroke": true,
+    "weight": 3
+  },
+  "salmon": {
+    "color": "#fa946e",
+    "fill": true,
+    "fillColor": "#fa946e",
+    "fillOpacity": 0.2,
+    "opacity": 0.5,
+    "stroke": true,
+    "weight": 3
+  },
+  "rose": {
+    "color": "#d46655",
+    "fill": true,
+    "fillColor": "#d46655",
+    "fillOpacity": 0.2,
+    "opacity": 0.5,
+    "stroke": true,
+    "weight": 3
+  },
+  "coral": {
+    "color": "#cc6677",
+    "colorBlind": true,
+    "fill": true,
+    "fillColor": "#cc6677",
+    "fillOpacity": 0.2,
+    "opacity": 0.5,
+    "stroke": true,
+    "weight": 3
+  },
+  "berry": {
+    "color": "#aa4499",
+    "colorBlind": true,
+    "fill": true,
+    "fillColor": "#aa4499",
+    "fillOpacity": 0.2,
+    "opacity": 0.5,
+    "stroke": true,
+    "weight": 3
+  },
+  "scarlet": {
+    "color": "#882255",
+    "colorBlind": true,
+    "fill": true,
+    "fillColor": "#882255",
+    "fillOpacity": 0.2,
+    "opacity": 0.5,
+    "stroke": true,
+    "weight": 3
+  },
+  "lilac": {
+    "color": "#896c9c",
+    "fill": true,
+    "fillColor": "#896c9c",
+    "fillOpacity": 0.2,
+    "opacity": 0.5,
+    "stroke": true,
+    "weight": 3
+  },
+  "violet": {
+    "color": "#7570b3",
+    "fill": true,
+    "fillColor": "#7570b3",
+    "fillOpacity": 0.2,
+    "opacity": 0.5,
+    "stroke": true,
+    "weight": 3
+  },
+  "currant": {
+    "color": "#5f3663",
+    "fill": true,
+    "fillColor": "#5f3663",
+    "fillOpacity": 0.2,
+    "opacity": 0.5,
+    "stroke": true,
+    "weight": 3
+  },
+  "breeze": {
+    "color": "#88ccee",
+    "colorBlind": true,
+    "fill": true,
+    "fillColor": "#88ccee",
+    "fillOpacity": 0.2,
+    "opacity": 0.5,
+    "stroke": true,
+    "weight": 3
+  },
+  "chill": {
+    "color": "#1b99aa",
+    "fill": true,
+    "fillColor": "#1b99aa",
+    "fillOpacity": 0.2,
+    "opacity": 0.5,
+    "stroke": true,
+    "weight": 3
+  },
+  "steele": {
+    "color": "#32557d",
+    "fill": true,
+    "fillColor": "#32557d",
+    "fillOpacity": 0.2,
+    "opacity": 0.5,
+    "stroke": true,
+    "weight": 3
+  },
+  "sapphire": {
+    "color": "#332288",
+    "colorBlind": true,
+    "fill": true,
+    "fillColor": "#332288",
+    "fillOpacity": 0.2,
+    "opacity": 0.5,
+    "stroke": true,
+    "weight": 3
+  },
+  "turquoise": {
+    "color": "#44aa99",
+    "colorBlind": true,
+    "fill": true,
+    "fillColor": "#44aa99",
+    "fillOpacity": 0.2,
+    "opacity": 0.5,
+    "stroke": true,
+    "weight": 3
+  },
+  "meadow": {
+    "color": "#1b9e77",
+    "fill": true,
+    "fillColor": "#1b9e77",
+    "fillOpacity": 0.2,
+    "opacity": 0.5,
+    "stroke": true,
+    "weight": 3
+  },
+  "eucalyptus": {
+    "color": "#558877",
+    "fill": true,
+    "fillColor": "#558877",
+    "fillOpacity": 0.2,
+    "opacity": 0.5,
+    "stroke": true,
+    "weight": 3
+  },
+  "sycamore": {
+    "color": "#999933",
+    "colorBlind": true,
+    "fill": true,
+    "fillColor": "#999933",
+    "fillOpacity": 0.2,
+    "opacity": 0.5,
+    "stroke": true,
+    "weight": 3
+  },
+  "emerald": {
+    "color": "#117733",
+    "colorBlind": true,
+    "fill": true,
+    "fillColor": "#117733",
+    "fillOpacity": 0.2,
+    "opacity": 0.5,
+    "stroke": true,
+    "weight": 3
+  },
+  "russett": {
+    "color": "#7a4810",
+    "fill": true,
+    "fillColor": "#7a4810",
+    "fillOpacity": 0.2,
+    "opacity": 0.5,
+    "stroke": true,
+    "weight": 3
+  },
+  "sand": {
+    "color": "#8f7657",
+    "fill": true,
+    "fillColor": "#8f7657",
+    "fillOpacity": 0.2,
+    "opacity": 0.5,
+    "stroke": true,
+    "weight": 3
+  },
+  "nickel": {
+    "color": "#6c6c6c",
+    "fill": true,
+    "fillColor": "#6c6c6c",
+    "fillOpacity": 0.2,
+    "opacity": 0.5,
+    "stroke": true,
+    "weight": 3
+  },
+  "night": {
+    "color": "#1f1f1f",
+    "colorBlind": true,
+    "fill": true,
+    "fillColor": "#1f1f1f",
+    "fillOpacity": 0.2,
+    "opacity": 0.5,
+    "stroke": true,
+    "weight": 3
+  },
+  "white": {
+    "color": "#ffffff",
+    "colorBlind": true,
+    "fill": true,
+    "fillColor": "#ffffff",
+    "fillOpacity": 0.2,
+    "opacity": 0.5,
+    "stroke": true,
+    "weight": 3
+  }
+}

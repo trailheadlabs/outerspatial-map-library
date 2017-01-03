@@ -1,0 +1,8 @@
+#map-1,
+#map-2 {
+  height: 300px;
+  position: relative;
+}
+#map-2 {
+  margin-top: 5px;
+}

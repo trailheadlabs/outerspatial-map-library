@@ -1,0 +1,14 @@
+{
+  "bing": {
+    "key": ""
+  },
+  "mapbox": {
+    "access_token": ""
+  },
+  "mapquest": {
+    "key": ""
+  },
+  "mapzen": {
+    "api_key": ""
+  }
+}

@@ -1,0 +1,10 @@
+machine:
+  node:
+    version: '4.2.2'
+  timezone:
+    America/Denver
+dependencies:
+  pre:
+    - npm install -g grunt-cli
+    - npm install
+    - grunt build

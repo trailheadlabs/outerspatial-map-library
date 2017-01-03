@@ -1,0 +1,66 @@
+{
+  "esri": {
+    "grayLabels": {
+      "attribution": "Copyright: &copy;2013 Esri, DeLorme, NAVTEQ",
+      "maxZoom": 16,
+      "minZoom": 1,
+      "name": "Esri Light Gray Labels",
+      "tiled": true,
+      "type": "arcgisserver",
+      "url": "https://services.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Reference/MapServer"
+    },
+    "imageryLabels": {
+      "attribution": "Esri, DigitalGlobe, GeoEye, i-cubed, USDA, USGS, AEX, Getmapping, Aerogrid, IGN, IGP, swisstopo, and the GIS User Community",
+      "maxZoom": 19,
+      "minZoom": 1,
+      "popup": false,
+      "name": "Esri Boundaries & Places",
+      "tiled": true,
+      "type": "arcgisserver",
+      "url": "https://services.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer"
+    },
+    "oceansLabels": {
+      "attribution": "Esri",
+      "maxZoom": 16,
+      "minZoom": 1,
+      "name": "Esri Ocean Labels",
+      "tiled": true,
+      "type": "arcgisserver",
+      "url": "https://services.arcgisonline.com/arcgis/rest/services/Ocean/World_Ocean_Reference/MapServer"
+    }
+  },
+  "nps": {
+    "places": {
+      "buildings": {
+        "name": "Buildings",
+        "table": "buildings",
+        "type": "cartodb",
+        "user": "nps"
+      },
+      "parkingLots": {
+        "name": "Parking Lots",
+        "table": "parking_lots",
+        "type": "cartodb",
+        "user": "nps"
+      },
+      "pointsOfInterest": {
+        "name": "Points of Interest",
+        "table": "points_of_interest",
+        "type": "cartodb",
+        "user": "nps"
+      },
+      "roads": {
+        "name": "Roads",
+        "table": "roads",
+        "type": "cartodb",
+        "user": "nps"
+      },
+      "trails": {
+        "name": "Trails",
+        "table": "trails",
+        "type": "cartodb",
+        "user": "nps"
+      }
+    }
+  }
+}

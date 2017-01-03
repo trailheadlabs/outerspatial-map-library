@@ -1,0 +1,12 @@
+#events {
+  background-color: #fff;
+  height: 200px;
+  left: 50%;
+  margin-left: -150px;
+  overflow: auto;
+  padding: 15px;
+  position: absolute;
+  top: 10px;
+  width: 300px;
+  z-index: 1;
+}

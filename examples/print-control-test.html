@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Print Test Page | Examples | NPMap.js</title>
+    <meta name="apple-mobile-web-app-title" content="NPS Maps">
+    <meta name="application-name" content="NPS Maps">
+    <meta name="author" content="National Park Service">
+    <meta name="description" content="A website for National Park Service maps.">
+    <meta name="keywords" content="NPMap, National Park Service, Federal Government, Department of Interior, United States Government, GIS, Cartography, Web Mapping, Natural Resources, Cultural Resources, National Park Maps, NPS Maps">
+    <meta name="msapplication-TileColor" content="#222222">
+    <meta name="msapplication-TileImage" content="https://www.nps.gov/npmap/windows-8-tile.png">
+    <link rel="shortcut icon" href="https://www.nps.gov/npmap/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://www.nps.gov/npmap/apple-touch-icon-144x144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="https://www.nps.gov/npmap/apple-touch-icon-114x114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="https://www.nps.gov/npmap/apple-touch-icon-72x72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="https://www.nps.gov/npmap/apple-touch-icon-57x57-precomposed.png">
+    <style>
+      html, body {
+        margin-top: 0;
+      }
+      body {
+        background: #fff;
+        color: #000;
+      }
+      button {
+        font-family: Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif;
+      }
+      img {
+        max-width: 100% !important;
+        page-break-inside: avoid;
+      }
+      .buttons {
+        border-bottom: solid 1px black;
+        padding: 10px 10px 10px 0;
+      }
+      .btn {
+        -webkit-user-select: none;
+           -moz-user-select: none;
+            -ms-user-select: none;
+             -o-user-select: none;
+                user-select: none;
+        display: inline-block;
+        padding: 6px 12px;
+        margin-bottom: 0;
+        font-size: 14px;
+        font-weight: bold;
+        line-height: 1.428571429;
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: middle;
+        cursor: pointer;
+        border: 1px solid transparent;
+        border-radius: 4px;
+      }
+      .btn-primary {
+        color: #fff;
+        background-color: #b28000;
+        border-color: #996e00;
+      }
+      .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active {
+        background-color: #896300;
+        border-color: #5b4200;
+        color: #fff;
+        text-decoration: none;
+      }
+
+      @media print {
+        html, body {
+          margin: 0;
+        }
+        .buttons, .leaflet-control-geocoder, .leaflet-control-home, .leaflet-control-zoom {
+          display: none;
+        }
+        .npmap-toolbar {
+          display: none !important;
+        }
+        .npmap-map-wrapper {
+          top: 0 !important;
+        }
+      }
+      @media print and (color) {
+        * {
+          -webkit-print-color-adjust: exact;
+                  print-color-adjust: exact;
+        }
+      }
+    </style>
+  </head>
+  <body lang="en">
+    <form class="buttons" role="form">
+      <button class="btn btn-primary" onclick="window.print();return false;">Print</button>
+    </form>
+    <div id="map" style="height:7.0in;position:relative;width:100%;">
+    </div>
+    <script>
+      /*
+          Examples:
+
+            http://localhost:1984/examples/print-control-test.html?lat=39.3700&lng=-105.7000&printId=662a7e19-d2f5-04fd-49af-75b3525e686f&zoom=7
+            http://localhost:1984/examples/print-control-test.html?lat=39.3700&lng=-105.7000&mapId=d8988e18-1e3e-4b3d-8a14-c5219327c8d9&zoom=7
+      */
+
+      var NPMap = {
+        div: 'map',
+        hooks: {
+          preinit: function(callback) {
+            var errored = false,
+              mapId = null,
+              loaded = false,
+              printId = null,
+              search = window.location.search.replace('?', '').split('&'),
+              config, lat, lng, zoom;
+
+            function load() {
+              var hooks = config.hooks,
+                init;
+
+              loaded = true;
+              delete config.div;
+
+              if ((lat && lng) || typeof zoom !== 'undefined') {
+                config.hooks = {
+                  init: function(callback) {
+                    if ((lat && lng) && typeof zoom !== 'undefined') {
+                      NPMap.config.L.setView({
+                        lat: lat,
+                        lng: lng
+                      }, zoom);
+                    } else if (lat && lng) {
+                      NPMap.config.L.setView({
+                        lat: lat,
+                        lng: lng
+                      });
+                    } else {
+                      NPMap.config.L.setZoom(zoom);
+                    }
+
+                    if (hooks && hooks.init) {
+                      hooks.init(callback);
+                    } else {
+                      callback();
+                    }
+                  }
+                };
+              }
+
+              L.extend(NPMap.config, config);
+              callback();
+            }
+            function showError(error) {
+              document.getElementById('map').innerHTML = '<p>The map could not be loaded.</p>';
+              errored = true;
+            }
+
+            for (var i = 0; i < search.length; i++) {
+              var param = search[i];
+
+              if (param.indexOf('lat=') === 0) {
+                lat = param.replace('lat=', '');
+              } else if (param.indexOf('lng') === 0) {
+                lng = param.replace('lng=', '');
+              } else if (param.indexOf('mapId=') === 0) {
+                mapId = param.replace('mapId=', '');
+              } else if (param.indexOf('printId=') === 0) {
+                printId = param.replace('printId=', '');
+              } else if (param.indexOf('zoom=', '') === 0) {
+                zoom = param.replace('zoom=', '');
+              }
+            }
+
+            if (mapId) {
+              L.npmap.util._.reqwest({
+                error: function(error) {
+                  showError();
+                },
+                success: function(response) {
+                  if (response) {
+                    config = response;
+                    load();
+                  } else {
+                   showError();
+                  }
+                },
+                type: 'jsonp',
+                url: 'https://www.nps.gov/maps/builder/configs/' + mapId + '.jsonp?callback=callback'
+              });
+            } else if (printId) {
+              var supportsCors = L.npmap.util._.supportsCors() === 'yes',
+                timeout;
+
+              function doRequest() {
+                L.npmap.util._.reqwest({
+                  crossOrigin: supportsCors,
+                  error: function() {
+                    clearTimeout(timeout);
+                    showError();
+                  },
+                  success: function(response) {
+                    if (!config && response && response.success === true) {
+                      window.clearTimeout(timeout);
+
+                      try {
+                        config = JSON.parse(window.atob(response.value));
+                        load();
+                      } catch (e) {
+                        showError();
+                      }
+                    } else if (!errored) {
+                      doRequest();
+                    }
+                  },
+                  type: 'json' + (supportsCors ? '' : 'p'),
+                  url: 'https://server-utils.herokuapp.com/session/?key=' + printId
+                });
+              }
+
+              timeout = window.setTimeout(function() {
+                if (!errored && !loaded) {
+                  showError();
+                }
+              }, 5000);
+              doRequest();
+            }
+          }
+        }
+      };
+
+      (function() {
+        var s = document.createElement('script');
+        s.src = 'https://www.nps.gov/lib/npmap.js/3.0.2/npmap-bootstrap.js';
+        document.body.appendChild(s);
+      })();
+    </script>
+  </body>
+</html>

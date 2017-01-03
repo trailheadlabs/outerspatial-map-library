@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Tests | NPMap.js</title>
+    <link rel="stylesheet" href="../node_modules/mocha/mocha.css">
+  </head>
+  <body>
+    <div id="mocha"></div>
+    <script src="../node_modules/expect.js/index.js"></script>
+    <script src="../node_modules/mocha/mocha.js"></script>
+    <script src="../node_modules/happen/happen.js"></script>
+    <script src="../node_modules/sinon/pkg/sinon-server-1.17.5.js"></script>
+    <!--[if IE]>
+    <script src="../node_modules/sinon/pkg/sinon-ie-1.17.2.js"></script>
+    <![endif]-->
+    <script src="../node_modules/leaflet/dist/leaflet-src.js"></script>
+    <script src="../dist/npmap.js"></script>
+    <script>
+      mocha.setup('bdd');
+    </script>
+    <script src="spec/map.js"></script>
+    <script src="spec/control.js"></script>
+    <script src="spec/icon.js"></script>
+    <script src="spec/layer.js"></script>
+    <script src="spec/preset.js"></script>
+    <script>
+      (window.mochaPhantomJS || window.mocha).run();
+    </script>
+  </body>
+</html>
