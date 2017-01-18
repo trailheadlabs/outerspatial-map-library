@@ -12,7 +12,7 @@ You may also want to take a look at [OuterSpatial Builder](https://github.com/tr
 
 ## Thanks
 
-This library was initially built by the U.S. National Park Service's [NPMap team](https://www.nps.gov/npmap/) and called NPMap.js. The agency recently decided to make the repository private, but luckily they made it available in the public domain so we ([Trailhead Labs](https://www.trailheadlabs.com)) have decided to host it and push forward development.
+This library was initially built by the U.S. National Park Service's [NPMap team](https://www.nps.gov/npmap/) and called NPMap.js. The agency recently decided to make the repository private, but luckily made it available in the public domain so we ([Trailhead Labs](https://www.trailheadlabs.com)) have decided to host it and push forward public development.
 
 The original design was heavily inspired (cough cough) by [Mapbox.js](https://github.com/mapbox/mapbox.js), and, of course, built on the great [Leaflet](http://leafletjs.com) library. Standing on the shoulders of giants. Also, many thanks to the authors of all the great plugins used in/by the library (take a look at [LICENSE.md](https://github.com/trailheadlabs/outerspatial.js/blob/master/LICENSE.md) for a list).
 
