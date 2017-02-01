@@ -171,7 +171,8 @@
   width: 100%;
   z-index: 2;
 }
-  .outerspatial-toolbar ul.left, .outerspatial-toolbar ul.right {
+  .outerspatial-toolbar ul.left,
+  .outerspatial-toolbar ul.right {
     line-height: 0;
     list-style-type: none;
     margin: 0;
@@ -241,8 +242,10 @@
     font-weight: bold;
     padding: 6px 8px;
   }
-.outerspatial button, .outerspatial input,
-.outerspatial select, .outerspatial textarea {
+.outerspatial button,
+.outerspatial input,
+.outerspatial select,
+.outerspatial textarea {
   font-family: inherit;
   font-size: 100%;
   margin: 0;
@@ -388,10 +391,25 @@
     border-color: #5b4200;
     color: #ffffff;
   }
-  .outerspatial .btn-primary:active, .outerspatial .btn-primary.active {
+  .outerspatial .btn-primary:active,
+  .outerspatial .btn-primary.active {
     background-image: none;
   }
-  .outerspatial .btn-primary.disabled, .outerspatial .btn-primary[disabled], .outerspatial fieldset[disabled] .btn-primary, .outerspatial .btn-primary.disabled:hover, .outerspatial .btn-primary[disabled]:hover, .outerspatial fieldset[disabled] .btn-primary:hover, .outerspatial .btn-primary.disabled:focus, .outerspatial .btn-primary[disabled]:focus, .outerspatial fieldset[disabled] .btn-primary:focus, .outerspatial .btn-primary.disabled:active, .outerspatial .btn-primary[disabled]:active, .outerspatial fieldset[disabled] .btn-primary:active, .outerspatial .btn-primary.disabled.active, .outerspatial .btn-primary[disabled].active, .outerspatial fieldset[disabled] .btn-primary.active {
+  .outerspatial .btn-primary.disabled,
+  .outerspatial .btn-primary[disabled],
+  .outerspatial fieldset[disabled] .btn-primary,
+  .outerspatial .btn-primary.disabled:hover,
+  .outerspatial .btn-primary[disabled]:hover,
+  .outerspatial fieldset[disabled] .btn-primary:hover,
+  .outerspatial .btn-primary.disabled:focus,
+  .outerspatial .btn-primary[disabled]:focus,
+  .outerspatial fieldset[disabled] .btn-primary:focus,
+  .outerspatial .btn-primary.disabled:active,
+  .outerspatial .btn-primary[disabled]:active,
+  .outerspatial fieldset[disabled] .btn-primary:active,
+  .outerspatial .btn-primary.disabled.active,
+  .outerspatial .btn-primary[disabled].active,
+  .outerspatial fieldset[disabled] .btn-primary.active {
     background-color: #b28000;
     border-color: #996e00;
   }
@@ -410,7 +428,8 @@
   .outerspatial .btn-circle.disabled:hover {
     background: #d29700;
   }
-  .outerspatial .btn-circle:focus, .outerspatial .btn-circle:hover {
+  .outerspatial .btn-circle:focus,
+  .outerspatial .btn-circle:hover {
     color: #fff;
   }
   .outerspatial .btn-circle:hover {
@@ -422,7 +441,8 @@
   line-height: 1.33;
   padding: 10px 16px;
 }
-.outerspatial .btn-sm, .outerspatial .btn-xs {
+.outerspatial .btn-sm,
+.outerspatial .btn-xs {
   border-radius: 3px;
   font-size: 12px;
   line-height: 1.5;
@@ -440,7 +460,9 @@
 .outerspatial .btn-block + .btn-block {
   margin-top: 5px;
 }
-.outerspatial input[type="submit"].btn-block, .outerspatial input[type="reset"].btn-block, .outerspatial input[type="button"].btn-block {
+.outerspatial input[type="submit"].btn-block,
+.outerspatial input[type="reset"].btn-block,
+.outerspatial input[type="button"].btn-block {
   width: 100%;
 }
 
@@ -462,7 +484,12 @@
       color: #d39700;
       text-decoration: underline;
     }
-  .outerspatial .leaflet-container h1, .outerspatial .leaflet-container h2, .outerspatial .leaflet-container h3, .outerspatial .leaflet-container h4, .outerspatial .leaflet-container h5, .outerspatial .leaflet-container h6 {
+  .outerspatial .leaflet-container h1,
+  .outerspatial .leaflet-container h2,
+  .outerspatial .leaflet-container h3,
+  .outerspatial .leaflet-container h4,
+  .outerspatial .leaflet-container h5,
+  .outerspatial .leaflet-container h6 {
     font-size: 15px;
     line-height: 20px;
     margin: 0 0 10px;
@@ -490,7 +517,8 @@
   margin-top: 4px;
   width: 12px;
 }
-.outerspatial [class^="icon-"], [class*=" icon-"] {
+.outerspatial [class^="icon-"],
+[class*=" icon-"] {
   background-image: url('images/icon/sprite.png');
   background-repeat: no-repeat;
   display: inline-block;
@@ -595,7 +623,8 @@
   top: -10px;
   width: 21px;
 }
-.outerspatial .leaflet-container a.leaflet-popup-close-button:focus, .leaflet-container a.leaflet-popup-close-button:hover {
+.outerspatial .leaflet-container a.leaflet-popup-close-button:focus,
+.leaflet-container a.leaflet-popup-close-button:hover {
   background-color: #8f8f7d;
   color: #fff;
   text-decoration: none;
@@ -605,7 +634,11 @@
   margin: 15px;
   width: auto !important;
 }
-  .outerspatial .leaflet-popup-scrolled .content, .outerspatial .content .leaflet-popup-scrolled audio, .outerspatial .content .leaflet-popup-scrolled iframe, .outerspatial .content .leaflet-popup-scrolled img, .outerspatial .content .leaflet-popup-scrolled video {
+  .outerspatial .leaflet-popup-scrolled .content,
+  .outerspatial .content .leaflet-popup-scrolled audio,
+  .outerspatial .content .leaflet-popup-scrolled iframe,
+  .outerspatial .content .leaflet-popup-scrolled img,
+  .outerspatial .content .leaflet-popup-scrolled video {
     margin-right: 15px;
   }
   .outerspatial .leaflet-popup-content dt {
@@ -647,7 +680,8 @@
     .outerspatial .leaflet-popup-content table tr.hoverable {
       cursor: pointer;
     }
-      .outerspatial .leaflet-popup-content table tr.hoverable td, .outerspatial .leaflet-popup-content table tr.hoverable th {
+      .outerspatial .leaflet-popup-content table tr.hoverable td,
+      .outerspatial .leaflet-popup-content table tr.hoverable th {
         padding-left: 5px;
         padding-right: 5px;
       }
@@ -657,12 +691,14 @@
     .outerspatial .leaflet-popup-content table tr:last-child {
       border-bottom: none;
     }
-    .outerspatial .leaflet-popup-content table td, .outerspatial .leaflet-popup-content table th {
+    .outerspatial .leaflet-popup-content table td,
+    .outerspatial .leaflet-popup-content table th {
       border: none;
       padding-bottom: 7px;
       padding-top: 7px;
     }
-    .outerspatial .leaflet-popup-content table tr th:first-child, .outerspatial .leaflet-popup-content table tr td:first-child {
+    .outerspatial .leaflet-popup-content table tr th:first-child,
+    .outerspatial .leaflet-popup-content table tr td:first-child {
       padding-right: 7px;
     }
   .outerspatial .leaflet-popup-content th {
@@ -785,11 +821,6 @@
   margin: 0;
   padding: 15px;
 }
-  /*
-  .outerspatial .leaflet-popup-scrolled .actions, .outerspatial .leaflet-popup-scrolled .content, .outerspatial .leaflet-popup-scrolled .title {
-    margin-right: 15px;
-  }
-  */
   .outerspatial .leaflet-popup-scrolled .actions ul li {
     margin-bottom: 0;
   }
@@ -832,7 +863,12 @@
 .outerspatial .leaflet-bar button {
   display: inherit;
 }
-.outerspatial .leaflet-bar a, .outerspatial .leaflet-bar a:hover, .outerspatial .leaflet-bar button, .outerspatial .leaflet-bar button:hover, .outerspatial .leaflet-bar div, .outerspatial .leaflet-bar div:hover {
+.outerspatial .leaflet-bar a,
+.outerspatial .leaflet-bar a:hover,
+.outerspatial .leaflet-bar button,
+.outerspatial .leaflet-bar button:hover,
+.outerspatial .leaflet-bar div,
+.outerspatial .leaflet-bar div:hover {
   -webkit-text-shadow: 0 2px 2px #757571;
      -moz-text-shadow: 0 2px 2px #757571;
       -ms-text-shadow: 0 2px 2px #757571;
@@ -851,13 +887,20 @@
   text-decoration: none;
   width: 26px;
 }
-.outerspatial .leaflet-bar a:hover, .outerspatial .leaflet-bar button:hover {
+.outerspatial .leaflet-bar a:hover,
+.outerspatial .leaflet-bar button:hover {
   background-color: #626159;
 }
-.outerspatial .leaflet-bar a:active, .outerspatial .leaflet-bar a.pressed, .outerspatial .leaflet-bar button:active, .outerspatial .leaflet-bar button.pressed {
+.outerspatial .leaflet-bar a:active,
+.outerspatial .leaflet-bar a.pressed,
+.outerspatial .leaflet-bar button:active,
+.outerspatial .leaflet-bar button.pressed {
   background-color: #53534a;
 }
-.outerspatial .leaflet-bar a.leaflet-disabled, .outerspatial .leaflet-bar a.leaflet-disabled:hover, .outerspatial .leaflet-bar button.leaflet-disabled, .outerspatial .leaflet-bar button.leaflet-disabled:hover {
+.outerspatial .leaflet-bar a.leaflet-disabled,
+.outerspatial .leaflet-bar a.leaflet-disabled:hover,
+.outerspatial .leaflet-bar button.leaflet-disabled,
+.outerspatial .leaflet-bar button.leaflet-disabled:hover {
   -webkit-text-shadow: none;
      -moz-text-shadow: none;
       -ms-text-shadow: none;
@@ -866,20 +909,26 @@
   background-color: #4b4B44;
   color: #bbb;
 }
-.outerspatial .leaflet-bar a:first-child, .outerspatial .leaflet-bar button:first-child, .outerspatial .leaflet-bar div:first-child {
+.outerspatial .leaflet-bar a:first-child,
+.outerspatial .leaflet-bar button:first-child,
+.outerspatial .leaflet-bar div:first-child {
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
   border-top: 1px solid #1a2423;
   height: 26px;
 }
-.outerspatial .leaflet-bar a:last-child, .outerspatial .leaflet-bar button:last-child, .outerspatial .leaflet-bar div:last-child {
+.outerspatial .leaflet-bar a:last-child,
+.outerspatial .leaflet-bar button:last-child,
+.outerspatial .leaflet-bar div:last-child {
   border-bottom: 1px solid #1a2423;
   border-bottom-left-radius: 4px;
   border-bottom-right-radius: 4px;
   border-top: none;
   height: 27px;
 }
-.outerspatial .leaflet-bar a.leaflet-bar-single, .outerspatial .leaflet-bar button.leaflet-bar-single, .outerspatial .leaflet-bar div.leaflet-bar-single {
+.outerspatial .leaflet-bar a.leaflet-bar-single,
+.outerspatial .leaflet-bar button.leaflet-bar-single,
+.outerspatial .leaflet-bar div.leaflet-bar-single {
   border-radius: 4px;
   border-top: solid 1px #1a2423;
   height: 26px;
@@ -995,7 +1044,6 @@
     position: absolute;
     right: 2px;
     top: 2px;
-    /*vertical-align: text-top;*/
     width: 26px;
   }
   .outerspatial .leaflet-control-geocoder input {
@@ -1087,9 +1135,9 @@
     margin: 0;
     padding-left: 0;
   }
-  .outerspatial .leaflet-control-legend ul li {
-    list-style-type: none;
-  }
+    .outerspatial .leaflet-control-legend ul li {
+      list-style-type: none;
+    }
 
 /* Locate Control */
 .outerspatial .outerspatial-control-locate button {
@@ -1173,7 +1221,6 @@
 .leaflet-draw-tooltip {
   visibility: hidden !important;
 }
-
   .leaflet-draw-tooltip:before {
     visibility: hidden !important;
   }
@@ -1229,24 +1276,24 @@
     width: 20px;
     z-index: 99999;
   }
-  .outerspatial .leaflet-control-overview button span {
-    background-image: url('images/control/overview/toggle.png');
-    background-repeat: no-repeat;
-    background-size: 10px 10px;
-    bottom: 10px;
-    height: 10px;
-    position: absolute;
-    right: 10px;
-    transition: all .2s;
-    width: 10px;
-  }
-    .outerspatial .leaflet-control-overview button span.minimized {
-      -webkit-transform: rotate(180deg);
-         -moz-transform: rotate(180deg);
-          -ms-transform: rotate(180deg);
-           -o-transform: rotate(180deg);
-              transform: rotate(180deg);
+    .outerspatial .leaflet-control-overview button span {
+      background-image: url('images/control/overview/toggle.png');
+      background-repeat: no-repeat;
+      background-size: 10px 10px;
+      bottom: 10px;
+      height: 10px;
+      position: absolute;
+      right: 10px;
+      transition: all .2s;
+      width: 10px;
     }
+      .outerspatial .leaflet-control-overview button span.minimized {
+        -webkit-transform: rotate(180deg);
+           -moz-transform: rotate(180deg);
+            -ms-transform: rotate(180deg);
+             -o-transform: rotate(180deg);
+                transform: rotate(180deg);
+      }
   .outerspatial .leaflet-retina .leaflet-control-overview button span {
     background-image: url('images/control/overview/toggle@2x.png');
   }
@@ -1318,34 +1365,34 @@
     position: relative;
     width: 198px;
   }
-  .outerspatial-control-switcher div:first-child div {
-    -webkit-user-select: none;
-       -moz-user-select: none;
-            user-select: none;
-    border-right: solid 1px #908e7d;
-    margin-left: 25px;
-    padding: 7px 8px 7px 8px;
-    margin-right: 25px;
-    position: relative;
-  }
-  .outerspatial-control-switcher div:first-child span:first-child {
-    float: left;
-    height: 100%;
-    left: 0;
-    position: absolute;
-    top: 0;
-    width: 25px;
-  }
-  .outerspatial-control-switcher div:first-child span:last-child {
-    background-image: url('images/control/switcher/toggle.png');
-    background-position: 6px;
-    background-repeat: no-repeat;
-    height: 100%;
-    position: absolute;
-    right: 0;
-    top: 0;
-    width: 25px;
-  }
+    .outerspatial-control-switcher div:first-child div {
+      -webkit-user-select: none;
+         -moz-user-select: none;
+              user-select: none;
+      border-right: solid 1px #908e7d;
+      margin-left: 25px;
+      padding: 7px 8px 7px 8px;
+      margin-right: 25px;
+      position: relative;
+    }
+    .outerspatial-control-switcher div:first-child span:first-child {
+      float: left;
+      height: 100%;
+      left: 0;
+      position: absolute;
+      top: 0;
+      width: 25px;
+    }
+    .outerspatial-control-switcher div:first-child span:last-child {
+      background-image: url('images/control/switcher/toggle.png');
+      background-position: 6px;
+      background-repeat: no-repeat;
+      height: 100%;
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: 25px;
+    }
   .leaflet-retina .outerspatial-control-switcher div:first-child span:last-child {
     background-image: url('images/control/switcher/toggle@2x.png');
     background-size: 10px 5px;
@@ -1383,7 +1430,8 @@
     font-size: 12px;
     padding: 14px 12px;
   }
-    .outerspatial-control-switcher li.selected, .outerspatial-control-switcher li.selected:hover {
+    .outerspatial-control-switcher li.selected,
+    .outerspatial-control-switcher li.selected:hover {
       background-color: #d9d9d6;
     }
     .outerspatial-control-switcher li:hover {
@@ -1474,7 +1522,8 @@
 }
 
 /* Notifications */
-.outerspatial .humane, .outerspatial .humane-bootstrap {
+.outerspatial .humane,
+.outerspatial .humane-bootstrap {
   -webkit-transition: all 0.4s ease-in-out;
      -moz-transition: all 0.4s ease-in-out;
       -ms-transition: all 0.4s ease-in-out;
@@ -1484,7 +1533,8 @@
   transition: all 0.4s ease-in-out;
   z-index: 100000;
 }
-.outerspatial .humane, .outerspatial .humane-bootstrap {
+.outerspatial .humane,
+.outerspatial .humane-bootstrap {
   -webkit-border-bottom-left-radius: 4px;
   -webkit-border-bottom-right-radius: 4px;
      -moz-border-radius-bottomleft: 4px;
@@ -1510,34 +1560,41 @@
   transform: translateY(-100px);
   width: 178px;
 }
-.outerspatial .humane p, .outerspatial .humane-bootstrap p, .outerspatial .humane ul, .outerspatial .humane-bootstrap ul {
+.outerspatial .humane p, .outerspatial .humane-bootstrap p,
+.outerspatial .humane ul,
+.outerspatial .humane-bootstrap ul {
   margin: 0;
   padding: 0;
 }
 .outerspatial .humane ul, .outerspatial .humane-bootstrap ul {
   list-style: none;
 }
-.outerspatial .humane.humane-bootstrap-success, .outerspatial .humane-bootstrap.humane-bootstrap-success {
+.outerspatial .humane.humane-bootstrap-success,
+.outerspatial .humane-bootstrap.humane-bootstrap-success {
   background-color: #dff0d8;
   border-color: #d6e9c6;
   color: #468847;
 }
-.outerspatial .humane.humane-bootstrap-info, .outerspatial .humane-bootstrap.humane-bootstrap-info {
+.outerspatial .humane.humane-bootstrap-info,
+.outerspatial .humane-bootstrap.humane-bootstrap-info {
   background-color: #d9edf7;
   border-color: #bce8f1;
   color: #3a87ad;
 }
-.outerspatial .humane.humane-bootstrap-warning, .outerspatial .humane-bootstrap.humane-bootstrap-warning {
+.outerspatial .humane.humane-bootstrap-warning,
+.outerspatial .humane-bootstrap.humane-bootstrap-warning {
   background-color: #fcf8e3;
   border-color: #fbeed5;
   color: #c09853;
 }
-.outerspatial .humane.humane-bootstrap-danger, .outerspatial .humane-bootstrap.humane-bootstrap-danger {
+.outerspatial .humane.humane-bootstrap-danger,
+.outerspatial .humane-bootstrap.humane-bootstrap-danger {
   background-color: #f2dede;
   border-color: #eed3d7;
   color: #b94a48;
 }
-.outerspatial .humane-animate, .outerspatial .humane-bootstrap.humane-bootstrap-animate {
+.outerspatial .humane-animate,
+.outerspatial .humane-bootstrap.humane-bootstrap-animate {
   opacity: 1;
   -moz-transform: translateY(0);
   -webkit-transform: translateY(0);
@@ -1545,7 +1602,8 @@
   -o-transform: translateY(0);
   transform: translateY(0);
 }
-.outerspatial .humane-js-animate, .outerspatial .humane-bootstrap.humane-bootstrap-js-animate {
+.outerspatial .humane-js-animate,
+.outerspatial .humane-bootstrap.humane-bootstrap-js-animate {
   opacity: 1;
   -moz-transform: translateY(0);
   -webkit-transform: translateY(0);
@@ -1553,7 +1611,8 @@
   -o-transform: translateY(0);
   transform: translateY(0);
 }
-.outerspatial .humane-js-animate:hover, .outerspatial .humane-bootstrap.humane-bootstrap-js-animate:hover {
+.outerspatial .humane-js-animate:hover,
+.outerspatial .humane-bootstrap.humane-bootstrap-js-animate:hover {
   opacity: 0.7;
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=70);
 }
@@ -1574,10 +1633,12 @@
   margin-top: 25px;
   padding-top: 15px;
 }
-  #outerspatial-module_Directions .directions .mapbox-directions-direction, #outerspatial-module_Directions .directions .mapbox-directions-way-name {
+  #outerspatial-module_Directions .directions .mapbox-directions-direction,
+  #outerspatial-module_Directions .directions .mapbox-directions-way-name {
     font-weight: bold;
   }
-  #outerspatial-module_Directions .directions .maneuver-header, #outerspatial-module_Directions .directions .maneuver-footer {
+  #outerspatial-module_Directions .directions .maneuver-header,
+  #outerspatial-module_Directions .directions .maneuver-footer {
     background-color: #f3efe5;
     margin-bottom: 15px;
     padding: 8px 10px;
@@ -1598,21 +1659,24 @@
       margin-bottom: 16px;
       text-transform: uppercase;
     }
-    #outerspatial-module_Directions .directions .maneuver-header h3, #outerspatial-module_Directions .directions .maneuver-footer h3 {
+    #outerspatial-module_Directions .directions .maneuver-header h3,
+    #outerspatial-module_Directions .directions .maneuver-footer h3 {
       color: #464646;
       font-size: 12px;
       line-height: 20px;
       margin-bottom: 0;
       min-height: 20px;
     }
-    #outerspatial-module_Directions .directions .maneuver-header .location, #outerspatial-module_Directions .directions .maneuver-footer .location {
+    #outerspatial-module_Directions .directions .maneuver-header .location,
+    #outerspatial-module_Directions .directions .maneuver-footer .location {
       color: #464646;
       font-size: 12px;
       line-height: 20px;
       margin-bottom: 0;
       min-height: 20px;
     }
-      #outerspatial-module_Directions .directions .maneuver-header .location .identifier, #outerspatial-module_Directions .directions .maneuver-footer .location .identifier {
+      #outerspatial-module_Directions .directions .maneuver-header .location .identifier,
+      #outerspatial-module_Directions .directions .maneuver-footer .location .identifier {
         -webkit-border-radius: 3px;
            -moz-border-radius: 3px;
                 border-radius: 3px;
@@ -1626,7 +1690,8 @@
         text-align: center;
         width: 20px;
       }
-      #outerspatial-module_Directions .directions .maneuver-header .location .name, #outerspatial-module_Directions .directions .maneuver-footer .location .name {
+      #outerspatial-module_Directions .directions .maneuver-header .location .name,
+      #outerspatial-module_Directions .directions .maneuver-footer .location .name {
         display: block;
         margin-left: 30px;
       }
