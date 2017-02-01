@@ -5,7 +5,7 @@ var OuterSpatial = {
   div: 'map',
   hooks: {
     preinit: function (callback) {
-      window.L.npmap.util._.reqwest({
+      window.L.outerspatial.util._.reqwest({
         success: function (response) {
           var html = '';
           var i;

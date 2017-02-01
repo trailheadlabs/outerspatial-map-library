@@ -8,7 +8,7 @@ var OuterSpatial = {
     attribution: 'NPMap Team',
     events: [{
       fn: function () {
-        window.L.npmap.layer.geojson({
+        window.L.outerspatial.layer.geojson({
           color: '#7570b3',
           dashArray: '4,5',
           data: this.toGeoJSON(),
