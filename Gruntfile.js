@@ -27,6 +27,7 @@ module.exports = function (grunt) {
 
   grunt.util.linefeed = '\n';
   grunt.initConfig({
+    aws: grunt.file.readJSON('secrets.json'),
     browserify: {
       all: {
         files: {
@@ -154,6 +155,20 @@ module.exports = function (grunt) {
       ]
     },
     pkg: pkg,
+    s3: {
+      options: {
+        accessKeyId: '<%= aws.accessKeyId %>',
+        bucket: 'outerspatial-production',
+        // dryRun: true,
+        gzip: true,
+        secretAccessKey: '<%= aws.secretAccessKey %>'
+      },
+      dist: {
+        cwd: 'dist/',
+        dest: 'libs/outerspatial.js/<%= pkg.version %>/',
+        src: '**'
+      }
+    },
     semistandard: {
       src: [
         'src/**/*.js'
@@ -205,7 +220,9 @@ module.exports = function (grunt) {
     'cssmin',
     'usebanner'
   ]);
-  grunt.registerTask('deploy', []);
+  grunt.registerTask('deploy', [
+    's3:dist'
+  ]);
   grunt.registerTask('examples', [
     'clean:examples',
     'copy:examples-data',

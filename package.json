@@ -22,7 +22,8 @@
     "brfs": "1.4.3",
     "browserify": "^13.0.0",
     "expect.js": "^0.3.1",
-    "grunt": "^1.0.1",
+    "grunt": "~0.4.x",
+    "grunt-aws": "^0.6.2",
     "grunt-banner": "0.6.0",
     "grunt-browserify": "5.0.0",
     "grunt-contrib-clean": "1.0.0",
@@ -67,10 +68,12 @@
     "Trailhead Labs",
     "Web Map"
   ],
-  "licenses": [{
-    "type": "MIT",
-    "url": "https://github.com/trailheadlabs/outerspatial.js/raw/master/LICENSE.md"
-  }],
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/trailheadlabs/outerspatial.js/raw/master/LICENSE.md"
+    }
+  ],
   "main": "main.js",
   "name": "outerspatial.js",
   "repository": {
