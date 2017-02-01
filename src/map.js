@@ -18,9 +18,12 @@ require('./popup.js');
 
   L.Circle.mergeOptions(style);
   L.CircleMarker.mergeOptions(style);
+  // TODO: Update this to OuterSpatial disclaimer URL
+  /*
   L.Control.Attribution.mergeOptions({
     prefix: '<a href="https://www.nps.gov/npmap/disclaimer/" target="_blank">Disclaimer</a>'
   });
+  */
   L.Map.addInitHook(function () {
     var container = this.getContainer();
     var elAttribution = util.getChildElementsByClassName(container, 'leaflet-control-attribution')[0];
@@ -106,22 +109,22 @@ MapExt = L.Map.extend({
   },
   initialize: function (options) {
     var baseLayerSet = false;
-    var container = L.DomUtil.create('div', 'npmap-container');
-    var map = L.DomUtil.create('div', 'npmap-map');
-    var mapWrapper = L.DomUtil.create('div', 'npmap-map-wrapper');
+    var container = L.DomUtil.create('div', 'outerspatial-container');
+    var map = L.DomUtil.create('div', 'outerspatial-map');
+    var mapWrapper = L.DomUtil.create('div', 'outerspatial-map-wrapper');
     var me = this;
-    var modules = L.DomUtil.create('div', 'npmap-modules');
-    var npmap = L.DomUtil.create('div', 'npmap' + ((L.Browser.ie6 || L.Browser.ie7) ? ' npmap-oldie' : '') + (L.Browser.retina ? ' npmap-retina' : ''));
-    var toolbar = L.DomUtil.create('div', 'npmap-toolbar');
+    var modules = L.DomUtil.create('div', 'outerspatial-modules');
+    var outerspatial = L.DomUtil.create('div', 'outerspatial' + ((L.Browser.ie6 || L.Browser.ie7) ? ' outerspatial-oldie' : '') + (L.Browser.retina ? ' outerspatial-retina' : ''));
+    var toolbar = L.DomUtil.create('div', 'outerspatial-toolbar');
     var toolbarLeft = L.DomUtil.create('ul', 'left');
     var toolbarRight = L.DomUtil.create('ul', 'right');
     var zoomifyMode = false;
 
     options = me._toLeaflet(options);
     L.Util.setOptions(this, options);
-    options.div.insertBefore(npmap, options.div.hasChildNodes() ? options.div.childNodes[0] : null);
-    npmap.appendChild(modules);
-    npmap.appendChild(container);
+    options.div.insertBefore(outerspatial, options.div.hasChildNodes() ? options.div.childNodes[0] : null);
+    outerspatial.appendChild(modules);
+    outerspatial.appendChild(container);
     toolbar.appendChild(toolbarLeft);
     toolbar.appendChild(toolbarRight);
     container.appendChild(toolbar);
@@ -156,7 +159,7 @@ MapExt = L.Map.extend({
     });
     me._progress = new Nanobar({
       bg: '#d29700',
-      id: 'npmap-progress',
+      id: 'outerspatial-progress',
       target: map
     });
 
@@ -185,7 +188,7 @@ MapExt = L.Map.extend({
 
           if (baseLayer.visible || typeof baseLayer.visible === 'undefined') {
             baseLayer.visible = true;
-            baseLayer.L = L.npmap.layer.zoomify(baseLayer);
+            baseLayer.L = L.outerspatial.layer.zoomify(baseLayer);
             me._addEvents(baseLayer.L, baseLayer);
             baseLayer.L.addTo(me);
             break;
@@ -203,7 +206,7 @@ MapExt = L.Map.extend({
             if (baseLayer.type === 'arcgisserver') {
               baseLayer.L = me._createArcGisServerLayer(baseLayer);
             } else {
-              baseLayer.L = L.npmap.layer[baseLayer.type](baseLayer);
+              baseLayer.L = L.outerspatial.layer[baseLayer.type](baseLayer);
             }
 
             me._addEvents(baseLayer.L, baseLayer);
@@ -233,13 +236,13 @@ MapExt = L.Map.extend({
             if (overlay.preset) {
               switch (overlay.preset) {
                 case 'nps-places-pois':
-                  overlay.L = L.npmap.preset.places.pois(overlay);
+                  overlay.L = L.outerspatial.preset.places.pois(overlay);
                   break;
               }
             } else if (overlay.type === 'arcgisserver') {
               overlay.L = me._createArcGisServerLayer(overlay);
             } else {
-              overlay.L = L.npmap.layer[overlay.type](overlay);
+              overlay.L = L.outerspatial.layer[overlay.type](overlay);
             }
 
             me._addEvents(overlay.L, overlay);
@@ -252,13 +255,6 @@ MapExt = L.Map.extend({
       }
     }
 
-    util.checkNpsNetwork(function (on) {
-      me._onNpsNetwork = on;
-
-      if (typeof me._updateImproveLinks === 'function') {
-        me._updateImproveLinks();
-      }
-    });
     me._initializeModules();
     me._setupPopup();
     me._setupTooltip();
@@ -288,7 +284,7 @@ MapExt = L.Map.extend({
     }
   },
   _createArcGisServerLayer: function (config) {
-    return L.npmap.layer[config.type][config.tiled === true ? 'tiled' : 'dynamic'](config);
+    return L.outerspatial.layer[config.type][config.tiled === true ? 'tiled' : 'dynamic'](config);
   },
   _initializeModules: function () {
     if (this.options && this.options.modules && L.Util.isArray(this.options.modules) && this.options.modules.length) {
@@ -300,9 +296,9 @@ MapExt = L.Map.extend({
       var i;
 
       this._divWrapper = this._container.parentNode.parentNode;
-      this._divModules = util.getChildElementsByClassName(this._divWrapper.parentNode.parentNode, 'npmap-modules')[0];
-      this._divModuleButtons = L.DomUtil.create('div', 'npmap-modules-buttons', this._container.parentNode);
-      this._buttonCloseModules = L.DomUtil.create('button', 'npmap-modules-buttons-button', this._divModuleButtons);
+      this._divModules = util.getChildElementsByClassName(this._divWrapper.parentNode.parentNode, 'outerspatial-modules')[0];
+      this._divModuleButtons = L.DomUtil.create('div', 'outerspatial-modules-buttons', this._container.parentNode);
+      this._buttonCloseModules = L.DomUtil.create('button', 'outerspatial-modules-buttons-button', this._divModuleButtons);
       this._buttonCloseModules.style.backgroundImage = 'url(' + window.L.Icon.Default.imagePath + '/font-awesome/times' + (L.Browser.retina ? '@2x' : '') + '.png)';
       this._buttonCloseModules.setAttribute('alt', 'Close');
       L.DomEvent.addListener(this._buttonCloseModules, 'click', me.closeModules, this);
@@ -317,7 +313,7 @@ MapExt = L.Map.extend({
         var title;
 
         if (module.type !== 'custom') {
-          this.options.modules[i] = module = L.npmap.module[module.type](module).addTo(this);
+          this.options.modules[i] = module = L.outerspatial.module[module.type](module).addTo(this);
         }
 
         content = module.content;
@@ -330,11 +326,11 @@ MapExt = L.Map.extend({
           divContent.appendChild(content);
         }
 
-        button = L.DomUtil.create('button', 'npmap-modules-buttons-button', this._divModuleButtons);
-        button.id = 'npmap-modules-buttons_' + title.replace(/ /g, '_');
+        button = L.DomUtil.create('button', 'outerspatial-modules-buttons-button', this._divModuleButtons);
+        button.id = 'outerspatial-modules-buttons_' + title.replace(/ /g, '_');
         button.setAttribute('alt', title);
         button.style.backgroundImage = 'url(' + window.L.Icon.Default.imagePath + '/font-awesome/' + icon + (L.Browser.retina ? '@2x' : '') + '.png)';
-        div.id = 'npmap-module_' + title.replace(/ /g, '_');
+        div.id = 'outerspatial-module_' + title.replace(/ /g, '_');
 
         if (typeof module.width === 'number') {
           if (module.width > width) {
@@ -343,7 +339,7 @@ MapExt = L.Map.extend({
         }
 
         L.DomEvent.addListener(button, 'click', function () {
-          me.showModule(this.id.replace('npmap-modules-buttons_', ''));
+          me.showModule(this.id.replace('outerspatial-modules-buttons_', ''));
         });
 
         if (!initialize && module.visible === true) {
@@ -477,7 +473,7 @@ MapExt = L.Map.extend({
               }
 
               if (actual.length) {
-                var popup = L.npmap.popup({
+                var popup = L.outerspatial.popup({
                   autoPanPaddingTopLeft: util._getAutoPanPaddingTopLeft(me.getContainer()),
                   maxHeight: (detectAvailablePopupSpace ? util._getAvailableVerticalSpace(me) - 84 : null),
                   maxWidth: (detectAvailablePopupSpace ? util._getAvailableHorizontalSpace(me) - 77 : null)
@@ -517,7 +513,7 @@ MapExt = L.Map.extend({
   _setupTooltip: function () {
     var me = this;
     var overData = [];
-    var tooltip = (me.infoboxControl ? me.infoboxControl : L.npmap.tooltip({
+    var tooltip = (me.infoboxControl ? me.infoboxControl : L.outerspatial.tooltip({
       map: me
     }));
 
@@ -740,7 +736,7 @@ MapExt = L.Map.extend({
         if (visible) {
           return config.baseLayers;
         } else {
-          var active = util.clone(baselayerPresets.nps.parkTiles);
+          var active = util.clone(baselayerPresets.mapbox.outdoors);
           active.visible = true;
           active.zIndex = 0;
           return [
@@ -800,6 +796,7 @@ MapExt = L.Map.extend({
     return config;
   },
   _updateImproveLinks: function () {
+    // TODO: Need to create a new page on OuterSpatial.js and link to it
     if (this.attributionControl) {
       var els = util.getChildElementsByClassName(this.attributionControl._container, 'improve-park-tiles');
 
@@ -810,7 +807,7 @@ MapExt = L.Map.extend({
         var lng = center.lng.toFixed(5);
         var zoom = this.getZoom();
 
-        el.href = (this._onNpsNetwork ? ('http://insidemaps.nps.gov/places/editor/#background=mapbox-satellite&map=' + zoom + '/' + lng + '/' + lat + '&overlays=park-tiles-overlay') : ('https://www.nps.gov/npmap/tools/park-tiles/improve/#' + zoom + '/' + lat + '/' + lng));
+        el.href = 'https://www.nps.gov/npmap/tools/park-tiles/improve/#' + zoom + '/' + lat + '/' + lng;
       }
     }
   },
@@ -867,7 +864,7 @@ MapExt = L.Map.extend({
         }
       }
 
-      if (button.id.replace('npmap-modules-buttons_', '').replace(/_/g, ' ') === title) {
+      if (button.id.replace('outerspatial-modules-buttons_', '').replace(/_/g, ' ') === title) {
         L.DomUtil.addClass(button, 'active');
       } else {
         L.DomUtil.removeClass(button, 'active');

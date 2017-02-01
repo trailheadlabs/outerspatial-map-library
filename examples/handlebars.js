@@ -1,4 +1,4 @@
-var NPMap = {
+var OuterSpatial = {
   div: 'map',
   overlays: [{
     attribution: '<a href="https://www.nps.gov/npmap/" target="_blank">NPMap</a>',
@@ -44,6 +44,6 @@ var NPMap = {
 
 (function () {
   var s = document.createElement('script');
-  s.src = '{{ path }}/npmap-bootstrap.js';
+  s.src = '{{ path }}/outerspatial-bootstrap.js';
   document.body.appendChild(s);
 })();

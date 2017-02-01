@@ -1,14 +1,14 @@
 /* global L */
 
-var NPMap = NPMap || null;
+var OuterSpatial = OuterSpatial || null;
 var ie;
 
-if (!NPMap) {
-  throw new Error('The NPMap object is required.');
+if (!OuterSpatial) {
+  throw new Error('The OuterSpatial object is required.');
 }
 
-if (typeof NPMap !== 'object') {
-  throw new Error('The NPMap variable cannot be a ' + typeof NPMap + '.');
+if (typeof OuterSpatial !== 'object') {
+  throw new Error('The OuterSpatial variable cannot be a ' + typeof OuterSpatial + '.');
 }
 
 // https://github.com/Gavin-Paolucci-Kleinow/ie-truth
@@ -56,16 +56,16 @@ function showError (div) {
 ie = IeVersion();
 
 if (ie.isIe && (ie.actingVersion < 10 || ie.trueVersion < 10)) {
-  if (NPMap.constructor === Array) {
-    for (var i = 0; i < NPMap.length; i++) {
-      showError(NPMap[i].div);
+  if (OuterSpatial.constructor === Array) {
+    for (var i = 0; i < OuterSpatial.length; i++) {
+      showError(OuterSpatial[i].div);
     }
   } else {
-    showError(NPMap.div);
+    showError(OuterSpatial.div);
   }
 } else {
-  NPMap = {
-    config: NPMap.config || NPMap
+  OuterSpatial = {
+    config: OuterSpatial.config || OuterSpatial
   };
 
   (function () {
@@ -97,8 +97,8 @@ if (ie.isIe && (ie.actingVersion < 10 || ie.trueVersion < 10)) {
           config.div = document.getElementById(config.div);
         }
 
-        divLoading = L.npmap.util._.getChildElementsByClassName(config.div, 'npmap-loading')[0];
-        config.L = L.npmap.map(config);
+        divLoading = L.outerspatial.util._.getChildElementsByClassName(config.div, 'outerspatial-loading')[0];
+        config.L = L.outerspatial.map(config);
 
         if (config.hooks && config.hooks.init) {
           config.hooks.init(destroyLoader);
@@ -107,8 +107,8 @@ if (ie.isIe && (ie.actingVersion < 10 || ie.trueVersion < 10)) {
         }
       }
 
-      if (NPMap.config.plugins) {
-        var plugins = NPMap.config.plugins;
+      if (OuterSpatial.config.plugins) {
+        var plugins = OuterSpatial.config.plugins;
         var count = plugins.length;
         var done = 0;
         var total = 0;
@@ -132,13 +132,13 @@ if (ie.isIe && (ie.actingVersion < 10 || ie.trueVersion < 10)) {
           plugin = plugins[i];
 
           if (plugin.css) {
-            L.npmap.util._.appendCssFile(plugin.css, function () {
+            L.outerspatial.util._.appendCssFile(plugin.css, function () {
               done++;
             });
           }
 
           if (plugin.js) {
-            L.npmap.util._.appendJsFile(plugin.js, function () {
+            L.outerspatial.util._.appendJsFile(plugin.js, function () {
               done++;
             });
           }
@@ -164,20 +164,20 @@ if (ie.isIe && (ie.actingVersion < 10 || ie.trueVersion < 10)) {
       }
     }
     function callback () {
-      L.npmap.util._.appendCssFile(path + 'npmap' + (dev ? '' : '.min') + '.css', function () {
-        if (NPMap.config.constructor === Array) {
-          for (var i = 0; i < NPMap.config.length; i++) {
-            build(NPMap.config[i]);
+      L.outerspatial.util._.appendCssFile(path + 'outerspatial' + (dev ? '' : '.min') + '.css', function () {
+        if (OuterSpatial.config.constructor === Array) {
+          for (var i = 0; i < OuterSpatial.config.length; i++) {
+            build(OuterSpatial.config[i]);
           }
         } else {
-          build(NPMap.config);
+          build(OuterSpatial.config);
         }
       });
     }
     function showLoader (div) {
       var mask = document.createElement('div');
 
-      mask.className = 'npmap-loading';
+      mask.className = 'outerspatial-loading';
       mask.style.cssText = 'background-color:#f9f7f1;bottom:0;height:100%;left:0;position:absolute;right:0;top:0;width:100%;z-index:99999;';
 
       if (typeof div === 'string') {
@@ -187,7 +187,7 @@ if (ie.isIe && (ie.actingVersion < 10 || ie.trueVersion < 10)) {
       div.appendChild(mask);
 
       return new Spinner({
-        className: 'npmap-loading-spinner',
+        className: 'outerspatial-loading-spinner',
         color: '#454545',
         corners: 1,
         direction: 1,
@@ -206,26 +206,26 @@ if (ie.isIe && (ie.actingVersion < 10 || ie.trueVersion < 10)) {
       }).spin(mask);
     }
 
-    if (NPMap.config instanceof Array) {
-      for (var i = 0; i < NPMap.config.length; i++) {
-        NPMap.config[i].spinner = showLoader(NPMap.config[i].div);
+    if (OuterSpatial.config instanceof Array) {
+      for (var i = 0; i < OuterSpatial.config.length; i++) {
+        OuterSpatial.config[i].spinner = showLoader(OuterSpatial.config[i].div);
       }
     } else {
-      NPMap.config.spinner = showLoader(NPMap.config.div);
+      OuterSpatial.config.spinner = showLoader(OuterSpatial.config.div);
     }
 
     for (var j = 0; j < scripts.length; j++) {
       var src = scripts[j].src;
 
       if (typeof src === 'string') {
-        if (src.indexOf('npmap-bootstrap.js') !== -1) {
+        if (src.indexOf('outerspatial-bootstrap.js') !== -1) {
           dev = true;
-          path = src.replace('npmap-bootstrap.js', '');
-          script.src = path + 'npmap.js';
+          path = src.replace('outerspatial-bootstrap.js', '');
+          script.src = path + 'outerspatial.js';
           break;
-        } else if (src.indexOf('npmap-bootstrap.min.js') !== -1) {
-          path = src.replace('npmap-bootstrap.min.js', '');
-          script.src = path + 'npmap.min.js';
+        } else if (src.indexOf('outerspatial-bootstrap.min.js') !== -1) {
+          path = src.replace('outerspatial-bootstrap.min.js', '');
+          script.src = path + 'outerspatial.min.js';
           break;
         }
       }

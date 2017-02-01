@@ -3,8 +3,8 @@
 
 var version = require('./package.json').version;
 
-window.L.Icon.Default.imagePath = 'https://www.nps.gov/lib/npmap.js/' + version + '/images';
-L.npmap = module.exports = {
+window.L.Icon.Default.imagePath = 'https://cdn.outerspatial.com/libs/outerspatial.js/' + version + '/images';
+L.outerspatial = module.exports = {
   VERSION: version,
   // Preserve order of controls because it affects the display hierarchy.
   control: {

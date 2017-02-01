@@ -1,4 +1,4 @@
-var NPMap = {
+var OuterSpatial = {
   baseLayers: [
     'stamen-toner'
   ],
@@ -37,7 +37,7 @@ var NPMap = {
             }
           }
 
-          NPMap.config.legendControl = {
+          OuterSpatial.config.legendControl = {
             html: '<h1 class="layer name">National Park Info</h1>' + html + '</ul>',
             position: 'bottomright'
           };
@@ -72,6 +72,6 @@ var NPMap = {
 
 (function () {
   var s = document.createElement('script');
-  s.src = '{{ path }}/npmap-bootstrap.js';
+  s.src = '{{ path }}/outerspatial-bootstrap.js';
   document.body.appendChild(s);
 })();

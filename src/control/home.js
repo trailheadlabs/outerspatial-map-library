@@ -42,7 +42,7 @@ L.Map.addInitHook(function () {
       options = this.options.homeControl;
     }
 
-    this.homeControl = L.npmap.control.home(options).addTo(this);
+    this.homeControl = L.outerspatial.control.home(options).addTo(this);
   }
 });
 

@@ -27,7 +27,7 @@ var SwitcherControl = L.Control.extend({
     this._list.appendChild(li);
   },
   _initLayout: function () {
-    var container = this._container = L.DomUtil.create('div', 'npmap-control-switcher');
+    var container = this._container = L.DomUtil.create('div', 'outerspatial-control-switcher');
 
     if (!L.Browser.touch) {
       L.DomEvent.disableClickPropagation(container);
@@ -87,9 +87,9 @@ var SwitcherControl = L.Control.extend({
           baseLayer.visible = true;
 
           if (baseLayer.type === 'arcgisserver') {
-            baseLayer.L = L.npmap.layer[baseLayer.type][baseLayer.tiled === true ? 'tiled' : 'dynamic'](baseLayer);
+            baseLayer.L = L.outerspatial.layer[baseLayer.type][baseLayer.tiled === true ? 'tiled' : 'dynamic'](baseLayer);
           } else {
-            baseLayer.L = L.npmap.layer[baseLayer.type](baseLayer);
+            baseLayer.L = L.outerspatial.layer[baseLayer.type](baseLayer);
           }
 
           if (this._map.getZoom() < baseLayer.minZoom) {
@@ -178,7 +178,7 @@ var SwitcherControl = L.Control.extend({
 
 L.Map.addInitHook(function () {
   if (this.options.baseLayers && this.options.baseLayers.length > 1) {
-    this.switcherControl = L.npmap.control.switcher(this.options.baseLayers).addTo(this);
+    this.switcherControl = L.outerspatial.control.switcher(this.options.baseLayers).addTo(this);
   }
 });
 

@@ -56,9 +56,9 @@ _Arguments_:
 The first, and only, argument is required. It must be a config object comprised of the following required and optional properties:
 
 * (Required) `div` (Object or String): Either a reference to an HTML element or the id of an HTML element to render the map into.
-* (Optional) `baseLayers` (Array): An array of baseLayer configuration objects AND/OR [baseLayer preset](#baseLayer-presets) strings. Defaults to `['nps-parkTiles']`.
-* (Optional) `description` (String): A description for the map. Used by some templates, including the NPS.gov content management system templates.
-* (Optional) `detectAvailablePopupSpace` (Boolean): Defaults to `undefined`. If `true` or `undefined`, NPMap.js will detect the height and width available in your map and set the `maxHeight` and `maxWidth` properties of the map's popups automatically.
+* (Optional) `baseLayers` (Array): An array of baseLayer configuration objects AND/OR [baseLayer preset](#baseLayer-presets) strings. Defaults to `['mapbox-outdoors']`.
+* (Optional) `description` (String): A description for the map. Used by some templates.
+* (Optional) `detectAvailablePopupSpace` (Boolean): Defaults to `undefined`. If `true` or `undefined`, OuterSpatial.js will detect the height and width available in your map and set the `maxHeight` and `maxWidth` properties of the map's popups automatically.
 * (Optional) `editControl` (Boolean or Object): Defaults to `undefined`.
 * (Optional) `events` (Array): An array of event objects to attach to the map. Defaults to `undefined`.
 * (Optional) `fullscreenControl` (Boolean or Object): Defaults to `undefined`.
@@ -70,7 +70,7 @@ The first, and only, argument is required. It must be a config object comprised 
 * (Optional) `legendControl` (Boolean or Object): Defaults to `undefined`.
 * (Optional) `locateControl` (Boolean or Object): Defaults to `undefined`.
 * (Optional) `measureControl` (Boolean or Object): Defaults to `undefined`.
-* (Optional) `name` (String): A name for the map. Used by some templates, including the NPS.gov content management system templates.
+* (Optional) `name` (String): A name for the map. Used by some templates.
 * (Optional) `overlays` (Array): An array of overlay configuration objects. Defaults to `undefined`.
 * (Optional) `overviewControl` (Boolean or Object): Defaults to `undefined`.
 * (Optional) `printControl` (Boolean or Object): Defaults to `undefined`.
@@ -84,13 +84,13 @@ _Returns_: a map object
 
 _Example (Bootstrap)_:
 
-    var NPMap = {
+    var OuterSpatial = {
       div: 'map'
     });
 
 _Example (API)_:
 
-    var map = L.npmap.map({
+    var map = L.outerspatial.map({
       div: 'map'
     });
 
@@ -114,7 +114,7 @@ Multiple overlays can be visible at the same time. Overlays will be added to the
 
 _Example (Bootstrap)_:
 
-    var NPMap = {
+    var OuterSpatial = {
       div: 'map',
       baseLayers: [
         'bing-aerial'
@@ -128,12 +128,12 @@ _Example (Bootstrap)_:
 
 _Example (API)_:
 
-    var map = L.npmap.map({
+    var map = L.outerspatial.map({
       div: 'map'
     });
 
-    L.npmap.layer.bing().addTo(map);
-    L.npmap.layer.cartodb({
+    L.outerspatial.layer.bing().addTo(map);
+    L.outerspatial.layer.cartodb({
       table: 'parks',
       type: 'cartodb',
       user: 'nps'
@@ -141,7 +141,7 @@ _Example (API)_:
 
 You can add events to a layer by adding an `events` array to the layer config. The array should contain event objects with `fn` and `type` properties. These objects can also (optionally) be given a `single` property if the event should only be fired one time. An example:
 
-    var NPMap = {
+    var OuterSpatial = {
       div: 'map',
       overlays: [{
         events: [{
@@ -156,7 +156,7 @@ You can add events to a layer by adding an `events` array to the layer config. T
       }]
     };
 
-Supported event "types" include all of the Leaflet layer events for a given layer type, as well as the following event types added by NPMap.js:
+Supported event "types" include all of the Leaflet layer events for a given layer type, as well as the following event types added by OuterSpatial.js:
 
 * `error`: Fired when a layer error occurs. Passes the error event object to the event function.
 * `load`: Fired when a layer is loaded. Only available for layers that extend `L.GeoJson`.
@@ -172,7 +172,7 @@ _Working Examples_:
 
 Create a layer from an ArcGIS Server tiled or dynamic map service, including **map** services hosted on ArcGIS Online, and add it to a map.
 
-Note: If you want to bring in an ArcGIS Online **feature** service, you will need to add it as a [GeoJSON](#geojson) layer to NPMap. You can get GeoJSON in [WGS84](http://en.wikipedia.org/wiki/World_Geodetic_System) out of the feature service by appending `?f=geojson&outSR=4326` to the end of the query URL, e.g.:
+Note: If you want to bring in an ArcGIS Online **feature** service, you will need to add it as a [GeoJSON](#geojson) layer to OuterSpatial.js. You can get GeoJSON in [WGS84](http://en.wikipedia.org/wiki/World_Geodetic_System) out of the feature service by appending `?f=geojson&outSR=4326` to the end of the query URL, e.g.:
 
     http://services1.arcgis.com/fBc8EJBxQRMcHlei/ArcGIS/rest/services/GRSM_RESTROOMS/FeatureServer/0/query?f=geojson&outSR=4326&where=OBJECTID+IS+NOT+NULL
 
@@ -191,7 +191,7 @@ The first, and only, argument is required. It must be a config object comprised 
 * (Optional) `clickable` (Boolean): Should interactivity (click) operations be enabled for this layer? Defaults to `true`.
 * (Optional) `description` (String): A description for the layer. Used by some [controls](#controls) and [modules](#modules).
 * (Optional) `dynamicAttribution` (String): The URL of a [dynamic attribution](http://blogs.esri.com/esri/arcgis/2012/08/15/dynamic-attribution-is-here/) endpoint for the service.
-* (Optional) `layers` (String): A comma-delimited string of the ArcGIS Server integer layer identifiers to bring into the NPMap.js layer.
+* (Optional) `layers` (String): A comma-delimited string of the ArcGIS Server integer layer identifiers to bring into the OuterSpatial.js layer.
 * (Optional) `name` (String): A name for the layer. Used by some [controls](#controls) and [modules](#modules).
 * (Optional) `popup` (String, Object, or Function): Configures the contents of the overlay's [popups](#using-popups).
 
@@ -201,7 +201,7 @@ _Returns_: a layer object
 
 _Example (Bootstrap)_:
 
-    var NPMap = {
+    var OuterSpatial = {
       div: 'map',
       overlays: [{
         attribution: '<a href="http://www.esri.com" target="_blank">Esri</a>',
@@ -214,11 +214,11 @@ _Example (Bootstrap)_:
 
 _Example (API)_:
 
-    var map = L.npmap.map({
+    var map = L.outerspatial.map({
       div: 'map'
     });
 
-    L.npmap.layer.arcgisserver({
+    L.outerspatial.layer.arcgisserver({
       attribution: '<a href="http://www.esri.com" target="_blank">Esri</a>',
       opacity: 0.5,
       tiled: true,
@@ -252,7 +252,7 @@ _Returns_: a layer object
 
 _Example (Bootstrap)_:
 
-    var NPMap = {
+    var OuterSpatial = {
       div: 'map',
       baseLayers: [{
         layer: 'aerialwithlabels',
@@ -262,11 +262,11 @@ _Example (Bootstrap)_:
 
 _Example (API)_:
 
-    var map = L.npmap.map({
+    var map = L.outerspatial.map({
       div: 'map'
     });
 
-    L.npmap.layer.bing({
+    L.outerspatial.layer.bing({
       layer: 'aerialwithlabels'
     }).addTo(map);
 
@@ -305,7 +305,7 @@ _Returns_: a layer object
 
 _Example (Bootstrap)_:
 
-    var NPMap = {
+    var OuterSpatial = {
       div: 'map',
       overlays: [{
         table: 'parks',
@@ -316,11 +316,11 @@ _Example (Bootstrap)_:
 
 _Example (API)_:
 
-    var map = L.npmap.map({
+    var map = L.outerspatial.map({
       div: 'map'
     });
 
-    L.npmap.layer.cartodb({
+    L.outerspatial.layer.cartodb({
       table: 'parks',
       type: 'cartodb',
       user: 'nps'
@@ -366,13 +366,13 @@ You can also (optionally) provide any of the options supported by [`L.GeoJSON`](
 2. `style`
 3. `onEachFeature`
 
-These three options are not supported because they are used internally by NPMap.js. If provided, they will be overwritten.
+These three options are not supported because they are used internally by OuterSpatial.js. If provided, they will be overwritten.
 
 _Returns_: a layer object
 
 _Example (Bootstrap)_:
 
-    var NPMap = {
+    var OuterSpatial = {
       div: 'map',
       overlays: [{
         type: 'csv',
@@ -382,11 +382,11 @@ _Example (Bootstrap)_:
 
 _Example (API)_:
 
-    var map = L.npmap.map({
+    var map = L.outerspatial.map({
       div: 'map'
     });
 
-    L.npmap.layer.csv({
+    L.outerspatial.layer.csv({
       url: 'data/colorado_cities.csv'
     }).addTo(map);
 
@@ -431,13 +431,13 @@ You can also (optionally) provide any of the options supported by [`L.GeoJSON`](
 2. `style`
 3. `onEachFeature`
 
-These three options are not supported because they are used internally by NPMap.js. If provided, they will be overwritten.
+These three options are not supported because they are used internally by OuterSpatial.js. If provided, they will be overwritten.
 
 _Returns_: a layer object
 
 _Example (Bootstrap)_:
 
-    var NPMap = {
+    var OuterSpatial = {
       div: 'map',
       overlays: [{
         type: 'geojson',
@@ -447,11 +447,11 @@ _Example (Bootstrap)_:
 
 _Example (API)_:
 
-    var map = L.npmap.map({
+    var map = L.outerspatial.map({
       div: 'map'
     });
 
-    L.npmap.layer.geojson({
+    L.outerspatial.layer.geojson({
       url: 'data/national_parks.geojson'
     }).addTo(map);
 
@@ -493,13 +493,13 @@ You can also (optionally) provide any of the options supported by [`L.GeoJSON`](
 2. `style`
 3. `onEachFeature`
 
-These three options are not supported because they are used internally by NPMap.js. If provided, they will be overwritten.
+These three options are not supported because they are used internally by OuterSpatial.js. If provided, they will be overwritten.
 
 _Returns_: a layer object
 
 _Example (Bootstrap)_:
 
-    var NPMap = {
+    var OuterSpatial = {
       div: 'map',
       overlays: [{
         branch: 'gh-pages',
@@ -512,11 +512,11 @@ _Example (Bootstrap)_:
 
 _Example (API)_:
 
-    var map = L.npmap.map({
+    var map = L.outerspatial.map({
       div: 'map'
     });
 
-    L.npmap.layer.github({
+    L.outerspatial.layer.github({
       branch: 'gh-pages',
       path: 'base_data/boundaries/parks/yose.topojson',
       repo: 'data',
@@ -533,7 +533,7 @@ _Working Examples_:
 
 Create a KML layer and add it to a map.
 
-NOTE: For NPMap.js to load KML data, the data must be properly formatted. NPMap.js uses toGeoJSON internally to convert KML to GeoJSON, so if your KML isn't loading properly, go and test it on the [website](http://mapbox.github.io/togeojson/).
+NOTE: For OuterSpatial.js to load KML data, the data must be properly formatted. OuterSpatial.js uses toGeoJSON internally to convert KML to GeoJSON, so if your KML isn't loading properly, go and test it on the [website](http://mapbox.github.io/togeojson/).
 
 _Arguments_:
 
@@ -563,13 +563,13 @@ You can also (optionally) provide any of the options supported by [`L.GeoJSON`](
 2. `style`
 3. `onEachFeature`
 
-These three options are not supported because they are used internally by NPMap.js. If provided, they will be overwritten.
+These three options are not supported because they are used internally by OuterSpatial.js. If provided, they will be overwritten.
 
 _Returns_: a layer object
 
 _Example (Bootstrap)_:
 
-    var NPMap = {
+    var OuterSpatial = {
       div: 'map',
       overlays: [{
         type: 'kml',
@@ -579,11 +579,11 @@ _Example (Bootstrap)_:
 
 _Example (API)_:
 
-    var map = L.npmap.map({
+    var map = L.outerspatial.map({
       div: 'map'
     });
 
-    L.npmap.layer.kml({
+    L.outerspatial.layer.kml({
       url: 'data/national_parks.kml'
     }).addTo(map);
 
@@ -624,7 +624,7 @@ _Returns_: a layer object
 
 _Example (Bootstrap)_:
 
-    var NPMap = {
+    var OuterSpatial = {
       div: 'map',
       overlays: [{
         id: 'examples.map-20v6611k',
@@ -634,11 +634,11 @@ _Example (Bootstrap)_:
 
 _Example (API)_:
 
-    var map = L.npmap.map({
+    var map = L.outerspatial.map({
       div: 'map'
     });
 
-    L.npmap.layer.mapbox({
+    L.outerspatial.layer.mapbox({
       id: 'examples.map-20v6611k'
     }).addTo(map);
 
@@ -676,13 +676,13 @@ You can also (optionally) provide any of the options supported by [`L.GeoJSON`](
 2. `style`
 3. `onEachFeature`
 
-These three options are not supported because they are used internally by NPMap.js. If provided, they will be overwritten.
+These three options are not supported because they are used internally by OuterSpatial.js. If provided, they will be overwritten.
 
 _Returns_: a layer object
 
 _Example (Bootstrap)_:
 
-    var NPMap = {
+    var OuterSpatial = {
       div: 'map',
       overlays: [{
         id: '08HVpMLpDksQjCeBL1FbTkqGHP4Bk7dfg',
@@ -692,11 +692,11 @@ _Example (Bootstrap)_:
 
 _Example (API)_:
 
-    var map = L.npmap.map({
+    var map = L.outerspatial.map({
       div: 'map',
     });
 
-    L.npmap.layer.spot({
+    L.outerspatial.layer.spot({
       id: '08HVpMLpDksQjCeBL1FbTkqGHP4Bk7dfg'
     }).addTo(map);
 
@@ -729,7 +729,7 @@ _Returns_: a layer object
 
 _Example (Bootstrap)_:
 
-    var NPMap = {
+    var OuterSpatial = {
       div: 'map',
       overlays: [{
         attribution: '&copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap</a> contributors',
@@ -740,11 +740,11 @@ _Example (Bootstrap)_:
 
 _Example (API)_:
 
-    var map = L.npmap.map({
+    var map = L.outerspatial.map({
       div: 'map'
     });
 
-    L.npmap.layer.tiled({
+    L.outerspatial.layer.tiled({
       attribution: '&copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap</a> contributors',
       url: 'http://{s}.tile.osm.org/{z}/{x}/{y}.png'
     }).addTo(map);
@@ -775,7 +775,7 @@ _Returns_: a layer object
 
 _Example (Bootstrap)_:
 
-    var NPMap = {
+    var OuterSpatial = {
       div: 'map',
       overlays: [{
         attribution: 'NOAA',
@@ -789,11 +789,11 @@ _Example (Bootstrap)_:
 
 _Example (API)_:
 
-    var map = L.npmap.map({
+    var map = L.outerspatial.map({
       div: 'map'
     });
 
-    L.npmap.layer.wms({
+    L.outerspatial.layer.wms({
       attribution: 'NOAA',
       format: 'image/png',
       layers: 'RAS_RIDGE_NEXRAD',
@@ -811,7 +811,7 @@ _Working Examples_:
 
 Create a Zoomify layer and add it to a map.
 
-NOTE: Zoomify layers do not contain spatial reference information, so they will not work with other layers. Because of this, when a Zoomify layer is added to a map, NPMap.js ignores any other layers specified in the `baseLayers` and/or `overlays` configs.
+NOTE: Zoomify layers do not contain spatial reference information, so they will not work with other layers. Because of this, when a Zoomify layer is added to a map, OuterSpatial.js ignores any other layers specified in the `baseLayers` and/or `overlays` configs.
 
 _Arguments_:
 
@@ -831,7 +831,7 @@ _Returns_: a layer object
 
 _Example (Bootstrap)_:
 
-    var NPMap = {
+    var OuterSpatial = {
       div: 'map',
       overlays: [{
         height: 2737,
@@ -843,11 +843,11 @@ _Example (Bootstrap)_:
 
 _Example (API)_:
 
-    var map = L.npmap.map({
+    var map = L.outerspatial.map({
       div: 'map'
     });
 
-    L.npmap.layer.zoomify({
+    L.outerspatial.layer.zoomify({
       height: 2737,
       url: 'data/parkmaps/maca/img/',
       width: 6543
@@ -861,7 +861,7 @@ _Working Examples_:
 
 ## <a name="controls">Controls</a>
 
-Add functionality to your map using NPMap.js' controls. Controls are added to either a control bar overlaid in one of the four corners of the map or a toolbar that displays above the map.
+Add functionality to your map using OuterSpatial.js' controls. Controls are added to either a control bar overlaid in one of the four corners of the map or a toolbar that displays above the map.
 
 **[[⬆]](#)**
 
@@ -879,18 +879,18 @@ _Returns_: a control object
 
 _Example (Bootstrap)_:
 
-    var NPMap = {
+    var OuterSpatial = {
       div: 'map',
       editControl: true
     };
 
 _Example (API)_:
 
-    var map = L.npmap.map({
+    var map = L.outerspatial.map({
       div: 'map'
     });
 
-    L.npmap.control.edit().addTo(map);
+    L.outerspatial.control.edit().addTo(map);
 
 _Working Examples_:
 
@@ -912,18 +912,18 @@ _Returns_: a control object
 
 _Example (Bootstrap)_:
 
-    var NPMap = {
+    var OuterSpatial = {
       div: 'map',
       fullscreenControl: true
     };
 
 _Example (API)_:
 
-    var map = L.npmap.map({
+    var map = L.outerspatial.map({
       div: 'map'
     });
 
-    L.npmap.control.fullscreen().addTo(map);
+    L.outerspatial.control.fullscreen().addTo(map);
 
 _Working Examples_:
 
@@ -944,7 +944,7 @@ _Arguments_:
 The first, and only, argument is optional, and may be a control config object with the following properties:
 
 * (Optional) `provider` (String): Which supported provider should be used? Defaults to `esri`. Valid options are `bing`, `esri`, `mapbox`, `mapquest`, `mapzen`, and `nominatim`. **Note** that the `mapquest` and `nominatim` providers are limited to 15,000 transactions per month, so they are not recommended for production usage.
-* (Optional) `searchPlaces` (Boolean): Should the geocoder search through points of interest from the National Park Service's [Places](https://www.nps.gov/npmap/tools/places/) system? Defaults to `false`.
+* (Optional) `searchPlaces` (Boolean): Should the geocoder search through points of interest from the National Park Service's [Places](https://www.nps.gov/maps/tools/places/) system? Defaults to `false`.
 
 You can also (optionally) provide any of the options supported by [`L.Control`](http://leafletjs.com/reference.html#control).
 
@@ -952,18 +952,18 @@ _Returns_: a control object
 
 _Example (Bootstrap)_:
 
-    var NPMap = {
+    var OuterSpatial = {
       div: 'map',
       geocoderControl: true
     };
 
 _Example (API)_:
 
-    var map = L.npmap.map({
+    var map = L.outerspatial.map({
       div: 'map'
     });
 
-    L.npmap.control.geocoder().addTo(map);
+    L.outerspatial.control.geocoder().addTo(map);
 
 _Working Examples_:
 
@@ -985,18 +985,18 @@ _Returns_: a control object
 
 _Example (Bootstrap)_:
 
-    var NPMap = {
+    var OuterSpatial = {
       div: 'map',
       hashControl: true
     };
 
 _Example (API)_:
 
-    var map = L.npmap.map({
+    var map = L.outerspatial.map({
       div: 'map'
     });
 
-    L.npmap.control.hash().addTo(map);
+    L.outerspatial.control.hash().addTo(map);
 
 _Working Examples_:
 
@@ -1020,13 +1020,13 @@ _Returns_: a control object
 
 _Example (Bootstrap)_:
 
-    var NPMap = {
+    var OuterSpatial = {
       div: 'map'
     };
 
 _Example (API)_:
 
-    var map = L.npmap.map({
+    var map = L.outerspatial.map({
       div: 'map'
     });
 
@@ -1046,18 +1046,18 @@ _Returns_: a control object
 
 _Example (Bootstrap)_:
 
-    var NPMap = {
+    var OuterSpatial = {
       div: 'map',
       infoboxControl: true
     };
 
 _Example (API)_:
 
-    var map = L.npmap.map({
+    var map = L.outerspatial.map({
       div: 'map'
     });
 
-    L.npmap.control.infobox().addTo(map);
+    L.outerspatial.control.infobox().addTo(map);
 
 **[[⬆]](#)**
 
@@ -1079,7 +1079,7 @@ _Returns_: a control object
 
 _Example (Bootstrap)_:
 
-    var NPMap = {
+    var OuterSpatial = {
       div: 'map',
       legendControl: {
         html: '' +
@@ -1094,11 +1094,11 @@ _Example (Bootstrap)_:
 
 _Example (API)_:
 
-    var map = L.npmap.map({
+    var map = L.outerspatial.map({
       div: 'map'
     });
 
-    L.npmap.control.legend({
+    L.outerspatial.control.legend({
       html: '' +
         '<h3>Legend</h3>' +
         '<ul>' +
@@ -1129,18 +1129,18 @@ _Returns_: a control object
 
 _Example (Bootstrap)_:
 
-    var NPMap = {
+    var OuterSpatial = {
       div: 'map',
       locateControl: true
     };
 
 _Example (API)_:
 
-    var map = L.npmap.map({
+    var map = L.outerspatial.map({
       div: 'map'
     });
 
-    L.npmap.control.locate().addTo(map);
+    L.outerspatial.control.locate().addTo(map);
 
 _Working Examples_:
 
@@ -1158,7 +1158,7 @@ _Arguments_:
 
 The first, and only, argument is optional, and may be a config object with the following properties:
 
-* (Optional) `units` (Object): An object, with one or both `area` (Array) and `distance` (Array) properties that tell NPMap.js which units to support with the control. Valid area units are acres (`ac`) and hectares (`ha`). Valid distance units are feet (`f`), meters (`m`), and miles (`mi`). The control defaults to all available area and distance units.
+* (Optional) `units` (Object): An object, with one or both `area` (Array) and `distance` (Array) properties that tell OuterSpatial.js which units to support with the control. Valid area units are acres (`ac`) and hectares (`ha`). Valid distance units are feet (`f`), meters (`m`), and miles (`mi`). The control defaults to all available area and distance units.
 
 You can also (optionally) provide any of the options supported by [`L.Control`](http://leafletjs.com/reference.html#control).
 
@@ -1166,18 +1166,18 @@ _Returns_: a control object
 
 _Example (Bootstrap)_:
 
-    var NPMap = {
+    var OuterSpatial = {
       div: 'map',
       measureControl: true
     };
 
 _Example (API)_:
 
-    var map = L.npmap.map({
+    var map = L.outerspatial.map({
       div: 'map'
     });
 
-    L.npmap.control.measure().addTo(map);
+    L.outerspatial.control.measure().addTo(map);
 
 _Working Examples_:
 
@@ -1209,7 +1209,7 @@ _Returns_: a control object
 
 _Example (Bootstrap)_:
 
-    var NPMap = {
+    var OuterSpatial = {
       div: 'map',
       overviewControl: {
         layer: 'mapbox-light'
@@ -1218,11 +1218,11 @@ _Example (Bootstrap)_:
 
 _Example (API)_:
 
-    var map = L.npmap.map({
+    var map = L.outerspatial.map({
       div: 'map'
     });
 
-    L.npmap.control.overview({
+    L.outerspatial.control.overview({
       layer: 'mapbox-light'
     }).addTo(map);
 
@@ -1250,18 +1250,18 @@ _Returns_: a control object
 
 _Example (Bootstrap)_:
 
-    var NPMap = {
+    var OuterSpatial = {
       div: 'map',
       printControl: true
     };
 
 _Example (API)_:
 
-    var map = L.npmap.map({
+    var map = L.outerspatial.map({
       div: 'map'
     });
 
-    L.npmap.control.print().addTo(map);
+    L.outerspatial.control.print().addTo(map);
 
 _Working Examples_:
 
@@ -1283,18 +1283,18 @@ _Returns_: a control object
 
 _Example (Bootstrap)_:
 
-    var NPMap = {
+    var OuterSpatial = {
       div: 'map',
       scaleControl: true
     };
 
 _Example (API)_:
 
-    var map = L.npmap.map({
+    var map = L.outerspatial.map({
       div: 'map'
     });
 
-    L.npmap.control.scale().addTo(map);
+    L.outerspatial.control.scale().addTo(map);
 
 _Working Examples_:
 
@@ -1317,13 +1317,13 @@ _Returns_: a control object
 
 _Example (Bootstrap)_:
 
-    var NPMap = {
+    var OuterSpatial = {
       div: 'map'
     };
 
 _Example (API)_:
 
-    var map = L.npmap.map({
+    var map = L.outerspatial.map({
       div: 'map'
     });
 
@@ -1331,7 +1331,7 @@ _Example (API)_:
 
 ### <a name="switcher">switcher()</a>
 
-The switcher control is used internally by NPMap.js. It is automatically created and added to a map when more than one config object is present in a map's `baseLayers` property. It should not be created manually.
+The switcher control is used internally by OuterSpatial.js. It is automatically created and added to a map when more than one config object is present in a map's `baseLayers` property. It should not be created manually.
 
 **[[⬆]](#)**
 
@@ -1349,18 +1349,18 @@ _Returns_: a control object
 
 _Example (Bootstrap)_:
 
-    var NPMap = {
+    var OuterSpatial = {
       div: 'map',
       zoomdisplayControl: true
     };
 
 _Example (API)_:
 
-    var map = L.npmap.map({
+    var map = L.outerspatial.map({
       div: 'map'
     });
 
-    L.npmap.control.zoomdisplay().addTo(map);
+    L.outerspatial.control.zoomdisplay().addTo(map);
 
 _Working Examples_:
 
@@ -1370,7 +1370,7 @@ _Working Examples_:
 
 ## <a name="modules">Modules</a>
 
-NPMap.js modules are standalone pieces of functionality that can be added and integrated into a map.
+OuterSpatial.js modules are standalone pieces of functionality that can be added and integrated into a map.
 
 ### <a name="directions">directions</a>
 
@@ -1394,7 +1394,7 @@ _Returns_: an icon object
 
 _Example (Bootstrap)_:
 
-    var NPMap = {
+    var OuterSpatial = {
       div: 'map',
       overlays: [{
         cluster: true,
@@ -1412,11 +1412,11 @@ _Example (Bootstrap)_:
 
 _Example (API)_:
 
-    var map = L.npmap.map({
+    var map = L.outerspatial.map({
       div: 'map'
     });
 
-    L.npmap.layer.csv({
+    L.outerspatial.layer.csv({
       cluster: true,
       styles: {
         point: {
@@ -1437,7 +1437,7 @@ _Working Examples_:
 
 ### <a name="npmapsymbollibrary">npmapsymbollibrary(config: object)</a>
 
-Create an icon using the [NPMap Symbol Library](https://github.com/nationalparkservice/npmap-symbol-library) icon set.
+Create an icon using the [NPMap Symbol Library](https://github.com/nationalparkservice/symbol-library) icon set.
 
 _Extends_: [`L.Icon`](http://leafletjs.com/reference.html#icon)
 
@@ -1449,7 +1449,7 @@ _Returns_: an icon object
 
 _Example (Bootstrap)_:
 
-    var NPMap = {
+    var OuterSpatial = {
       div: 'map',
       overlays: [{
         cluster: true,
@@ -1468,11 +1468,11 @@ _Example (Bootstrap)_:
 
 _Example (API)_:
 
-    var map = L.npmap.map({
+    var map = L.outerspatial.map({
       div: 'map'
     });
 
-    L.npmap.layer.csv({
+    L.outerspatial.layer.csv({
       cluster: true,
       styles: {
         point: {
@@ -1494,31 +1494,23 @@ _Working Examples_:
 
 ## <a name="presets">Presets</a>
 
-Presets in NPMap.js can be be used as shortcuts to add commonly-used layers and styling to a map.
+Presets in OuterSpatial.js can be be used as shortcuts to add commonly-used layers and styling to a map.
 
 **[[⬆]](#)**
 
 ### <a name="baseLayer">baseLayer</a>
 
-NPMap.js includes support for adding baseLayers via string presets. This makes it easy to add one or more baseLayers to your map without knowing the technical details required to manually configure it. To use presets, simply add one or more preset strings (outlined below) to the `baseLayers` property:
+OuterSpatial.js includes support for adding baseLayers via string presets. This makes it easy to add one or more baseLayers to your map without knowing the technical details required to manually configure it. To use presets, simply add one or more preset strings (outlined below) to the `baseLayers` property:
 
-    var NPMap = {
+    var OuterSpatial = {
       div: 'map',
       baseLayers: [
-        'nps-parkTilesImagery'
+        'mapbox-streets'
       ]
     };
 
 The following baseLayer preset strings are supported:
 
-* NPS
-   * `nps-darkStreets`
-   * `nps-lightStreets`
-   * `nps-neutralTerrain`
-   * `nps-parkTiles`
-   * `nps-parkTilesImagery`
-   * `nps-parkTilesSlate`
-   * `nps-satelliteNight`
 * Bing
    * `bing-aerial`
    * `bing-aerialLabels`
@@ -1568,46 +1560,46 @@ Docs coming soon.
 
 ## <a name="concepts">Concepts</a>
 
-Understanding a few fundamental concepts will help you get the most out of NPMap.js.
+Understanding a few fundamental concepts will help you get the most out of OuterSpatial.js.
 
 **[[⬆]](#)**
 
 ### <a name="bootstrap-vs-api">Bootstrap vs. API</a>
 
-There are three ways to use NPMap.js: The "Bootstrap" method, the "API" method, and the "Hybrid" method.
+There are three ways to use OuterSpatial.js: The "Bootstrap" method, the "API" method, and the "Hybrid" method.
 
 #### Bootstrap
 
-To create a map using the Bootstrap method, create an `NPMap` config object and add configuration properties to it as documented above. Then load `npmap-bootstrap.js` and NPMap.js takes over from there.
+To create a map using the Bootstrap method, create an `OS` config object and add configuration properties to it as documented above. Then load `os-bootstrap.js` and OuterSpatial.js takes over from there.
 
-This method is the recommended (and easiest) way to create maps with NPMap.js, and it takes full advantage of the power of NPMap.js. It includes "extras" like a spinning loading indicator and automatic loading of `npmap.css`.
+This method is the recommended (and easiest) way to create maps with OuterSpatial.js, and it takes full advantage of the power of OuterSpatial.js. It includes "extras" like a spinning loading indicator and automatic loading of `os.css`.
 
 #### API
 
-It is also possible to create maps by interacting directly with the NPMap.js API in a way similar to other more "traditional" web mapping libraries like Google Maps and the ArcGIS JavaScript API. This method requires a manual load of both `npmap.css` and `npmap.js`, and it lacks the "extras" that come along with the Bootstrap method. It also requires at least a general understanding of JavaScript.
+It is also possible to create maps by interacting directly with the OuterSpatial.js API in a way similar to other more "traditional" web mapping libraries like Google Maps and the ArcGIS JavaScript API. This method requires a manual load of both `outerspatial.css` and `outerspatial.js`, and it lacks the "extras" that come along with the Bootstrap method. It also requires at least a general understanding of JavaScript.
 
 #### Hybrid
 
-The NPMap team builds many of its maps using a hybrid approach that uses `npmap-bootstrap.js` to do the initial configuration and load of a map and then takes advantage of NPMap.js' [hooks](../examples/hooks.html) and API to add custom functionality.
+Trailhead Labs builds many of its maps using a hybrid approach that uses `outerspatial-bootstrap.js` to do the initial configuration and load of a map and then takes advantage of OuterSpatial.js' [hooks](../examples/hooks.html) and API to add custom functionality.
 
 This approach gets the best of both the Bootstrap and API methods: Easy initial configuration with advanced programmatic access for complete control. This approach also has an added benefit of consistency. Every map built using this hybrid approach is laid out (or "scaffolded") in a consistent way.
 
-This hybrid approach is possible because NPMap.js exposes the underlying [Map](#map), [Layer](#layer), [Control](#control), and [Module](#module) objects so they can be interacted with programatically after they are initialized.
+This hybrid approach is possible because OuterSpatial.js exposes the underlying [Map](#map), [Layer](#layer), [Control](#control), and [Module](#module) objects so they can be interacted with programatically after they are initialized.
 
-For example, once NPMap.js creates a map it exposes the internal map object via a `L` property on the `NPMap.config` object. This means you can access the object like this: `NPMap.config.L`.
+For example, once OuterSpatial.js creates a map it exposes the internal map object via a `L` property on the `OS.config` object. This means you can access the object like this: `OuterSpatial.config.L`.
 
-You can also access the `baseLayers` and `overlays` objects initialized by NPMap.js in a similar way:
+You can also access the `baseLayers` and `overlays` objects initialized by OuterSpatial.js in a similar way:
 
-* `NPMap.config.baseLayers[0].L` gets a reference to the layer object for the first baseLayer
-* `NPMap.config.overlays[0].L` gets a reference to the layer object for the first overlay
+* `OuterSpatial.config.baseLayers[0].L` gets a reference to the layer object for the first baseLayer
+* `OuterSpatial.config.overlays[0].L` gets a reference to the layer object for the first overlay
 
 **[[⬆]](#)**
 
 ### <a name="hooks">Hooks</a>
 
-You can use the `preinit` and `init` hooks to add custom functionality to your map. Both hooks must accept a callback function and execute it to pass control back to NPMap.js.
+You can use the `preinit` and `init` hooks to add custom functionality to your map. Both hooks must accept a callback function and execute it to pass control back to OuterSpatial.js.
 
-    var NPMap = {
+    var OuterSpatial = {
       div: 'map',
       hooks: {
         preinit: function(callback) {
@@ -1621,15 +1613,15 @@ You can use the `preinit` and `init` hooks to add custom functionality to your m
       }
     };
 
-The `preinit` hook is called after NPMap.js has loaded all of its dependencies and any plugins specified in the [`plugins`](#plugins) config. The `init` hook is called after NPMap.js creates the map and has created any layers specified in the `baseLayers` or `overlays` configs.
+The `preinit` hook is called after OuterSpatial.js has loaded all of its dependencies and any plugins specified in the [`plugins`](#plugins) config. The `init` hook is called after OuterSpatial.js creates the map and has created any layers specified in the `baseLayers` or `overlays` configs.
 
 **[[⬆]](#)**
 
 ### <a name="multiple-maps">Multiple Maps</a>
 
-Unlike previous versions of the NPMap library, the Bootstrap method supports adding multiple maps to the same web page. To add multiple maps, make the `NPMap` config object an array of map configuration objects:
+Unlike previous versions of the OuterSpatial.js library, the Bootstrap method supports adding multiple maps to the same web page. To add multiple maps, make the `OuterSpatial` config object an array of map configuration objects:
 
-    var NPMap = [{
+    var OuterSpatial = [{
       div: 'map-1'
     },{
       div: 'map-2'
@@ -1639,9 +1631,9 @@ Unlike previous versions of the NPMap library, the Bootstrap method supports add
 
 ### <a name="plugins">Plugins</a>
 
-If you need to add functionality that isn't supported by NPMap.js to a map, you can load a Leaflet plugin. The `plugins` configuration can be used to load plugins:
+If you need to add functionality that isn't supported by OuterSpatial.js to a map, you can load a Leaflet plugin. The `plugins` configuration can be used to load plugins:
 
-    var NPMap = {
+    var OuterSpatial = {
       div: 'map',
       plugins: [{
         js: 'plugins/Leaflet.GeometryUtil/0.3.2/plugin.min.js'
@@ -1650,7 +1642,7 @@ If you need to add functionality that isn't supported by NPMap.js to a map, you 
       }]
     };
 
-NPMap.js will load any CSS files (specified in the `css` property) and JavaScript files (specified in the `js` property). These plugins will be available in both the `preinit` and `init` [hooks](#hooks).
+OuterSpatial.js will load any CSS files (specified in the `css` property) and JavaScript files (specified in the `js` property). These plugins will be available in both the `preinit` and `init` [hooks](#hooks).
 
 _Working Examples_:
 
@@ -1670,17 +1662,17 @@ Popups display when you click on a feature in an overlay. Each popup is made up 
 3. Footer
    - Actions
 
-If you do not specify a `popup` property on your layer object, NPMap.js will use a set of sensible defaults to configure the popup. If, however, you specify a `popup` property on your layer object, NPMap.js will only implement what you have specified. For example, if your `popup` property looks like the following:
+If you do not specify a `popup` property on your layer object, OuterSpatial.js will use a set of sensible defaults to configure the popup. If, however, you specify a `popup` property on your layer object, OuterSpatial.js will only implement what you have specified. For example, if your `popup` property looks like the following:
 
     popup: {
       title: '{{Name}}'
     }
 
-NPMap.js will only display the title in the popup and will not render any other popup elements.
+OuterSpatial.js will only display the title in the popup and will not render any other popup elements.
 
 The content for each of the sections of a popup should be specified individually via a `popup` configuration object:
 
-    var NPMap = {
+    var OuterSpatial = {
       div: 'map',
       overlays: [{
         ...
@@ -1735,9 +1727,9 @@ The content for each of the sections of a popup should be specified individually
       }]
     };
 
-If you are embedding media (images, audio, and/or video) in your popup, you should hardcode the height and width of the media in your HTML so NPMap.js can size the popup appropriately:
+If you are embedding media (images, audio, and/or video) in your popup, you should hardcode the height and width of the media in your HTML so OuterSpatial.js can size the popup appropriately:
 
-    var NPMap = {
+    var OuterSpatial = {
       div: 'map',
       overlays: [{
         ...
@@ -1749,7 +1741,7 @@ If you are embedding media (images, audio, and/or video) in your popup, you shou
 
 [HTML](http://en.wikipedia.org/wiki/HTML) and [Handlebars](http://handlebarsjs.com/) are supported for many popup elements (take a look at the comments in the code sample above to see which elements support HTML and/or Handlebars).
 
-NPMap.js also adds a number of "helpers" to Handlebars. These helpers can be used to format popups:
+OuterSpatial.js also adds a number of "helpers" to Handlebars. These helpers can be used to format popups:
 
 <ul>
   <li><code>ifCond (available operators include '!=', '!==', '==', '===', '&lt;', '&lt;=', '&gt;', '&gt;=', '&&', and '||')</code><pre><code>description: "I am {{#ifCond Name '===' 'A Rectangle'}}indeed{{else}}not{{/ifCond}} a rectangle! (Verified by a custom Handlebars helper.)"</code></pre></li>
@@ -1768,7 +1760,7 @@ Tooltips display when you hover over a feature in an overlay. Tooltips only work
 
 Tooltips should be short and succinct. Both HTML and Handlebars strings are supported by tooltips.
 
-    var NPMap = {
+    var OuterSpatial = {
       div: 'map',
       overlays: [{
         ...
@@ -1782,7 +1774,7 @@ You can see examples of configuring tooltips for overlays in the [tooltips examp
 
 ### <a name="styling-vectors">Styling Vectors</a>
 
-NPMap.js uses the [simplestyle specification](https://github.com/mapbox/simplestyle-spec) internally. It currently, at v1.1.0, includes the following properties:
+OuterSpatial.js uses the [simplestyle specification](https://github.com/mapbox/simplestyle-spec) internally. It currently, at v1.1.0, includes the following properties:
 
     fill
     fill-opacity
@@ -1793,22 +1785,22 @@ NPMap.js uses the [simplestyle specification](https://github.com/mapbox/simplest
     stroke-opacity
     stroke-width
 
-In addition, NPMap.js supports the following property that is not supported by the simplestyle specification:
+In addition, OuterSpatial.js supports the following property that is not supported by the simplestyle specification:
 
     marker-library
 
 This property is optional. It defaults to `maki`, and can also be `npmap`.
 
-Styles for vector shapes can be set in multiple ways. NPMap.js looks in the following order for styles:
+Styles for vector shapes can be set in multiple ways. OuterSpatial.js looks in the following order for styles:
 
-1. In the properties pulled in for each feature from the data source. You can tell NPMap.js to ignore feature styles by setting the `ignoreFeatureStyles` property to true. For example, if a GeoJSON point feature has a `marker-symbol` property, it will be used to style the marker on the map unless `ignoreFeatureStyles` is set to `true` in the styles geometry (`line`, `point`, or `polygon`) object of an overlay's configuration.
+1. In the properties pulled in for each feature from the data source. You can tell OuterSpatial.js to ignore feature styles by setting the `ignoreFeatureStyles` property to true. For example, if a GeoJSON point feature has a `marker-symbol` property, it will be used to style the marker on the map unless `ignoreFeatureStyles` is set to `true` in the styles geometry (`line`, `point`, or `polygon`) object of an overlay's configuration.
 2. In an overlay's configuration object, via a `styles` property, with `line`, `point`, and/or `polygon` properties designated as:
    1. an object
    2. a function that is passed a data object for each feature and returns a style object
 
-If no styles are found in these two places, NPMap.js falls back to a set of default styles.
+If no styles are found in these two places, OuterSpatial.js falls back to a set of default styles.
 
-If you prefer not to use the simplestyle specification, you can utilize the out-of-the-box Leaflet styles for the `line` (L.Path), `point` (L.Icon), and `polygon` (L.Path) `styles` object on your overlay configuration. NPMap.js will then pass the object directly to Leaflet.
+If you prefer not to use the simplestyle specification, you can utilize the out-of-the-box Leaflet styles for the `line` (L.Path), `point` (L.Icon), and `polygon` (L.Path) `styles` object on your overlay configuration. OuterSpatial.js will then pass the object directly to Leaflet.
 
 **Note**: Style properties cascade. This means that if a `marker-symbol` property is passed in via the data source (e.g. a GeoJSON feature's properties) and a `marker-color` property is passed in via the overlay config object, the geometry will be styled with both the `marker-symbol` **and** `marker-color` properties unless the `ignoreFeatureStyles` property is present.
 

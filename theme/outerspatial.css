@@ -1,21 +1,22 @@
-.npmap {
+.outerspatial {
   height: 100%;
   position: relative;
   width: 100%;
 }
-  .npmap * {
+  .outerspatial * {
     -webkit-box-sizing: content-box;
        -moz-box-sizing: content-box;
             box-sizing: content-box;
   }
-  .npmap .clearfix:after, .npmap .clearfix:before {
+  .outerspatial .clearfix:after,
+  .outerspatial .clearfix:before {
     content: " ";
     display: table;
   }
-  .npmap .clearfix:after {
+  .outerspatial .clearfix:after {
     clear: both;
   }
-  .npmap .ir {
+  .outerspatial .ir {
     background-repeat: no-repeat;
     direction: ltr;
     display: block;
@@ -25,13 +26,13 @@
   }
 
 @media (max-width: 767px) {
-  .npmap-hidden-xs {
+  .outerspatial-hidden-xs {
     display: none!important;
   }
 }
 
 /* Modules */
-.npmap-modules {
+.outerspatial-modules {
   -webkit-box-shadow: 2px 0 2px rgba(0,0,0,.2);
      -moz-box-shadow: 2px 0 2px rgba(0,0,0,.2);
           box-shadow: 2px 0 2px rgba(0,0,0,.2);
@@ -44,22 +45,27 @@
   width: 300px;
   z-index: 2;
 }
-  .npmap-modules .module {
+  .outerspatial-modules .module {
     bottom: 0;
     left: 0;
     position: absolute;
     right: 0;
     top: 0;
   }
-    .npmap-modules .module h1, .npmap-modules .module h2, .npmap-modules .module h3, .npmap-modules .module h4, .npmap-modules .module h5, .npmap-modules .module h6 {
+    .outerspatial-modules .module h1,
+    .outerspatial-modules .module h2,
+    .outerspatial-modules .module h3,
+    .outerspatial-modules .module h4,
+    .outerspatial-modules .module h5,
+    .outerspatial-modules .module h6 {
       font-weight: 500;
       line-height: 1.1;
     }
-    .npmap-modules .module h2.title {
+    .outerspatial-modules .module h2.title {
       color: #647630;
       font-size: 17px;
     }
-    .npmap-modules .module .content {
+    .outerspatial-modules .module .content {
       bottom: 0;
       font-size: 14px;
       left: 0;
@@ -69,29 +75,29 @@
       right: 0;
       top: 39px;
     }
-      .npmap-modules .module .content h3 {
+      .outerspatial-modules .module .content h3 {
         font-size: 16px;
       }
-      .npmap-modules .module .content h4 {
+      .outerspatial-modules .module .content h4 {
         font-size: 15px;
       }
-      .npmap-modules .module .content h5 {
+      .outerspatial-modules .module .content h5 {
         font-size: 14px;
       }
-      .npmap-modules .module .content h6 {
+      .outerspatial-modules .module .content h6 {
         font-size: 13px;
       }
-    .npmap-modules .module .title {
+    .outerspatial-modules .module .title {
       border-bottom: solid 1px #B5B39C;
       padding: 10px 15px;
       margin: 0;
     }
-.npmap-modules-buttons .npmap-modules-buttons-button {
+.outerspatial-modules-buttons .outerspatial-modules-buttons-button {
   background-position: 4px;
   background-repeat: no-repeat;
   background-size: 16px 16px;
 }
-.npmap-container {
+.outerspatial-container {
   bottom: 0;
   left: 0;
   position: absolute;
@@ -99,7 +105,7 @@
   top: 0;
   z-index: 1;
 }
-.npmap-map-wrapper {
+.outerspatial-map-wrapper {
   bottom: 0;
   left: 0;
   position: absolute;
@@ -107,7 +113,7 @@
   top: 0;
   z-index: 1;
 }
-  .npmap-map-wrapper .npmap-modules-buttons {
+  .outerspatial-map-wrapper .outerspatial-modules-buttons {
     bottom: 0;
     margin: 15px -30px 0 0;
     pointer-events: none;
@@ -116,7 +122,7 @@
     width: 30px;
     z-index: 9999999; /* IE 8 */
   }
-    .npmap-map-wrapper .npmap-modules-buttons button {
+    .outerspatial-map-wrapper .outerspatial-modules-buttons button {
       -webkit-border-radius: 0 3px 3px 0;
          -moz-border-radius: 0 3px 3px 0;
               border-radius: 0 3px 3px 0;
@@ -135,24 +141,24 @@
       pointer-events: auto;
       width: 24px;
     }
-      .npmap-map-wrapper .npmap-modules-buttons button:hover {
+      .outerspatial-map-wrapper .outerspatial-modules-buttons button:hover {
         background-color: #626159;
       }
-      .npmap-map-wrapper .npmap-modules-buttons button.active {
+      .outerspatial-map-wrapper .outerspatial-modules-buttons button.active {
         background-color: #4b4b44;
         cursor: default;
       }
-.npmap-map {
+.outerspatial-map {
   background-image: url('images/grain.png');
   border: solid 1px transparent;
   box-sizing: border-box;
   height: 100%;
   width: 100%;
 }
-  .npmap-map:focus {
+  .outerspatial-map:focus {
     border-color: #b28000;
   }
-.npmap-toolbar {
+.outerspatial-toolbar {
   -webkit-box-shadow: 0 1px 5px rgba(0, 0, 0, .15);
      -moz-box-shadow: 0 1px 5px rgba(0, 0, 0, .15);
           box-shadow: 0 1px 5px rgba(0, 0, 0, .15);
@@ -165,42 +171,42 @@
   width: 100%;
   z-index: 2;
 }
-  .npmap-toolbar ul.left, .npmap-toolbar ul.right {
+  .outerspatial-toolbar ul.left, .outerspatial-toolbar ul.right {
     line-height: 0;
     list-style-type: none;
     margin: 0;
     padding: 0;
   }
-  .npmap-toolbar ul.left {
+  .outerspatial-toolbar ul.left {
     float: left;
     padding-left: 10px;
   }
-    .npmap-toolbar ul.left li {
+    .outerspatial-toolbar ul.left li {
       border-left: none !important;
       border-right: solid 1px #adaca2 !important;
       float: left;
     }
-      .npmap-toolbar ul.left li:first-child {
+      .outerspatial-toolbar ul.left li:first-child {
         border-left: solid 1px #adaca2 !important;
       }
-  .npmap-toolbar ul.right {
+  .outerspatial-toolbar ul.right {
     float: right !important;
     padding-right: 10px;
   }
-    .npmap-toolbar ul.right li {
+    .outerspatial-toolbar ul.right li {
       border-left: solid 1px #adaca2 !important;
       border-right: none !important;
       float: left !important;
     }
-      .npmap-toolbar ul.right li:last-child {
+      .outerspatial-toolbar ul.right li:last-child {
         border-right: solid 1px #adaca2 !important;
       }
-  .npmap-toolbar ul li {
+  .outerspatial-toolbar ul li {
     height: auto !important;
     list-style-type: none !important;
     padding: 0 !important;
   }
-  .npmap-toolbar button {
+  .outerspatial-toolbar button {
     background-color: #828171;
     background-position: 5px;
     background-repeat: no-repeat;
@@ -213,18 +219,19 @@
     position: relative;
     width: 26px;
   }
-    .npmap-toolbar button:focus {
+    .outerspatial-toolbar button:focus {
       outline-offset: -3px;
     }
-    .npmap-toolbar button:hover {
+    .outerspatial-toolbar button:hover {
       background-color: #74746a;
     }
 
 /* Buttons and Forms */
-.npmap button, .npmap input {
+.outerspatial button,
+.outerspatial input {
   line-height: 14px;
 }
-  .npmap input[type = 'text'] {
+  .outerspatial input[type = 'text'] {
     -webkit-box-sizing: border-box;
        -moz-box-sizing: border-box;
             box-sizing: border-box;
@@ -234,34 +241,47 @@
     font-weight: bold;
     padding: 6px 8px;
   }
-.npmap button, .npmap input, .npmap select, .npmap textarea {
+.outerspatial button, .outerspatial input,
+.outerspatial select, .outerspatial textarea {
   font-family: inherit;
   font-size: 100%;
   margin: 0;
 }
-.npmap button, .npmap select {
+.outerspatial button,
+.outerspatial select {
   text-transform: none;
 }
-.npmap button, .npmap html input[type="button"], .npmap input[type="reset"], .npmap input[type="submit"] {
+.outerspatial button,
+.outerspatial html input[type="button"],
+.outerspatial input[type="reset"],
+.outerspatial input[type="submit"] {
   -webkit-appearance: button;
      -moz-appearance: button;
   cursor: pointer;
 }
-.npmap button[disabled], .npmap html input[disabled] {
+.outerspatial button[disabled],
+.outerspatial html input[disabled] {
   cursor: default;
 }
-.npmap button::-moz-focus-inner, .npmap input::-moz-focus-inner {
+.outerspatial button::-moz-focus-inner,
+.outerspatial input::-moz-focus-inner {
   border: 0;
   padding: 0;
 }
-.npmap input, .npmap button, .npmap select, .npmap textarea {
+.outerspatial input,
+.outerspatial button,
+.outerspatial select,
+.outerspatial textarea {
   font-family: inherit;
   font-size: inherit;
 }
-.npmap button, .npmap input, .npmap select[multiple], .npmap textarea {
+.outerspatial button,
+.outerspatial input,
+.outerspatial select[multiple],
+.outerspatial textarea {
   background-image: none;
 }
-.npmap .btn {
+.outerspatial .btn {
   -webkit-user-select: none;
      -moz-user-select: none;
       -ms-user-select: none;
@@ -280,18 +300,22 @@
   vertical-align: middle;
   white-space: nowrap;
 }
-  .npmap .btn:hover, .npmap .btn:focus {
+  .outerspatial .btn:hover,
+  .outerspatial .btn:focus {
     color: #333333;
     text-decoration: none;
   }
-  .npmap .btn:active, .npmap .btn.active {
+  .outerspatial .btn:active,
+  .outerspatial .btn.active {
     -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
        -moz-box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
             box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
     background-image: none;
     outline: 0;
   }
-  .npmap .btn.disabled, .npmap .btn[disabled], .npmap fieldset[disabled] .btn {
+  .outerspatial .btn.disabled,
+  .outerspatial .btn[disabled],
+  .outerspatial fieldset[disabled] .btn {
     -webkit-box-shadow: none;
        -moz-box-shadow: none;
             box-shadow: none;
@@ -300,24 +324,42 @@
     opacity: 0.65;
     pointer-events: none;
   }
-.npmap .btn-default {
+.outerspatial .btn-default {
   background-color: #ffffff;
   border-color: #cccccc;
   color: #333333;
 }
-  .npmap .btn-default:hover, .npmap .btn-default:focus, .npmap .btn-default:active, .npmap .btn-default.active {
+  .outerspatial .btn-default:hover,
+  .outerspatial .btn-default:focus,
+  .outerspatial .btn-default:active,
+  .outerspatial .btn-default.active {
     background-color: #ebebeb;
     border-color: #adadad;
     color: #333333;
   }
-  .npmap .btn-default:active, .npmap .btn-default.active {
+  .outerspatial .btn-default:active,
+  .outerspatial .btn-default.active {
     background-image: none;
   }
-  .npmap .btn-default.disabled, .npmap .btn-default[disabled], .npmap fieldset[disabled] .btn-default, .npmap .btn-default.disabled:hover, .npmap .btn-default[disabled]:hover, .npmap fieldset[disabled] .btn-default:hover, .npmap .btn-default.disabled:focus, .npmap .btn-default[disabled]:focus, .npmap fieldset[disabled] .btn-default:focus, .npmap .btn-default.disabled:active, .npmap .btn-default[disabled]:active, .npmap fieldset[disabled] .btn-default:active, .npmap .btn-default.disabled.active, .npmap .btn-default[disabled].active, .npmap fieldset[disabled] .btn-default.active {
+  .outerspatial .btn-default.disabled,
+  .outerspatial .btn-default[disabled],
+  .outerspatial fieldset[disabled] .btn-default,
+  .outerspatial .btn-default.disabled:hover,
+  .outerspatial .btn-default[disabled]:hover,
+  .outerspatial fieldset[disabled] .btn-default:hover,
+  .outerspatial .btn-default.disabled:focus,
+  .outerspatial .btn-default[disabled]:focus,
+  .outerspatial fieldset[disabled] .btn-default:focus,
+  .outerspatial .btn-default.disabled:active,
+  .outerspatial .btn-default[disabled]:active,
+  .outerspatial fieldset[disabled] .btn-default:active,
+  .outerspatial .btn-default.disabled.active,
+  .outerspatial .btn-default[disabled].active,
+  .outerspatial fieldset[disabled] .btn-default.active {
     background-color: #ffffff;
     border-color: #cccccc;
   }
-.npmap .btn-link {
+.outerspatial .btn-link {
   -webkit-box-shadow: none;
           box-shadow: none;
   background-color: transparent;
@@ -326,29 +368,34 @@
   cursor: pointer;
   font-weight: normal;
 }
-  .npmap .btn-link:hover, .npmap .btn-link:focus {
+  .outerspatial .btn-link:hover,
+  .outerspatial .btn-link:focus {
     background-color: transparent;
     color: #b98600;
     text-decoration: underline;
   }
-.npmap .btn-primary {
+.outerspatial .btn-primary {
   background-color: #b28000;
   border-color: #996e00;
   color: #ffffff;
 }
-  .npmap .btn-primary:hover, .npmap .btn-primary:focus, .npmap .btn-primary:active, .npmap .btn-primary.active, .npmap .open .dropdown-toggle.btn-primary {
+  .outerspatial .btn-primary:hover,
+  .outerspatial .btn-primary:focus,
+  .outerspatial .btn-primary:active,
+  .outerspatial .btn-primary.active,
+  .outerspatial .open .dropdown-toggle.btn-primary {
     background-color: #896300;
     border-color: #5b4200;
     color: #ffffff;
   }
-  .npmap .btn-primary:active, .npmap .btn-primary.active {
+  .outerspatial .btn-primary:active, .outerspatial .btn-primary.active {
     background-image: none;
   }
-  .npmap .btn-primary.disabled, .npmap .btn-primary[disabled], .npmap fieldset[disabled] .btn-primary, .npmap .btn-primary.disabled:hover, .npmap .btn-primary[disabled]:hover, .npmap fieldset[disabled] .btn-primary:hover, .npmap .btn-primary.disabled:focus, .npmap .btn-primary[disabled]:focus, .npmap fieldset[disabled] .btn-primary:focus, .npmap .btn-primary.disabled:active, .npmap .btn-primary[disabled]:active, .npmap fieldset[disabled] .btn-primary:active, .npmap .btn-primary.disabled.active, .npmap .btn-primary[disabled].active, .npmap fieldset[disabled] .btn-primary.active {
+  .outerspatial .btn-primary.disabled, .outerspatial .btn-primary[disabled], .outerspatial fieldset[disabled] .btn-primary, .outerspatial .btn-primary.disabled:hover, .outerspatial .btn-primary[disabled]:hover, .outerspatial fieldset[disabled] .btn-primary:hover, .outerspatial .btn-primary.disabled:focus, .outerspatial .btn-primary[disabled]:focus, .outerspatial fieldset[disabled] .btn-primary:focus, .outerspatial .btn-primary.disabled:active, .outerspatial .btn-primary[disabled]:active, .outerspatial fieldset[disabled] .btn-primary:active, .outerspatial .btn-primary.disabled.active, .outerspatial .btn-primary[disabled].active, .outerspatial fieldset[disabled] .btn-primary.active {
     background-color: #b28000;
     border-color: #996e00;
   }
-.npmap .btn-circle {
+.outerspatial .btn-circle {
   background: #d29700;
   border-radius: 90% !important;
   color: #fff;
@@ -360,90 +407,90 @@
   text-align: center !important;
   width: 21px;
 }
-  .npmap .btn-circle.disabled:hover {
+  .outerspatial .btn-circle.disabled:hover {
     background: #d29700;
   }
-  .npmap .btn-circle:focus, .npmap .btn-circle:hover {
+  .outerspatial .btn-circle:focus, .outerspatial .btn-circle:hover {
     color: #fff;
   }
-  .npmap .btn-circle:hover {
+  .outerspatial .btn-circle:hover {
     background: #8f8f7d;
   }
-.npmap .btn-lg {
+.outerspatial .btn-lg {
   border-radius: 6px;
   font-size: 18px;
   line-height: 1.33;
   padding: 10px 16px;
 }
-.npmap .btn-sm, .npmap .btn-xs {
+.outerspatial .btn-sm, .outerspatial .btn-xs {
   border-radius: 3px;
   font-size: 12px;
   line-height: 1.5;
   padding: 5px 10px;
 }
-.npmap .btn-xs {
+.outerspatial .btn-xs {
   padding: 1px 5px;
 }
-.npmap .btn-block {
+.outerspatial .btn-block {
   display: block;
   padding-left: 0;
   padding-right: 0;
   width: 100%;
 }
-.npmap .btn-block + .btn-block {
+.outerspatial .btn-block + .btn-block {
   margin-top: 5px;
 }
-.npmap input[type="submit"].btn-block, .npmap input[type="reset"].btn-block, .npmap input[type="button"].btn-block {
+.outerspatial input[type="submit"].btn-block, .outerspatial input[type="reset"].btn-block, .outerspatial input[type="button"].btn-block {
   width: 100%;
 }
 
 /* Leaflet Overrides */
-.npmap .leaflet-container {
+.outerspatial .leaflet-container {
   color: #464646;
   font-family: inherit;
   font-size: inherit;
   overflow: hidden;
   touch-action: none;
 }
-  .npmap .leaflet-container a {
+  .outerspatial .leaflet-container a {
     color: #b28000;
     cursor: pointer;
     font-weight: normal;
     text-decoration: none;
   }
-    .npmap .leaflet-container a:hover {
+    .outerspatial .leaflet-container a:hover {
       color: #d39700;
       text-decoration: underline;
     }
-  .npmap .leaflet-container h1, .npmap .leaflet-container h2, .npmap .leaflet-container h3, .npmap .leaflet-container h4, .npmap .leaflet-container h5, .npmap .leaflet-container h6 {
+  .outerspatial .leaflet-container h1, .outerspatial .leaflet-container h2, .outerspatial .leaflet-container h3, .outerspatial .leaflet-container h4, .outerspatial .leaflet-container h5, .outerspatial .leaflet-container h6 {
     font-size: 15px;
     line-height: 20px;
     margin: 0 0 10px;
   }
 
 /* Icons */
-.npmapsymbollibrary-icon.large {
+.outerspatialsymbollibrary-icon.large {
   background-size: 24px 24px;
   height: 24px;
   margin-left: 5px;
   margin-top: 7px;
   width: 24px;
 }
-.npmapsymbollibrary-icon.medium {
+.outerspatialsymbollibrary-icon.medium {
   background-size: 18px 18px;
   height: 18px;
   margin-left: 5px;
   margin-top: 4px;
   width: 18px;
 }
-.npmapsymbollibrary-icon.small {
+.outerspatialsymbollibrary-icon.small {
   background-size: 12px 12px;
   height: 12px;
   margin-left: 5px;
   margin-top: 4px;
   width: 12px;
 }
-.npmap [class^="icon-"], [class*=" icon-"] {
+.outerspatial [class^="icon-"], [class*=" icon-"] {
   background-image: url('images/icon/sprite.png');
   background-repeat: no-repeat;
   display: inline-block;
@@ -458,7 +505,7 @@
 }
 
 /* Popup */
-.npmap .leaflet-popup-content-wrapper {
+.outerspatial .leaflet-popup-content-wrapper {
      -moz-background-clip: padding;
   -webkit-background-clip: padding-box;
           background-clip: padding-box;
@@ -476,23 +523,23 @@
   overflow: auto;
   text-align: left;
 }
-.npmap .leaflet-popup-pane {
+.outerspatial .leaflet-popup-pane {
   pointer-events: none;
 }
-.npmap .leaflet-popup-tip-container {
+.outerspatial .leaflet-popup-tip-container {
   height: 25px;
   margin: -1px auto;
   padding-left: 21px;
   width: 25px;
 }
 /* IE8 and below */
-.npmap .leaflet-oldie .leaflet-control-zoom {
+.outerspatial .leaflet-oldie .leaflet-control-zoom {
   border: none;
 }
-.npmap .leaflet-oldie .leaflet-popup-tip-container {
+.outerspatial .leaflet-oldie .leaflet-popup-tip-container {
   display: none;
 }
-.npmap .leaflet-popup-tip {
+.outerspatial .leaflet-popup-tip {
   -webkit-box-shadow: none;
      -moz-box-shadow: none;
       -ms-box-shadow: none;
@@ -513,7 +560,7 @@
   position: relative;
   width: 100%;
 }
-  .npmap .leaflet-popup-tip:after {
+  .outerspatial .leaflet-popup-tip:after {
     -webkit-box-shadow: 0 1px 5px rgba(0,0,0,.18);
        -moz-box-shadow: 0 1px 5px rgba(0,0,0,.18);
         -ms-box-shadow: 0 1px 5px rgba(0,0,0,.18);
@@ -533,7 +580,7 @@
      top: -25px;
      width: 30px;
   }
-.npmap .leaflet-container a.leaflet-popup-close-button {
+.outerspatial .leaflet-container a.leaflet-popup-close-button {
   background: #d29700;
   border-radius: 90%;
   color: #fff;
@@ -548,80 +595,80 @@
   top: -10px;
   width: 21px;
 }
-.npmap .leaflet-container a.leaflet-popup-close-button:focus, .leaflet-container a.leaflet-popup-close-button:hover {
+.outerspatial .leaflet-container a.leaflet-popup-close-button:focus, .leaflet-container a.leaflet-popup-close-button:hover {
   background-color: #8f8f7d;
   color: #fff;
   text-decoration: none;
 }
-.npmap .leaflet-popup-content {
+.outerspatial .leaflet-popup-content {
   font-size: 14px;
   margin: 15px;
   width: auto !important;
 }
-  .npmap .leaflet-popup-scrolled .content, .npmap .content .leaflet-popup-scrolled audio, .npmap .content .leaflet-popup-scrolled iframe, .npmap .content .leaflet-popup-scrolled img, .npmap .content .leaflet-popup-scrolled video {
+  .outerspatial .leaflet-popup-scrolled .content, .outerspatial .content .leaflet-popup-scrolled audio, .outerspatial .content .leaflet-popup-scrolled iframe, .outerspatial .content .leaflet-popup-scrolled img, .outerspatial .content .leaflet-popup-scrolled video {
     margin-right: 15px;
   }
-  .npmap .leaflet-popup-content dt {
+  .outerspatial .leaflet-popup-content dt {
     clear: both;
     float: left;
     font-weight: bold;
   }
-  .npmap .leaflet-popup-content dt:after {
+  .outerspatial .leaflet-popup-content dt:after {
     content: ":";
   }
-  .npmap .leaflet-popup-content dd {
+  .outerspatial .leaflet-popup-content dd {
     float: left;
     margin-left: 5px;
   }
-  .npmap .leaflet-popup-content ul {
+  .outerspatial .leaflet-popup-content ul {
     float: none;
     margin-left: 0;
     margin-top: 0;
     padding-left: 25px;
   }
-    .npmap .leaflet-popup-content ul li {
+    .outerspatial .leaflet-popup-content ul li {
       list-style: initial;
     }
-  .npmap .leaflet-popup-content p {
+  .outerspatial .leaflet-popup-content p {
     margin: 6px 0;
   }
   /* TODO: Figure out a way to see if allowable width for popup is less than width of table, and, if it is, set table-layout: fixed; */
-  .npmap .leaflet-popup-content table {
+  .outerspatial .leaflet-popup-content table {
     border: none;
     border-collapse: collapse;
     margin: 0;
     width: 100%;
     word-wrap: break-word;
   }
-    .npmap .leaflet-popup-content table tr {
+    .outerspatial .leaflet-popup-content table tr {
       border-bottom: 1px solid  #e1dfd7;
       vertical-align: middle;
     }
-    .npmap .leaflet-popup-content table tr.hoverable {
+    .outerspatial .leaflet-popup-content table tr.hoverable {
       cursor: pointer;
     }
-      .npmap .leaflet-popup-content table tr.hoverable td, .npmap .leaflet-popup-content table tr.hoverable th {
+      .outerspatial .leaflet-popup-content table tr.hoverable td, .outerspatial .leaflet-popup-content table tr.hoverable th {
         padding-left: 5px;
         padding-right: 5px;
       }
-    .npmap .leaflet-popup-content table tr.hoverable:hover {
+    .outerspatial .leaflet-popup-content table tr.hoverable:hover {
       background-color: #e1dfd7;
     }
-    .npmap .leaflet-popup-content table tr:last-child {
+    .outerspatial .leaflet-popup-content table tr:last-child {
       border-bottom: none;
     }
-    .npmap .leaflet-popup-content table td, .npmap .leaflet-popup-content table th {
+    .outerspatial .leaflet-popup-content table td, .outerspatial .leaflet-popup-content table th {
       border: none;
       padding-bottom: 7px;
       padding-top: 7px;
     }
-    .npmap .leaflet-popup-content table tr th:first-child, .npmap .leaflet-popup-content table tr td:first-child {
+    .outerspatial .leaflet-popup-content table tr th:first-child, .outerspatial .leaflet-popup-content table tr td:first-child {
       padding-right: 7px;
     }
-  .npmap .leaflet-popup-content th {
+  .outerspatial .leaflet-popup-content th {
     white-space: nowrap;
   }
-  .npmap .leaflet-popup-content .actions {
+  .outerspatial .leaflet-popup-content .actions {
     -webkit-touch-callout: none;
       -webkit-user-select: none;
        -khtml-user-select: none;
@@ -634,28 +681,28 @@
     padding-top: 12px;
     position: relative;
   }
-    .npmap .leaflet-popup-content .actions ul {
+    .outerspatial .leaflet-popup-content .actions ul {
       padding-left: 0;
     }
-      .npmap .leaflet-popup-content .actions ul li {
+      .outerspatial .leaflet-popup-content .actions ul li {
         float: left;
         list-style-type: none;
         margin: 0 5px 16px 5px;
       }
-      .npmap .leaflet-popup-content .actions ul li:first-child {
+      .outerspatial .leaflet-popup-content .actions ul li:first-child {
         margin-left: 0;
       }
-      .npmap .leaflet-popup-content .actions ul li:last-child {
+      .outerspatial .leaflet-popup-content .actions ul li:last-child {
         margin-right: 0;
       }
-    .npmap .leaflet-popup-content .actions a {
+    .outerspatial .leaflet-popup-content .actions a {
       color: #1f4a87;
       font-weight: bold;
     }
-      .npmap .leaflet-popup-content .actions a:hover {
+      .outerspatial .leaflet-popup-content .actions a:hover {
         text-decoration: none;
       }
-    .npmap .leaflet-popup-content .actions .menu {
+    .outerspatial .leaflet-popup-content .actions .menu {
       -webkit-box-shadow: 0 2px 3px rgba(0,0,0,.12);
          -moz-box-shadow: 0 2px 3px rgba(0,0,0,.12);
               box-shadow: 0 2px 3px rgba(0,0,0,.12);
@@ -664,94 +711,94 @@
       position: absolute;
       z-index: 1;
     }
-      .npmap .leaflet-popup-content .actions .menu a {
+      .outerspatial .leaflet-popup-content .actions .menu a {
         color: #464646;
         display: block;
         font-size: 11px;
         padding: 5px 16px;
       }
-      .npmap .leaflet-popup-content .actions .menu a:hover {
+      .outerspatial .leaflet-popup-content .actions .menu a:hover {
         background-color: #f1f1ef;
       }
-      .npmap .leaflet-popup-content .actions .menu {
+      .outerspatial .leaflet-popup-content .actions .menu {
         list-style-type: none;
         margin: 0;
         padding: 0;
         width: 100px;
       }
-      .npmap .leaflet-popup-content .actions .menu li {
+      .outerspatial .leaflet-popup-content .actions .menu li {
         border-top: 1px solid #f2f1ef;
         display: block;
         margin: 0;
         padding: 0;
         width: 100%;
       }
-      .npmap .leaflet-popup-content .actions .menu li:first-child {
+      .outerspatial .leaflet-popup-content .actions .menu li:first-child {
         border-top: 0;
       }
-  .npmap .leaflet-popup-content .layer {
+  .outerspatial .leaflet-popup-content .layer {
     clear: both;
     margin-bottom: 10px;
   }
-    .npmap .leaflet-popup-content .layer .sublayer {
+    .outerspatial .leaflet-popup-content .layer .sublayer {
       clear: both;
       margin-bottom: 8px;
     }
-    .npmap .leaflet-popup-content .layer .sublayer:last-child {
+    .outerspatial .leaflet-popup-content .layer .sublayer:last-child {
       margin-bottom: 0;
     }
-  .npmap .leaflet-popup-content .layer:last-child {
+  .outerspatial .leaflet-popup-content .layer:last-child {
     margin-bottom: 0;
   }
-  .npmap .leaflet-popup-content .media button:last-child {
+  .outerspatial .leaflet-popup-content .media button:last-child {
     margin-left: 2px;
   }
-  .npmap .leaflet-popup-content .media ul {
+  .outerspatial .leaflet-popup-content .media ul {
     list-style-type: none;
     margin: 10px 0;
     padding: 0;
   }
-    .npmap .leaflet-popup-content .media ul li {
+    .outerspatial .leaflet-popup-content .media ul li {
       text-align: center;
       width: 100%;
     }
-      .npmap .leaflet-popup-content .media ul li img {
+      .outerspatial .leaflet-popup-content .media ul li img {
         max-width: 100%;
       }
-  .npmap .leaflet-popup-content .title {
+  .outerspatial .leaflet-popup-content .title {
     font-weight: bold;
     margin-bottom: 8px;
   }
-  .npmap .leaflet-popup-content .sublayer .title {
+  .outerspatial .leaflet-popup-content .sublayer .title {
     font-style: italic;
     font-weight: normal;
   }
-  .npmap .leaflet-popup-content .footer {
+  .outerspatial .leaflet-popup-content .footer {
     border-top: solid 1px #b1b0a7;
     margin-bottom: 2px;
     margin-top: 13px;
     padding-top: 17px;
   }
-.npmap .leaflet-popup-scrolled {
+.outerspatial .leaflet-popup-scrolled {
   border-bottom: none;
   border-top: none;
   margin: 0;
   padding: 15px;
 }
   /*
-  .npmap .leaflet-popup-scrolled .actions, .npmap .leaflet-popup-scrolled .content, .npmap .leaflet-popup-scrolled .title {
+  .outerspatial .leaflet-popup-scrolled .actions, .outerspatial .leaflet-popup-scrolled .content, .outerspatial .leaflet-popup-scrolled .title {
     margin-right: 15px;
   }
   */
-  .npmap .leaflet-popup-scrolled .actions ul li {
+  .outerspatial .leaflet-popup-scrolled .actions ul li {
     margin-bottom: 0;
   }
 
 /* Tooltip */
-.npmap .leaflet-tooltip-container {
+.outerspatial .leaflet-tooltip-container {
   z-index: 650;
 }
-.npmap .leaflet-tooltip {
+.outerspatial .leaflet-tooltip {
   -webkit-border-radius: 1px;
           border-radius: 1px;
   -webkit-user-select: none;
@@ -770,22 +817,22 @@
   width: auto;
   z-index: 650;
 }
-  .npmap .leaflet-tooltip.leaflet-tooltip-fade {
+  .outerspatial .leaflet-tooltip.leaflet-tooltip-fade {
     opacity: 1;
   }
 
 /* Zoombox */
-.npmap .leaflet-zoom-box {
+.outerspatial .leaflet-zoom-box {
   border: 3px solid #d29700;
   background: white;
   opacity: 0.5;
 }
 
 /* Leaflet Bar */
-.npmap .leaflet-bar button {
+.outerspatial .leaflet-bar button {
   display: inherit;
 }
-.npmap .leaflet-bar a, .npmap .leaflet-bar a:hover, .npmap .leaflet-bar button, .npmap .leaflet-bar button:hover, .npmap .leaflet-bar div, .npmap .leaflet-bar div:hover {
+.outerspatial .leaflet-bar a, .outerspatial .leaflet-bar a:hover, .outerspatial .leaflet-bar button, .outerspatial .leaflet-bar button:hover, .outerspatial .leaflet-bar div, .outerspatial .leaflet-bar div:hover {
   -webkit-text-shadow: 0 2px 2px #757571;
      -moz-text-shadow: 0 2px 2px #757571;
       -ms-text-shadow: 0 2px 2px #757571;
@@ -804,13 +851,13 @@
   text-decoration: none;
   width: 26px;
 }
-.npmap .leaflet-bar a:hover, .npmap .leaflet-bar button:hover {
+.outerspatial .leaflet-bar a:hover, .outerspatial .leaflet-bar button:hover {
   background-color: #626159;
 }
-.npmap .leaflet-bar a:active, .npmap .leaflet-bar a.pressed, .npmap .leaflet-bar button:active, .npmap .leaflet-bar button.pressed {
+.outerspatial .leaflet-bar a:active, .outerspatial .leaflet-bar a.pressed, .outerspatial .leaflet-bar button:active, .outerspatial .leaflet-bar button.pressed {
   background-color: #53534a;
 }
-.npmap .leaflet-bar a.leaflet-disabled, .npmap .leaflet-bar a.leaflet-disabled:hover, .npmap .leaflet-bar button.leaflet-disabled, .npmap .leaflet-bar button.leaflet-disabled:hover {
+.outerspatial .leaflet-bar a.leaflet-disabled, .outerspatial .leaflet-bar a.leaflet-disabled:hover, .outerspatial .leaflet-bar button.leaflet-disabled, .outerspatial .leaflet-bar button.leaflet-disabled:hover {
   -webkit-text-shadow: none;
      -moz-text-shadow: none;
       -ms-text-shadow: none;
@@ -819,27 +866,27 @@
   background-color: #4b4B44;
   color: #bbb;
 }
-.npmap .leaflet-bar a:first-child, .npmap .leaflet-bar button:first-child, .npmap .leaflet-bar div:first-child {
+.outerspatial .leaflet-bar a:first-child, .outerspatial .leaflet-bar button:first-child, .outerspatial .leaflet-bar div:first-child {
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
   border-top: 1px solid #1a2423;
   height: 26px;
 }
-.npmap .leaflet-bar a:last-child, .npmap .leaflet-bar button:last-child, .npmap .leaflet-bar div:last-child {
+.outerspatial .leaflet-bar a:last-child, .outerspatial .leaflet-bar button:last-child, .outerspatial .leaflet-bar div:last-child {
   border-bottom: 1px solid #1a2423;
   border-bottom-left-radius: 4px;
   border-bottom-right-radius: 4px;
   border-top: none;
   height: 27px;
 }
-.npmap .leaflet-bar a.leaflet-bar-single, .npmap .leaflet-bar button.leaflet-bar-single, .npmap .leaflet-bar div.leaflet-bar-single {
+.outerspatial .leaflet-bar a.leaflet-bar-single, .outerspatial .leaflet-bar button.leaflet-bar-single, .outerspatial .leaflet-bar div.leaflet-bar-single {
   border-radius: 4px;
   border-top: solid 1px #1a2423;
   height: 26px;
 }
 
 /* Controls */
-.npmap .leaflet-control {
+.outerspatial .leaflet-control {
   -webkit-box-shadow: 0 0 15px #888;
      -moz-box-shadow: 0 0 15px #888;
       -ms-box-shadow: 0 0 15px #888;
@@ -848,7 +895,7 @@
 }
 
 /* Attribution Control */
-.npmap .leaflet-control-attribution {
+.outerspatial .leaflet-control-attribution {
   display: inline-block;
   line-height: 13px;
   overflow: hidden;
@@ -859,80 +906,80 @@
 }
 
 /* Download Control */
-.npmap-toolbar button.download {
+.outerspatial-toolbar button.download {
   background-image: url('images/font-awesome/download.png');
   background-position: 7px;
   background-size: 14px 14px;
 }
-.npmap-retina .npmap-toolbar button.share {
+.outerspatial-retina .outerspatial-toolbar button.share {
   background-image: url('images/font-awesome/download@2x.png');
 }
 
 /* Edit Control */
-.npmap .leaflet-control-edit button {
+.outerspatial .leaflet-control-edit button {
   background-image: url('images/control/draw/spritesheet.png');
   background-repeat: no-repeat;
 }
-.npmap .leaflet-retina .leaflet-control-edit button {
+.outerspatial .leaflet-retina .leaflet-control-edit button {
   background-image: url('images/control/draw/spritesheet@2x.png');
   background-size: 270px 30px;
 }
-.npmap .leaflet-control-edit .polygon {
+.outerspatial .leaflet-control-edit .polygon {
   background-position: -31px -2px;
 }
-.npmap .leaflet-control-edit .polyline {
+.outerspatial .leaflet-control-edit .polyline {
   background-position: -2px -2px;
 }
-.npmap .leaflet-control-edit .rectangle {
+.outerspatial .leaflet-control-edit .rectangle {
   background-position: -62px -2px;
 }
-.npmap .leaflet-control-edit .circle {
+.outerspatial .leaflet-control-edit .circle {
   background-position: -92px -2px;
 }
-.npmap .leaflet-control-edit .marker {
+.outerspatial .leaflet-control-edit .marker {
   background-position: -122px -2px;
 }
-.npmap .leaflet-mouse-marker {
+.outerspatial .leaflet-mouse-marker {
   background-color: #fff;
   cursor: crosshair;
 }
-.npmap .leaflet-draw-tooltip {
+.outerspatial .leaflet-draw-tooltip {
   visibility: hidden;
 }
-.npmap .leaflet-draw-guide-dash {
+.outerspatial .leaflet-draw-guide-dash {
   font-size: 1%;
   opacity: 0.6;
   position: absolute;
   width: 5px;
   height: 5px;
 }
-.npmap .leaflet-edit-move {
+.outerspatial .leaflet-edit-move {
   cursor: move;
 }
-.npmap .leaflet-edit-resize {
+.outerspatial .leaflet-edit-resize {
   cursor: pointer;
 }
 
 /* Fullscreen Control */
-.npmap-toolbar button.fullscreen.enter {
+.outerspatial-toolbar button.fullscreen.enter {
   background-image: url('images/font-awesome/arrows-alt.png');
 }
-.npmap-retina .npmap-toolbar button.fullscreen.enter {
+.outerspatial-retina .outerspatial-toolbar button.fullscreen.enter {
   background-image: url('images/font-awesome/arrows-alt@2x.png');
 }
-.npmap-toolbar button.fullscreen.exit {
+.outerspatial-toolbar button.fullscreen.exit {
   background-image: url('images/control/fullscreen/exit.png');
 }
-.npmap-retina .npmap-toolbar button.fullscreen.exit {
+.outerspatial-retina .outerspatial-toolbar button.fullscreen.exit {
   background-image: url('images/control/fullscreen/exit@2x.png');
 }
 
 /* Geocoder Control */
-.npmap .leaflet-control-geocoder {
+.outerspatial .leaflet-control-geocoder {
   font-size: 12px;
   z-index: 8;
 }
-  .npmap .leaflet-control-geocoder button {
+  .outerspatial .leaflet-control-geocoder button {
     -webkit-background-clip: padding-box;
        -moz-background-clip: padding;
             background-clip: padding-box;
@@ -951,11 +998,11 @@
     /*vertical-align: text-top;*/
     width: 26px;
   }
-  .npmap .leaflet-control-geocoder input {
+  .outerspatial .leaflet-control-geocoder input {
     padding-right: 34px;
     width: 200px;
   }
-  .npmap .leaflet-control-geocoder ul.leaflet-control {
+  .outerspatial .leaflet-control-geocoder ul.leaflet-control {
     background-color: #fff;
     border-left: 1px solid #cbcbcb;
     border-right: 1px solid #cbcbcb;
@@ -970,33 +1017,33 @@
     width: 198px;
     z-index: -1;
   }
-    .npmap .leaflet-control-geocoder ul li {
+    .outerspatial .leaflet-control-geocoder ul li {
       border-top: 1px solid #f2f1ef;
       cursor: pointer;
       list-style-type: none;
       padding: 7px 10px;
     }
-    .npmap .leaflet-control-geocoder ul li:first-child {
+    .outerspatial .leaflet-control-geocoder ul li:first-child {
       border-top: none;
     }
-    .npmap .leaflet-control-geocoder ul li:hover {
+    .outerspatial .leaflet-control-geocoder ul li:hover {
       background-color: #f1f1ef;
     }
-    .npmap .leaflet-control-geocoder ul li.selected {
+    .outerspatial .leaflet-control-geocoder ul li.selected {
       background-color: #ddd;
       border-color: #ddd;
     }
-.npmap .leaflet-control-geocoder .search {
+.outerspatial .leaflet-control-geocoder .search {
   background-color: #cb9733;
   background-image: url('images/control/geocoder/search.png');
   background-repeat: no-repeat;
   background-position: 5px;
   background-size: 16px 16px;
 }
-.npmap .leaflet-retina .leaflet-control-geocoder .search {
+.outerspatial .leaflet-retina .leaflet-control-geocoder .search {
   background-image: url('images/control/geocoder/search@2x.png');
 }
-.npmap .leaflet-control-geocoder .working {
+.outerspatial .leaflet-control-geocoder .working {
   background-color: #000;
   background-image: url('images/control/geocoder/spinner.gif');
   background-repeat: no-repeat;
@@ -1004,23 +1051,23 @@
   background-size: 16px 16px;
   cursor: wait;
 }
-.npmap .leaflet-retina .leaflet-control-geocoder .working {
+.outerspatial .leaflet-retina .leaflet-control-geocoder .working {
   background-image: url('images/control/geocoder/spinner@2x.gif');
 }
 
 /* Home Control */
-.npmap .leaflet-control-home button {
+.outerspatial .leaflet-control-home button {
   background-image: url('images/font-awesome/home.png');
   background-position: 5px 4px;
   background-repeat: no-repeat;
   background-size: 16px 16px;
 }
-.npmap .leaflet-retina .leaflet-control-home button {
+.outerspatial .leaflet-retina .leaflet-control-home button {
   background-image: url('images/font-awesome/home@2x.png');
 }
 
 /* Info Control */
-.npmap .leaflet-control-info {
+.outerspatial .leaflet-control-info {
   background-color: #fff;
   display: none;
   padding: 3px 5px;
@@ -1028,51 +1075,51 @@
 }
 
 /* Legend Control */
-.npmap .leaflet-control-legend {
+.outerspatial .leaflet-control-legend {
   background-color: #fff;
   background-color: rgba(255,255,255,.8);
   padding: 10px;
 }
-  .npmap .leaflet-control-legend h3 {
+  .outerspatial .leaflet-control-legend h3 {
     margin: 0 0 8px 0;
   }
-  .npmap .leaflet-control-legend ul {
+  .outerspatial .leaflet-control-legend ul {
     margin: 0;
     padding-left: 0;
   }
-  .npmap .leaflet-control-legend ul li {
+  .outerspatial .leaflet-control-legend ul li {
     list-style-type: none;
   }
 
 /* Locate Control */
-.npmap .npmap-control-locate button {
+.outerspatial .outerspatial-control-locate button {
   background-image: url('images/font-awesome/location-arrow.png');
   background-position: 4px;
   background-repeat: no-repeat;
   background-size: 16px 16px;
 }
-.npmap .leaflet-retina .npmap-control-locate button {
+.outerspatial .leaflet-retina .outerspatial-control-locate button {
   background-image: url('images/font-awesome/location-arrow@2x.png');
 }
-.npmap .npmap-control-locate button.requesting {
+.outerspatial .outerspatial-control-locate button.requesting {
   background-image: url('images/control/locate/spinner.gif');
   background-position: 50% 50%;
 }
-.npmap .leaflet-retina .npmap-control-locate button.requesting {
+.outerspatial .leaflet-retina .outerspatial-control-locate button.requesting {
   background-image: url('images/control/locate/spinner@2x.gif');
 }
 
 /* Measure Control */
-.npmap-control-measure button.leaflet-bar-single {
+.outerspatial-control-measure button.leaflet-bar-single {
   background-image: url('images/control/measure/ruler.png');
   background-position: 5px 4px;
   background-repeat: no-repeat;
   background-size: 16px 16px;
 }
-.leaflet-retina .npmap-control-measure button.leaflet-bar-single {
+.leaflet-retina .outerspatial-control-measure button.leaflet-bar-single {
   background-image: url('images/control/measure/ruler@2x.png');
 }
-.npmap-control-measure ul {
+.outerspatial-control-measure ul {
   display: none;
   height: 28px;
   left: 26px;
@@ -1083,22 +1130,22 @@
   white-space: nowrap;
   z-index: -1;
 }
-  .npmap-control-measure ul li {
+  .outerspatial-control-measure ul li {
     display: inline-block;
   }
-    .npmap-control-measure ul li:first-child a {
+    .outerspatial-control-measure ul li:first-child a {
       border-left: none;
     }
-    .npmap-control-measure ul li:last-child {
+    .outerspatial-control-measure ul li:last-child {
       vertical-align: middle;
     }
-      .npmap-control-measure ul li select {
+      .outerspatial-control-measure ul li select {
         margin-left: 5px;
       }
-      .npmap-control-measure ul li select:first-child {
+      .outerspatial-control-measure ul li select:first-child {
         display: none;
       }
-    .npmap-control-measure ul li button {
+    .outerspatial-control-measure ul li button {
       background-color: #919187 !important;
       border: none !important;
       border-radius: 0 !important;
@@ -1113,13 +1160,13 @@
       text-decoration: none !important;
       width: auto !important;
     }
-      .npmap-control-measure ul li button:hover {
+      .outerspatial-control-measure ul li button:hover {
         background-color: #a0a098;
       }
-      .npmap-control-measure ul li button.pressed {
+      .outerspatial-control-measure ul li button.pressed {
         background-color: #74746a !important;
       }
-      .npmap-control-measure ul li:last-child button {
+      .outerspatial-control-measure ul li:last-child button {
         border-bottom-right-radius: 4px !important;
         border-top-right-radius: 4px !important;
       }
@@ -1138,7 +1185,7 @@
   padding: 5px;
   visibility: visible !important;
 }
-.npmap .leaflet-measure-tooltip {
+.outerspatial .leaflet-measure-tooltip {
   background-color: #fff;
   background-color: rgba(255, 255, 255, 0.7);
   box-shadow: 0 0 5px #bbb;
@@ -1149,18 +1196,18 @@
   white-space: nowrap;
   width: auto !important;
 }
-  .npmap .leaflet-measure-tooltip div.leaflet-measure-tooltip-distance span:last-child {
+  .outerspatial .leaflet-measure-tooltip div.leaflet-measure-tooltip-distance span:last-child {
     display: none;
   }
-  .npmap .leaflet-measure-tooltip .leaflet-measure-tooltip-difference {
+  .outerspatial .leaflet-measure-tooltip .leaflet-measure-tooltip-difference {
     color: #777;
   }
-  .npmap .leaflet-measure-tooltip .leaflet-measure-tooltip-total {
+  .outerspatial .leaflet-measure-tooltip .leaflet-measure-tooltip-total {
     font-weight: bold;
   }
 
 /* Overview Control */
-.npmap .leaflet-control-overview {
+.outerspatial .leaflet-control-overview {
   -webkit-box-shadow: -1px 0 5px rgba(0,0,0,.28);
      -moz-box-shadow: -1px 0 5px rgba(0,0,0,.28);
           box-shadow: -1px 0 5px rgba(0,0,0,.28);
@@ -1169,7 +1216,7 @@
   border-top: solid #454545 3px;
   transition: all .2s;
 }
-  .npmap .leaflet-control-overview button {
+  .outerspatial .leaflet-control-overview button {
     background-color: transparent;
     border: none;
     bottom: 0;
@@ -1182,7 +1229,7 @@
     width: 20px;
     z-index: 99999;
   }
-  .npmap .leaflet-control-overview button span {
+  .outerspatial .leaflet-control-overview button span {
     background-image: url('images/control/overview/toggle.png');
     background-repeat: no-repeat;
     background-size: 10px 10px;
@@ -1193,61 +1240,61 @@
     transition: all .2s;
     width: 10px;
   }
-    .npmap .leaflet-control-overview button span.minimized {
+    .outerspatial .leaflet-control-overview button span.minimized {
       -webkit-transform: rotate(180deg);
          -moz-transform: rotate(180deg);
           -ms-transform: rotate(180deg);
            -o-transform: rotate(180deg);
               transform: rotate(180deg);
     }
-  .npmap .leaflet-retina .leaflet-control-overview button span {
+  .outerspatial .leaflet-retina .leaflet-control-overview button span {
     background-image: url('images/control/overview/toggle@2x.png');
   }
 
 /* Print Control */
-.npmap-toolbar button.print {
+.outerspatial-toolbar button.print {
   background-image: url('images/font-awesome/print.png');
 }
-.npmap-retina .npmap-toolbar button.print {
+.outerspatial-retina .outerspatial-toolbar button.print {
   background-image: url('images/font-awesome/print@2x.png');
 }
 
 /* Scale Control */
-.npmap .leaflet-control-scale {
+.outerspatial .leaflet-control-scale {
   cursor: -webkit-grab;
   cursor: -moz-grab;
 }
 
 /* Share Control */
-.npmap-toolbar button.share {
+.outerspatial-toolbar button.share {
   background-image: url('images/font-awesome/envelope.png');
 }
-.npmap-retina .npmap-toolbar button.share {
+.outerspatial-retina .outerspatial-toolbar button.share {
   background-image: url('images/font-awesome/envelope@2x.png');
 }
 
 /* Smallzoom Control */
-.npmap .leaflet-control-zoom .in {
+.outerspatial .leaflet-control-zoom .in {
   background-image: url('images/font-awesome/plus.png');
   background-position: 5px 4px;
   background-repeat: no-repeat;
   background-size: 16px 16px;
 }
-.npmap .leaflet-retina .leaflet-control-zoom .in {
+.outerspatial .leaflet-retina .leaflet-control-zoom .in {
   background-image: url('images/font-awesome/plus@2x.png');
 }
-.npmap .leaflet-control-zoom .out {
+.outerspatial .leaflet-control-zoom .out {
   background-image: url('images/font-awesome/minus.png');
   background-position: 5px 4px;
   background-repeat: no-repeat;
   background-size: 16px 16px;
 }
-.npmap .leaflet-retina .leaflet-control-zoom .out {
+.outerspatial .leaflet-retina .leaflet-control-zoom .out {
   background-image: url('images/font-awesome/minus@2x.png');
 }
 
 /* Switcher Control */
-.npmap-control-switcher {
+.outerspatial-control-switcher {
   -webkit-border-radius: 4px;
      -moz-border-radius: 4px;
           border-radius: 4px;
@@ -1256,7 +1303,7 @@
   font-weight: bold;
   min-width: 200px;
 }
-  .npmap-control-switcher div:first-child {
+  .outerspatial-control-switcher div:first-child {
     -webkit-border-radius: 4px;
        -moz-border-radius: 4px;
             border-radius: 4px;
@@ -1271,7 +1318,7 @@
     position: relative;
     width: 198px;
   }
-  .npmap-control-switcher div:first-child div {
+  .outerspatial-control-switcher div:first-child div {
     -webkit-user-select: none;
        -moz-user-select: none;
             user-select: none;
@@ -1281,7 +1328,7 @@
     margin-right: 25px;
     position: relative;
   }
-  .npmap-control-switcher div:first-child span:first-child {
+  .outerspatial-control-switcher div:first-child span:first-child {
     float: left;
     height: 100%;
     left: 0;
@@ -1289,7 +1336,7 @@
     top: 0;
     width: 25px;
   }
-  .npmap-control-switcher div:first-child span:last-child {
+  .outerspatial-control-switcher div:first-child span:last-child {
     background-image: url('images/control/switcher/toggle.png');
     background-position: 6px;
     background-repeat: no-repeat;
@@ -1299,11 +1346,11 @@
     top: 0;
     width: 25px;
   }
-  .leaflet-retina .npmap-control-switcher div:first-child span:last-child {
+  .leaflet-retina .outerspatial-control-switcher div:first-child span:last-child {
     background-image: url('images/control/switcher/toggle@2x.png');
     background-size: 10px 5px;
   }
-  .npmap-control-switcher div:first-child span:last-child.open {
+  .outerspatial-control-switcher div:first-child span:last-child.open {
     -webkit-transform: rotate(180deg);
        -moz-transform: rotate(180deg);
         -ms-transform: rotate(180deg);
@@ -1311,7 +1358,7 @@
             transform: rotate(180deg);
     background-position: 8px;
   }
-  .npmap-control-switcher ul {
+  .outerspatial-control-switcher ul {
     -webkit-box-shadow: 0 2px 15px #888;
        -moz-box-shadow: 0 2px 15px #888;
         -ms-box-shadow: 0 2px 15px #888;
@@ -1330,28 +1377,28 @@
     position: absolute;
     width: 213px;
   }
-  .npmap-control-switcher li {
+  .outerspatial-control-switcher li {
     border-bottom: solid 1px #f2f1ef;
     cursor: pointer;
     font-size: 12px;
     padding: 14px 12px;
   }
-    .npmap-control-switcher li.selected, .npmap-control-switcher li.selected:hover {
+    .outerspatial-control-switcher li.selected, .outerspatial-control-switcher li.selected:hover {
       background-color: #d9d9d6;
     }
-    .npmap-control-switcher li:hover {
+    .outerspatial-control-switcher li:hover {
       background-color: #f1f1ef;
     }
-    .npmap-control-switcher li:last-child {
+    .outerspatial-control-switcher li:last-child {
       border-bottom: none;
     }
-.npmap-control-switcher .aerial {
+.outerspatial-control-switcher .aerial {
   background-image: url('images/control/switcher/aerial.png');
   height: 22px;
   position: absolute;
   width: 17px;
 }
-.npmap-control-switcher .aerial-small {
+.outerspatial-control-switcher .aerial-small {
   background-image: url('images/control/switcher/aerial-small.png');
   height: 13px;
   margin-left: 11px;
@@ -1359,13 +1406,13 @@
   position: absolute;
   width: 13px;
 }
-.npmap-control-switcher .generic {
+.outerspatial-control-switcher .generic {
   background-image: url('images/control/switcher/eye.png');
   height: 22px;
   position: absolute;
   width: 17px;
 }
-.npmap-control-switcher .generic-small {
+.outerspatial-control-switcher .generic-small {
   background-image: url('images/control/switcher/eye-small.png');
   height: 10px;
   margin-top: 9px;
@@ -1373,13 +1420,13 @@
   position: absolute;
   width: 17px;
 }
-.npmap-control-switcher .nps {
+.outerspatial-control-switcher .nps {
   background-image: url('images/control/switcher/nps.png');
   height: 22px;
   position: absolute;
   width: 17px;
 }
-.npmap-control-switcher .nps-small {
+.outerspatial-control-switcher .nps-small {
   background-image: url('images/control/switcher/nps-small.png');
   height: 15px;
   margin-left: 12px;
@@ -1387,13 +1434,13 @@
   position: absolute;
   width: 12px;
 }
-.npmap-control-switcher .street {
+.outerspatial-control-switcher .street {
   background-image: url('images/control/switcher/street.png');
   height: 22px;
   position: absolute;
   width: 17px;
 }
-.npmap-control-switcher .street-small {
+.outerspatial-control-switcher .street-small {
   background-image: url('images/control/switcher/street-small.png');
   height: 13px;
   margin-left: 9px;
@@ -1401,13 +1448,13 @@
   position: absolute;
   width: 17px;
 }
-.npmap-control-switcher .topo {
+.outerspatial-control-switcher .topo {
   background-image: url('images/control/switcher/topo.png');
   height: 22px;
   position: absolute;
   width: 17px;
 }
-.npmap-control-switcher .topo-small {
+.outerspatial-control-switcher .topo-small {
   background-image: url('images/control/switcher/topo-small.png');
   height: 13px;
   margin-left: 9px;
@@ -1427,7 +1474,7 @@
 }
 
 /* Notifications */
-.npmap .humane, .npmap .humane-bootstrap {
+.outerspatial .humane, .outerspatial .humane-bootstrap {
   -webkit-transition: all 0.4s ease-in-out;
      -moz-transition: all 0.4s ease-in-out;
       -ms-transition: all 0.4s ease-in-out;
@@ -1437,7 +1484,7 @@
   transition: all 0.4s ease-in-out;
   z-index: 100000;
 }
-.npmap .humane, .npmap .humane-bootstrap {
+.outerspatial .humane, .outerspatial .humane-bootstrap {
   -webkit-border-bottom-left-radius: 4px;
   -webkit-border-bottom-right-radius: 4px;
      -moz-border-radius-bottomleft: 4px;
@@ -1463,34 +1510,34 @@
   transform: translateY(-100px);
   width: 178px;
 }
-.npmap .humane p, .npmap .humane-bootstrap p, .npmap .humane ul, .npmap .humane-bootstrap ul {
+.outerspatial .humane p, .outerspatial .humane-bootstrap p, .outerspatial .humane ul, .outerspatial .humane-bootstrap ul {
   margin: 0;
   padding: 0;
 }
-.npmap .humane ul, .npmap .humane-bootstrap ul {
+.outerspatial .humane ul, .outerspatial .humane-bootstrap ul {
   list-style: none;
 }
-.npmap .humane.humane-bootstrap-success, .npmap .humane-bootstrap.humane-bootstrap-success {
+.outerspatial .humane.humane-bootstrap-success, .outerspatial .humane-bootstrap.humane-bootstrap-success {
   background-color: #dff0d8;
   border-color: #d6e9c6;
   color: #468847;
 }
-.npmap .humane.humane-bootstrap-info, .npmap .humane-bootstrap.humane-bootstrap-info {
+.outerspatial .humane.humane-bootstrap-info, .outerspatial .humane-bootstrap.humane-bootstrap-info {
   background-color: #d9edf7;
   border-color: #bce8f1;
   color: #3a87ad;
 }
-.npmap .humane.humane-bootstrap-warning, .npmap .humane-bootstrap.humane-bootstrap-warning {
+.outerspatial .humane.humane-bootstrap-warning, .outerspatial .humane-bootstrap.humane-bootstrap-warning {
   background-color: #fcf8e3;
   border-color: #fbeed5;
   color: #c09853;
 }
-.npmap .humane.humane-bootstrap-danger, .npmap .humane-bootstrap.humane-bootstrap-danger {
+.outerspatial .humane.humane-bootstrap-danger, .outerspatial .humane-bootstrap.humane-bootstrap-danger {
   background-color: #f2dede;
   border-color: #eed3d7;
   color: #b94a48;
 }
-.npmap .humane-animate, .npmap .humane-bootstrap.humane-bootstrap-animate {
+.outerspatial .humane-animate, .outerspatial .humane-bootstrap.humane-bootstrap-animate {
   opacity: 1;
   -moz-transform: translateY(0);
   -webkit-transform: translateY(0);
@@ -1498,7 +1545,7 @@
   -o-transform: translateY(0);
   transform: translateY(0);
 }
-.npmap .humane-js-animate, .npmap .humane-bootstrap.humane-bootstrap-js-animate {
+.outerspatial .humane-js-animate, .outerspatial .humane-bootstrap.humane-bootstrap-js-animate {
   opacity: 1;
   -moz-transform: translateY(0);
   -webkit-transform: translateY(0);
@@ -1506,36 +1553,36 @@
   -o-transform: translateY(0);
   transform: translateY(0);
 }
-.npmap .humane-js-animate:hover, .npmap .humane-bootstrap.humane-bootstrap-js-animate:hover {
+.outerspatial .humane-js-animate:hover, .outerspatial .humane-bootstrap.humane-bootstrap-js-animate:hover {
   opacity: 0.7;
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=70);
 }
 
 /* Modules */
-#npmap-module_Directions .content div:first-child {
+#outerspatial-module_Directions .content div:first-child {
   margin-bottom: 10px;
 }
-#npmap-module_Directions button.btn-link {
+#outerspatial-module_Directions button.btn-link {
   color: #464646;
 }
-  #npmap-module_Directions button.btn-link:hover {
+  #outerspatial-module_Directions button.btn-link:hover {
     text-decoration: underline;
   }
 
-#npmap-module_Directions .directions {
+#outerspatial-module_Directions .directions {
   border-top: 1px dotted #bdbbb1;
   margin-top: 25px;
   padding-top: 15px;
 }
-  #npmap-module_Directions .directions .mapbox-directions-direction, #npmap-module_Directions .directions .mapbox-directions-way-name {
+  #outerspatial-module_Directions .directions .mapbox-directions-direction, #outerspatial-module_Directions .directions .mapbox-directions-way-name {
     font-weight: bold;
   }
-  #npmap-module_Directions .directions .maneuver-header, #npmap-module_Directions .directions .maneuver-footer {
+  #outerspatial-module_Directions .directions .maneuver-header, #outerspatial-module_Directions .directions .maneuver-footer {
     background-color: #f3efe5;
     margin-bottom: 15px;
     padding: 8px 10px;
   }
-    #npmap-module_Directions .directions .maneuver-header h2 {
+    #outerspatial-module_Directions .directions .maneuver-header h2 {
       color: #647630;
       font-size: 14px;
       font-weight: bold;
@@ -1543,7 +1590,7 @@
       margin-bottom: 16px;
       margin-top: 0;
     }
-    #npmap-module_Directions .directions .maneuver-header .info {
+    #outerspatial-module_Directions .directions .maneuver-header .info {
       color: #706d5f;
       display: block;
       font-size: 12px;
@@ -1551,21 +1598,21 @@
       margin-bottom: 16px;
       text-transform: uppercase;
     }
-    #npmap-module_Directions .directions .maneuver-header h3, #npmap-module_Directions .directions .maneuver-footer h3 {
+    #outerspatial-module_Directions .directions .maneuver-header h3, #outerspatial-module_Directions .directions .maneuver-footer h3 {
       color: #464646;
       font-size: 12px;
       line-height: 20px;
       margin-bottom: 0;
       min-height: 20px;
     }
-    #npmap-module_Directions .directions .maneuver-header .location, #npmap-module_Directions .directions .maneuver-footer .location {
+    #outerspatial-module_Directions .directions .maneuver-header .location, #outerspatial-module_Directions .directions .maneuver-footer .location {
       color: #464646;
       font-size: 12px;
       line-height: 20px;
       margin-bottom: 0;
       min-height: 20px;
     }
-      #npmap-module_Directions .directions .maneuver-header .location .identifier, #npmap-module_Directions .directions .maneuver-footer .location .identifier {
+      #outerspatial-module_Directions .directions .maneuver-header .location .identifier, #outerspatial-module_Directions .directions .maneuver-footer .location .identifier {
         -webkit-border-radius: 3px;
            -moz-border-radius: 3px;
                 border-radius: 3px;
@@ -1579,17 +1626,17 @@
         text-align: center;
         width: 20px;
       }
-      #npmap-module_Directions .directions .maneuver-header .location .name, #npmap-module_Directions .directions .maneuver-footer .location .name {
+      #outerspatial-module_Directions .directions .maneuver-header .location .name, #outerspatial-module_Directions .directions .maneuver-footer .location .name {
         display: block;
         margin-left: 30px;
       }
-  #npmap-module_Directions .directions .maneuver-footer {
+  #outerspatial-module_Directions .directions .maneuver-footer {
     margin-bottom: 0;
   }
-    #npmap-module_Directions .directions .maneuver-footer .location {
+    #outerspatial-module_Directions .directions .maneuver-footer .location {
       margin-top: 0;
     }
-#npmap-module_Directions .disclaimer {
+#outerspatial-module_Directions .disclaimer {
   border-top: 1px solid #b1b0a7;
   color: #706d5f;
   font-size: 9.5px;
@@ -1597,44 +1644,44 @@
   margin-top: 47px;
   padding-top: 6px;
 }
-#npmap-module_Directions .actions {
+#outerspatial-module_Directions .actions {
   margin-left: 26px;
 }
-  #npmap-module_Directions .actions div:first-child {
+  #outerspatial-module_Directions .actions div:first-child {
     display: none;
     margin: -12px 0 20px 0;
   }
-    #npmap-module_Directions .actions div:first-child button {
+    #outerspatial-module_Directions .actions div:first-child button {
       padding: 0;
     }
-  #npmap-module_Directions .actions button:first-child {
+  #outerspatial-module_Directions .actions button:first-child {
     margin-right: 5px;
   }
-#npmap-module_Directions ul, #npmap-module_Directions ul li {
+#outerspatial-module_Directions ul, #outerspatial-module_Directions ul li {
   list-style-type: none;
 }
-#npmap-module_Directions ul {
+#outerspatial-module_Directions ul {
   margin-bottom: 20px;
   padding-left: 0;
 }
-  #npmap-module_Directions ul li {
+  #outerspatial-module_Directions ul li {
     height: 29px;
     margin-bottom: 10px;
     position: relative;
   }
-  #npmap-module_Directions ul li.over {
+  #outerspatial-module_Directions ul li.over {
     border: 2px dashed #000;
   }
-  #npmap-module_Directions ul li:last-child {
+  #outerspatial-module_Directions ul li:last-child {
     margin-bottom: 0;
   }
-    #npmap-module_Directions ul li div {
+    #outerspatial-module_Directions ul li div {
       left: 26px;
       position: absolute;
       right: 0;
       top: 0;
     }
-      #npmap-module_Directions ul li button {
+      #outerspatial-module_Directions ul li button {
         -webkit-background-clip: padding-box;
            -moz-background-clip: padding;
                 background-clip: padding-box;
@@ -1651,17 +1698,17 @@
         top: 2px;
         width: 25px;
       }
-        #npmap-module_Directions ul li button.remove {
+        #outerspatial-module_Directions ul li button.remove {
           background-color: transparent;
           color: #000;
         }
-        #npmap-module_Directions ul li div button.search {
+        #outerspatial-module_Directions ul li div button.search {
           background-color: #c09030;
         }
-    #npmap-module_Directions ul li div.remove {
+    #outerspatial-module_Directions ul li div.remove {
       right: 28px;
     }
-    #npmap-module_Directions ul li label {
+    #outerspatial-module_Directions ul li label {
       -webkit-border-radius: 3px;
          -moz-border-radius: 3px;
            -o-border-radius: 3px;
@@ -1677,25 +1724,25 @@
       text-align: center;
       width: 20px;
     }
-    #npmap-module_Directions ul li input {
+    #outerspatial-module_Directions ul li input {
       width: 100%;
     }
-    #npmap-module_Directions ul li input.search {
+    #outerspatial-module_Directions ul li input.search {
       padding-right: 30px;
     }
-#npmap-module_Directions ol {
+#outerspatial-module_Directions ol {
   counter-reset: li;
   margin-bottom: 0;
   margin-left: 0;
   padding-left: 0;
 }
-  #npmap-module_Directions ol > li {
+  #outerspatial-module_Directions ol > li {
     list-style: none;
     margin: 0 0 0 35px;
     padding: 0 60px 10px 0;
     position: relative;
   }
-    #npmap-module_Directions ol > li:before {
+    #outerspatial-module_Directions ol > li:before {
       box-sizing: border-box;
       color: #b28000;
       content: counter(li)".";
@@ -1704,7 +1751,7 @@
       left: -35px;
       position: absolute;
     }
-    #npmap-module_Directions ol > li .distance {
+    #outerspatial-module_Directions ol > li .distance {
       position: absolute;
       right: 0;
       top: 0;

@@ -1,5 +1,5 @@
 var attribution = '<a href="https://www.mapbox.com/about/maps" target="_blank">MapBox</a>, &copy; <a href="https://openstreetmap.org/copyright">OpenStreetMap</a> contributors';
-var NPMap = {
+var OuterSpatial = {
   baseLayers: [{
     attribution: attribution,
     id: 'mapbox.geography-class',
@@ -23,6 +23,6 @@ var NPMap = {
 
 (function () {
   var s = document.createElement('script');
-  s.src = '{{ path }}/npmap-bootstrap.js';
+  s.src = '{{ path }}/outerspatial-bootstrap.js';
   document.body.appendChild(s);
 })();

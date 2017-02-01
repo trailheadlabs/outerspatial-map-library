@@ -140,7 +140,7 @@ L.Map.addInitHook(function () {
       options = this.options.legendControl;
     }
 
-    this.legendControl = L.npmap.control.legend(options).addTo(this);
+    this.legendControl = L.outerspatial.control.legend(options).addTo(this);
   }
 });
 

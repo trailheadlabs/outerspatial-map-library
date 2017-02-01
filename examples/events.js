@@ -1,12 +1,12 @@
 var el = document.getElementById('events');
-var NPMap;
+var OuterSpatial;
 
 function addMessage (message) {
   el.innerHTML += message + '<br>';
   el.scrollTop = el.scrollHeight;
 }
 
-NPMap = {
+OuterSpatial = {
   div: 'map',
   events: [{
     fn: function () {
@@ -51,6 +51,6 @@ NPMap = {
 
 (function () {
   var s = document.createElement('script');
-  s.src = '{{ path }}/npmap-bootstrap.js';
+  s.src = '{{ path }}/outerspatial-bootstrap.js';
   document.body.appendChild(s);
 })();

@@ -1,7 +1,8 @@
 /* global afterEach, beforeEach, describe, sinon */
 
-describe('L.npmap.preset', function () {
-  var element, server;
+describe('L.outerspatial.preset', function () {
+  var element;
+  var server;
 
   afterEach(function () {
     element = null;

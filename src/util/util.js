@@ -162,23 +162,6 @@ module.exports = {
       node.style.display = 'block';
     }
   },
-  checkNpsNetwork: function (callback) {
-    this.reqwest({
-      crossOrigin: true,
-      error: function () {
-        callback(false);
-      },
-      success: function (response) {
-        if (response && response.success) {
-          callback(true);
-        } else {
-          callback(false);
-        }
-      },
-      type: 'json',
-      url: 'https://insidemaps.nps.gov/test/inside'
-    });
-  },
   _getAutoPanPaddingTopLeft: function (el) {
     var containers = this.getChildElementsByClassName(el, 'leaflet-top');
 
@@ -495,10 +478,10 @@ module.exports = {
 
       this._checkDisplay(el, changed);
 
-      if (el.id !== 'npmap' && parentNode) {
+      if (el.id !== 'outerspatial' && parentNode) {
         this._checkDisplay(parentNode, changed);
 
-        while (parentNode.id && parentNode.id !== 'npmap' && parentNode.id !== 'npmap-map') {
+        while (parentNode.id && parentNode.id !== 'outerspatial' && parentNode.id !== 'outerspatial-map') {
           parentNode = parentNode.parentNode;
 
           if (parentNode) {

@@ -63,7 +63,7 @@ L.Map.addInitHook(function () {
       options = this.options.smallzoomControl;
     }
 
-    this.smallzoomControl = L.npmap.control.smallzoom(options).addTo(this);
+    this.smallzoomControl = L.outerspatial.control.smallzoom(options).addTo(this);
   }
 });
 

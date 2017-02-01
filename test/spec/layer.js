@@ -1,6 +1,6 @@
 /* global afterEach, beforeEach, describe, expect, it, L, sinon */
 
-describe('L.npmap.layer', function () {
+describe('L.outerspatial.layer', function () {
   var element, server;
 
   afterEach(function () {
@@ -13,7 +13,7 @@ describe('L.npmap.layer', function () {
   });
   describe('arcgisserver', function () {
     it('creates a dynamic layer and adds it to the map', function () {
-      var map = L.npmap.map({
+      var map = L.outerspatial.map({
         baseLayers: false,
         div: element,
         overlays: [{
@@ -26,7 +26,7 @@ describe('L.npmap.layer', function () {
       expect(map.options.overlays[0].L).to.be.ok();
     });
     it('fires the \'ready\' event for a dynamic layer', function (done) {
-      L.npmap.map({
+      L.outerspatial.map({
         baseLayers: false,
         div: element,
         overlays: [{
@@ -43,7 +43,7 @@ describe('L.npmap.layer', function () {
       });
     });
     it('creates a tiled layer and adds it to the map', function () {
-      var map = L.npmap.map({
+      var map = L.outerspatial.map({
         baseLayers: false,
         div: element,
         overlays: [{
@@ -56,7 +56,7 @@ describe('L.npmap.layer', function () {
       expect(map.options.overlays[0].L).to.be.ok();
     });
     it('fires the \'ready\' event for a tiled layer', function (done) {
-      L.npmap.map({
+      L.outerspatial.map({
         baseLayers: false,
         div: element,
         overlays: [{
@@ -75,7 +75,7 @@ describe('L.npmap.layer', function () {
   });
   describe('bing', function () {
     it('creates a layer and adds it to the map', function () {
-      var map = L.npmap.map({
+      var map = L.outerspatial.map({
         baseLayers: false,
         div: element,
         overlays: [{
@@ -90,7 +90,7 @@ describe('L.npmap.layer', function () {
     });
     /*
     it('fires the \'ready\' event', function (done) {
-      L.npmap.map({
+      L.outerspatial.map({
         baseLayers: false,
         div: element,
         overlays: [{
@@ -111,7 +111,7 @@ describe('L.npmap.layer', function () {
   });
   describe('cartodb', function () {
     it('creates a layer and adds it to the map', function () {
-      var map = L.npmap.map({
+      var map = L.outerspatial.map({
         baseLayers: false,
         div: element,
         overlays: [{
@@ -125,7 +125,7 @@ describe('L.npmap.layer', function () {
     });
     /*
     it('fires the \'ready\' event for a layer', function (done) {
-      L.npmap.map({
+      L.outerspatial.map({
         baseLayers: false,
         div: element,
         overlays: [{

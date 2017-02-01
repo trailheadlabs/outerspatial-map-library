@@ -12,13 +12,13 @@ var DownloadControl = L.Control.extend({
     return this;
   },
   addTo: function (map) {
-    var toolbar = util.getChildElementsByClassName(map.getContainer().parentNode.parentNode, 'npmap-toolbar')[0];
+    var toolbar = util.getChildElementsByClassName(map.getContainer().parentNode.parentNode, 'outerspatial-toolbar')[0];
 
     toolbar.childNodes[1].appendChild(this._li);
     toolbar.style.display = 'block';
     this._container = toolbar.parentNode.parentNode;
     this._map = map;
-    util.getChildElementsByClassName(this._container.parentNode, 'npmap-map-wrapper')[0].style.top = '28px';
+    util.getChildElementsByClassName(this._container.parentNode, 'outerspatial-map-wrapper')[0].style.top = '28px';
     return this;
   },
   download: function (e) {
@@ -38,7 +38,7 @@ L.Map.addInitHook(function () {
       options = this.options.downloadControl;
     }
 
-    this.downloadControl = L.npmap.control.download(options).addTo(this);
+    this.downloadControl = L.outerspatial.control.download(options).addTo(this);
   }
 });
 

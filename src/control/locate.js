@@ -47,7 +47,7 @@ var LocateControl = L.Control.extend({
     var me = this;
     var obj = {};
 
-    this._container = L.DomUtil.create('div', 'npmap-control-locate leaflet-bar leaflet-control');
+    this._container = L.DomUtil.create('div', 'outerspatial-control-locate leaflet-bar leaflet-control');
     this._event = undefined;
     this._layer = new L.LayerGroup().addTo(map);
     this._locateOptions = {
@@ -257,7 +257,7 @@ L.Map.addInitHook(function () {
       options = this.options.locateControl;
     }
 
-    this.locateControl = L.npmap.control.locate(options).addTo(this);
+    this.locateControl = L.outerspatial.control.locate(options).addTo(this);
   }
 });
 

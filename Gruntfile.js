@@ -1,6 +1,4 @@
 module.exports = function (grunt) {
-  'use strict';
-
   var cssNpmapSymbolLibrary = '';
   var npmapSymbolLibrary = require('./node_modules/npmap-symbol-library/www/npmap-builder/npmap-symbol-library.json');
   var pkg = require('./package.json');
@@ -9,7 +7,6 @@ module.exports = function (grunt) {
     medium: 18,
     small: 12
   };
-  var secrets;
 
   function loadNpmTasks () {
     Object.keys(pkg.devDependencies).filter(function (moduleName) {
@@ -28,52 +25,16 @@ module.exports = function (grunt) {
     }
   }
 
-  try {
-    secrets = require('./secrets.json');
-  } catch (e) {
-    secrets = require('./secrets.sample.json');
-  }
-
   grunt.util.linefeed = '\n';
   grunt.initConfig({
-    akamai_rest_purge: {
-      lib: {
-        /*
-        objects: [
-          'npmap-bootstrap.js',
-          'npmap-bootstrap.min.js',
-          'npmap.css',
-          'npmap.min.css',
-          'npmap.js',
-          'npmap.min.js',
-          'npmap-standalone.css',
-          'npmap-standalone.min.css',
-          'npmap-standalone.js',
-          'npmap-standalone.min.js'
-        ].map(function (fileName) {
-          return 'https://www.nps.gov/lib/npmap.js/<%= pkg.version %>/' + fileName;
-        })
-        */
-        objects: [
-          'https://www.nps.gov/lib/npmap.js/<%= pkg.version %>/*'
-        ]
-      },
-      options: {
-        action: 'invalidate',
-        auth: {
-          pass: secrets.akamai.password,
-          user: secrets.akamai.user
-        }
-      }
-    },
     browserify: {
       all: {
         files: {
-          'dist/npmap.js': [
+          'dist/outerspatial.js': [
             'main.js'
           ],
-          'dist/npmap-standalone.js': [
-            'npmap.js'
+          'dist/outerspatial-standalone.js': [
+            'outerspatial.js'
           ]
         }
       }
@@ -88,25 +49,17 @@ module.exports = function (grunt) {
         src: [
           'dist/examples/**/*'
         ]
-      },
-      lib: {
-        options: {
-          force: true
-        },
-        src: [
-          '/Volumes/lib/npmap.js/<%= pkg.version %>'
-        ]
       }
     },
     concat: {
       css: {
-        dest: 'dist/npmap.css',
+        dest: 'dist/outerspatial.css',
         options: {
           banner: cssNpmapSymbolLibrary
         },
         src: [
           'node_modules/leaflet/dist/leaflet.css',
-          'theme/nps.css'
+          'theme/outerspatial.css'
         ]
       }
     },
@@ -120,8 +73,8 @@ module.exports = function (grunt) {
         ]
       },
       css: {
-        dest: 'dist/npmap-standalone.css',
-        src: 'theme/nps.css'
+        dest: 'dist/outerspatial-standalone.css',
+        src: 'theme/outerspatial.css'
       },
       'examples-data': {
         cwd: 'examples/data/',
@@ -148,16 +101,8 @@ module.exports = function (grunt) {
         ]
       },
       javascript: {
-        dest: 'dist/npmap-bootstrap.js',
+        dest: 'dist/outerspatial-bootstrap.js',
         src: 'src/bootstrap.js'
-      },
-      lib: {
-        cwd: 'dist/',
-        dest: '/Volumes/lib/npmap.js/<%= pkg.version %>/',
-        expand: true,
-        src: [
-          '**/*'
-        ]
       },
       npmapSymbolLibrary: {
         cwd: 'node_modules/npmap-symbol-library/renders/npmap-builder/',
@@ -178,7 +123,7 @@ module.exports = function (grunt) {
     },
     csslint: {
       src: [
-        'theme/nps.css'
+        'theme/outerspatial.css'
       ]
     },
     cssmin: {
@@ -201,13 +146,6 @@ module.exports = function (grunt) {
             'dist/api/index.md'
           ]
         }]
-      }
-    },
-    mkdir: {
-      lib: {
-        create: [
-          '/Volumes/lib/npmap.js/<%= pkg.version %>/'
-        ]
       }
     },
     mocha_phantomjs: {
@@ -236,7 +174,7 @@ module.exports = function (grunt) {
     usebanner: {
       dist: {
         options: {
-          banner: '/**\n * NPMap.js <%= pkg.version %>\n * Built on <%= grunt.template.today("mm/dd/yyyy") %> at <%= grunt.template.today("hh:MMTT Z") %>\n * Copyright <%= grunt.template.today("yyyy") %> National Park Service\n * Licensed under ' + pkg.licenses[0].type + ' (' + pkg.licenses[0].url + ')\n */',
+          banner: '/**\n * OuterSpatial.js <%= pkg.version %>\n * Built on <%= grunt.template.today("mm/dd/yyyy") %> at <%= grunt.template.today("hh:MMTT Z") %>\n * Copyright <%= grunt.template.today("yyyy") %> Trailhead Labs\n * Licensed under ' + pkg.licenses[0].type + ' (' + pkg.licenses[0].url + ')\n */',
           position: 'top'
         },
         files: {
@@ -267,11 +205,7 @@ module.exports = function (grunt) {
     'cssmin',
     'usebanner'
   ]);
-  grunt.registerTask('deploy', [
-    'clean:lib',
-    'mkdir:lib',
-    'copy:lib'
-  ]);
+  grunt.registerTask('deploy', []);
   grunt.registerTask('examples', [
     'clean:examples',
     'copy:examples-data',
@@ -287,9 +221,7 @@ module.exports = function (grunt) {
       grunt.file.copy('./keys.sample.json', './keys.json');
     }
   });
-  grunt.registerTask('purge', [
-    'akamai_rest_purge:lib'
-  ]);
+  grunt.registerTask('purge', []);
   grunt.registerTask('generate-examples', 'Internal.', function () {
     var categories = {
       'Getting Started': [],
@@ -335,7 +267,7 @@ module.exports = function (grunt) {
       }
     }
 
-    html = '<h1 style="display:none;">NPMap.js Examples</h1>';
+    html = '<h1 style="display:none;">OuterSpatial.js Examples</h1>';
 
     for (var category in categories) {
       html += '<h2>' + category + '</h2><ul>';

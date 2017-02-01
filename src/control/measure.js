@@ -95,7 +95,7 @@ var MeasureControl = L.Control.extend({
       var i;
       var unit;
 
-      this._container = L.DomUtil.create('div', 'leaflet-bar leaflet-control npmap-control-measure');
+      this._container = L.DomUtil.create('div', 'leaflet-bar leaflet-control outerspatial-control-measure');
       this._map = map;
       this._menu = L.DomUtil.create('ul', '', this._container);
       this._button = L.DomUtil.create('button', 'leaflet-bar-single measure-control', this._container);
@@ -619,7 +619,7 @@ L.Map.addInitHook(function () {
       options = this.options.measureControl;
     }
 
-    this.measureControl = L.npmap.control.measure(options).addTo(this);
+    this.measureControl = L.outerspatial.control.measure(options).addTo(this);
   }
 });
 

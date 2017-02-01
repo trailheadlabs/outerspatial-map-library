@@ -1,2 +1,2 @@
 require('./leaflet');
-require('./npmap');
+require('./outerspatial');

@@ -1,8 +1,8 @@
-var NPMap = {
+var OuterSpatial = {
   div: 'map',
   hooks: {
     init: function (callback) {
-      NPMap.config.L.notify
+      OuterSpatial.config.L.notify
         .success('Good Job!')
         .info('Some helpful information.')
         .warning('Something may go wrong.')
@@ -14,6 +14,6 @@ var NPMap = {
 
 (function () {
   var s = document.createElement('script');
-  s.src = '{{ path }}/npmap-bootstrap.js';
+  s.src = '{{ path }}/outerspatial-bootstrap.js';
   document.body.appendChild(s);
 })();

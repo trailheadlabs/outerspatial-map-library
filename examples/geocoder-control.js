@@ -1,4 +1,4 @@
-var NPMap = {
+var OuterSpatial = {
   div: 'map',
   geocoderControl: {
     searchPlaces: true
@@ -7,6 +7,6 @@ var NPMap = {
 
 (function () {
   var s = document.createElement('script');
-  s.src = '{{ path }}/npmap-bootstrap.js';
+  s.src = '{{ path }}/outerspatial-bootstrap.js';
   document.body.appendChild(s);
 })();

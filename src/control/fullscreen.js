@@ -39,14 +39,14 @@ var FullscreenControl = L.Control.extend({
     }
   },
   addTo: function (map) {
-    var toolbar = util.getChildElementsByClassName(map.getContainer().parentNode.parentNode, 'npmap-toolbar')[0];
+    var toolbar = util.getChildElementsByClassName(map.getContainer().parentNode.parentNode, 'outerspatial-toolbar')[0];
 
     toolbar.childNodes[1].appendChild(this._li);
     toolbar.style.display = 'block';
     this._container = toolbar.parentNode.parentNode;
     this._isFullscreen = false;
     this._map = map;
-    util.getChildElementsByClassName(this._container.parentNode, 'npmap-map-wrapper')[0].style.top = '28px';
+    util.getChildElementsByClassName(this._container.parentNode, 'outerspatial-map-wrapper')[0].style.top = '28px';
     return this;
   },
   _getParentDocumentBody: function (el) {
@@ -103,7 +103,7 @@ var FullscreenControl = L.Control.extend({
           window.parent.postMessage('exitfullscreen', '*');
 
           if (this._frameBody) {
-            utils = window.parent.NPMapUtils;
+            utils = window.parent.OuterSpatialUtils;
 
             if (utils && utils.fullscreenControl && utils.fullscreenControl.listeners && typeof utils.fullscreenControl.listeners.exitfullscreen === 'function') {
               utils.fullscreenControl.listeners.exitfullscreen();
@@ -169,7 +169,7 @@ var FullscreenControl = L.Control.extend({
           window.parent.postMessage('enterfullscreen', '*');
 
           if (this._frameBody) {
-            utils = window.parent.NPMapUtils;
+            utils = window.parent.OuterSpatialUtils;
 
             if (utils && utils.fullscreenControl && utils.fullscreenControl.listeners && typeof utils.fullscreenControl.listeners.enterfullscreen === 'function') {
               utils.fullscreenControl.listeners.enterfullscreen();
@@ -196,7 +196,7 @@ L.Map.addInitHook(function () {
       options = this.options.fullscreenControl;
     }
 
-    this.fullscreenControl = L.npmap.control.fullscreen(options).addTo(this);
+    this.fullscreenControl = L.outerspatial.control.fullscreen(options).addTo(this);
   }
 });
 

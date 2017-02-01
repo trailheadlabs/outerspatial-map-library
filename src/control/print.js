@@ -22,11 +22,11 @@ var PrintControl = L.Control.extend({
   },
   addTo: function (map) {
     if (this.options.ui === true) {
-      var toolbar = util.getChildElementsByClassName(map.getContainer().parentNode.parentNode, 'npmap-toolbar')[0];
+      var toolbar = util.getChildElementsByClassName(map.getContainer().parentNode.parentNode, 'outerspatial-toolbar')[0];
       toolbar.childNodes[1].appendChild(this._li);
       toolbar.style.display = 'block';
       this._container = toolbar.parentNode.parentNode;
-      util.getChildElementsByClassName(this._container.parentNode, 'npmap-map-wrapper')[0].style.top = '28px';
+      util.getChildElementsByClassName(this._container.parentNode, 'outerspatial-map-wrapper')[0].style.top = '28px';
     }
 
     this._map = map;
@@ -120,7 +120,7 @@ var PrintControl = L.Control.extend({
 
       params.value = window.btoa(JSON.stringify(config));
       url += '&printId=' + params.key;
-      L.npmap.util._.reqwest({
+      L.outerspatial.util._.reqwest({
         crossOrigin: supportsCors,
         type: 'json' + (supportsCors ? '' : 'p'),
         url: 'https://server-utils.herokuapp.com/session/' + L.Util.getParamString(params)
@@ -144,7 +144,7 @@ L.Map.addInitHook(function () {
       options = this.options.printControl;
     }
 
-    this.printControl = L.npmap.control.print(options).addTo(this);
+    this.printControl = L.outerspatial.control.print(options).addTo(this);
   }
 });
 

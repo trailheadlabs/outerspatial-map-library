@@ -33,7 +33,7 @@ var ClusterLayer = L.MarkerClusterGroup.extend({
     this._nonPointGroup = L.featureGroup();
     this._nonPointGroup.addEventParent(this);
     this._queue = [];
-    this.L = L.npmap.layer[options.type](options);
+    this.L = L.outerspatial.layer[options.type](options);
     interval = setInterval(function () {
       if (me.L._loaded) {
         clearInterval(interval);

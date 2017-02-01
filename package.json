@@ -1,30 +1,28 @@
 {
   "bugs": {
-    "email": "npmap@nps.gov",
-    "url": "https://github.com/nationalparkservice/npmap.js/issues"
+    "email": "hi@trailheadlabs.com",
+    "url": "https://github.com/trailheadlabs/outerspatial.js/issues"
   },
   "dependencies": {
     "csv2geojson": "5.0.2",
     "handlebars": "4.0.5",
-    "helper-dateformat": "https://github.com/nationalparkservice/helper-dateformat/archive/v0.2.1.tar.gz",
-    "humane-js": "https://github.com/nationalparkservice/humane-js/archive/3.2.2.tar.gz",
+    "helper-dateformat": "https://github.com/trailheadlabs/helper-dateformat.git#9dfb8714b319dfa2cbfab47cdcfeb3ec2d1cbd94",
+    "humane-js": "https://github.com/trailheadlabs/humane-js/archive/3.2.2.tar.gz",
     "leaflet": "1.0.2",
-    "leaflet-draw": "git+https://github.com/nationalparkservice/Leaflet.Draw.git#23287efc2dc02fcf7de3b4737a76d16f06e7557c",
+    "leaflet-draw": "https://github.com/trailheadlabs/leaflet.draw.git#e6cf342f531effcf50fb5d5625d8a5a105935af1",
     "leaflet.markercluster": "1.0.0",
     "maki": "~0.5.0",
     "nanobar": "0.4.2",
-    "npmap-symbol-library": "https://github.com/nationalparkservice/npmap-symbol-library/archive/v2.2.2.tar.gz",
+    "npmap-symbol-library": "https://github.com/nationalparkservice/symbol-library/archive/v2.2.2.tar.gz",
     "reqwest": "2.0.5",
     "togeojson": "0.14.2"
   },
-  "description": "A JavaScript web mapping library for the National Park Service, built as a Leaflet plugin.",
+  "description": "A JavaScript web mapping library, built as a Leaflet plugin, for the OuterSpatial outdoor technology platform.",
   "devDependencies": {
     "brfs": "1.4.3",
     "browserify": "^13.0.0",
     "expect.js": "^0.3.1",
-    "grunt": "^1.0.0",
-    "grunt": "~0.4.0",
-    "grunt-akamai-rest-purge": "^0.1.1",
+    "grunt": "^1.0.1",
     "grunt-banner": "0.6.0",
     "grunt-browserify": "5.0.0",
     "grunt-contrib-clean": "1.0.0",
@@ -56,34 +54,28 @@
   "engines": {
     "node": "*"
   },
-  "homepage": "https://www.nps.gov/maps/tools/npmap.js/",
+  "homepage": "https://github.com/trailheadlabs/outerspatial.js",
   "keywords": [
     "Cartography",
-    "Department of Interior",
     "Digital",
+    "Interactive Map",
     "JavaScript",
     "Leaflet",
     "Map",
-    "National Park Service",
-    "NPMap",
-    "NPMap.js",
-    "NPMap Symbol Library",
-    "NPS Places",
-    "Park Tiles",
-    "US Government",
+    "OuterSpatial",
+    "OuterSpatial.js",
+    "Trailhead Labs",
     "Web Map"
   ],
-  "licenses": [
-    {
-      "type": "MIT",
-      "url": "https://github.com/nationalparkservice/npmap.js/blob/master/LICENSE.md"
-    }
-  ],
+  "licenses": [{
+    "type": "MIT",
+    "url": "https://github.com/trailheadlabs/outerspatial.js/raw/master/LICENSE.md"
+  }],
   "main": "main.js",
-  "name": "npmap.js",
+  "name": "outerspatial.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/nationalparkservice/npmap.js.git"
+    "url": "https://github.com/trailheadlabs/outerspatial.js.git"
   },
-  "version": "3.0.18"
+  "version": "4.0.0"
 }

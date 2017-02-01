@@ -12,12 +12,12 @@ var ShareControl = L.Control.extend({
     return this;
   },
   addTo: function (map) {
-    var toolbar = util.getChildElementsByClassName(map.getContainer().parentNode.parentNode, 'npmap-toolbar')[0];
+    var toolbar = util.getChildElementsByClassName(map.getContainer().parentNode.parentNode, 'outerspatial-toolbar')[0];
     toolbar.childNodes[1].appendChild(this._li);
     toolbar.style.display = 'block';
     this._container = toolbar.parentNode.parentNode;
     this._map = map;
-    util.getChildElementsByClassName(this._container.parentNode, 'npmap-map-wrapper')[0].style.top = '28px';
+    util.getChildElementsByClassName(this._container.parentNode, 'outerspatial-map-wrapper')[0].style.top = '28px';
     return this;
   },
   share: function (e) {
@@ -37,7 +37,7 @@ L.Map.addInitHook(function () {
       options = this.options.shareControl;
     }
 
-    this.shareControl = L.npmap.control.share(options).addTo(this);
+    this.shareControl = L.outerspatial.control.share(options).addTo(this);
   }
 });
 

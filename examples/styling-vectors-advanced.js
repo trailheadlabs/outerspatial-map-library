@@ -1,4 +1,4 @@
-var NPMap = {
+var OuterSpatial = {
   center: {
     lat: 44.51511,
     lng: -110.46066
@@ -15,15 +15,15 @@ var NPMap = {
           lineCap: 'square',
           weight: 3,
           opacity: 1
-        }).addTo(NPMap.config.L);
-        window.L.npmap.layer.geojson({
+        }).addTo(OuterSpatial.config.L);
+        window.L.outerspatial.layer.geojson({
           color: '#7570b3',
           dashArray: '4,5',
           data: this.toGeoJSON(),
           lineCap: 'square',
           weight: 3,
           lineOpacity: 1
-        }).addTo(NPMap.config.L);
+        }).addTo(OuterSpatial.config.L);
       },
       type: 'ready'
     }],
@@ -43,6 +43,6 @@ var NPMap = {
 
 (function () {
   var s = document.createElement('script');
-  s.src = '{{ path }}/npmap-bootstrap.js';
+  s.src = '{{ path }}/outerspatial-bootstrap.js';
   document.body.appendChild(s);
 })();

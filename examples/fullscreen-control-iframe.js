@@ -1,4 +1,4 @@
-var NPMapUtils = {
+var OuterSpatialUtils = {
   fullscreenControl: {
     listeners: {
       enterfullscreen: function () {

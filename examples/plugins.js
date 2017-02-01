@@ -1,4 +1,4 @@
-var NPMap = {
+var OuterSpatial = {
   center: {
     lat: 44.617844,
     lng: -110.541687
@@ -10,7 +10,7 @@ var NPMap = {
     events: [{
       fn: function () {
         var layers = this.getLayers();
-        var map = NPMap.config.L;
+        var map = OuterSpatial.config.L;
 
         map.on('draw:created draw:drawstartmarker', function (e) {
           var marker;
@@ -49,6 +49,6 @@ var NPMap = {
 
 (function () {
   var s = document.createElement('script');
-  s.src = '{{ path }}/npmap-bootstrap.js';
+  s.src = '{{ path }}/outerspatial-bootstrap.js';
   document.body.appendChild(s);
 })();

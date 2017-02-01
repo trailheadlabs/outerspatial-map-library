@@ -63,7 +63,7 @@ module.exports = function (options) {
   }
 
   if (options.cluster) {
-    return L.npmap.layer._cluster(options);
+    return L.outerspatial.layer._cluster(options);
   } else {
     return new CsvLayer(options);
   }

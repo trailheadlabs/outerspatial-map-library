@@ -211,7 +211,7 @@ var HashControl = L.Class.extend({
 
 L.Map.addInitHook(function () {
   if (this.options.hashControl) {
-    this.hashControl = L.npmap.control.hash(this.options.hashControl).addTo(this);
+    this.hashControl = L.outerspatial.control.hash(this.options.hashControl).addTo(this);
   }
 });
 

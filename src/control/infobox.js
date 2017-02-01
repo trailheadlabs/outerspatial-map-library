@@ -68,7 +68,7 @@ L.Map.addInitHook(function () {
       options = this.options.infoboxControl;
     }
 
-    this.infoboxControl = L.npmap.control.infobox(options).addTo(this);
+    this.infoboxControl = L.outerspatial.control.infobox(options).addTo(this);
   }
 });
 

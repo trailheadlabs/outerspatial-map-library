@@ -74,7 +74,7 @@ var Popup = L.Popup.extend({
             var data = null;
 
             try {
-              data = this.parentNode.parentNode.parentNode.parentNode.npmap_data;
+              data = this.parentNode.parentNode.parentNode.parentNode.outerspatial_data;
             } catch (exception) {}
 
             menu.style.display = 'none';
@@ -93,7 +93,7 @@ var Popup = L.Popup.extend({
         var data = null;
 
         try {
-          data = this.parentNode.parentNode.parentNode.parentNode.npmap_data;
+          data = this.parentNode.parentNode.parentNode.parentNode.outerspatial_data;
         } catch (exception) {}
 
         config.handler(data);
@@ -204,7 +204,7 @@ var Popup = L.Popup.extend({
     } else if (layerConfig && typeof layerConfig === 'function') {
       div = L.DomUtil.create('div', 'layer');
       div.innerHTML = layerConfig(result);
-      div.npmap_data = result;
+      div.outerspatial_data = result;
       return div;
     } else {
       var config = layerConfig;
@@ -217,7 +217,7 @@ var Popup = L.Popup.extend({
       var ul;
 
       div = L.DomUtil.create('div', 'layer');
-      div.npmap_data = result;
+      div.outerspatial_data = result;
 
       if (!config) {
         if (resultConfig) {

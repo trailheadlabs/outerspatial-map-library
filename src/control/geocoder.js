@@ -375,12 +375,12 @@ var GeocoderControl = L.Control.extend({
         var type;
 
         if (d) {
-          li.className = 'npmap-geocoder-result-park';
+          li.className = 'outerspatial-geocoder-result-park';
           li.id = d;
           type = 'park';
         } else {
           d = result.n;
-          li.className = 'npmap-geocoder-result-poi';
+          li.className = 'outerspatial-geocoder-result-poi';
           li.id = result.c;
           type = 'poi';
         }
@@ -416,7 +416,7 @@ L.Map.addInitHook(function () {
       options = this.options.geocoderControl;
     }
 
-    this.geocoderControl = L.npmap.control.geocoder(options).addTo(this);
+    this.geocoderControl = L.outerspatial.control.geocoder(options).addTo(this);
   }
 });
 

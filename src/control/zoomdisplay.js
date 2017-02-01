@@ -38,7 +38,7 @@ L.Map.addInitHook(function () {
       options = this.options.zoomdisplayControl;
     }
 
-    this.zoomdisplayControl = L.npmap.control.zoomdisplay(options).addTo(this);
+    this.zoomdisplayControl = L.outerspatial.control.zoomdisplay(options).addTo(this);
   }
 });
 

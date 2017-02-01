@@ -69,7 +69,7 @@ var EditControl = L.Control.extend({
 
     if (options.marker) {
       if (options.marker.icon && options.marker.icon['marker-library']) {
-        options.marker.icon = L.npmap.icon[options.marker.icon['marker-library']](options.marker.icon);
+        options.marker.icon = L.outerspatial.icon[options.marker.icon['marker-library']](options.marker.icon);
       }
 
       this._initializeMode(container, new L.Draw.Marker(map, options.marker), 'Draw a marker');
@@ -243,7 +243,7 @@ L.Map.addInitHook(function () {
       options = this.options.editControl;
     }
 
-    this.editControl = L.npmap.control.edit(options).addTo(this);
+    this.editControl = L.outerspatial.control.edit(options).addTo(this);
   } else {
     var edit = false;
     var overlays = this.options.overlays;
@@ -258,7 +258,7 @@ L.Map.addInitHook(function () {
     }
 
     if (edit) {
-      this.editControl = L.npmap.control.edit({
+      this.editControl = L.outerspatial.control.edit({
         toolbar: false
       }).addTo(this);
     }

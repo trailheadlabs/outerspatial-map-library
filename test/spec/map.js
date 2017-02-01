@@ -1,7 +1,8 @@
 /* global afterEach, beforeEach, describe, expect, it, L, sinon */
 
-describe('L.npmap.map', function () {
-  var element, server;
+describe('L.outerspatial.map', function () {
+  var element;
+  var server;
 
   afterEach(function () {
     element = null;
@@ -14,7 +15,7 @@ describe('L.npmap.map', function () {
   });
   describe('constructor', function () {
     it('passes options to constructor when called without new', function () {
-      var map = L.npmap.map({
+      var map = L.outerspatial.map({
         div: element,
         smallzoomControl: false
       });
@@ -22,35 +23,35 @@ describe('L.npmap.map', function () {
       expect(map.options.smallzoomControl).to.equal(false);
     });
     it('creates the map when the div property is an object', function () {
-      var map = L.npmap.map({
+      var map = L.outerspatial.map({
         div: element
       });
 
       expect(map).to.be.ok();
     });
     it('sets a default center for the map if none is specified', function () {
-      var map = L.npmap.map({
+      var map = L.outerspatial.map({
         div: element
       });
 
       expect(map.getCenter().lat).to.be.ok();
     });
     it('sets a default zoom for the map if none is specified', function () {
-      var map = L.npmap.map({
+      var map = L.outerspatial.map({
         div: element
       });
 
       expect(map.getZoom()).to.be.ok();
     });
     it('adds a default baseLayer if none is specified', function () {
-      var map = L.npmap.map({
+      var map = L.outerspatial.map({
         div: element
       });
 
       expect(map.options.baseLayers.length).to.be(1);
     });
     it('renames the "layers" property "overlays", if specified', function () {
-      var map = L.npmap.map({
+      var map = L.outerspatial.map({
         div: element,
         layers: [{
           table: 'parks',
@@ -62,9 +63,9 @@ describe('L.npmap.map', function () {
       expect(map.options.overlays.length).to.be(1);
     });
     it('switches preset layers in when specified in the baseLayers property', function () {
-      var map = L.npmap.map({
+      var map = L.outerspatial.map({
         baseLayers: [
-          'nps-parkTiles'
+          'mapbox-outdoors'
         ],
         div: element
       });

@@ -19,7 +19,7 @@ L.Map.addInitHook(function () {
       options = this.options.scaleControl;
     }
 
-    this.scaleControl = L.npmap.control.scale(options).addTo(this);
+    this.scaleControl = L.outerspatial.control.scale(options).addTo(this);
   }
 });
 

@@ -111,7 +111,7 @@ module.exports = {
                   target.openPopup();
                 } else {
                   var container = map.getContainer();
-                  var popup = L.npmap.popup({
+                  var popup = L.outerspatial.popup({
                     autoPanPaddingTopLeft: util._getAutoPanPaddingTopLeft(container),
                     maxHeight: (detectAvailablePopupSpace ? util._getAvailableVerticalSpace(map) - 84 : null),
                     maxWidth: (detectAvailablePopupSpace ? util._getAvailableHorizontalSpace(map) - 77 : null)
@@ -221,7 +221,7 @@ module.exports = {
           }
         }
 
-        icon = L.npmap.icon[icon['marker-library']](icon);
+        icon = L.outerspatial.icon[icon['marker-library']](icon);
       } else {
         configStyles = typeof configStyles.point === 'function' ? configStyles.point(properties) : configStyles.point;
 
@@ -247,7 +247,7 @@ module.exports = {
               }
             }
 
-            icon = L.npmap.icon[icon['marker-library']](icon);
+            icon = L.outerspatial.icon[icon['marker-library']](icon);
           }
         } else {
           if (!configStyles.ignoreFeatureStyles) {
@@ -260,7 +260,7 @@ module.exports = {
             }
           }
 
-          icon = L.npmap.icon[icon['marker-library']](icon);
+          icon = L.outerspatial.icon[icon['marker-library']](icon);
         }
       }
 

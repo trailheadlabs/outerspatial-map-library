@@ -1,15 +1,5 @@
-var NPMap =  {
+var OuterSpatial =  {
   baseLayers: [
-    'nps-parkTiles',
-    'nps-parkTiles3',
-    'nps-parkTilesImagery',
-    'nps-parkTiles3Imagery',
-    'nps-parkTiles3Light',
-    'nps-parkTilesSlate',
-    'nps-parkTiles3Slate',
-    'nps-lightStreets',
-    'nps-neutralTerrain',
-    'nps-satelliteNight',
     'bing-aerial',
     'bing-aerialLabels',
     'bing-roads',
@@ -51,6 +41,6 @@ var NPMap =  {
 
 (function () {
   var s = document.createElement('script');
-  s.src = '{{ path }}/npmap-bootstrap.js';
+  s.src = '{{ path }}/outerspatial-bootstrap.js';
   document.body.appendChild(s);
 })();

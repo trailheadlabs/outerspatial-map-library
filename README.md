@@ -2,19 +2,19 @@
 
 [![Circle CI](https://circleci.com/gh/trailheadlabs/outerspatial.js.svg?style=svg)](https://circleci.com/gh/trailheadlabs/outerspatial.js)
 
-Extends [Leaflet](http://leafletjs.com) to include functionality and a look-and-feel built specifically for [OuterSpatial](https://www.outerspatial.com).
+Extends [Leaflet](http://leafletjs.com) to include functionality and a look-and-feel built specifically for the [OuterSpatial](https://www.outerspatial.com) outdoor technology platform.
 
 This library is under active development, so please help test and [report issues](https://github.com/trailheadlabs/outerspatial.js/issues).
 
 ## OuterSpatial Builder
 
-You may also want to take a look at [OuterSpatial Builder](https://github.com/trailheadlabs/outerspatial-builder). It is a graphical interface that walks through the process of building a map with OuterSpatial.js, step-by-step.
+You may also want to take a look at [OuterSpatial Builder](https://github.com/trailheadlabs/outerspatial-builder). It's a graphical interface that walks through the process of building a map with OuterSpatial.js, step-by-step.
 
 ## Thanks
 
-This library was initially built by the U.S. National Park Service's [NPMap team](https://www.nps.gov/npmap/) and called NPMap.js. The agency recently decided to make the repository private, but luckily they made it available in the public domain so we ([Trailhead Labs](https://www.trailheadlabs.com)) have decided to host it and push forward development.
+Initial development on this library was done by the U.S. National Park Service's [NPMap team](https://www.nps.gov/npmap/) and called NPMap.js. The agency recently made the repository private, but luckily made the code available in the public domain so we ([Trailhead Labs](https://www.trailheadlabs.com)) have decided to host it and push development forward.
 
-The original design was heavily inspired (cough cough) by [Mapbox.js](https://github.com/mapbox/mapbox.js), and, of course, built on the great [Leaflet](http://leafletjs.com) library. Standing on the shoulders of giants. Also, many thanks to the authors of all the great plugins used in/by the library (take a look at [LICENSE.md](https://github.com/trailheadlabs/outerspatial.js/blob/master/LICENSE.md) for a list).
+The original design was heavily inspired (cough cough) by [Mapbox.js](https://github.com/mapbox/mapbox.js), and, of course, built on the great [Leaflet](http://leafletjs.com) library. Many thanks to the authors of all the great plugins used in/by the library (take a look at [LICENSE.md](https://github.com/trailheadlabs/outerspatial.js/blob/master/LICENSE.md) for a list).
 
 ## Versioning
 
@@ -28,7 +28,7 @@ OuterSpatial.js is versioned using [semantic versioning](http://semver.org). Thi
 
 ## Changelog
 
-- v3.0.18: The first version imported into the new repository
+- v3.0.18: The first version imported under the Trailhead Labs GitHub organization
 
 ## Keys
 
@@ -46,6 +46,10 @@ Install the [Grunt](http://gruntjs.com/) command line tool (do this once as an a
 
     npm install -g grunt-cli
 
+Copy keys.sample.json to a file called keys.json, then modify keys.json with your own API keys:
+
+    cp secrets.sample.json secrets.json
+
 Copy secrets.sample.json to a file called secrets.json for development and testing:
 
     cp secrets.sample.json secrets.json
@@ -54,7 +58,7 @@ Then use Grunt to build the library:
 
     grunt build
 
-Internally, the Grunt task uses [browserify](https://github.com/substack/node-browserify) to combine dependencies. It is installed locally, along with other required packages, when you run `npm install`. The build task also uses [uglify](https://github.com/gruntjs/grunt-contrib-uglify) and [cssmin](https://npmjs.org/package/grunt-contrib-cssmin) to create minified versions of the library's CSS and JavaScript in `dist/`.
+Internally, the Grunt task uses [browserify](https://github.com/substack/node-browserify) to combine dependencies. It's installed locally, along with other required packages, when you run `npm install`. The build task also uses [uglify](https://github.com/gruntjs/grunt-contrib-uglify) and [cssmin](https://npmjs.org/package/grunt-contrib-cssmin) to create minified versions of the library's CSS and JavaScript in `dist/`.
 
 ## Testing
 

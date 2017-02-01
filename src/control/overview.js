@@ -34,9 +34,9 @@ var OverviewControl = L.Control.extend({
       L.Util.setOptions(this, options);
 
       if (options.layer.type === 'arcgisserver') {
-        this._layer = options.layer.L = L.npmap.layer[options.layer.type][options.layer.tiled === true ? 'tiled' : 'dynamic'](options.layer);
+        this._layer = options.layer.L = L.outerspatial.layer[options.layer.type][options.layer.tiled === true ? 'tiled' : 'dynamic'](options.layer);
       } else {
-        this._layer = options.layer.L = L.npmap.layer[options.layer.type](options.layer);
+        this._layer = options.layer.L = L.outerspatial.layer[options.layer.type](options.layer);
       }
 
       return this;
@@ -47,7 +47,7 @@ var OverviewControl = L.Control.extend({
   onAdd: function (map) {
     // TODO: The hidden-* classes needs to be triggered by the width of the map itself.
 
-    this._container = L.DomUtil.create('div', 'npmap-hidden-xs leaflet-control-overview');
+    this._container = L.DomUtil.create('div', 'outerspatial-hidden-xs leaflet-control-overview');
     this._container.style.width = this.options.width + 'px';
     this._container.style.height = this.options.height + 'px';
     L.DomEvent.disableClickPropagation(this._container);
@@ -328,7 +328,7 @@ L.Map.addInitHook(function () {
       options = this.options.overviewControl;
     }
 
-    this.overviewControl = L.npmap.control.overview(options).addTo(this);
+    this.overviewControl = L.outerspatial.control.overview(options).addTo(this);
   }
 });
 
