@@ -8,14 +8,14 @@
     "handlebars": "4.0.5",
     "helper-dateformat": "https://github.com/trailheadlabs/helper-dateformat.git#9dfb8714b319dfa2cbfab47cdcfeb3ec2d1cbd94",
     "humane-js": "https://github.com/trailheadlabs/humane-js/archive/3.2.2.tar.gz",
-    "leaflet": "1.0.2",
+    "leaflet": "~1.0.0",
     "leaflet-draw": "https://github.com/trailheadlabs/leaflet.draw.git#e6cf342f531effcf50fb5d5625d8a5a105935af1",
-    "leaflet.markercluster": "1.0.0",
+    "leaflet.markercluster": "~1.0.0",
     "maki": "~0.5.0",
     "nanobar": "0.4.2",
     "npmap-symbol-library": "https://github.com/nationalparkservice/symbol-library/archive/v2.2.2.tar.gz",
     "reqwest": "2.0.5",
-    "togeojson": "0.14.2"
+    "@mapbox/togeojson": "0.16.0"
   },
   "description": "A JavaScript web mapping library, built as a Leaflet plugin, for the OuterSpatial outdoor technology platform.",
   "devDependencies": {
