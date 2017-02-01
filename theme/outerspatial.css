@@ -529,7 +529,7 @@
 .outerspatial .leaflet-popup-tip-container {
   height: 25px;
   margin: -1px auto;
-  padding-left: 21px;
+  /* padding-left: 21px; */
   width: 25px;
 }
 /* IE8 and below */
