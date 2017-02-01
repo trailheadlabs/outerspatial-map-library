@@ -105,7 +105,10 @@ require('./popup.js');
 MapExt = L.Map.extend({
   options: {
     bounceAtZoomLimits: false,
-    worldCopyJump: true
+    wheelPxPerZoomLevel: 120,
+    worldCopyJump: true,
+    zoomDelta: 0.5,
+    zoomSnap: 0.5
   },
   initialize: function (options) {
     var baseLayerSet = false;
