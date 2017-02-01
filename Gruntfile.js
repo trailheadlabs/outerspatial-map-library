@@ -168,6 +168,7 @@ module.exports = function (grunt) {
         bucket: 'outerspatial-production',
         // dryRun: true,
         gzip: true,
+        overwrite: false,
         secretAccessKey: '<%= aws.secretAccessKey %>'
       },
       dist: {
