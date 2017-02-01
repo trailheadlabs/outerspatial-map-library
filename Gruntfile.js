@@ -7,6 +7,7 @@ module.exports = function (grunt) {
     medium: 18,
     small: 12
   };
+  var secrets;
 
   function loadNpmTasks () {
     Object.keys(pkg.devDependencies).filter(function (moduleName) {
@@ -25,9 +26,15 @@ module.exports = function (grunt) {
     }
   }
 
+  try {
+    secrets = grunt.file.readJSON('./secrets.json');
+  } catch (e) {
+    secrets = grunt.file.readJSON('./secrets.sample.json');
+  }
+
   grunt.util.linefeed = '\n';
   grunt.initConfig({
-    aws: grunt.file.readJSON('secrets.json'),
+    aws: secrets,
     browserify: {
       all: {
         files: {
