@@ -29,6 +29,7 @@ OuterSpatial.js is versioned using [semantic versioning](http://semver.org). Thi
 ## Changelog
 
 - v3.0.18: The first version imported under the Trailhead Labs GitHub organization
+- v4.0.0: The first version under the `OuterSpatial` namespace
 
 ## Keys
 
