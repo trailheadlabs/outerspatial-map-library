@@ -84,6 +84,14 @@ module.exports = function (grunt) {
         dest: 'dist/outerspatial-standalone.css',
         src: 'theme/outerspatial.css'
       },
+      docs: {
+        cwd: 'docs/',
+        dest: 'dist/docs',
+        expand: true,
+        src: [
+          '**/*'
+        ]
+      },
       'examples-data': {
         cwd: 'examples/data/',
         dest: 'dist/examples/data',
@@ -154,6 +162,17 @@ module.exports = function (grunt) {
             'dist/api/index.md'
           ]
         }]
+      },
+      docs: {
+        files: [{
+          cwd: 'docs',
+          dest: 'dist/docs',
+          expand: true,
+          ext: '.html',
+          src: [
+            '**/*.md'
+          ]
+        }]
       }
     },
     mocha_phantomjs: {
@@ -216,6 +235,8 @@ module.exports = function (grunt) {
     'clean:dist',
     'copy:api',
     'md2html:api',
+    'copy:docs',
+    'md2html:docs',
     'copy:css',
     'examples',
     'copy:images',
