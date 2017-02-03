@@ -26,7 +26,7 @@ var ZoomDisplayControl = L.Control.extend({
       zoom = '';
     }
 
-    this._control.innerHTML = zoom;
+    this._control.innerHTML = Math.floor(zoom);
   }
 });
 
