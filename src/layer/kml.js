@@ -2,7 +2,7 @@
 
 'use strict';
 
-var togeojson = require('togeojson');
+var togeojson = require('@mapbox/togeojson');
 var util = require('../util/util');
 
 var KmlLayer = L.GeoJSON.extend({
