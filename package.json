@@ -9,7 +9,7 @@
     "helper-dateformat": "https://github.com/trailheadlabs/helper-dateformat.git#9dfb8714b319dfa2cbfab47cdcfeb3ec2d1cbd94",
     "humane-js": "https://github.com/trailheadlabs/humane-js/archive/3.2.2.tar.gz",
     "leaflet": "~1.0.0",
-    "leaflet-draw": "https://github.com/trailheadlabs/leaflet.draw.git#e6cf342f531effcf50fb5d5625d8a5a105935af1",
+    "leaflet-draw": "0.4.9",
     "leaflet.markercluster": "~1.0.0",
     "maki": "~0.5.0",
     "nanobar": "0.4.2",
