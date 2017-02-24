@@ -10,7 +10,7 @@ var OuterSpatial = {
     type: 'custom',
     visible: true
   }, {
-    content: '<p>And another paragraph.</p><p>Let\'s do one more.</p>',
+    content: '<h3>h3. Another Heading</h3><p>And another paragraph.</p><p>Let\'s do one more.</p>',
     icon: 'globe',
     title: 'Module #2',
     type: 'custom'

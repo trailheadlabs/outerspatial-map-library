@@ -47,7 +47,7 @@ function showError (div) {
 
   div.innerHTML = '' +
     '<div style="padding:15px;">' +
-      '<p>National Park Service maps do not support Internet Explorer versions 7, 8, or 9. We recommend upgrading to a <a href="http://outdatedbrowser.com/" target="_blank">modern browser</a>, like the latest version of Internet Explorer, Google Chrome, or Mozilla Firefox.</p>' +
+      '<p>OuterSpatial interactive maps do not support Internet Explorer versions 7, 8, or 9. We recommend upgrading to a <a href="http://outdatedbrowser.com/" target="_blank">modern browser</a>, like the latest version of Internet Explorer, Google Chrome, or Mozilla Firefox.</p>' +
       '<p>If you are using Internet Explorer 10 or later, make sure "Enterprise Mode" and <a href="https://support.google.com/mail/answer/181472?hl=en" target="_blank">"Compatibility View"</a> are turned off.</p>' +
     '</div>' +
   '';
@@ -178,7 +178,7 @@ if (ie.isIe && (ie.actingVersion < 10 || ie.trueVersion < 10)) {
       var mask = document.createElement('div');
 
       mask.className = 'outerspatial-loading';
-      mask.style.cssText = 'background-color:#f9f7f1;bottom:0;height:100%;left:0;position:absolute;right:0;top:0;width:100%;z-index:99999;';
+      mask.style.cssText = 'background-color:#f2f2f2;bottom:0;height:100%;left:0;position:absolute;right:0;top:0;width:100%;z-index:99999;';
 
       if (typeof div === 'string') {
         div = document.getElementById(div);
