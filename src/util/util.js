@@ -652,7 +652,7 @@ module.exports = {
           }
         },
         type: 'json' + (supportsCors ? '' : 'p'),
-        url: 'https://server-utils.herokuapp.com/proxy/?encoded=true&type=' + type + '&url=' + window.btoa(encodeURIComponent(url))
+        url: 'https://outerspatial-utilities.herokuapp.com/proxy/?encoded=true&type=' + type + '&url=' + window.btoa(encodeURIComponent(url))
       });
     }
   },

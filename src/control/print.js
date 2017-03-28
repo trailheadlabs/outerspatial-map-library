@@ -123,7 +123,7 @@ var PrintControl = L.Control.extend({
       L.outerspatial.util._.reqwest({
         crossOrigin: supportsCors,
         type: 'json' + (supportsCors ? '' : 'p'),
-        url: 'https://server-utils.herokuapp.com/session/' + L.Util.getParamString(params)
+        url: 'https://outerspatial-utilities.herokuapp.com/session/' + L.Util.getParamString(params)
       });
     }
 

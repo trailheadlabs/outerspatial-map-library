@@ -4,6 +4,7 @@
     "url": "https://github.com/trailheadlabs/outerspatial.js/issues"
   },
   "dependencies": {
+    "@mapbox/togeojson": "0.16.0",
     "csv2geojson": "5.0.2",
     "handlebars": "4.0.5",
     "helper-dateformat": "https://github.com/trailheadlabs/helper-dateformat.git#9dfb8714b319dfa2cbfab47cdcfeb3ec2d1cbd94",
@@ -14,8 +15,7 @@
     "maki": "~0.5.0",
     "nanobar": "0.4.2",
     "npmap-symbol-library": "https://github.com/nationalparkservice/symbol-library/archive/v2.2.2.tar.gz",
-    "reqwest": "2.0.5",
-    "@mapbox/togeojson": "0.16.0"
+    "reqwest": "2.0.5"
   },
   "description": "A JavaScript web mapping library, built as a Leaflet plugin, for the OuterSpatial outdoor technology platform.",
   "devDependencies": {
@@ -81,5 +81,5 @@
     "type": "git",
     "url": "https://github.com/trailheadlabs/outerspatial.js.git"
   },
-  "version": "4.0.3"
+  "version": "4.0.4"
 }

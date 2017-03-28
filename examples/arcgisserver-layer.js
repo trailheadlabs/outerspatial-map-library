@@ -11,7 +11,7 @@ var OuterSpatial = {
     attribution: 'Land Resources Division',
     name: 'National Parks',
     type: 'geojson',
-    url: 'https://server-utils.herokuapp.com/arcgis2geojson/?url=https://mapservices.nps.gov/arcgis/rest/services/LandResourcesDivisionTractAndBoundaryService/MapServer/1'
+    url: 'https://outerspatial-utilities.herokuapp.com/arcgis2geojson/?url=https://mapservices.nps.gov/arcgis/rest/services/LandResourcesDivisionTractAndBoundaryService/MapServer/1'
   }, {
     attribution: 'Great Smoky Mountains National Park',
     name: 'Restrooms',
