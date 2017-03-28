@@ -6,9 +6,9 @@ Extends [Leaflet](http://leafletjs.com) to include functionality and a look-and-
 
 This library is under active development, so please help test and [report issues](https://github.com/trailheadlabs/outerspatial.js/issues).
 
-## OuterSpatial Builder
+## OuterSpatial Map Builder
 
-You may also want to take a look at [OuterSpatial Builder](https://github.com/trailheadlabs/outerspatial-builder). It's a graphical interface that walks through the process of building a map with OuterSpatial.js, step-by-step.
+You may also want to take a look at [OuterSpatial Map Builder](https://github.com/trailheadlabs/outerspatial-map-builder). It's a graphical interface that walks through the process of building a map with OuterSpatial.js, step-by-step.
 
 ## Thanks
 
