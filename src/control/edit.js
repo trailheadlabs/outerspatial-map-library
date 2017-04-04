@@ -6,7 +6,7 @@
 
 require('leaflet-draw');
 require('../icon/maki');
-require('../icon/npmapsymbollibrary');
+require('../icon/outerspatialsymbollibrary');
 
 var EditControl = L.Control.extend({
   includes: L.Mixin.Events,

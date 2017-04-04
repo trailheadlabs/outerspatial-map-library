@@ -28,7 +28,7 @@ L.outerspatial = module.exports = {
   },
   icon: {
     maki: require('./src/icon/maki'),
-    npmapsymbollibrary: require('./src/icon/npmapsymbollibrary')
+    outerspatialsymbollibrary: require('./src/icon/outerspatialsymbollibrary')
   },
   layer: {
     _cluster: require('./src/layer/cluster'),
@@ -57,7 +57,7 @@ L.outerspatial = module.exports = {
     baselayers: require('./src/preset/baselayers.json'),
     colors: require('./src/preset/colors.json'),
     maki: require('./node_modules/maki/_includes/maki.json'),
-    npmapsymbollibrary: require('./node_modules/npmap-symbol-library/www/npmap-builder/npmap-symbol-library.json'),
+    outerspatialsymbollibrary: require('./node_modules/outerspatial-symbol-library/www/outerspatial-builder/outerspatial-symbol-library.json'),
     overlays: require('./src/preset/overlays.json'),
     places: {
       pois: require('./src/preset/places/pois')

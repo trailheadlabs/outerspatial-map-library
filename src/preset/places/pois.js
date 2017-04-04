@@ -1707,7 +1707,7 @@ var PoiLayer = L.GeoJSON.extend({
   },
   _getIcon: function (dark, symbol) {
     if (symbol) {
-      return L.outerspatial.icon.npmapsymbollibrary({
+      return L.outerspatial.icon.outerspatialsymbollibrary({
         'marker-color': (dark ? '000000' : '117733'),
         'marker-size': 'medium',
         'marker-symbol': symbol + '-white'

@@ -17,7 +17,7 @@ var OuterSpatial = {
     name: 'Restrooms',
     styles: {
       point: {
-        'marker-library': 'npmapsymbollibrary',
+        'marker-library': 'outerspatialsymbollibrary',
         'marker-symbol': 'restrooms-white'
       }
     },

@@ -1,6 +1,6 @@
 module.exports = function (grunt) {
-  var cssNpmapSymbolLibrary = '';
-  var npmapSymbolLibrary = require('./node_modules/npmap-symbol-library/www/npmap-builder/npmap-symbol-library.json');
+  var cssOuterSpatialSymbolLibrary = '';
+  var outerspatialSymbolLibrary = require('./node_modules/outerspatial-symbol-library/www/outerspatial-builder/outerspatial-symbol-library.json');
   var pkg = require('./package.json');
   var sizes = {
     large: 24,
@@ -17,12 +17,12 @@ module.exports = function (grunt) {
     });
   }
 
-  for (var i = 0; i < npmapSymbolLibrary.length; i++) {
-    var icon = npmapSymbolLibrary[i];
+  for (var i = 0; i < outerspatialSymbolLibrary.length; i++) {
+    var icon = outerspatialSymbolLibrary[i];
 
     for (var prop in sizes) {
-      cssNpmapSymbolLibrary += '.' + icon.icon + '-' + prop + ' {background-image: url(images/icon/npmap-symbol-library/' + icon.icon + '-' + sizes[prop] + '.png);}\n';
-      cssNpmapSymbolLibrary += '.' + icon.icon + '-' + prop + '-2x {background-image: url(images/icon/npmap-symbol-library/' + icon.icon + '-' + sizes[prop] + '@2x.png);}\n';
+      cssOuterSpatialSymbolLibrary += '.' + icon.icon + '-' + prop + ' {background-image: url(images/icon/outerspatial-symbol-library/' + icon.icon + '-' + sizes[prop] + '.png);}\n';
+      cssOuterSpatialSymbolLibrary += '.' + icon.icon + '-' + prop + '-2x {background-image: url(images/icon/outerspatial-symbol-library/' + icon.icon + '-' + sizes[prop] + '@2x.png);}\n';
     }
   }
 
@@ -63,7 +63,7 @@ module.exports = function (grunt) {
       css: {
         dest: 'dist/outerspatial.css',
         options: {
-          banner: cssNpmapSymbolLibrary
+          banner: cssOuterSpatialSymbolLibrary
         },
         src: [
           'node_modules/leaflet/dist/leaflet.css',
@@ -120,9 +120,9 @@ module.exports = function (grunt) {
         dest: 'dist/outerspatial-bootstrap.js',
         src: 'src/bootstrap.js'
       },
-      npmapSymbolLibrary: {
-        cwd: 'node_modules/npmap-symbol-library/renders/npmap-builder/',
-        dest: 'dist/images/icon/npmap-symbol-library',
+      outerspatialSymbolLibrary: {
+        cwd: 'node_modules/outerspatial-symbol-library/renders/outerspatial-builder/',
+        dest: 'dist/images/icon/outerspatial-symbol-library',
         expand: true,
         src: [
           '**/*'
@@ -241,7 +241,7 @@ module.exports = function (grunt) {
     'examples',
     'copy:images',
     'copy:javascript',
-    'copy:npmapSymbolLibrary',
+    'copy:outerspatialSymbolLibrary',
     'copy:plugins',
     'concat',
     'browserify',

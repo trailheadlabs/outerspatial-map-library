@@ -15,7 +15,7 @@ describe('L.outerspatial.icon', function () {
   describe('maki', function () {
 
   });
-  describe('npmap', function () {
+  describe('outerspatial', function () {
 
   });
 });

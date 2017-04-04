@@ -11,7 +11,7 @@ var OuterSpatial = {
     },
     styles: {
       point: {
-        'marker-library': 'npmapsymbollibrary',
+        'marker-library': 'outerspatialsymbollibrary',
         'marker-size': 'small',
         'marker-symbol': 'dot-white'
       }

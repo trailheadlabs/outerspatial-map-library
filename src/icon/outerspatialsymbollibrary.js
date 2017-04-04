@@ -4,7 +4,7 @@
 
 var keys = require('../../keys.json');
 var util = require('../util/util');
-var NpmapIcon = L.Icon.extend({
+var OuterSpatialIcon = L.Icon.extend({
   options: {
     accessToken: (function () {
       if (keys && keys.mapbox && keys.mapbox.access_token) {
@@ -46,11 +46,11 @@ var NpmapIcon = L.Icon.extend({
   },
   createIcon: function (oldIcon) {
     var options = this.options;
-    var divIcon = L.DomUtil.create('div', 'npmapsymbollibrary-icon ' + options['marker-size'] + ' ' + options['marker-symbol'] + '-' + options['marker-size'] + (L.Browser.retina ? '-2x' : ''));
+    var divIcon = L.DomUtil.create('div', 'outerspatialsymbollibrary-icon ' + options['marker-size'] + ' ' + options['marker-symbol'] + '-' + options['marker-size'] + (L.Browser.retina ? '-2x' : ''));
     var divMarker = (oldIcon && oldIcon.tagName === 'DIV') ? oldIcon : document.createElement('div');
 
     this._setIconStyles(divMarker, 'icon');
-    divMarker.style.backgroundImage = util.handlebars(NpmapIcon.MAKI_TEMPLATE, {
+    divMarker.style.backgroundImage = util.handlebars(OuterSpatialIcon.MAKI_TEMPLATE, {
       accessToken: options.accessToken,
       color: options['marker-color'].replace('#', ''),
       retina: L.Browser.retina ? '@2x' : '',
@@ -65,5 +65,5 @@ var NpmapIcon = L.Icon.extend({
 });
 
 module.exports = function (options) {
-  return new NpmapIcon(options);
+  return new OuterSpatialIcon(options);
 };

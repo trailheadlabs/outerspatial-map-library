@@ -32,7 +32,7 @@
    * [directions](#directions)
 * [Icons](#icons)
    * [maki](#maki)
-   * [npmapsymbollibrary](#npmapsymbollibrary)
+   * [outerspatialsymbollibrary](#outerspatialsymbollibrary)
 * [Presets](#presets)
    * [baseLayer](#baselayer)
 * [Utils](#utils)
@@ -1435,9 +1435,9 @@ _Working Examples_:
 
 **[[⬆]](#)**
 
-### <a name="npmapsymbollibrary">npmapsymbollibrary(config: object)</a>
+### <a name="outerspatialsymbollibrary">outerspatialsymbollibrary(config: object)</a>
 
-Create an icon using the [NPMap Symbol Library](https://github.com/nationalparkservice/symbol-library) icon set.
+Create an icon using the [OuterSpatial Symbol Library](https://github.com/trailheadlabs/outerspatial-symbol-library) icon set.
 
 _Extends_: [`L.Icon`](http://leafletjs.com/reference.html#icon)
 
@@ -1456,7 +1456,7 @@ _Example (Bootstrap)_:
         styles: {
           point: {
             'marker-color': '#5e9fd5',
-            'marker-library': 'npmapsymbollibrary',
+            'marker-library': 'outerspatialsymbollibrary',
             'marker-size': 'small',
             'marker-symbol': 'campsite-white'
           }
@@ -1477,7 +1477,7 @@ _Example (API)_:
       styles: {
         point: {
           'marker-color': '#5e9fd5',
-          'marker-library': 'npmapsymbollibrary',
+          'marker-library': 'outerspatialsymbollibrary',
           'marker-size': 'small',
           'marker-symbol': 'campsite-white'
         }
@@ -1789,7 +1789,7 @@ In addition, OuterSpatial.js supports the following property that is not support
 
     marker-library
 
-This property is optional. It defaults to `maki`, and can also be `npmap`.
+This property is optional. It defaults to `maki`, and can also be `outerspatial`.
 
 Styles for vector shapes can be set in multiple ways. OuterSpatial.js looks in the following order for styles:
 
