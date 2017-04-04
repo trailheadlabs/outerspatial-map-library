@@ -10,6 +10,8 @@ module.exports = {
   _types: {
     'LineString': 'line',
     'MultiLineString': 'line',
+    'MultiPoint': 'point',
+    'MultiPolygon': 'polygon',
     'Point': 'point',
     'Polygon': 'polygon'
   },
