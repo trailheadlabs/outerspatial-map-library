@@ -1,6 +1,6 @@
 {
   "bugs": {
-    "email": "hi@trailheadlabs.com",
+    "email": "code@trailheadlabs.com",
     "url": "https://github.com/trailheadlabs/outerspatial.js/issues"
   },
   "dependencies": {
@@ -57,15 +57,25 @@
   },
   "homepage": "https://github.com/trailheadlabs/outerspatial.js",
   "keywords": [
+    "ArcGIS Server",
+    "CARTO",
     "Cartography",
+    "CSV",
     "Digital",
+    "GeoJSON",
     "Interactive Map",
     "JavaScript",
+    "KML",
     "Leaflet",
     "Map",
+    "Mapbox",
+    "Mapquest",
+    "Mapzen",
+    "OuterSpatial.js",
     "OuterSpatial",
     "OuterSpatial Mobile",
-    "OuterSpatial.js",
+    "OuterSpatial Symbol Library",
+    "SPOT",
     "Trailhead Labs",
     "Web Map"
   ],

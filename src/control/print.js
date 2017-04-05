@@ -6,7 +6,7 @@ var util = require('../util/util');
 var PrintControl = L.Control.extend({
   options: {
     ui: true,
-    url: 'https://www.nps.gov/maps/print/'
+    url: 'https://www.trailheadlabs.com/labs/outerspatial.js/print/'
   },
   initialize: function (options) {
     L.Util.setOptions(this, options);
@@ -71,16 +71,23 @@ var PrintControl = L.Control.extend({
   })(),
   print: function (e) {
     var map = this._map;
+    var mapId = map.options.id || map.options.mapId;
     var me = this;
     var center = map.getCenter();
-    var url = me.options.url + (me.options.url.indexOf('?') === -1 ? '?' : '&') + 'lat=' + center.lat.toFixed(4) + '&lng=' + center.lng.toFixed(4) + '&zoom=' + map.getZoom();
+    var url;
     var win;
 
     L.DomEvent.preventDefault(e);
 
-    if (map.options.mapId) {
-      url += '&mapId=' + map.options.mapId;
+    if (mapId) {
+      url = 'https://www.outerspatial.com/builder_maps/' + mapId + '/print/';
     } else {
+      url = me.options.url;
+    }
+
+    url += (url.indexOf('?') === -1 ? '?' : '&') + 'lat=' + center.lat.toFixed(4) + '&lng=' + center.lng.toFixed(4) + '&zoom=' + map.getZoom();
+
+    if (!mapId) {
       var options = map.options;
       var config = {
         baseLayers: [],
