@@ -29,11 +29,11 @@ var SwitcherControl = L.Control.extend({
   _initLayout: function () {
     var container = this._container = L.DomUtil.create('div', 'outerspatial-control-switcher');
 
-    if (!L.Browser.touch) {
+    if (L.Browser.mobile && L.Browser.touch) {
+      L.DomEvent.on(container, 'click', L.DomEvent.stopPropagation);
+    } else {
       L.DomEvent.disableClickPropagation(container);
       L.DomEvent.on(container, 'mousewheel', L.DomEvent.stopPropagation);
-    } else {
-      L.DomEvent.on(container, 'click', L.DomEvent.stopPropagation);
     }
 
     this._active = L.DomUtil.create('div', null, container);
