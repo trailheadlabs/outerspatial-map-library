@@ -71,7 +71,25 @@ var PrintControl = L.Control.extend({
   })(),
   print: function (e) {
     var map = this._map;
-    var mapId = map.options.id || map.options.mapId;
+    var mapId = (function () {
+      var options = map.options;
+
+      if (typeof options.id !== 'undefined') {
+        return options.id;
+      } else if (typeof options.mapId !== 'undefined') {
+        return options.mapId;
+      } else if (typeof options.meta === 'object') {
+        var meta = options.meta;
+
+        if (typeof meta.id !== 'undefined') {
+          return meta.id;
+        } else if (typeof meta.mapId !== 'undefined') {
+          return meta.mapId;
+        }
+      }
+
+      return null;
+    })();
     var me = this;
     var center = map.getCenter();
     var url;
