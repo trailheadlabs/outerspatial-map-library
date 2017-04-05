@@ -7,7 +7,7 @@ module.exports = function (grunt) {
     medium: 18,
     small: 12
   };
-  var secrets;
+  var s3;
 
   function loadNpmTasks () {
     Object.keys(pkg.devDependencies).filter(function (moduleName) {
@@ -17,24 +17,21 @@ module.exports = function (grunt) {
     });
   }
 
-  for (var i = 0; i < outerspatialSymbolLibrary.length; i++) {
-    var icon = outerspatialSymbolLibrary[i];
-
+  outerspatialSymbolLibrary.forEach(function (icon) {
     for (var prop in sizes) {
       cssOuterSpatialSymbolLibrary += '.' + icon.icon + '-' + prop + ' {background-image: url(images/icon/outerspatial-symbol-library/' + icon.icon + '-' + sizes[prop] + '.png);}\n';
       cssOuterSpatialSymbolLibrary += '.' + icon.icon + '-' + prop + '-2x {background-image: url(images/icon/outerspatial-symbol-library/' + icon.icon + '-' + sizes[prop] + '@2x.png);}\n';
     }
-  }
+  });
 
   try {
-    secrets = grunt.file.readJSON('./secrets.json');
+    s3 = grunt.file.readJSON('./s3.json');
   } catch (e) {
-    secrets = grunt.file.readJSON('./secrets.sample.json');
+    s3 = grunt.file.readJSON('./s3.sample.json');
   }
 
   grunt.util.linefeed = '\n';
   grunt.initConfig({
-    aws: secrets,
     browserify: {
       all: {
         files: {
@@ -181,21 +178,7 @@ module.exports = function (grunt) {
       ]
     },
     pkg: pkg,
-    s3: {
-      options: {
-        accessKeyId: '<%= aws.accessKeyId %>',
-        bucket: 'outerspatial-production',
-        // dryRun: true,
-        gzip: true,
-        overwrite: false,
-        secretAccessKey: '<%= aws.secretAccessKey %>'
-      },
-      dist: {
-        cwd: 'dist/',
-        dest: 'libs/outerspatial.js/<%= pkg.version %>/',
-        src: '**'
-      }
-    },
+    s3: s3,
     semistandard: {
       src: [
         'src/**/*.js'

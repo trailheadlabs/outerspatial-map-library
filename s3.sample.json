@@ -1,0 +1,14 @@
+{
+  "options": {
+    "accessKeyId": "AWS_ACCESS_KEY_ID",
+    "bucket": "outerspatial-production",
+    "gzip": true,
+    "overwrite": false,
+    "secretAccessKey": "AWS_SECRET_ACCESS_KEY"
+  },
+  "dist": {
+    "cwd": "dist/",
+    "dest": "libs/outerspatial.js/<%= pkg.version %>/",
+    "src": "**"
+  }
+}

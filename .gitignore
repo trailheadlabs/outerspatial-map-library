@@ -1,6 +1,7 @@
 dist
 keys.json
 node_modules
+s3.json
 secrets.json
 
 .DS_Store

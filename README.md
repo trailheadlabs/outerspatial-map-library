@@ -36,6 +36,7 @@ OuterSpatial.js is versioned using [semantic versioning](http://semver.org). Thi
 - [v4.0.4](https://github.com/trailheadlabs/outerspatial.js/milestone/5?closed=1)
 - [v5.0.0](https://github.com/trailheadlabs/outerspatial.js/milestone/4?closed=1)
 - [v5.0.1](https://github.com/trailheadlabs/outerspatial.js/milestone/6?closed=1)
+- [v5.0.2](https://github.com/trailheadlabs/outerspatial.js/milestone/7?closed=1)
 
 ## Keys
 
@@ -53,19 +54,21 @@ Install the [Grunt](http://gruntjs.com/) command line tool (do this once as an a
 
     npm install -g grunt-cli
 
-Copy keys.sample.json to a file called keys.json, then modify keys.json with your own API keys:
+Copy keys.sample.json to a file called keys.json, then modify keys.json, adding your own API keys:
 
-    cp secrets.sample.json secrets.json
-
-Copy secrets.sample.json to a file called secrets.json for development and testing:
-
-    cp secrets.sample.json secrets.json
+    cp keys.sample.json keys.json
 
 Then use Grunt to build the library:
 
     grunt build
 
 Internally, the Grunt task uses [browserify](https://github.com/substack/node-browserify) to combine dependencies. It's installed locally, along with other required packages, when you run `npm install`. The build task also uses [uglify](https://github.com/gruntjs/grunt-contrib-uglify) and [cssmin](https://npmjs.org/package/grunt-contrib-cssmin) to create minified versions of the library's CSS and JavaScript in `dist/`.
+
+## Deploying
+
+This project contains sample code that demonstrates deploying OuterSpatial.js to an Amazon S3 bucket using the `grunt-deploy` command. This command will not work unless you make a copy of "s3.sample.json", rename it "s3.json", and update the information in it  — including the "accessKeyId", "bucket", and "secretAccessKey" properties:
+
+    cp s3.sample.json s3.json
 
 ## Testing
 
