@@ -1244,7 +1244,7 @@ _Arguments_:
 The first, and only, argument is optional, and may be a config object with the following properties:
 
 * (Optional) `ui` (Boolean): Should the control add its user interface (UI) to the map? Defaults to `true`.
-* (Optional) `url` (String): A URL to a print-optimized web page. Defaults to `https://www.outerspatial.com/maps/print/`.
+* (Optional) `url` (String): A URL to a print-optimized web page. Defaults to `https://www.trailheadlabs.com/labs/outerspatial.js/print/`.
 
 _Returns_: a control object
 
