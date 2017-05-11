@@ -8,7 +8,7 @@ This library is under active development, so please help test and [report issues
 
 ## OuterSpatial Map Builder
 
-You may also want to take a look at [OuterSpatial Map Builder](https://github.com/trailheadlabs/outerspatial-map-builder). It's a graphical interface that walks through the process of building a map with OuterSpatial.js, step-by-step.
+OuterSpatial Map Builder is a graphical interface that walks through the process of building a map with OuterSpatial.js, step-by-step. This project is currently private, but we're exploring ways to open source it.
 
 ## Thanks
 
