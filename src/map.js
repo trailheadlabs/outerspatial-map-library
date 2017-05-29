@@ -476,15 +476,17 @@ MapExt = L.Map.extend({
               }
 
               if (actual.length) {
-                var popup = L.outerspatial.popup({
-                  autoPanPaddingTopLeft: util._getAutoPanPaddingTopLeft(me.getContainer()),
-                  maxHeight: (detectAvailablePopupSpace ? util._getAvailableVerticalSpace(me) - 84 : null),
-                  maxWidth: (detectAvailablePopupSpace ? util._getAvailableHorizontalSpace(me) - 77 : null)
-                });
+                if (me._popup === null || typeof me._popup === 'undefined') {
+                  var popup = L.outerspatial.popup({
+                    autoPanPaddingTopLeft: util._getAutoPanPaddingTopLeft(me.getContainer()),
+                    maxHeight: (detectAvailablePopupSpace ? util._getAvailableVerticalSpace(me) - 84 : null),
+                    maxWidth: (detectAvailablePopupSpace ? util._getAvailableHorizontalSpace(me) - 77 : null)
+                  });
 
-                popup
-                  .setContent(popup._handleResults(actual, me.options.popup))
-                  .setLatLng(latLng).openOn(me);
+                  popup
+                    .setContent(popup._handleResults(actual, me.options.popup))
+                    .setLatLng(latLng).openOn(me);
+                }
               }
             }
           }
