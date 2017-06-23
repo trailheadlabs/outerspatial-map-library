@@ -475,7 +475,7 @@ MapExt = L.Map.extend({
                 }
               }
 
-              if (actual.length) {
+              if (actual.length && !me._popup) {
                 var popup = L.outerspatial.popup({
                   autoPanPaddingTopLeft: util._getAutoPanPaddingTopLeft(me.getContainer()),
                   maxHeight: (detectAvailablePopupSpace ? util._getAvailableVerticalSpace(me) - 84 : null),
