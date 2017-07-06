@@ -68,7 +68,7 @@ Internally, the Grunt task uses [browserify](https://github.com/substack/node-br
 
 ## Deploying
 
-This project contains sample code that demonstrates deploying OuterSpatial.js to an Amazon S3 bucket using the `grunt-deploy` command. This command will not work unless you make a copy of "s3.sample.json", rename it "s3.json", and update the information in it  — including the "accessKeyId", "bucket", and "secretAccessKey" properties:
+This project contains sample code that demonstrates deploying OuterSpatial.js to an Amazon S3 bucket using the `grunt deploy` command. This command will not work unless you make a copy of "s3.sample.json", rename it "s3.json", and update the information in it  — including the "accessKeyId", "bucket", and "secretAccessKey" properties:
 
     cp s3.sample.json s3.json
 
