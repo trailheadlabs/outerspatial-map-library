@@ -8,12 +8,14 @@ var OuterSpatial = {
     filter: function (feature) {
       return feature.properties.park === 'Yellowstone';
     },
-    maki: {
-      name: 'star'
-    },
     popup: {
       description: 'This is {{#ifCond type \'!==\' \'community\'}}not {{/ifCond}}a community.',
       title: '{{name}}'
+    },
+    styles: {
+      point: {
+        'marker-symbol': 'star'
+      }
     },
     type: 'geojson',
     url: 'data/gateway-points-of-interest.geojson'
@@ -22,13 +24,15 @@ var OuterSpatial = {
       clusterIcon: '#000',
       maxClusterRadius: 70
     },
-    maki: {
-      color: '#609321',
-      name: 'park'
-    },
     popup: {
       description: 'The alpha code is {{Code}}',
       title: '{{Name}}'
+    },
+    styles: {
+      point: {
+        'marker-color': '#609321',
+        'marker-symbol': 'park'
+      }
     },
     type: 'geojson',
     url: 'data/national-parks.geojson'
