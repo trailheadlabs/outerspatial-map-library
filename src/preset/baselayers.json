@@ -1,4 +1,14 @@
 {
+  "outerspatial": {
+    "outdoors": {
+      "attribution": "&copy; <a href='https://www.mapbox.com/about/maps/' target='_blank'>Mapbox</a> &copy; <a href='https://www.openstreetmap.org/copyright' target='_blank'>OpenStreetMap</a> contributors",
+      "icon": "topo",
+      "id": "trailheadlabs.cj5wmcjku2mls2stllpydix9b",
+      "name": "OuterSpatial Outdoors",
+      "styled": true,
+      "type": "mapbox"
+    }
+  },
   "bing": {
     "aerial": {
       "icon": "aerial",
@@ -232,68 +242,6 @@
       "icon": "topo",
       "id": "mapbox.streets",
       "name": "Mapbox Terrain",
-      "type": "mapbox"
-    }
-  },
-  "nps": {
-    "parkTiles3": {
-      "attribution": "&copy; <a href='https://www.mapbox.com/about/maps/' target='_blank'>Mapbox</a> &copy; <a href='https://www.openstreetmap.org/copyright' target='_blank'>OpenStreetMap</a> contributors | <a class='improve-park-tiles' href='https://www.nps.gov/maps/tools/park-tiles/improve/' target='_blank'>Improve Park Tiles</a>",
-      "clickable": false,
-      "icon": "nps",
-      "id": "nps.397cfb9a,nps.3cf3d4ab,nps.b0add3e6",
-      "lightOrDark": "light",
-      "name": "Park Tiles 3",
-      "type": "mapbox"
-    },
-    "parkTiles3Imagery": {
-      "attribution": "&copy; <a href='https://www.mapbox.com/about/maps/' target='_blank'>Mapbox</a> &copy; <a href='https://www.openstreetmap.org/copyright' target='_blank'>OpenStreetMap</a> contributors | <a class='improve-park-tiles' href='https://www.nps.gov/maps/tools/park-tiles/improve/' target='_blank'>Improve Park Tiles</a>",
-      "clickable": false,
-      "icon": "nps",
-      "id": "nps.2c589204,nps.25abf75b,nps.7531d30a",
-      "lightOrDark": "dark",
-      "name": "Park Tiles 3 Imagery",
-      "type": "mapbox"
-    },
-    "parkTiles3Light": {
-      "attribution": "&copy; <a href='https://www.mapbox.com/about/maps/' target='_blank'>Mapbox</a> &copy; <a href='https://www.openstreetmap.org/copyright' target='_blank'>OpenStreetMap</a> contributors | <a class='improve-park-tiles' href='https://www.nps.gov/maps/tools/park-tiles/improve/' target='_blank'>Improve Park Tiles</a>",
-      "clickable": false,
-      "icon": "nps",
-      "id": "nps.1ee61ddf,nps.7f508801,nps.5748cf33",
-      "lightOrDark": "light",
-      "name": "Park Tiles 3 Light",
-      "type": "mapbox"
-    },
-    "parkTiles3Slate": {
-      "attribution": "&copy; <a href='https://www.mapbox.com/about/maps/' target='_blank'>Mapbox</a> &copy; <a href='https://www.openstreetmap.org/copyright' target='_blank'>OpenStreetMap</a> contributors | <a class='improve-park-tiles' href='https://www.nps.gov/maps/tools/park-tiles/improve/' target='_blank'>Improve Park Tiles</a>",
-      "clickable": false,
-      "icon": "nps",
-      "id": "nps.9e521899,nps.17f575d9,nps.e091bdaf",
-      "lightOrDark": "dark",
-      "name": "Park Tiles 3 Slate",
-      "type": "mapbox"
-    },
-    "parkTiles": {
-      "attribution": "&copy; <a href='https://www.mapbox.com/about/maps/' target='_blank'>Mapbox</a> &copy; <a href='https://www.openstreetmap.org/copyright' target='_blank'>OpenStreetMap</a> contributors | <a class='improve-park-tiles' href='https://www.nps.gov/maps/tools/park-tiles/improve/' target='_blank'>Improve Park Tiles</a>",
-      "icon": "nps",
-      "id": "nps.2yxv8n84",
-      "lightOrDark": "light",
-      "name": "Park Tiles",
-      "type": "mapbox"
-    },
-    "parkTilesImagery": {
-      "attribution": "&copy; <a href='https://www.mapbox.com/about/maps/' target='_blank'>Mapbox</a> &copy; <a href='https://www.openstreetmap.org/copyright' target='_blank'>OpenStreetMap</a> contributors | <a class='improve-park-tiles' href='https://www.nps.gov/maps/tools/park-tiles/improve/' target='_blank'>Improve Park Tiles</a>",
-      "icon": "nps",
-      "id": "mapbox.satellite,nps.gdipreks",
-      "lightOrDark": "dark",
-      "name": "Park Tiles Imagery",
-      "type": "mapbox"
-    },
-    "parkTilesSlate": {
-      "attribution": "&copy; <a href='https://www.mapbox.com/about/maps/' target='_blank'>Mapbox</a> &copy; <a href='https://www.openstreetmap.org/copyright' target='_blank'>OpenStreetMap</a> contributors",
-      "icon": "nps",
-      "id": "nps.68926899",
-      "lightOrDark": "dark",
-      "name": "Park Tiles Slate",
       "type": "mapbox"
     }
   },

@@ -39,6 +39,7 @@ OuterSpatial.js is versioned using [semantic versioning](http://semver.org). Thi
 - [v5.0.2](https://github.com/trailheadlabs/outerspatial.js/milestone/7?closed=1)
 - [v5.0.3](https://github.com/trailheadlabs/outerspatial.js/milestone/8?closed=1)
 - [v5.0.4](https://github.com/trailheadlabs/outerspatial.js/milestone/9?closed=1)
+- [v6.0.0](https://github.com/trailheadlabs/outerspatial.js/milestone/10?closed=1)
 
 ## Keys
 

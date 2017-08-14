@@ -18,12 +18,9 @@ require('./popup.js');
 
   L.Circle.mergeOptions(style);
   L.CircleMarker.mergeOptions(style);
-  // TODO: Update this to OuterSpatial disclaimer URL
-  /*
   L.Control.Attribution.mergeOptions({
-    prefix: '<a href="https://www.nps.gov/npmap/disclaimer/" target="_blank">Disclaimer</a>'
+    prefix: '&copy; <a href="https://www.outerspatial.com/" target="_blank">OuterSpatial</a>'
   });
-  */
   L.Map.addInitHook(function () {
     var container = this.getContainer();
     var elAttribution = util.getChildElementsByClassName(container, 'leaflet-control-attribution')[0];
@@ -208,6 +205,8 @@ MapExt = L.Map.extend({
 
             if (baseLayer.type === 'arcgisserver') {
               baseLayer.L = me._createArcGisServerLayer(baseLayer);
+            } else if (baseLayer.type === 'mapbox') {
+              baseLayer.L = me._createMapboxLayer(baseLayer);
             } else {
               baseLayer.L = L.outerspatial.layer[baseLayer.type](baseLayer);
             }
@@ -244,6 +243,8 @@ MapExt = L.Map.extend({
               }
             } else if (overlay.type === 'arcgisserver') {
               overlay.L = me._createArcGisServerLayer(overlay);
+            } else if (overlay.type === 'mapbox') {
+              overlay.L = me._createMapboxLayer(overlay);
             } else {
               overlay.L = L.outerspatial.layer[overlay.type](overlay);
             }
@@ -288,6 +289,9 @@ MapExt = L.Map.extend({
   },
   _createArcGisServerLayer: function (config) {
     return L.outerspatial.layer[config.type][config.tiled === true ? 'tiled' : 'dynamic'](config);
+  },
+  _createMapboxLayer: function (config) {
+    return L.outerspatial.layer[config.type][config.styled === true ? 'styled' : 'tiled'](config);
   },
   _initializeModules: function () {
     if (this.options && this.options.modules && L.Util.isArray(this.options.modules) && this.options.modules.length) {

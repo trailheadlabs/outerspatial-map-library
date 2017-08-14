@@ -17,7 +17,7 @@
     "outerspatial-symbol-library": "https://github.com/trailheadlabs/outerspatial-symbol-library/archive/3.1.0.tar.gz",
     "reqwest": "2.0.5"
   },
-  "description": "A JavaScript web mapping library, built as a Leaflet plugin, for the OuterSpatial outdoor technology platform.",
+  "description": "A JavaScript web mapping library, built as a Leaflet plugin, for the OuterSpatial platform.",
   "devDependencies": {
     "brfs": "1.4.3",
     "browserify": "^13.0.0",
@@ -45,6 +45,7 @@
     "mocha": "^3.0.0",
     "mocha-phantomjs": "^4.0.1",
     "phantomjs-prebuilt": "~2.1.12",
+    "semistandard": "^11.0.0",
     "sinon": "1.17.5",
     "uglify-js": "2.7.3",
     "xhr2": "^0.1.2"
@@ -91,5 +92,5 @@
     "type": "git",
     "url": "https://github.com/trailheadlabs/outerspatial.js.git"
   },
-  "version": "5.0.4"
+  "version": "6.0.0"
 }

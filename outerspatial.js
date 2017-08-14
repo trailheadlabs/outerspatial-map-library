@@ -42,7 +42,10 @@ L.outerspatial = module.exports = {
     geojson: require('./src/layer/geojson'),
     github: require('./src/layer/github'),
     kml: require('./src/layer/kml'),
-    mapbox: require('./src/layer/mapbox'),
+    mapbox: {
+      styled: require('./src/layer/mapbox/styled'),
+      tiled: require('./src/layer/mapbox/tiled')
+    },
     spot: require('./src/layer/spot'),
     tiled: require('./src/layer/tiled'),
     wms: require('./src/layer/wms'),

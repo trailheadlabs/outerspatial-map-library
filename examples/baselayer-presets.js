@@ -1,5 +1,6 @@
 var OuterSpatial =  {
   baseLayers: [
+    'outerspatial-outdoors',
     'bing-aerial',
     'bing-aerialLabels',
     'bing-roads',

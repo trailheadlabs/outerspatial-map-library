@@ -88,6 +88,8 @@ var SwitcherControl = L.Control.extend({
 
           if (baseLayer.type === 'arcgisserver') {
             baseLayer.L = L.outerspatial.layer[baseLayer.type][baseLayer.tiled === true ? 'tiled' : 'dynamic'](baseLayer);
+          } else if (baseLayer.type === 'mapbox') {
+            baseLayer.L = L.outerspatial.layer[baseLayer.type][baseLayer.styled === true ? 'styled' : 'tiled'](baseLayer);
           } else {
             baseLayer.L = L.outerspatial.layer[baseLayer.type](baseLayer);
           }

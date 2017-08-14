@@ -3,14 +3,14 @@
 
 'use strict';
 
-var keys = require('../../keys.json');
+var keys = require('../../../keys.json');
 var reqwest = require('reqwest');
-var util = require('../util/util');
+var util = require('../../util/util');
 
-var MapBoxLayer = L.TileLayer.extend({
+var MapboxTiledLayer = L.TileLayer.extend({
   _formatPattern: /\.((?:png|jpg)\d*)(?=$|\?)/,
   includes: [
-    require('../mixin/grid')
+    require('../../mixin/grid')
   ],
   options: {
     accessToken: (function () {
@@ -193,5 +193,5 @@ module.exports = function (options) {
     options.type = 'mapbox';
   }
 
-  return new MapBoxLayer(options);
+  return new MapboxTiledLayer(options);
 };
