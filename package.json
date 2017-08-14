@@ -54,7 +54,7 @@
     "test": "grunt test"
   },
   "engines": {
-    "node": "*"
+    "node": "stable"
   },
   "homepage": "https://github.com/trailheadlabs/outerspatial.js",
   "keywords": [
