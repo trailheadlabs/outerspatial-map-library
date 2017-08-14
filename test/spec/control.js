@@ -138,14 +138,6 @@ describe('L.outerspatial.control', function () {
       expect(map.homeControl).to.be(undefined);
     });
   });
-
-
-
-
-
-
-
-  
   describe('overviewControl', function () {
     it('creates an overviewControl when a valid "overviewControl" object is provided', function () {
       var map = L.outerspatial.map({
