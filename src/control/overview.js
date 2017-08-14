@@ -25,18 +25,23 @@ var OverviewControl = L.Control.extend({
     util.strict(options, 'object');
 
     if (options.layer) {
+      var type;
+
       if (typeof options.layer === 'string') {
         var name = options.layer.split('-');
 
         options.layer = util.clone(baselayerPresets[name[0]][name[1]]);
       }
 
+      type = options.layer.type;
       L.Util.setOptions(this, options);
 
-      if (options.layer.type === 'arcgisserver') {
-        this._layer = options.layer.L = L.outerspatial.layer[options.layer.type][options.layer.tiled === true ? 'tiled' : 'dynamic'](options.layer);
+      if (type === 'arcgisserver') {
+        this._layer = options.layer.L = L.outerspatial.layer[type][options.layer.tiled === true ? 'tiled' : 'dynamic'](options.layer);
+      } else if (type === 'mapbox') {
+        this._layer = options.layer.L = L.outerspatial.layer[type][options.layer.styled === true ? 'styled' : 'tiled'](options.layer);
       } else {
-        this._layer = options.layer.L = L.outerspatial.layer[options.layer.type](options.layer);
+        this._layer = options.layer.L = L.outerspatial.layer[type](options.layer);
       }
 
       return this;
