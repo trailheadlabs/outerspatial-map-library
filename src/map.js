@@ -803,7 +803,7 @@ MapExt = L.Map.extend({
     return config;
   },
   _updateImproveLinks: function () {
-    // TODO: Need to create a new page on OuterSpatial.js and link to it
+    // TODO: Need to create a new page on OuterSpatial Map Library and link to it
     if (this.attributionControl) {
       var els = util.getChildElementsByClassName(this.attributionControl._container, 'improve-park-tiles');
 

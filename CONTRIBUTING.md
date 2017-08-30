@@ -8,6 +8,6 @@ If you have any questions, just [shoot us an email](mailto:hi@trailheadlabs.com)
 
 ## Coding conventions
 
-OuterSpatial.js uses [JavaScript Semi-Standard Style](https://github.com/Flet/semistandard).
+OuterSpatial Map Library uses [JavaScript Semi-Standard Style](https://github.com/Flet/semistandard).
 
 The `.csscomb.json` file should be used to format CSS.

@@ -199,7 +199,7 @@ module.exports = function (grunt) {
     usebanner: {
       dist: {
         options: {
-          banner: '/**\n * OuterSpatial.js <%= pkg.version %>\n * Built on <%= grunt.template.today("mm/dd/yyyy") %> at <%= grunt.template.today("hh:MMTT Z") %>\n * Copyright <%= grunt.template.today("yyyy") %> Trailhead Labs\n * Licensed under ' + pkg.licenses[0].type + ' (' + pkg.licenses[0].url + ')\n */',
+          banner: '/**\n * OuterSpatial Map Library <%= pkg.version %>\n * Built on <%= grunt.template.today("mm/dd/yyyy") %> at <%= grunt.template.today("hh:MMTT Z") %>\n * Copyright <%= grunt.template.today("yyyy") %> Trailhead Labs\n * Licensed under ' + pkg.licenses[0].type + ' (' + pkg.licenses[0].url + ')\n */',
           position: 'top'
         },
         files: {
@@ -296,7 +296,7 @@ module.exports = function (grunt) {
       }
     }
 
-    html = '<h1 style="display:none;">OuterSpatial.js Examples</h1>';
+    html = '<h1 style="display:none;">OuterSpatial Map Library Examples</h1>';
 
     for (var category in categories) {
       html += '<h2>' + category + '</h2><ul>';

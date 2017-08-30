@@ -43,7 +43,7 @@ OuterSpatial Map Library is versioned using [semantic versioning](http://semver.
 
 ## Keys
 
-OuterSpatial Map Library supports connecting to a number of services that require API keys. You will need to create a copy of `keys.sample.json`, rename it `keys.json`, add your keys, and run `grunt build` to bundle your keys into the build of OuterSpatial.js that is created in the `_dist` folder.
+OuterSpatial Map Library supports connecting to a number of services that require API keys. You will need to create a copy of `keys.sample.json`, rename it `keys.json`, add your keys, and run `grunt build` to bundle your keys into the build of OuterSpatial Map Library that is created in the `_dist` folder.
 
 ## Building
 

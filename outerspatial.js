@@ -3,7 +3,7 @@
 
 var version = require('./package.json').version;
 
-window.L.Icon.Default.imagePath = 'https://cdn.outerspatial.com/libs/outerspatial.js/' + version + '/images';
+window.L.Icon.Default.imagePath = 'https://cdn.outerspatial.com/libs/outerspatial-map-library/' + version + '/images';
 L.outerspatial = module.exports = {
   VERSION: version,
   // Preserve order of controls because it affects the display hierarchy.

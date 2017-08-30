@@ -1,7 +1,7 @@
 {
   "bugs": {
     "email": "code@trailheadlabs.com",
-    "url": "https://github.com/trailheadlabs/outerspatial.js/issues"
+    "url": "https://github.com/trailheadlabs/outerspatial-map-library/issues"
   },
   "dependencies": {
     "@mapbox/togeojson": "0.16.0",
@@ -56,7 +56,7 @@
   "engines": {
     "node": "stable"
   },
-  "homepage": "https://github.com/trailheadlabs/outerspatial.js",
+  "homepage": "https://github.com/trailheadlabs/outerspatial-map-library",
   "keywords": [
     "ArcGIS Server",
     "CARTO",
@@ -72,7 +72,7 @@
     "Mapbox",
     "Mapquest",
     "Mapzen",
-    "OuterSpatial.js",
+    "OuterSpatial Map Library",
     "OuterSpatial",
     "OuterSpatial Mobile",
     "OuterSpatial Symbol Library",
@@ -83,14 +83,14 @@
   "licenses": [
     {
       "type": "MIT",
-      "url": "https://github.com/trailheadlabs/outerspatial.js/raw/master/LICENSE.md"
+      "url": "https://github.com/trailheadlabs/outerspatial-map-library/raw/master/LICENSE.md"
     }
   ],
   "main": "main.js",
-  "name": "outerspatial.js",
+  "name": "outerspatial-map-library",
   "repository": {
     "type": "git",
-    "url": "https://github.com/trailheadlabs/outerspatial.js.git"
+    "url": "https://github.com/trailheadlabs/outerspatial-map-library.git"
   },
   "version": "6.0.0"
 }

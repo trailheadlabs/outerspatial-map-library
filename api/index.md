@@ -58,7 +58,7 @@ The first, and only, argument is required. It must be a config object comprised 
 * (Required) `div` (Object or String): Either a reference to an HTML element or the id of an HTML element to render the map into.
 * (Optional) `baseLayers` (Array): An array of baseLayer configuration objects AND/OR [baseLayer preset](#baseLayer-presets) strings. Defaults to `['mapbox-outdoors']`.
 * (Optional) `description` (String): A description for the map. Used by some templates.
-* (Optional) `detectAvailablePopupSpace` (Boolean): Defaults to `undefined`. If `true` or `undefined`, OuterSpatial.js will detect the height and width available in your map and set the `maxHeight` and `maxWidth` properties of the map's popups automatically.
+* (Optional) `detectAvailablePopupSpace` (Boolean): Defaults to `undefined`. If `true` or `undefined`, OuterSpatial Map Library will detect the height and width available in your map and set the `maxHeight` and `maxWidth` properties of the map's popups automatically.
 * (Optional) `editControl` (Boolean or Object): Defaults to `undefined`.
 * (Optional) `events` (Array): An array of event objects to attach to the map. Defaults to `undefined`.
 * (Optional) `fullscreenControl` (Boolean or Object): Defaults to `undefined`.
@@ -156,7 +156,7 @@ You can add events to a layer by adding an `events` array to the layer config. T
       }]
     };
 
-Supported event "types" include all of the Leaflet layer events for a given layer type, as well as the following event types added by OuterSpatial.js:
+Supported event "types" include all of the Leaflet layer events for a given layer type, as well as the following event types added by OuterSpatial Map Library:
 
 * `error`: Fired when a layer error occurs. Passes the error event object to the event function.
 * `load`: Fired when a layer is loaded. Only available for layers that extend `L.GeoJson`.
@@ -172,7 +172,7 @@ _Working Examples_:
 
 Create a layer from an ArcGIS Server tiled or dynamic map service, including **map** services hosted on ArcGIS Online, and add it to a map.
 
-Note: If you want to bring in an ArcGIS Online **feature** service, you will need to add it as a [GeoJSON](#geojson) layer to OuterSpatial.js. You can get GeoJSON in [WGS84](http://en.wikipedia.org/wiki/World_Geodetic_System) out of the feature service by appending `?f=geojson&outSR=4326` to the end of the query URL, e.g.:
+Note: If you want to bring in an ArcGIS Online **feature** service, you will need to add it as a [GeoJSON](#geojson) layer to OuterSpatial Map Library. You can get GeoJSON in [WGS84](http://en.wikipedia.org/wiki/World_Geodetic_System) out of the feature service by appending `?f=geojson&outSR=4326` to the end of the query URL, e.g.:
 
     http://services1.arcgis.com/fBc8EJBxQRMcHlei/ArcGIS/rest/services/GRSM_RESTROOMS/FeatureServer/0/query?f=geojson&outSR=4326&where=OBJECTID+IS+NOT+NULL
 
@@ -191,7 +191,7 @@ The first, and only, argument is required. It must be a config object comprised 
 * (Optional) `clickable` (Boolean): Should interactivity (click) operations be enabled for this layer? Defaults to `true`.
 * (Optional) `description` (String): A description for the layer. Used by some [controls](#controls) and [modules](#modules).
 * (Optional) `dynamicAttribution` (String): The URL of a [dynamic attribution](http://blogs.esri.com/esri/arcgis/2012/08/15/dynamic-attribution-is-here/) endpoint for the service.
-* (Optional) `layers` (String): A comma-delimited string of the ArcGIS Server integer layer identifiers to bring into the OuterSpatial.js layer.
+* (Optional) `layers` (String): A comma-delimited string of the ArcGIS Server integer layer identifiers to bring into the OuterSpatial Map Library layer.
 * (Optional) `name` (String): A name for the layer. Used by some [controls](#controls) and [modules](#modules).
 * (Optional) `popup` (String, Object, or Function): Configures the contents of the overlay's [popups](#using-popups).
 
@@ -366,7 +366,7 @@ You can also (optionally) provide any of the options supported by [`L.GeoJSON`](
 2. `style`
 3. `onEachFeature`
 
-These three options are not supported because they are used internally by OuterSpatial.js. If provided, they will be overwritten.
+These three options are not supported because they are used internally by OuterSpatial Map Library. If provided, they will be overwritten.
 
 _Returns_: a layer object
 
@@ -431,7 +431,7 @@ You can also (optionally) provide any of the options supported by [`L.GeoJSON`](
 2. `style`
 3. `onEachFeature`
 
-These three options are not supported because they are used internally by OuterSpatial.js. If provided, they will be overwritten.
+These three options are not supported because they are used internally by OuterSpatial Map Library. If provided, they will be overwritten.
 
 _Returns_: a layer object
 
@@ -493,7 +493,7 @@ You can also (optionally) provide any of the options supported by [`L.GeoJSON`](
 2. `style`
 3. `onEachFeature`
 
-These three options are not supported because they are used internally by OuterSpatial.js. If provided, they will be overwritten.
+These three options are not supported because they are used internally by OuterSpatial Map Library. If provided, they will be overwritten.
 
 _Returns_: a layer object
 
@@ -533,7 +533,7 @@ _Working Examples_:
 
 Create a KML layer and add it to a map.
 
-NOTE: For OuterSpatial.js to load KML data, the data must be properly formatted. OuterSpatial.js uses toGeoJSON internally to convert KML to GeoJSON, so if your KML isn't loading properly, go and test it on the [website](http://mapbox.github.io/togeojson/).
+NOTE: For OuterSpatial Map Library to load KML data, the data must be properly formatted. OuterSpatial Map Library uses toGeoJSON internally to convert KML to GeoJSON, so if your KML isn't loading properly, go and test it on the [website](http://mapbox.github.io/togeojson/).
 
 _Arguments_:
 
@@ -563,7 +563,7 @@ You can also (optionally) provide any of the options supported by [`L.GeoJSON`](
 2. `style`
 3. `onEachFeature`
 
-These three options are not supported because they are used internally by OuterSpatial.js. If provided, they will be overwritten.
+These three options are not supported because they are used internally by OuterSpatial Map Library. If provided, they will be overwritten.
 
 _Returns_: a layer object
 
@@ -676,7 +676,7 @@ You can also (optionally) provide any of the options supported by [`L.GeoJSON`](
 2. `style`
 3. `onEachFeature`
 
-These three options are not supported because they are used internally by OuterSpatial.js. If provided, they will be overwritten.
+These three options are not supported because they are used internally by OuterSpatial Map Library. If provided, they will be overwritten.
 
 _Returns_: a layer object
 
@@ -811,7 +811,7 @@ _Working Examples_:
 
 Create a Zoomify layer and add it to a map.
 
-NOTE: Zoomify layers do not contain spatial reference information, so they will not work with other layers. Because of this, when a Zoomify layer is added to a map, OuterSpatial.js ignores any other layers specified in the `baseLayers` and/or `overlays` configs.
+NOTE: Zoomify layers do not contain spatial reference information, so they will not work with other layers. Because of this, when a Zoomify layer is added to a map, OuterSpatial Map Library ignores any other layers specified in the `baseLayers` and/or `overlays` configs.
 
 _Arguments_:
 
@@ -861,7 +861,7 @@ _Working Examples_:
 
 ## <a name="controls">Controls</a>
 
-Add functionality to your map using OuterSpatial.js' controls. Controls are added to either a control bar overlaid in one of the four corners of the map or a toolbar that displays above the map.
+Add functionality to your map using OuterSpatial Map Library' controls. Controls are added to either a control bar overlaid in one of the four corners of the map or a toolbar that displays above the map.
 
 **[[⬆]](#)**
 
@@ -1158,7 +1158,7 @@ _Arguments_:
 
 The first, and only, argument is optional, and may be a config object with the following properties:
 
-* (Optional) `units` (Object): An object, with one or both `area` (Array) and `distance` (Array) properties that tell OuterSpatial.js which units to support with the control. Valid area units are acres (`ac`) and hectares (`ha`). Valid distance units are feet (`f`), meters (`m`), and miles (`mi`). The control defaults to all available area and distance units.
+* (Optional) `units` (Object): An object, with one or both `area` (Array) and `distance` (Array) properties that tell OuterSpatial Map Library which units to support with the control. Valid area units are acres (`ac`) and hectares (`ha`). Valid distance units are feet (`f`), meters (`m`), and miles (`mi`). The control defaults to all available area and distance units.
 
 You can also (optionally) provide any of the options supported by [`L.Control`](http://leafletjs.com/reference.html#control).
 
@@ -1244,7 +1244,7 @@ _Arguments_:
 The first, and only, argument is optional, and may be a config object with the following properties:
 
 * (Optional) `ui` (Boolean): Should the control add its user interface (UI) to the map? Defaults to `true`.
-* (Optional) `url` (String): A URL to a print-optimized web page. Defaults to `https://www.trailheadlabs.com/labs/outerspatial.js/print/`.
+* (Optional) `url` (String): A URL to a print-optimized web page. Defaults to `https://www.trailheadlabs.com/labs/outerspatial-map-library/print/`.
 
 _Returns_: a control object
 
@@ -1331,7 +1331,7 @@ _Example (API)_:
 
 ### <a name="switcher">switcher()</a>
 
-The switcher control is used internally by OuterSpatial.js. It is automatically created and added to a map when more than one config object is present in a map's `baseLayers` property. It should not be created manually.
+The switcher control is used internally by OuterSpatial Map Library. It is automatically created and added to a map when more than one config object is present in a map's `baseLayers` property. It should not be created manually.
 
 **[[⬆]](#)**
 
@@ -1370,7 +1370,7 @@ _Working Examples_:
 
 ## <a name="modules">Modules</a>
 
-OuterSpatial.js modules are standalone pieces of functionality that can be added and integrated into a map.
+OuterSpatial Map Library modules are standalone pieces of functionality that can be added and integrated into a map.
 
 ### <a name="directions">directions</a>
 
@@ -1494,13 +1494,13 @@ _Working Examples_:
 
 ## <a name="presets">Presets</a>
 
-Presets in OuterSpatial.js can be be used as shortcuts to add commonly-used layers and styling to a map.
+Presets in OuterSpatial Map Library can be be used as shortcuts to add commonly-used layers and styling to a map.
 
 **[[⬆]](#)**
 
 ### <a name="baseLayer">baseLayer</a>
 
-OuterSpatial.js includes support for adding baseLayers via string presets. This makes it easy to add one or more baseLayers to your map without knowing the technical details required to manually configure it. To use presets, simply add one or more preset strings (outlined below) to the `baseLayers` property:
+OuterSpatial Map Library includes support for adding baseLayers via string presets. This makes it easy to add one or more baseLayers to your map without knowing the technical details required to manually configure it. To use presets, simply add one or more preset strings (outlined below) to the `baseLayers` property:
 
     var OuterSpatial = {
       div: 'map',
@@ -1560,35 +1560,35 @@ Docs coming soon.
 
 ## <a name="concepts">Concepts</a>
 
-Understanding a few fundamental concepts will help you get the most out of OuterSpatial.js.
+Understanding a few fundamental concepts will help you get the most out of OuterSpatial Map Library.
 
 **[[⬆]](#)**
 
 ### <a name="bootstrap-vs-api">Bootstrap vs. API</a>
 
-There are three ways to use OuterSpatial.js: The "Bootstrap" method, the "API" method, and the "Hybrid" method.
+There are three ways to use OuterSpatial Map Library: The "Bootstrap" method, the "API" method, and the "Hybrid" method.
 
 #### Bootstrap
 
-To create a map using the Bootstrap method, create an `OS` config object and add configuration properties to it as documented above. Then load `os-bootstrap.js` and OuterSpatial.js takes over from there.
+To create a map using the Bootstrap method, create an `OS` config object and add configuration properties to it as documented above. Then load `os-bootstrap.js` and OuterSpatial Map Library takes over from there.
 
-This method is the recommended (and easiest) way to create maps with OuterSpatial.js, and it takes full advantage of the power of OuterSpatial.js. It includes "extras" like a spinning loading indicator and automatic loading of `os.css`.
+This method is the recommended (and easiest) way to create maps with OuterSpatial Map Library, and it takes full advantage of the power of OuterSpatial Map Library. It includes "extras" like a spinning loading indicator and automatic loading of `os.css`.
 
 #### API
 
-It is also possible to create maps by interacting directly with the OuterSpatial.js API in a way similar to other more "traditional" web mapping libraries like Google Maps and the ArcGIS JavaScript API. This method requires a manual load of both `outerspatial.css` and `outerspatial.js`, and it lacks the "extras" that come along with the Bootstrap method. It also requires at least a general understanding of JavaScript.
+It is also possible to create maps by interacting directly with the OuterSpatial Map Library API in a way similar to other more "traditional" web mapping libraries like Google Maps and the ArcGIS JavaScript API. This method requires a manual load of both `outerspatial.css` and `outerspatial.js`, and it lacks the "extras" that come along with the Bootstrap method. It also requires at least a general understanding of JavaScript.
 
 #### Hybrid
 
-Trailhead Labs builds many of its maps using a hybrid approach that uses `outerspatial-bootstrap.js` to do the initial configuration and load of a map and then takes advantage of OuterSpatial.js' [hooks](../examples/hooks.html) and API to add custom functionality.
+Trailhead Labs builds many of its maps using a hybrid approach that uses `outerspatial-bootstrap.js` to do the initial configuration and load of a map and then takes advantage of OuterSpatial Map Library' [hooks](../examples/hooks.html) and API to add custom functionality.
 
 This approach gets the best of both the Bootstrap and API methods: Easy initial configuration with advanced programmatic access for complete control. This approach also has an added benefit of consistency. Every map built using this hybrid approach is laid out (or "scaffolded") in a consistent way.
 
-This hybrid approach is possible because OuterSpatial.js exposes the underlying [Map](#map), [Layer](#layer), [Control](#control), and [Module](#module) objects so they can be interacted with programatically after they are initialized.
+This hybrid approach is possible because OuterSpatial Map Library exposes the underlying [Map](#map), [Layer](#layer), [Control](#control), and [Module](#module) objects so they can be interacted with programatically after they are initialized.
 
-For example, once OuterSpatial.js creates a map it exposes the internal map object via a `L` property on the `OS.config` object. This means you can access the object like this: `OuterSpatial.config.L`.
+For example, once OuterSpatial Map Library creates a map it exposes the internal map object via a `L` property on the `OS.config` object. This means you can access the object like this: `OuterSpatial.config.L`.
 
-You can also access the `baseLayers` and `overlays` objects initialized by OuterSpatial.js in a similar way:
+You can also access the `baseLayers` and `overlays` objects initialized by OuterSpatial Map Library in a similar way:
 
 * `OuterSpatial.config.baseLayers[0].L` gets a reference to the layer object for the first baseLayer
 * `OuterSpatial.config.overlays[0].L` gets a reference to the layer object for the first overlay
@@ -1597,7 +1597,7 @@ You can also access the `baseLayers` and `overlays` objects initialized by Outer
 
 ### <a name="hooks">Hooks</a>
 
-You can use the `preinit` and `init` hooks to add custom functionality to your map. Both hooks must accept a callback function and execute it to pass control back to OuterSpatial.js.
+You can use the `preinit` and `init` hooks to add custom functionality to your map. Both hooks must accept a callback function and execute it to pass control back to OuterSpatial Map Library.
 
     var OuterSpatial = {
       div: 'map',
@@ -1613,13 +1613,13 @@ You can use the `preinit` and `init` hooks to add custom functionality to your m
       }
     };
 
-The `preinit` hook is called after OuterSpatial.js has loaded all of its dependencies and any plugins specified in the [`plugins`](#plugins) config. The `init` hook is called after OuterSpatial.js creates the map and has created any layers specified in the `baseLayers` or `overlays` configs.
+The `preinit` hook is called after OuterSpatial Map Library has loaded all of its dependencies and any plugins specified in the [`plugins`](#plugins) config. The `init` hook is called after OuterSpatial Map Library creates the map and has created any layers specified in the `baseLayers` or `overlays` configs.
 
 **[[⬆]](#)**
 
 ### <a name="multiple-maps">Multiple Maps</a>
 
-Unlike previous versions of the OuterSpatial.js library, the Bootstrap method supports adding multiple maps to the same web page. To add multiple maps, make the `OuterSpatial` config object an array of map configuration objects:
+Unlike previous versions of the OuterSpatial Map Library library, the Bootstrap method supports adding multiple maps to the same web page. To add multiple maps, make the `OuterSpatial` config object an array of map configuration objects:
 
     var OuterSpatial = [{
       div: 'map-1'
@@ -1631,7 +1631,7 @@ Unlike previous versions of the OuterSpatial.js library, the Bootstrap method su
 
 ### <a name="plugins">Plugins</a>
 
-If you need to add functionality that isn't supported by OuterSpatial.js to a map, you can load a Leaflet plugin. The `plugins` configuration can be used to load plugins:
+If you need to add functionality that isn't supported by OuterSpatial Map Library to a map, you can load a Leaflet plugin. The `plugins` configuration can be used to load plugins:
 
     var OuterSpatial = {
       div: 'map',
@@ -1642,7 +1642,7 @@ If you need to add functionality that isn't supported by OuterSpatial.js to a ma
       }]
     };
 
-OuterSpatial.js will load any CSS files (specified in the `css` property) and JavaScript files (specified in the `js` property). These plugins will be available in both the `preinit` and `init` [hooks](#hooks).
+OuterSpatial Map Library will load any CSS files (specified in the `css` property) and JavaScript files (specified in the `js` property). These plugins will be available in both the `preinit` and `init` [hooks](#hooks).
 
 _Working Examples_:
 
@@ -1662,13 +1662,13 @@ Popups display when you click on a feature in an overlay. Each popup is made up 
 3. Footer
    - Actions
 
-If you do not specify a `popup` property on your layer object, OuterSpatial.js will use a set of sensible defaults to configure the popup. If, however, you specify a `popup` property on your layer object, OuterSpatial.js will only implement what you have specified. For example, if your `popup` property looks like the following:
+If you do not specify a `popup` property on your layer object, OuterSpatial Map Library will use a set of sensible defaults to configure the popup. If, however, you specify a `popup` property on your layer object, OuterSpatial Map Library will only implement what you have specified. For example, if your `popup` property looks like the following:
 
     popup: {
       title: '{{Name}}'
     }
 
-OuterSpatial.js will only display the title in the popup and will not render any other popup elements.
+OuterSpatial Map Library will only display the title in the popup and will not render any other popup elements.
 
 The content for each of the sections of a popup should be specified individually via a `popup` configuration object:
 
@@ -1727,7 +1727,7 @@ The content for each of the sections of a popup should be specified individually
       }]
     };
 
-If you are embedding media (images, audio, and/or video) in your popup, you should hardcode the height and width of the media in your HTML so OuterSpatial.js can size the popup appropriately:
+If you are embedding media (images, audio, and/or video) in your popup, you should hardcode the height and width of the media in your HTML so OuterSpatial Map Library can size the popup appropriately:
 
     var OuterSpatial = {
       div: 'map',
@@ -1741,7 +1741,7 @@ If you are embedding media (images, audio, and/or video) in your popup, you shou
 
 [HTML](http://en.wikipedia.org/wiki/HTML) and [Handlebars](http://handlebarsjs.com/) are supported for many popup elements (take a look at the comments in the code sample above to see which elements support HTML and/or Handlebars).
 
-OuterSpatial.js also adds a number of "helpers" to Handlebars. These helpers can be used to format popups:
+OuterSpatial Map Library also adds a number of "helpers" to Handlebars. These helpers can be used to format popups:
 
 <ul>
   <li><code>ifCond (available operators include '!=', '!==', '==', '===', '&lt;', '&lt;=', '&gt;', '&gt;=', '&&', and '||')</code><pre><code>description: "I am {{#ifCond Name '===' 'A Rectangle'}}indeed{{else}}not{{/ifCond}} a rectangle! (Verified by a custom Handlebars helper.)"</code></pre></li>
@@ -1774,7 +1774,7 @@ You can see examples of configuring tooltips for overlays in the [tooltips examp
 
 ### <a name="styling-vectors">Styling Vectors</a>
 
-OuterSpatial.js uses the [simplestyle specification](https://github.com/mapbox/simplestyle-spec) internally. It currently, at v1.1.0, includes the following properties:
+OuterSpatial Map Library uses the [simplestyle specification](https://github.com/mapbox/simplestyle-spec) internally. It currently, at v1.1.0, includes the following properties:
 
     fill
     fill-opacity
@@ -1785,22 +1785,22 @@ OuterSpatial.js uses the [simplestyle specification](https://github.com/mapbox/s
     stroke-opacity
     stroke-width
 
-In addition, OuterSpatial.js supports the following property that is not supported by the simplestyle specification:
+In addition, OuterSpatial Map Library supports the following property that is not supported by the simplestyle specification:
 
     marker-library
 
 This property is optional. It defaults to `maki`, and can also be `outerspatial`.
 
-Styles for vector shapes can be set in multiple ways. OuterSpatial.js looks in the following order for styles:
+Styles for vector shapes can be set in multiple ways. OuterSpatial Map Library looks in the following order for styles:
 
-1. In the properties pulled in for each feature from the data source. You can tell OuterSpatial.js to ignore feature styles by setting the `ignoreFeatureStyles` property to true. For example, if a GeoJSON point feature has a `marker-symbol` property, it will be used to style the marker on the map unless `ignoreFeatureStyles` is set to `true` in the styles geometry (`line`, `point`, or `polygon`) object of an overlay's configuration.
+1. In the properties pulled in for each feature from the data source. You can tell OuterSpatial Map Library to ignore feature styles by setting the `ignoreFeatureStyles` property to true. For example, if a GeoJSON point feature has a `marker-symbol` property, it will be used to style the marker on the map unless `ignoreFeatureStyles` is set to `true` in the styles geometry (`line`, `point`, or `polygon`) object of an overlay's configuration.
 2. In an overlay's configuration object, via a `styles` property, with `line`, `point`, and/or `polygon` properties designated as:
    1. an object
    2. a function that is passed a data object for each feature and returns a style object
 
-If no styles are found in these two places, OuterSpatial.js falls back to a set of default styles.
+If no styles are found in these two places, OuterSpatial Map Library falls back to a set of default styles.
 
-If you prefer not to use the simplestyle specification, you can utilize the out-of-the-box Leaflet styles for the `line` (L.Path), `point` (L.Icon), and `polygon` (L.Path) `styles` object on your overlay configuration. OuterSpatial.js will then pass the object directly to Leaflet.
+If you prefer not to use the simplestyle specification, you can utilize the out-of-the-box Leaflet styles for the `line` (L.Path), `point` (L.Icon), and `polygon` (L.Path) `styles` object on your overlay configuration. OuterSpatial Map Library will then pass the object directly to Leaflet.
 
 **Note**: Style properties cascade. This means that if a `marker-symbol` property is passed in via the data source (e.g. a GeoJSON feature's properties) and a `marker-color` property is passed in via the overlay config object, the geometry will be styled with both the `marker-symbol` **and** `marker-color` properties unless the `ignoreFeatureStyles` property is present.
 

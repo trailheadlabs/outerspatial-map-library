@@ -6,7 +6,7 @@ var util = require('../util/util');
 var PrintControl = L.Control.extend({
   options: {
     ui: true,
-    url: 'https://www.trailheadlabs.com/labs/outerspatial.js/print/'
+    url: 'https://www.trailheadlabs.com/labs/outerspatial-map-library/print/'
   },
   initialize: function (options) {
     L.Util.setOptions(this, options);
