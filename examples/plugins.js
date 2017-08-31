@@ -11,13 +11,13 @@ var OuterSpatial = {
       fn: function () {
         var layers = this.getLayers();
         var map = OuterSpatial.config.L;
-        console.log("ready")
+        console.log('ready');
         map.editControl._modes.marker.handler.setOptions({guideLayers: layers});
 
         map.on('draw:created', function (e) {
           var marker;
-          
-          console.log("drawcreated")
+
+          console.log('drawcreated');
 
           if (e.layerType && e.layerType === 'marker') {
             marker = e.layer;
@@ -42,7 +42,7 @@ var OuterSpatial = {
     url: 'https://nps-yell.cartodb.com/api/v2/sql?q=SELECT * FROM roads&format=geojson'
   }],
   plugins: [{
-    js: '{{ path }}/plugins/Leaflet.GeometryUtil/0.7.1/plugin.min.js'
+    js: '{{ path }}/plugins/Leaflet.GeometryUtil/0.8.0/plugin.min.js'
   }, {
     js: '{{ path }}/plugins/Leaflet.Snap/0.4.0/plugin.min.js'
   }],
