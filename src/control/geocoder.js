@@ -191,7 +191,7 @@ var GeocoderControl = L.Control.extend({
       this._input.value = this._oldValue = id;
 
       if (me._bounds[id]) {
-        me._map.fitBounds(me._bounds[id]);
+        me._map.fitBounds(me._bounds[id].getBounds());
       } else if (me._centroids[id]) {
         me._map.setView(me._centroids[id], 17);
       } else {
@@ -202,7 +202,7 @@ var GeocoderControl = L.Control.extend({
 
               if (row.b) {
                 me._bounds[id] = new L.GeoJSON(JSON.parse(row.b));
-                me._map.fitBounds(me._bounds[id]);
+                me._map.fitBounds(me._bounds[id].getBounds());
               } else {
                 me._centroids[id] = {
                   lat: row.l,
