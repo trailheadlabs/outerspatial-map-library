@@ -8,7 +8,7 @@ var OuterSpatial = {
       description: '' +
         '<ul>' +
           '<li>Is National Park?: {{#ifCond designation \'===\' \'National Park\'}}Yes{{else}}No, is a {{designation}}{{/ifCond}}</li>' +
-          '<li>Blurb: {{blurb}}</li>' +
+          '<li>Unit Code: {{toUpperCase unit_code}}</li>' +
         '</ul>' +
       '',
       title: '<a href="{{url}}" target="_blank">{{display_name}}</a>'
