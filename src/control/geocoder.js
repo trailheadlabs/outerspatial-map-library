@@ -10,7 +10,7 @@ var GeocoderControl = L.Control.extend({
   _cache: {},
   _centroids: {},
   _pois: {},
-  includes: L.Mixin.Events,
+  includes: L.Evented.prototype,
   options: {
     position: 'topright',
     provider: 'esri',

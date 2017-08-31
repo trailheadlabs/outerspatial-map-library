@@ -4,7 +4,7 @@ var util = require('../../util/util');
 
 var ArcGisServerDynamicLayer = L.Layer.extend({
   includes: [
-    L.Mixin.Events,
+    L.Evented.prototype,
     require('../../mixin/esri')
   ],
   options: {

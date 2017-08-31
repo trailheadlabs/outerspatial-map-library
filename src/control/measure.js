@@ -7,7 +7,7 @@ require('leaflet-draw');
 
 var util = require('../util/util');
 var MeasureControl = L.Control.extend({
-  includes: L.Mixin.Events,
+  includes: L.Evented.prototype,
   options: {
     polygon: {
       allowIntersection: false,
