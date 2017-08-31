@@ -1636,9 +1636,9 @@ If you need to add functionality that isn't supported by OuterSpatial Map Librar
     var OuterSpatial = {
       div: 'map',
       plugins: [{
-        js: 'plugins/Leaflet.GeometryUtil/0.3.2/plugin.min.js'
+        js: 'plugins/Leaflet.GeometryUtil/0.8.0/plugin.min.js'
       },{
-        js: 'plugins/Leaflet.Snap/0.0.1/plugin.min.js'
+        js: 'plugins/Leaflet.Snap/0.4.0/plugin.min.js'
       }]
     };
 
