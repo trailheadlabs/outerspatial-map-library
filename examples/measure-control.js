@@ -10,7 +10,8 @@ var OuterSpatial = {
   measureControl: {
     units: {
       area: [
-        'ac'
+        'ac',
+        'ha'
       ],
       distance: [
         'mi',

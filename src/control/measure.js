@@ -355,7 +355,7 @@ var MeasureControl = L.Control.extend({
       var latLngs;
 
       this._activePolygon.addLatLng(latLng);
-      latLngs = this._activePolygon.getLatLngs();
+      latLngs = this._activePolygon.getLatLngs()[0];
 
       if (latLngs.length > 2) {
         if (this._activeTooltip) {
@@ -478,11 +478,11 @@ var MeasureControl = L.Control.extend({
     var map = this._map;
 
     L.DomEvent
-      .off(document, 'keydown', this._onKeyDown)
-      .off(map, 'click', this._mouseClickArea)
-      .off(map, 'click', this._mouseClickDistance)
-      .off(map, 'dblclick', this._handlerDeactivated)
-      .off(map, 'mousemove', this._mouseMove);
+      .off(document, 'keydown', this._onKeyDown, this)
+      .off(map, 'click', this._mouseClickArea, this)
+      .off(map, 'click', this._mouseClickDistance, this)
+      .off(map, 'dblclick', this._handlerDeactivated, this)
+      .off(map, 'mousemove', this._mouseMove, this);
   },
   _removeTempTooltip: function () {
     this._featureGroupTooltips.removeLayer(this._tempTooltip);
