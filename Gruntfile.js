@@ -209,6 +209,15 @@ module.exports = function (grunt) {
           ]
         }
       }
+    },
+    watch: {
+      scripts: {
+        files: ['src/**/*.js'],
+        tasks: ['build'],
+        options: {
+          spawn: false
+        }
+      }
     }
   });
   loadNpmTasks();
