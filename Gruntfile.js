@@ -212,10 +212,13 @@ module.exports = function (grunt) {
     },
     watch: {
       scripts: {
-        files: ['src/**/*.js'],
+        files: [
+          'src/**/*.js',
+          'theme/**/*.css'
+        ],
         tasks: ['build'],
         options: {
-          spawn: false
+          interrupt: true
         }
       }
     }
