@@ -67,7 +67,7 @@ var LocateControl = L.Control.extend({
     me._button.setAttribute('alt', this.options.strings.title);
     me._button.innerHTML = '' +
       '<svg xmlns="http://www.w3.org/2000/svg" height="18" width="18" viewBox="-0.75 -0.75 18 18">' +
-        '<g class="locate">' +
+        '<g class="icon-svg-path">' +
         '<path d="M11.993 15.3l4-14c.2-.8-.5-1.5-1.3-1.3l-14 4c-.9.3-1 1.5-.1 1.9l6.6 2.9 2.8 6.6c.5.9 1.7.8 2-.1zm1.5-12.8l-2.7 9.5-1.9-4.4c-.1-.2-.3-.4-.5-.5l-4.4-1.9z"/>' +
         '</g>' +
       '</svg>';

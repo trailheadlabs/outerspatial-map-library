@@ -17,7 +17,7 @@ var SmallZoomControl = L.Control.extend({
 
     this._zoomInButton.innerHTML = '' +
       '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18" width="18" height="18">' +
-        '<g class="zoom">' +
+        '<g class="icon-svg-line">' +
           '<line x1="8.5" y1="1.5" x2="8.5" y2="15.5"/>' +
           '<line x1="1.5" y1="8.5" x2="15.5" y2="8.5"/>' +
         '</g>' +
@@ -25,7 +25,7 @@ var SmallZoomControl = L.Control.extend({
 
     this._zoomOutButton.innerHTML = '' +
       '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18" width="18" height="18">' +
-        '<g class="zoom">' +
+        '<g class="icon-svg-line">' +
           '<line x1="1.5" y1="8.5" x2="15.5" y2="8.5"/>' +
         '</g>' +
       '</svg>';

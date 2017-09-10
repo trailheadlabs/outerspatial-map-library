@@ -865,47 +865,6 @@
   text-decoration: none;
   /*width: 30px;*/
 }
-.outerspatial .leaflet-bar button .home {
-  stroke: #444444;
-  stroke-width: 2;
-  fill: none;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  fill-rule: evenodd;
-}
-.outerspatial .leaflet-bar button .zoom {
-  stroke: #444444;
-  stroke-width: 2;
-  fill: none;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  fill-rule: evenodd;
-  /*fill="none" stroke="#444444" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10"*/
-}
-.outerspatial .leaflet-bar button .locate {
-  fill: #444444;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  fill-rule: evenodd;
-}
-.outerspatial .leaflet-bar a:active,
-.outerspatial .leaflet-bar a:hover,
-.outerspatial .leaflet-bar button:active,
-.outerspatial .leaflet-bar button:hover polyline,
-.outerspatial .leaflet-bar button:hover .zoom {
-  stroke: #98ca43;
-}
-.outerspatial .leaflet-bar button:hover .locate {
-  fill: #98ca43;
-}
-.outerspatial .leaflet-bar a.pressed,
-.outerspatial .leaflet-bar button.pressed {
-  background-color: #98ca43;
-}
-.outerspatial .leaflet-bar button.pressed .locate,
-.outerspatial .leaflet-bar button.pressed:hover .locate {
-  fill: #fff;
-}
 .outerspatial .leaflet-bar a.leaflet-disabled,
 .outerspatial .leaflet-bar a.leaflet-disabled:hover,
 .outerspatial .leaflet-bar button.leaflet-disabled,
@@ -916,14 +875,48 @@
        -o-text-shadow: none;
           text-shadow: none;*/
   background-color: #98ca43;
+}
+.outerspatial .leaflet-bar a.pressed,
+.outerspatial .leaflet-bar button.pressed {
+  background-color: #98ca43;
+}
+.outerspatial .leaflet-bar button .icon-svg-line {
+  stroke: #444444;
+  stroke-width: 2;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill-rule: evenodd;
+}
+.outerspatial .leaflet-bar a:active,
+.outerspatial .leaflet-bar a:hover,
+.outerspatial .leaflet-bar button:active,
+.outerspatial .leaflet-bar button:hover .icon-svg-line {
+  stroke: #98ca43;
+}
+.outerspatial .leaflet-bar button.pressed .icon-svg-line,
+.outerspatial .leaflet-bar button.pressed:hover .icon-svg-line,
+.outerspatial .leaflet-bar button.leaflet-disabled .icon-svg-line,
+.outerspatial .leaflet-bar button.leaflet-disabled:hover .icon-svg-line {
   stroke: #fff;
 }
-
-.outerspatial .leaflet-bar button.leaflet-disabled .zoom,
-.outerspatial .leaflet-bar button.leaflet-disabled:hover .zoom {
-  stroke: #fff;
+.outerspatial .leaflet-bar button .icon-svg-path {
+  fill: #444444;
+  fill-rule: evenodd;
+  stroke-width: 0;
 }
-
+.outerspatial .leaflet-bar a:active,
+.outerspatial .leaflet-bar a:hover,
+.outerspatial .leaflet-bar button:active,
+.outerspatial .leaflet-bar button:hover .icon-svg-path {
+  fill: #98ca43;
+}
+.outerspatial .leaflet-bar button.pressed .icon-svg-path,
+.outerspatial .leaflet-bar button.pressed:hover .icon-svg-path,
+.outerspatial .leaflet-bar button.leaflet-disabled .icon-svg-path,
+.outerspatial .leaflet-bar button.leaflet-disabled:hover .icon-svg-path {
+  fill: #fff;
+}
 /*.outerspatial .leaflet-bar a:first-child,
 .outerspatial .leaflet-bar button:first-child,
 .outerspatial .leaflet-bar div:first-child {
