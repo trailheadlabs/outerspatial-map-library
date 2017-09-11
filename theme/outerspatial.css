@@ -846,18 +846,21 @@
 .outerspatial .leaflet-bar button:hover,
 .outerspatial .leaflet-bar div,
 .outerspatial .leaflet-bar div:hover {
-  /*-webkit-text-shadow: 0 2px 2px #757571;
-     -moz-text-shadow: 0 2px 2px #757571;
-      -ms-text-shadow: 0 2px 2px #757571;
-       -o-text-shadow: 0 2px 2px #757571;
-          text-shadow: 0 2px 2px #757571;*/
+  -webkit-text-shadow: 0 2px 2px #d8d8d8;
+     -moz-text-shadow: 0 2px 2px #d8d8d8;
+      -ms-text-shadow: 0 2px 2px #d8d8d8;
+       -o-text-shadow: 0 2px 2px #d8d8d8;
+          text-shadow: 0 2px 2px #d8d8d8;
   background-color: #fff;
   border-top: none;
   border-left: none;
   border-right: none;
   border-bottom: 1px solid #d8d8d8;
-  color: #fff;
-  line-height: 10px;
+  color: #444444;
+  width: 18px;
+  height: 18px;
+  font-size: 18px;
+  line-height: 18px;
   padding: 6px 6px 5px 6px;
   text-align: center;
   text-decoration: none;
