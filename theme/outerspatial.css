@@ -846,24 +846,37 @@
 .outerspatial .leaflet-bar button:hover,
 .outerspatial .leaflet-bar div,
 .outerspatial .leaflet-bar div:hover {
-  -webkit-text-shadow: 0 2px 2px #757571;
+  /*-webkit-text-shadow: 0 2px 2px #757571;
      -moz-text-shadow: 0 2px 2px #757571;
       -ms-text-shadow: 0 2px 2px #757571;
        -o-text-shadow: 0 2px 2px #757571;
-          text-shadow: 0 2px 2px #757571;
+          text-shadow: 0 2px 2px #757571;*/
   background-color: #fff;
-  border: none;
-  /*border-bottom: 1px solid #404041;
-  border-left: 1px solid #404041;
-  border-right: 1px solid #404041;
-  border-top: none;*/
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 1px solid #d8d8d8;
   color: #fff;
-  /*height: 30px;*/
   line-height: 10px;
-  padding: 6px;
+  padding: 6px 6px 5px 6px;
   text-align: center;
   text-decoration: none;
-  /*width: 30px;*/
+}
+/*.outerspatial .leaflet-bar a:first-child,
+.outerspatial .leaflet-bar button:first-child,
+.outerspatial .leaflet-bar div:first-child {
+  border-bottom: 1px solid #d8d8d8;
+}*/
+.outerspatial .leaflet-bar a:last-child,
+.outerspatial .leaflet-bar button:last-child,
+.outerspatial .leaflet-bar div:last-child {
+  border-bottom: none;
+  padding-bottom: 6px;
+}
+.outerspatial .leaflet-bar a.leaflet-bar-single,
+.outerspatial .leaflet-bar button.leaflet-bar-single,
+.outerspatial .leaflet-bar div.leaflet-bar-single {
+  padding: 6px;
 }
 .outerspatial .leaflet-bar a.leaflet-disabled,
 .outerspatial .leaflet-bar a.leaflet-disabled:hover,
@@ -874,7 +887,8 @@
       -ms-text-shadow: none;
        -o-text-shadow: none;
           text-shadow: none;*/
-  background-color: #98ca43;
+  background-color: #9b9b9b;
+
 }
 .outerspatial .leaflet-bar a.pressed,
 .outerspatial .leaflet-bar button.pressed {
@@ -916,25 +930,6 @@
 .outerspatial .leaflet-bar button.leaflet-disabled .icon-svg-path,
 .outerspatial .leaflet-bar button.leaflet-disabled:hover .icon-svg-path {
   fill: #fff;
-}
-/*.outerspatial .leaflet-bar a:first-child,
-.outerspatial .leaflet-bar button:first-child,
-.outerspatial .leaflet-bar div:first-child {
-  border-top: 1px solid #404041;
-  height: 26px;
-}
-.outerspatial .leaflet-bar a:last-child,
-.outerspatial .leaflet-bar button:last-child,
-.outerspatial .leaflet-bar div:last-child {
-  border-bottom: 1px solid #404041;
-  border-top: none;
-  height: 27px;
-}*/
-.outerspatial .leaflet-bar a.leaflet-bar-single,
-.outerspatial .leaflet-bar button.leaflet-bar-single,
-.outerspatial .leaflet-bar div.leaflet-bar-single {
-  /*padding-top: 3px;*/
-  /*height: 30px;*/
 }
 
 /* Controls */

@@ -65,13 +65,7 @@ var LocateControl = L.Control.extend({
     this.options.followCircleStyle = obj;
     me._button = L.DomUtil.create('button', 'leaflet-bar-single', this._container);
     me._button.setAttribute('alt', this.options.strings.title);
-    me._button.innerHTML = '' +
-      '<svg xmlns="http://www.w3.org/2000/svg" height="18" width="18" viewBox="-0.75 -0.75 18 18">' +
-        '<g class="icon-svg-path">' +
-        '<path d="M11.993 15.3l4-14c.2-.8-.5-1.5-1.3-1.3l-14 4c-.9.3-1 1.5-.1 1.9l6.6 2.9 2.8 6.6c.5.9 1.7.8 2-.1zm1.5-12.8l-2.7 9.5-1.9-4.4c-.1-.2-.3-.4-.5-.5l-4.4-1.9z"/>' +
-        '</g>' +
-      '</svg>';
-
+    me.setIcon('default');
     L.DomEvent
       .on(me._button, 'click', L.DomEvent.stopPropagation)
       .on(me._button, 'click', L.DomEvent.preventDefault)
@@ -93,7 +87,7 @@ var LocateControl = L.Control.extend({
     }
     function locate () {
       if (!me._event) {
-        L.DomUtil.addClass(me._button, 'requesting');
+        me.setIcon('requesting');
         L.DomUtil.addClass(me._button, 'pressed');
         L.DomUtil.removeClass(me._button, 'following');
       } else {
@@ -167,7 +161,7 @@ var LocateControl = L.Control.extend({
       map.off('dragstart', stopFollowing);
       L.DomUtil.removeClass(me._button, 'following');
       L.DomUtil.removeClass(me._button, 'pressed');
-      L.DomUtil.removeClass(me._button, 'requesting');
+      me.setIcon('default');
       resetVariables();
       me._layer.clearLayers();
       me._circleMarker = undefined;
@@ -236,7 +230,7 @@ var LocateControl = L.Control.extend({
         return;
       }
 
-      L.DomUtil.removeClass(me._button, 'requesting');
+      me.setIcon('default');
       L.DomUtil.addClass(me._button, 'pressed');
 
       if (me._following) {
@@ -253,6 +247,25 @@ var LocateControl = L.Control.extend({
     this.stopFollowing = stopFollowing;
     this.stopLocate = stopLocate;
     return this._container;
+  },
+  setIcon: function (icon) {
+    if (icon === 'default') {
+      this._button.innerHTML = '' +
+        '<svg xmlns="http://www.w3.org/2000/svg" height="18" width="18" viewBox="-0.75 -0.75 18 18">' +
+          '<g class="icon-svg-path">' +
+          '<path d="M11.993 15.3l4-14c.2-.8-.5-1.5-1.3-1.3l-14 4c-.9.3-1 1.5-.1 1.9l6.6 2.9 2.8 6.6c.5.9 1.7.8 2-.1zm1.5-12.8l-2.7 9.5-1.9-4.4c-.1-.2-.3-.4-.5-.5l-4.4-1.9z"/>' +
+          '</g>' +
+        '</svg>';
+    } else if (icon === 'requesting') {
+      this._button.innerHTML = '' +
+        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="2 2 16 16" width="18" height="18">' +
+          '<g class="icon-svg-path">' +
+            '<path d="M8,3c1.179,0,2.311,0.423,3.205,1.17L8.883,6.492l6.211,0.539L14.555,0.82l-1.93,1.93 C11.353,1.632,9.71,1,8,1C4.567,1,1.664,3.454,1.097,6.834l1.973,0.331C3.474,4.752,5.548,3,8,3z"/>' +
+            '<path d="M8,13c-1.179,0-2.311-0.423-3.205-1.17l2.322-2.322L0.906,8.969l0.539,6.211l1.93-1.93 C4.647,14.368,6.29,15,8,15c3.433,0,6.336-2.454,6.903-5.834l-1.973-0.331C12.526,11.248,10.452,13,8,13z" data-color="color-2"/>' +
+            '<animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 9 9" to="360 9 9" dur="1.0s" repeatCount="indefinite"/>' +
+          '</g>' +
+        '</svg>';
+    }
   }
 });
 
