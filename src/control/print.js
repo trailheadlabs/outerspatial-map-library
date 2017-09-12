@@ -5,32 +5,49 @@
 var util = require('../util/util');
 var PrintControl = L.Control.extend({
   options: {
+    position: 'topright',
     ui: true,
     url: 'https://www.trailheadlabs.com/labs/outerspatial-map-library/print/'
   },
   initialize: function (options) {
     L.Util.setOptions(this, options);
 
-    if (this.options.ui === true) {
-      this._li = L.DomUtil.create('li', '');
-      this._button = L.DomUtil.create('button', 'print', this._li);
-      this._button.setAttribute('alt', 'Print the map');
-      L.DomEvent.addListener(this._button, 'click', this.print, this);
-    }
+    // if (this.options.ui === true) {
+    //   this._li = L.DomUtil.create('li', '');
+    //   this._button = L.DomUtil.create('button', 'print', this._li);
+    //   this._button.setAttribute('alt', 'Print the map');
+    //   L.DomEvent.addListener(this._button, 'click', this.print, this);
+    // }
 
     return this;
   },
-  addTo: function (map) {
-    if (this.options.ui === true) {
-      var toolbar = util.getChildElementsByClassName(map.getContainer().parentNode.parentNode, 'outerspatial-toolbar')[0];
-      toolbar.childNodes[1].appendChild(this._li);
-      toolbar.style.display = 'block';
-      this._container = toolbar.parentNode.parentNode;
-      util.getChildElementsByClassName(this._container.parentNode, 'outerspatial-map-wrapper')[0].style.top = '28px';
-    }
-
-    this._map = map;
-    return this;
+  // addTo: function (map) {
+  //   if (this.options.ui === true) {
+  //     var toolbar = util.getChildElementsByClassName(map.getContainer().parentNode.parentNode, 'outerspatial-toolbar')[0];
+  //     toolbar.childNodes[1].appendChild(this._li);
+  //     toolbar.style.display = 'block';
+  //     this._container = toolbar.parentNode.parentNode;
+  //     util.getChildElementsByClassName(this._container.parentNode, 'outerspatial-map-wrapper')[0].style.top = '28px';
+  //   }
+  //
+  //   this._map = map;
+  //   return this;
+  // },
+  onAdd: function () {
+    var container = L.DomUtil.create('div', 'leaflet-bar leaflet-control');
+    var button = L.DomUtil.create('button', '', container);
+    button.innerHTML = '' +
+      '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18">' +
+        '<g class="icon-svg-line">' +
+          '<polyline data-color="color-2" points="6 6 6 1 18 1 18 6"/>' +
+          '<path d="M5,18H1v-7c0-2.8,2.2-5,5-5 h12c2.8,0,5,2.2,5,5v7h-4"/>' +
+          '<line x1="17" y1="10" x2="18" y2="10"/>' +
+          '<rect x="6" y="14" width="12" height="9"/>' +
+        '</g>' +
+      '</svg>';
+    button.setAttribute('alt', 'Print the map');
+    L.DomEvent.addListener(button, 'click', this.print, this);
+    return container;
   },
   _clean: function (layer) {
     delete layer.L;
