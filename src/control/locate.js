@@ -258,11 +258,11 @@ var LocateControl = L.Control.extend({
         '</svg>';
     } else if (icon === 'requesting') {
       this._button.innerHTML = '' +
-        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="2 2 16 16" width="18" height="18">' +
+        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18" width="18" height="18">' +
           '<g class="icon-svg-path">' +
             '<path d="M8,3c1.179,0,2.311,0.423,3.205,1.17L8.883,6.492l6.211,0.539L14.555,0.82l-1.93,1.93 C11.353,1.632,9.71,1,8,1C4.567,1,1.664,3.454,1.097,6.834l1.973,0.331C3.474,4.752,5.548,3,8,3z"/>' +
             '<path d="M8,13c-1.179,0-2.311-0.423-3.205-1.17l2.322-2.322L0.906,8.969l0.539,6.211l1.93-1.93 C4.647,14.368,6.29,15,8,15c3.433,0,6.336-2.454,6.903-5.834l-1.973-0.331C12.526,11.248,10.452,13,8,13z" data-color="color-2"/>' +
-            '<animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 9 9" to="360 9 9" dur="1.0s" repeatCount="indefinite"/>' +
+            '<animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 8 8" to="360 8 8" dur="1.0s" repeatCount="indefinite"/>' +
           '</g>' +
         '</svg>';
     }
