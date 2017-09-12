@@ -1106,17 +1106,6 @@
   background-image: url('images/control/geocoder/spinner@2x.gif');
 }
 
-/* Home Control */
-/*.outerspatial .leaflet-control-home button {
-  background-image: url('images/font-awesome/home.png');
-  background-position: 5px 4px;
-  background-repeat: no-repeat;
-  background-size: 16px 16px;
-}
-.outerspatial .leaflet-retina .leaflet-control-home button {
-  background-image: url('images/font-awesome/home@2x.png');
-}*/
-
 /* Info Control */
 .outerspatial .leaflet-control-info {
   background-color: #f2f2f2;
@@ -1141,24 +1130,6 @@
     .outerspatial .leaflet-control-legend ul li {
       list-style-type: none;
     }
-
-/* Locate Control */
-/*.outerspatial .outerspatial-control-locate button {
-  background-image: url('images/font-awesome/location-arrow.png');
-  background-position: 4px;
-  background-repeat: no-repeat;
-  background-size: 16px 16px;
-}
-.outerspatial .leaflet-retina .outerspatial-control-locate button {
-  background-image: url('images/font-awesome/location-arrow@2x.png');
-}*/
-.outerspatial .outerspatial-control-locate button.requesting {
-  background-image: url('images/control/locate/spinner.gif');
-  background-position: 50% 50%;
-}
-.outerspatial .leaflet-retina .outerspatial-control-locate button.requesting {
-  background-image: url('images/control/locate/spinner@2x.gif');
-}
 
 /* Measure Control */
 .outerspatial-control-measure button.leaflet-bar-single {
@@ -1302,12 +1273,12 @@
   }
 
 /* Print Control */
-.outerspatial-toolbar button.print {
+/*.outerspatial-toolbar button.print {
   background-image: url('images/font-awesome/print.png');
 }
 .outerspatial-retina .outerspatial-toolbar button.print {
   background-image: url('images/font-awesome/print@2x.png');
-}
+}*/
 
 /* Scale Control */
 .outerspatial .leaflet-control-scale {
@@ -1321,26 +1292,6 @@
 }
 .outerspatial-retina .outerspatial-toolbar button.share {
   background-image: url('images/font-awesome/envelope@2x.png');
-}
-
-/* Smallzoom Control */
-.outerspatial .leaflet-control-zoom .in {
-  background-image: url('images/font-awesome/plus.png');
-  background-position: 5px 4px;
-  background-repeat: no-repeat;
-  background-size: 16px 16px;
-}
-.outerspatial .leaflet-retina .leaflet-control-zoom .in {
-  background-image: url('images/font-awesome/plus@2x.png');
-}
-.outerspatial .leaflet-control-zoom .out {
-  background-image: url('images/font-awesome/minus.png');
-  background-position: 5px 4px;
-  background-repeat: no-repeat;
-  background-size: 16px 16px;
-}
-.outerspatial .leaflet-retina .leaflet-control-zoom .out {
-  background-image: url('images/font-awesome/minus@2x.png');
 }
 
 /* Switcher Control */

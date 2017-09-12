@@ -12,8 +12,8 @@ var SmallZoomControl = L.Control.extend({
   },
   onAdd: function (map) {
     this._container = L.DomUtil.create('div', 'leaflet-bar');
-    this._zoomInButton = this._createButton('Zoom in', 'in', this._container, this._zoomIn, this);
-    this._zoomOutButton = this._createButton('Zoom out', 'out', this._container, this._zoomOut, this);
+    this._zoomInButton = this._createButton('Zoom in', undefined, this._container, this._zoomIn, this);
+    this._zoomOutButton = this._createButton('Zoom out', undefined, this._container, this._zoomOut, this);
 
     this._zoomInButton.innerHTML = '' +
       '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18" width="18" height="18">' +

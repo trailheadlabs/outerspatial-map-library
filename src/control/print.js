@@ -35,7 +35,7 @@ var PrintControl = L.Control.extend({
   // },
   onAdd: function () {
     var container = L.DomUtil.create('div', 'leaflet-bar leaflet-control');
-    var button = L.DomUtil.create('button', '', container);
+    var button = L.DomUtil.create('button', undefined, container);
     button.innerHTML = '' +
       '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18">' +
         '<g class="icon-svg-line">' +
