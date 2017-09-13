@@ -16,17 +16,16 @@ var SmallZoomControl = L.Control.extend({
     this._zoomOutButton = this._createButton('Zoom out', undefined, this._container, this._zoomOut, this);
 
     this._zoomInButton.innerHTML = '' +
-      '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18" width="18" height="18">' +
+      '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18">' +
         '<g class="icon-svg-line">' +
-          '<line x1="8.5" y1="1.5" x2="8.5" y2="15.5"/>' +
-          '<line x1="1.5" y1="8.5" x2="15.5" y2="8.5"/>' +
+          '<line vector-effect="non-scaling-stroke" x1="12" y1="2" x2="12" y2="22"/>' +
+          '<line vector-effect="non-scaling-stroke" x1="22" y1="12" x2="2" y2="12"/>' +
         '</g>' +
       '</svg>';
-
     this._zoomOutButton.innerHTML = '' +
-      '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18" width="18" height="18">' +
+      '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18">' +
         '<g class="icon-svg-line">' +
-          '<line x1="1.5" y1="8.5" x2="15.5" y2="8.5"/>' +
+          '<line vector-effect="non-scaling-stroke" x1="22" y1="12" x2="2" y2="12"/>' +
         '</g>' +
       '</svg>';
     map.on('zoomend zoomlevelschange', this._updateDisabled, this);

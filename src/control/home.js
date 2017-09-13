@@ -15,10 +15,10 @@ var HomeControl = L.Control.extend({
     var button = L.DomUtil.create('button', 'leaflet-bar-single', container);
 
     button.innerHTML = '' +
-      '<svg width="18" height="18" viewBox="-0.75 -0.75 18 18" xmlns="http://www.w3.org/2000/svg">' +
+      '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="18" height="18">' +
         '<g class="icon-svg-line">' +
-          '<polyline points="13.6949153 7.45762712 13.6949153 15.8644068 9.62711864 15.8644068 9.62711864 11.5254237 6.37288136 11.5254237 6.37288136 15.8644068 2.30508475 15.8644068 2.30508475 7.45762712"/>' +
-          '<polyline points="0.13559322 6.91525424 8 0.13559322 15.8644068 6.91525424"/>' +
+          '<polyline vector-effect="non-scaling-stroke" points="26 16 26 30 19 30 19 22 13 22 13 30 6 30 6 16"/>' +
+          '<polyline vector-effect="non-scaling-stroke" points="1 15 16 2 31 15"/>' +
         '</g>' +
       '</svg>';
     button.setAttribute('alt', 'Pan/zoom to initial extent');

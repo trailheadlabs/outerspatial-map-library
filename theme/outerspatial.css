@@ -899,7 +899,7 @@
 }
 .outerspatial .leaflet-bar button .icon-svg-line {
   stroke: #444444;
-  stroke-width: 2;
+  stroke-width: 1.5;
   fill: none;
   stroke-linecap: round;
   stroke-linejoin: round;
@@ -919,8 +919,6 @@
 }
 .outerspatial .leaflet-bar button .icon-svg-path {
   fill: #444444;
-  fill-rule: evenodd;
-  stroke-width: 0;
 }
 .outerspatial .leaflet-bar a:active,
 .outerspatial .leaflet-bar a:hover,

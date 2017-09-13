@@ -39,10 +39,10 @@ var PrintControl = L.Control.extend({
     button.innerHTML = '' +
       '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18">' +
         '<g class="icon-svg-line">' +
-          '<polyline data-color="color-2" points="6 6 6 1 18 1 18 6"/>' +
-          '<path d="M5,18H1v-7c0-2.8,2.2-5,5-5 h12c2.8,0,5,2.2,5,5v7h-4"/>' +
-          '<line x1="17" y1="10" x2="18" y2="10"/>' +
-          '<rect x="6" y="14" width="12" height="9"/>' +
+          '<polyline vector-effect="non-scaling-stroke" points="6 6 6 1 18 1 18 6"/>' +
+          '<path vector-effect="non-scaling-stroke" d="M5,18H1v-7c0-2.8,2.2-5,5-5 h12c2.8,0,5,2.2,5,5v7h-4"/>' +
+          '<line vector-effect="non-scaling-stroke" x1="17" y1="10" x2="18" y2="10"/>' +
+          '<rect vector-effect="non-scaling-stroke" x="6" y="14" width="12" height="9"/>' +
         '</g>' +
       '</svg>';
     button.setAttribute('alt', 'Print the map');

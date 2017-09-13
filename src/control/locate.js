@@ -251,18 +251,18 @@ var LocateControl = L.Control.extend({
   setIcon: function (icon) {
     if (icon === 'default') {
       this._button.innerHTML = '' +
-        '<svg xmlns="http://www.w3.org/2000/svg" height="18" width="18" viewBox="-0.75 -0.75 18 18">' +
-          '<g class="icon-svg-path">' +
-          '<path d="M11.993 15.3l4-14c.2-.8-.5-1.5-1.3-1.3l-14 4c-.9.3-1 1.5-.1 1.9l6.6 2.9 2.8 6.6c.5.9 1.7.8 2-.1zm1.5-12.8l-2.7 9.5-1.9-4.4c-.1-.2-.3-.4-.5-.5l-4.4-1.9z"/>' +
+        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="2 0 32 32" width="18" height="18">' +
+          '<g class="icon-svg-line">' +
+            '<polygon transform="scale(-1,1) translate(-32, 0)" vector-effect="non-scaling-stroke" points="29 10 2 2 10 29 16 16"/>' +
           '</g>' +
         '</svg>';
     } else if (icon === 'requesting') {
       this._button.innerHTML = '' +
-        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18" width="18" height="18">' +
+        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="18" height="18">' +
           '<g class="icon-svg-path">' +
-            '<path d="M8,3c1.179,0,2.311,0.423,3.205,1.17L8.883,6.492l6.211,0.539L14.555,0.82l-1.93,1.93 C11.353,1.632,9.71,1,8,1C4.567,1,1.664,3.454,1.097,6.834l1.973,0.331C3.474,4.752,5.548,3,8,3z"/>' +
-            '<path d="M8,13c-1.179,0-2.311-0.423-3.205-1.17l2.322-2.322L0.906,8.969l0.539,6.211l1.93-1.93 C4.647,14.368,6.29,15,8,15c3.433,0,6.336-2.454,6.903-5.834l-1.973-0.331C12.526,11.248,10.452,13,8,13z" data-color="color-2"/>' +
-            '<animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 8 8" to="360 8 8" dur="1.0s" repeatCount="indefinite"/>' +
+            '<path vector-effect="non-scaling-stroke" d="M6,32C6,17.664,17.664,6,32,6c6.348,0,12.391,2.285,17.136,6.45l-6.843,6.843 c-0.271,0.271-0.363,0.673-0.238,1.035c0.126,0.362,0.447,0.62,0.828,0.665l17,2C59.922,22.998,59.961,23,60,23 c0.264,0,0.519-0.104,0.707-0.293c0.216-0.216,0.322-0.52,0.286-0.824l-2-17c-0.045-0.381-0.303-0.702-0.665-0.828 c-0.362-0.125-0.765-0.034-1.035,0.238l-5.326,5.326C46.462,4.703,39.412,2,32,2C15.458,2,2,15.458,2,32c0,1.104,0.896,2,2,2 S6,33.104,6,32z"/>' +
+            '<path vector-effect="non-scaling-stroke" d="M60,30c-1.104,0-2,0.896-2,2c0,14.337-11.664,26-26,26c-6.348,0-12.391-2.285-17.135-6.451l6.842-6.842 c0.271-0.271,0.363-0.673,0.238-1.035c-0.126-0.362-0.447-0.62-0.828-0.665l-17-2c-0.306-0.036-0.608,0.07-0.824,0.286 c-0.216,0.217-0.322,0.52-0.286,0.824l2,17c0.045,0.38,0.303,0.702,0.665,0.827C5.779,59.981,5.89,60,6,60 c0.261,0,0.517-0.103,0.707-0.293l5.326-5.326C17.538,59.297,24.587,62,32,62c16.542,0,30-13.458,30-30C62,30.896,61.104,30,60,30z"/>' +
+            '<animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 32 32" to="360 32 32" dur="1.0s" repeatCount="indefinite"/>' +
           '</g>' +
         '</svg>';
     }
