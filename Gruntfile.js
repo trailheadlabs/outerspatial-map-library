@@ -214,7 +214,8 @@ module.exports = function (grunt) {
       scripts: {
         files: [
           'src/**/*.js',
-          'theme/**/*.css'
+          'theme/**/*.css',
+          'examples/*.js'
         ],
         tasks: ['build'],
         options: {
