@@ -4,6 +4,9 @@
 
 var util = require('../util/util');
 var FullscreenControl = L.Control.extend({
+  options: {
+    position: 'topright'
+  },
   initialize: function (options) {
     this._frame = null;
     this._supported = true;
@@ -19,11 +22,17 @@ var FullscreenControl = L.Control.extend({
       } catch (exception) {
         this._supported = false;
       }
+
+      this._li = L.DomUtil.create('li', '');
+      this._button = L.DomUtil.create('button', 'fullscreen enter', this._li);
+    } else {
+      this._buttonContainer = L.DomUtil.create('div', 'leaflet-bar leaflet-control');
+      this._button = L.DomUtil.create('button', undefined, this._buttonContainer);
+      this._setIcon('enterFullscreen');
     }
 
     // TODO: Also add ARIA attributes.
-    this._li = L.DomUtil.create('li', '');
-    this._button = L.DomUtil.create('button', 'fullscreen enter', this._li);
+
     this._button.setAttribute('alt', 'Enter fullscreen');
     L.DomEvent.addListener(this._button, 'click', this.fullscreen, this);
 
@@ -38,16 +47,38 @@ var FullscreenControl = L.Control.extend({
       this.fullscreen();
     }
   },
-  addTo: function (map) {
-    var toolbar = util.getChildElementsByClassName(map.getContainer().parentNode.parentNode, 'outerspatial-toolbar')[0];
-
-    toolbar.childNodes[1].appendChild(this._li);
-    toolbar.style.display = 'block';
-    this._container = toolbar.parentNode.parentNode;
+  // addTo: function (map) {
+  //   var toolbar = util.getChildElementsByClassName(map.getContainer().parentNode.parentNode, 'outerspatial-toolbar')[0];
+  //
+  //   toolbar.childNodes[1].appendChild(this._li);
+  //   toolbar.style.display = 'block';
+  //   this._container = toolbar.parentNode.parentNode;
+  //   this._isFullscreen = false;
+  //   this._map = map;
+  //   util.getChildElementsByClassName(this._container.parentNode, 'outerspatial-map-wrapper')[0].style.top = '28px';
+  //   return this;
+  // },
+  onAdd: function (map) {
     this._isFullscreen = false;
     this._map = map;
-    util.getChildElementsByClassName(this._container.parentNode, 'outerspatial-map-wrapper')[0].style.top = '28px';
-    return this;
+    return this._buttonContainer;
+  },
+  _setIcon: function (icon) {
+    if (icon === 'enterFullscreen') {
+      this._button.innerHTML = '' +
+        '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="2 2 14 14">' +
+          '<g class="icon-svg-path">' +
+            '<path d="M4.5 11H3v4h4v-1.5H4.5V11zM3 7h1.5V4.5H7V3H3v4zm10.5 6.5H11V15h4v-4h-1.5v2.5zM11 3v1.5h2.5V7H15V3h-4z"/>' +
+          '</g>' +
+        '</svg>';
+    } else if (icon === 'exitFullscreen') {
+      this._button.innerHTML = '' +
+        '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="2 2 14 14">' +
+          '<g class="icon-svg-path">' +
+            '<path d="M3 12.5h2.5V15H7v-4H3v1.5zm2.5-7H3V7h4V3H5.5v2.5zM11 15h1.5v-2.5H15V11h-4v4zm1.5-9.5V3H11v4h4V5.5h-2.5z"/>' +
+          '</g>' +
+        '</svg>';
+    }
   },
   _getParentDocumentBody: function (el) {
     while (el.parentNode) {
@@ -66,6 +97,7 @@ var FullscreenControl = L.Control.extend({
     if (this._supported) {
       var body = document.body;
       var utils;
+      this._container = this._buttonContainer.parentNode.parentNode.parentNode;
 
       if (this._isFullscreen) {
         if (this._frame) {
@@ -94,8 +126,7 @@ var FullscreenControl = L.Control.extend({
         this._container.style.top = this._containerTop;
         L.DomEvent.removeListener(document, 'keyup', this._onKeyUp);
         this._isFullscreen = false;
-        L.DomUtil.removeClass(this._button, 'exit');
-        L.DomUtil.addClass(this._button, 'enter');
+        this._setIcon('enterFullscreen');
         this._button.setAttribute('alt', 'Enter fullscreen');
         this._map.fire('exitfullscreen');
 
@@ -160,8 +191,7 @@ var FullscreenControl = L.Control.extend({
         this._container.style.top = '0';
         L.DomEvent.addListener(document, 'keyup', this._onKeyUp, this);
         this._isFullscreen = true;
-        L.DomUtil.removeClass(this._button, 'enter');
-        L.DomUtil.addClass(this._button, 'exit');
+        this._setIcon('exitFullscreen');
         this._button.setAttribute('alt', 'Exit fullscreen');
         this._map.fire('enterfullscreen');
 

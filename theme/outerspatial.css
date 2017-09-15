@@ -907,7 +907,7 @@
 }
 .outerspatial .leaflet-bar a:active,
 .outerspatial .leaflet-bar a:hover,
-.outerspatial .leaflet-bar button:active,
+.outerspatial .leaflet-bar button:active .icon-svg-line,
 .outerspatial .leaflet-bar button:hover .icon-svg-line {
   stroke: #98ca43;
 }
@@ -922,7 +922,7 @@
 }
 .outerspatial .leaflet-bar a:active,
 .outerspatial .leaflet-bar a:hover,
-.outerspatial .leaflet-bar button:active,
+.outerspatial .leaflet-bar button:active .icon-svg-path,
 .outerspatial .leaflet-bar button:hover .icon-svg-path {
   fill: #98ca43;
 }
