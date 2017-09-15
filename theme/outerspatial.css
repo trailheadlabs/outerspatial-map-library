@@ -443,7 +443,7 @@
 /* Leaflet Overrides */
 .outerspatial .leaflet-container {
   color: inherit;
-  font-family: inherit;
+  font-family: sans-serif;
   font-size: inherit;
   overflow: hidden;
   touch-action: none;
@@ -846,11 +846,6 @@
 .outerspatial .leaflet-bar button:hover,
 .outerspatial .leaflet-bar div,
 .outerspatial .leaflet-bar div:hover {
-  -webkit-text-shadow: 0 2px 2px #d8d8d8;
-     -moz-text-shadow: 0 2px 2px #d8d8d8;
-      -ms-text-shadow: 0 2px 2px #d8d8d8;
-       -o-text-shadow: 0 2px 2px #d8d8d8;
-          text-shadow: 0 2px 2px #d8d8d8;
   background-color: #fff;
   border-top: none;
   border-left: none;
@@ -1130,18 +1125,9 @@
     }
 
 /* Measure Control */
-.outerspatial-control-measure button.leaflet-bar-single {
-  background-image: url('images/control/measure/ruler.png');
-  background-position: 5px 4px;
-  background-repeat: no-repeat;
-  background-size: 16px 16px;
-}
-.leaflet-retina .outerspatial-control-measure button.leaflet-bar-single {
-  background-image: url('images/control/measure/ruler@2x.png');
-}
 .outerspatial-control-measure ul {
   display: none;
-  height: 28px;
+  height: 18px;
   left: 26px;
   list-style: none;
   margin: 0;
@@ -1172,8 +1158,8 @@
       color: #fff !important;
       display: block !important;
       font-size: 11px !important;
-      height: 28px !important;
-      line-height: 28px !important;
+      height: 18px !important;
+      line-height: 18px !important;
       padding-left: 10px !important;
       padding-right: 10px !important;
       text-align: center !important;

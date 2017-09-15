@@ -98,7 +98,17 @@ var MeasureControl = L.Control.extend({
       this._container = L.DomUtil.create('div', 'leaflet-bar leaflet-control outerspatial-control-measure');
       this._map = map;
       this._menu = L.DomUtil.create('ul', '', this._container);
-      this._button = L.DomUtil.create('button', 'leaflet-bar-single measure-control', this._container);
+      this._button = L.DomUtil.create('button', 'leaflet-bar-single', this._container);
+      this._button.innerHTML = '' +
+        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18">' +
+          '<g class="icon-svg-line">' +
+            '<line data-color="color-2" x1="11" y1="8" x2="12" y2="9"/>' +
+            '<line data-color="color-2" x1="14" y1="5" x2="16" y2="7"/>' +
+            '<line data-color="color-2" x1="8" y1="11" x2="10" y2="13"/>' +
+            '<line data-color="color-2" x1="5" y1="14" x2="6" y2="15"/>' +
+            '<rect x="1.393" y="8.464" transform="rotate(-45 12 12)" width="21.213" height="7.071"/>' +
+          '</g>' +
+        '</svg>';
 
       if (this._activeUnitArea) {
         var liArea = L.DomUtil.create('li', '', this._menu);
