@@ -860,11 +860,6 @@
   text-align: center;
   text-decoration: none;
 }
-/*.outerspatial .leaflet-bar a:first-child,
-.outerspatial .leaflet-bar button:first-child,
-.outerspatial .leaflet-bar div:first-child {
-  border-bottom: 1px solid #d8d8d8;
-}*/
 .outerspatial .leaflet-bar a:last-child,
 .outerspatial .leaflet-bar button:last-child,
 .outerspatial .leaflet-bar div:last-child {
@@ -880,11 +875,6 @@
 .outerspatial .leaflet-bar a.leaflet-disabled:hover,
 .outerspatial .leaflet-bar button.leaflet-disabled,
 .outerspatial .leaflet-bar button.leaflet-disabled:hover {
-  /*-webkit-text-shadow: none;
-     -moz-text-shadow: none;
-      -ms-text-shadow: none;
-       -o-text-shadow: none;
-          text-shadow: none;*/
   background-color: #9b9b9b;
 
 }
@@ -1255,14 +1245,6 @@
   .outerspatial .leaflet-retina .leaflet-control-overview button span {
     background-image: url('images/control/overview/toggle@2x.png');
   }
-
-/* Print Control */
-/*.outerspatial-toolbar button.print {
-  background-image: url('images/font-awesome/print.png');
-}
-.outerspatial-retina .outerspatial-toolbar button.print {
-  background-image: url('images/font-awesome/print@2x.png');
-}*/
 
 /* Scale Control */
 .outerspatial .leaflet-control-scale {
