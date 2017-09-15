@@ -1,7 +1,6 @@
 var OuterSpatial = {
   div: 'map',
-  fullscreenControl: true,
-  printControl: true
+  fullscreenControl: true
 };
 
 (function () {
