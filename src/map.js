@@ -19,6 +19,7 @@ require('./popup.js');
   L.Circle.mergeOptions(style);
   L.CircleMarker.mergeOptions(style);
   L.Control.Attribution.mergeOptions({
+    position: 'bottomleft',
     prefix: '&copy; <a href="https://www.outerspatial.com/" target="_blank">OuterSpatial</a>'
   });
   L.Map.addInitHook(function () {
