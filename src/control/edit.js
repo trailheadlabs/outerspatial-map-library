@@ -191,6 +191,46 @@ var EditControl = L.Control.extend({
     this._map._controllingInteractivity = 'map';
     this.fire('deactivated');
   },
+  _setIcon: function (type) {
+    if (type === 'circle') {
+      return '' +
+        '<svg width="18" height="18" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">' +
+          '<g class="icon-svg-path">' +
+            '<circle cx="12" cy="12" r="10"/>' +
+          '</g>' +
+        '</svg>';
+    } else if (type === 'rectangle') {
+      return '' +
+        '<svg width="18" height="18" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">' +
+          '<g class="icon-svg-path">' +
+            '<rect height="20" width="20" y="2" x="2"/>' +
+          '</g>' +
+        '</svg>';
+    } else if (type === 'polygon') {
+      return '' +
+        '<svg width="18" height="18" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">' +
+          '<g class="icon-svg-path">' +
+            '<polygon transform="rotate(-45 12 12)" points="23 12 14 23 1 18.5 1 5.5 14 1 23 12"/>' +
+          '</g>' +
+        '</svg>';
+    } else if (type === 'polyline') {
+      return '' +
+        '<svg width="18" height="18" viewbox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">' +
+          '<g class="icon-svg-line">' +
+           '<rect vector-effect="non-scaling-stroke" height="6" width="6" y="3" x="23" stroke-width="2"/>' +
+           '<rect vector-effect="non-scaling-stroke" height="6" width="6" y="23" x="3" stroke-width="2"/>' +
+           '<line vector-effect="non-scaling-stroke" y2="9" x2="23" y1="23" x1="9"/>' +
+          '</g>' +
+        '</svg>';
+    } else if (type === 'marker') {
+      return '' +
+        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18">' +
+          '<g class="icon-svg-path">' +
+            '<path d="M12,0C7.6,0,3,3.4,3,9c0,5.3,8,13.4,8.3,13.7c0.2,0.2,0.4,0.3,0.7,0.3s0.5-0.1,0.7-0.3C13,22.4,21,14.3,21,9 C21,3.4,16.4,0,12,0z M12,12c-1.7,0-3-1.3-3-3s1.3-3,3-3s3,1.3,3,3S13.7,12,12,12z"/>' +
+          '</g>' +
+        '</svg>';
+    }
+  },
   _initializeMode: function (container, handler, title) {
     var button = null;
     var me = this;
@@ -200,7 +240,8 @@ var EditControl = L.Control.extend({
     this._modes[type].handler = handler;
 
     if (this.options.toolbar) {
-      button = L.DomUtil.create('button', type, container);
+      button = L.DomUtil.create('button', undefined, container);
+      button.innerHTML = this._setIcon(type);
       button.setAttribute('alt', title);
       L.DomEvent
         .disableClickPropagation(button)

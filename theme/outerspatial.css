@@ -959,29 +959,6 @@
 }
 
 /* Edit Control */
-.outerspatial .leaflet-control-edit button {
-  background-image: url('images/control/draw/spritesheet.png');
-  background-repeat: no-repeat;
-}
-.outerspatial .leaflet-retina .leaflet-control-edit button {
-  background-image: url('images/control/draw/spritesheet@2x.png');
-  background-size: 270px 30px;
-}
-.outerspatial .leaflet-control-edit .polygon {
-  background-position: -31px -2px;
-}
-.outerspatial .leaflet-control-edit .polyline {
-  background-position: -2px -2px;
-}
-.outerspatial .leaflet-control-edit .rectangle {
-  background-position: -62px -2px;
-}
-.outerspatial .leaflet-control-edit .circle {
-  background-position: -92px -2px;
-}
-.outerspatial .leaflet-control-edit .marker {
-  background-position: -122px -2px;
-}
 .outerspatial .leaflet-mouse-marker {
   background-color: #fff;
   cursor: crosshair;
