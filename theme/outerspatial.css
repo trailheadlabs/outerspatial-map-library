@@ -133,10 +133,15 @@
     border-color: #41a7d0;
   }
 .outerspatial-toolbar {
-  -webkit-box-shadow: 0 1px 5px rgba(0, 0, 0, .15);
-     -moz-box-shadow: 0 1px 5px rgba(0, 0, 0, .15);
-          box-shadow: 0 1px 5px rgba(0, 0, 0, .15);
+  -webkit-box-shadow: 0 0 4px 0 rgba(0, 0, 0, .15);
+     -moz-box-shadow: 0 0 4px 0 rgba(0, 0, 0, .15);
+          box-shadow: 0 0 4px 0 rgba(0, 0, 0, .15);
   background-color: #ffffff;
+  border-top: 1px solid #dddddd;
+  border-left: 1px solid #dddddd;
+  border-right: 1px solid #dddddd;
+  box-sizing: border-box;
+  box-shadow: 0 0 4px 0 rgba(0,0,0,0.30);
   display: none;
   height: 30px;
   left: 0;
@@ -148,6 +153,7 @@
   .outerspatial-toolbar ul.left,
   .outerspatial-toolbar ul.right {
     line-height: 18px;
+    height: 30px;
     list-style-type: none;
     margin: 0;
     padding: 0;
@@ -158,40 +164,32 @@
   }
     .outerspatial-toolbar ul.left li {
       border-left: none !important;
-      border-right: solid 1px #757571 !important;
+      border-right: solid 1px #dddddd !important;
       float: left;
     }
-      .outerspatial-toolbar ul.left li:first-child {
-        border-left: solid 1px #757571 !important;
-      }
   .outerspatial-toolbar ul.right {
     float: right !important;
-    padding-right: 10px;
   }
     .outerspatial-toolbar ul.right li {
-      border-left: solid 1px #757571 !important;
+      border-left: solid 1px #dddddd !important;
       border-right: none !important;
       float: left !important;
     }
-      .outerspatial-toolbar ul.right li:last-child {
-        border-right: solid 1px #757571 !important;
-      }
   .outerspatial-toolbar ul li {
-    height: auto !important;
+    height: 29px !important;
     list-style-type: none !important;
     padding: 0 !important;
   }
   .outerspatial-toolbar button {
     background-color: #ffffff;
     border: none;
-    padding: 5px;
+    padding: 5px 6px 6px 6px;
     position: relative;
+    height:29px;
+    box-sizing: border-box;
   }
     .outerspatial-toolbar button:focus {
       outline-offset: -3px;
-    }
-    .outerspatial-toolbar button:hover {
-      background-color: #6d6e70;
     }
 
 /* Buttons and Forms */
@@ -895,13 +893,15 @@
 .outerspatial .leaflet-bar button.leaflet-disabled:hover .icon-svg-line {
   stroke: #fff;
 }
-.outerspatial .leaflet-bar button .icon-svg-path {
+.outerspatial .leaflet-bar button .icon-svg-path,
+.outerspatial-toolbar button .icon-svg-path {
   fill: #444444;
 }
 .outerspatial .leaflet-bar a:active,
 .outerspatial .leaflet-bar a:hover,
 .outerspatial .leaflet-bar button:active .icon-svg-path,
-.outerspatial .leaflet-bar button:hover .icon-svg-path {
+.outerspatial .leaflet-bar button:hover .icon-svg-path,
+.outerspatial-toolbar button:hover .icon-svg-path {
   fill: #98ca43;
 }
 .outerspatial .leaflet-bar button.pressed .icon-svg-path,

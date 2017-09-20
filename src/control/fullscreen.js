@@ -52,7 +52,7 @@ var FullscreenControl = L.Control.extend({
       this._container = toolbar.parentNode.parentNode;
       this._isFullscreen = false;
       this._map = map;
-      util.getChildElementsByClassName(this._container.parentNode, 'outerspatial-map-wrapper')[0].style.top = '28px';
+      util.getChildElementsByClassName(this._container.parentNode, 'outerspatial-map-wrapper')[0].style.top = '30px';
       return this;
     }
   },
