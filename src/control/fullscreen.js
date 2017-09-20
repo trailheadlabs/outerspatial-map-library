@@ -44,6 +44,7 @@ var FullscreenControl = L.Control.extend({
   addTo: function (map) {
     if (this._frame === null) {
       L.Control.prototype.addTo.call(this, map);
+      return this;
     } else {
       var toolbar = util.getChildElementsByClassName(map.getContainer().parentNode.parentNode, 'outerspatial-toolbar')[0];
       toolbar.childNodes[1].appendChild(this._li);
