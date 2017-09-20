@@ -1214,6 +1214,8 @@
 .outerspatial .leaflet-control-scale {
   cursor: -webkit-grab;
   cursor: -moz-grab;
+  margin-bottom: 10px;
+  margin-left: 10px;
 }
 
 /* Share Control */
