@@ -922,20 +922,20 @@
 
 /* Attribution Control */
 .outerspatial .leaflet-control-attribution {
-  -webkit-border-bottom-right-radius: 10px;
-  -webkit-border-top-right-radius: 10px;
-     -moz-border-radius-bottomright: 10px;
-     -moz-border-radius-topright: 10px;
-  background-color: #f2f2f2;
-  background-color: rgba(242,242,242,.8);
-  border-bottom-right-radius: 10px;
-  border-top-right-radius: 10px;
+  -webkit-border-bottom-right-radius: 14px;
+  -webkit-border-top-right-radius: 14px;
+     -moz-border-radius-bottomright: 14px;
+     -moz-border-radius-topright: 14px;
+  background-color: #ffffff;
+  background-color: rgba(255,255,255,.8);
+  border-bottom-right-radius: 14px;
+  border-top-right-radius: 14px;
   display: inline-block;
   line-height: 13px;
   margin-bottom: 10px;
   overflow: hidden;
-  padding: 3px 5px;
-  padding-right: 10px;
+  padding: 7px 5px;
+  padding-right: 17px;
   text-align: right;
   text-overflow: ellipsis;
   white-space: nowrap;
