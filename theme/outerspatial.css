@@ -136,9 +136,9 @@
   -webkit-box-shadow: 0 1px 5px rgba(0, 0, 0, .15);
      -moz-box-shadow: 0 1px 5px rgba(0, 0, 0, .15);
           box-shadow: 0 1px 5px rgba(0, 0, 0, .15);
-  background-color: #404041;
+  background-color: #ffffff;
   display: none;
-  height: 28px;
+  height: 30px;
   left: 0;
   position: absolute;
   top: 0;
@@ -147,7 +147,7 @@
 }
   .outerspatial-toolbar ul.left,
   .outerspatial-toolbar ul.right {
-    line-height: 0;
+    line-height: 18px;
     list-style-type: none;
     margin: 0;
     padding: 0;
@@ -182,17 +182,10 @@
     padding: 0 !important;
   }
   .outerspatial-toolbar button {
-    background-color: #404041;
-    background-position: 5px;
-    background-repeat: no-repeat;
-    background-size: 16px 16px;
+    background-color: #ffffff;
     border: none;
-    box-sizing: border-box;
-    height: 28px;
-    padding-bottom: 0;
-    padding-top: 0;
+    padding: 5px;
     position: relative;
-    width: 26px;
   }
     .outerspatial-toolbar button:focus {
       outline-offset: -3px;
@@ -978,20 +971,6 @@
 }
 .outerspatial .leaflet-edit-resize {
   cursor: pointer;
-}
-
-/* Fullscreen Control */
-.outerspatial-toolbar button.fullscreen.enter {
-  background-image: url('images/font-awesome/arrows-alt.png');
-}
-.outerspatial-retina .outerspatial-toolbar button.fullscreen.enter {
-  background-image: url('images/font-awesome/arrows-alt@2x.png');
-}
-.outerspatial-toolbar button.fullscreen.exit {
-  background-image: url('images/control/fullscreen/exit.png');
-}
-.outerspatial-retina .outerspatial-toolbar button.fullscreen.exit {
-  background-image: url('images/control/fullscreen/exit@2x.png');
 }
 
 /* Geocoder Control */

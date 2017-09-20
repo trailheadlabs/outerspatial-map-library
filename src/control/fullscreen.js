@@ -22,20 +22,14 @@ var FullscreenControl = L.Control.extend({
       } catch (exception) {
         this._supported = false;
       }
+      // TODO: Also add ARIA attributes.
 
       this._li = L.DomUtil.create('li', '');
-      this._button = L.DomUtil.create('button', 'fullscreen enter', this._li);
-    } else {
-      this._buttonContainer = L.DomUtil.create('div', 'leaflet-bar leaflet-control');
-      this._button = L.DomUtil.create('button', undefined, this._buttonContainer);
+      this._button = L.DomUtil.create('button', undefined, this._li);
       this._setIcon('enterFullscreen');
+      this._button.setAttribute('alt', 'Enter fullscreen');
+      L.DomEvent.addListener(this._button, 'click', this.fullscreen, this);
     }
-
-    // TODO: Also add ARIA attributes.
-
-    this._button.setAttribute('alt', 'Enter fullscreen');
-    L.DomEvent.addListener(this._button, 'click', this.fullscreen, this);
-
     return this;
   },
   _onKeyUp: function (e) {
@@ -47,21 +41,31 @@ var FullscreenControl = L.Control.extend({
       this.fullscreen();
     }
   },
-  // addTo: function (map) {
-  //   var toolbar = util.getChildElementsByClassName(map.getContainer().parentNode.parentNode, 'outerspatial-toolbar')[0];
-  //
-  //   toolbar.childNodes[1].appendChild(this._li);
-  //   toolbar.style.display = 'block';
-  //   this._container = toolbar.parentNode.parentNode;
-  //   this._isFullscreen = false;
-  //   this._map = map;
-  //   util.getChildElementsByClassName(this._container.parentNode, 'outerspatial-map-wrapper')[0].style.top = '28px';
-  //   return this;
-  // },
+  addTo: function (map) {
+    if (this._frame === null) {
+      L.Control.prototype.addTo.call(this, map);
+    } else {
+      var toolbar = util.getChildElementsByClassName(map.getContainer().parentNode.parentNode, 'outerspatial-toolbar')[0];
+      toolbar.childNodes[1].appendChild(this._li);
+      toolbar.style.display = 'block';
+      this._container = toolbar.parentNode.parentNode;
+      this._isFullscreen = false;
+      this._map = map;
+      util.getChildElementsByClassName(this._container.parentNode, 'outerspatial-map-wrapper')[0].style.top = '28px';
+      return this;
+    }
+  },
   onAdd: function (map) {
-    this._isFullscreen = false;
-    this._map = map;
-    return this._buttonContainer;
+    if (this._frame === null) {
+      this._buttonContainer = L.DomUtil.create('div', 'leaflet-bar leaflet-control');
+      this._button = L.DomUtil.create('button', undefined, this._buttonContainer);
+      this._setIcon('enterFullscreen');
+      this._button.setAttribute('alt', 'Enter fullscreen');
+      L.DomEvent.addListener(this._button, 'click', this.fullscreen, this);
+      this._isFullscreen = false;
+      this._map = map;
+      return this._buttonContainer;
+    }
   },
   _setIcon: function (icon) {
     if (icon === 'enterFullscreen') {
@@ -97,7 +101,10 @@ var FullscreenControl = L.Control.extend({
     if (this._supported) {
       var body = document.body;
       var utils;
-      this._container = this._buttonContainer.parentNode.parentNode.parentNode;
+
+      if (this._frame === null) {
+        this._container = this._buttonContainer.parentNode.parentNode.parentNode;
+      }
 
       if (this._isFullscreen) {
         if (this._frame) {

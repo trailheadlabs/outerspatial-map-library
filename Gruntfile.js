@@ -97,6 +97,10 @@ module.exports = function (grunt) {
           '**'
         ]
       },
+      'examples-iframe': {
+        dest: 'dist/',
+        src: 'examples/iframe-*.html'
+      },
       'examples-img': {
         cwd: 'examples/img/',
         dest: 'dist/examples/img',
@@ -215,7 +219,9 @@ module.exports = function (grunt) {
         files: [
           'src/**/*.js',
           'theme/**/*.css',
-          'examples/*.js'
+          'examples/*.js',
+          'examples/index.json',
+          'Gruntfile.js'
         ],
         tasks: ['build'],
         options: {
@@ -251,6 +257,7 @@ module.exports = function (grunt) {
   grunt.registerTask('examples', [
     'clean:examples',
     'copy:examples-data',
+    'copy:examples-iframe',
     'copy:examples-img',
     'generate-examples'
   ]);

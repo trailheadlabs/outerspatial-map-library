@@ -120,9 +120,11 @@
   "title": "Fullscreen Control"
 }, {
   "category": "Controls",
+  "css": true,
   "description": "",
+  "html": true,
   "id": "fullscreen-control-iframe",
-  "include": false,
+  "include": true,
   "title": "Fullscreen Control (Iframe)"
 }, {
   "category": "Controls",
