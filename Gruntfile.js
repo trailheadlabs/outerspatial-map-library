@@ -289,12 +289,8 @@ module.exports = function (grunt) {
       var example = examples[i];
 
       if (example.include && !example.under_development) {
-        var css = grunt.file.read('examples/default.css');
+        var css = grunt.file.read('examples/' + (example.css ? example.id : 'default') + '.css');
         var js = grunt.file.read('examples/' + example.id + '.js');
-
-        if (example.css) {
-          css += grunt.file.read('examples/' + example.id + '.css');
-        }
 
         html = grunt.file.read('examples/' + (example.html ? example.id : 'default') + '.html');
 
