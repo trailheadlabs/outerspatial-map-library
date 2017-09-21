@@ -44,7 +44,6 @@ var FullscreenControl = L.Control.extend({
   addTo: function (map) {
     if (this._frame === null) {
       L.Control.prototype.addTo.call(this, map);
-      return this;
     } else {
       var toolbar = util.getChildElementsByClassName(map.getContainer().parentNode.parentNode, 'outerspatial-toolbar')[0];
       toolbar.childNodes[1].appendChild(this._li);
@@ -53,8 +52,9 @@ var FullscreenControl = L.Control.extend({
       this._isFullscreen = false;
       this._map = map;
       util.getChildElementsByClassName(this._container.parentNode, 'outerspatial-map-wrapper')[0].style.top = '30px';
-      return this;
     }
+
+    return this;
   },
   onAdd: function (map) {
     if (this._frame === null) {
