@@ -32,7 +32,7 @@ var MeasureControl = L.Control.extend({
         weight: 4
       }
     },
-    position: 'topleft',
+    position: 'topright',
     units: {
       area: [
         'ac',

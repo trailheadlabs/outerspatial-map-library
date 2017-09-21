@@ -4,7 +4,7 @@
 
 var HomeControl = L.Control.extend({
   options: {
-    position: 'topleft'
+    position: 'topright'
   },
   initialize: function (options) {
     L.Util.extend(this.options, options);

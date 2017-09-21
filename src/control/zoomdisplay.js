@@ -4,7 +4,7 @@
 
 var ZoomDisplayControl = L.Control.extend({
   options: {
-    position: 'topleft'
+    position: 'topright'
   },
   onAdd: function (map) {
     this._map = map;

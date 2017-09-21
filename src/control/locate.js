@@ -34,7 +34,7 @@ var LocateControl = L.Control.extend({
     onLocationOutsideMapBounds: function (context) {
       context._map.notify.danger(context.options.strings.outsideMapBoundsMsg);
     },
-    position: 'topleft',
+    position: 'topright',
     setView: true,
     stopFollowingOnDrag: true,
     strings: {

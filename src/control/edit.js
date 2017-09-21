@@ -42,7 +42,7 @@ var EditControl = L.Control.extend({
         weight: 4
       }
     },
-    position: 'topleft',
+    position: 'topright',
     rectangle: {
       shapeOptions: {
         color: '#d46655',

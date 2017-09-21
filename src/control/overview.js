@@ -328,12 +328,20 @@ L.Map.mergeOptions({
 L.Map.addInitHook(function () {
   if (this.options.overviewControl) {
     var options = {};
+    var container;
+    var childNodes;
 
     if (typeof this.options.overviewControl === 'object') {
       options = this.options.overviewControl;
     }
 
     this.overviewControl = L.outerspatial.control.overview(options).addTo(this);
+    container = this.overviewControl._container.parentNode;
+    childNodes = container.childNodes;
+
+    if (childNodes.length > 1) {
+      container.insertBefore(this.overviewControl._container, null);
+    }
   }
 });
 
