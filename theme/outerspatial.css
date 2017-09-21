@@ -873,7 +873,8 @@
 .outerspatial .leaflet-bar button.pressed {
   background-color: #98ca43;
 }
-.outerspatial .leaflet-bar button .icon-svg-line {
+.outerspatial .leaflet-bar button .icon-svg-line,
+.outerspatial-toolbar button .icon-svg-line {
   stroke: #444444;
   stroke-width: 1.5;
   fill: none;
@@ -884,7 +885,8 @@
 .outerspatial .leaflet-bar a:active,
 .outerspatial .leaflet-bar a:hover,
 .outerspatial .leaflet-bar button:active .icon-svg-line,
-.outerspatial .leaflet-bar button:hover .icon-svg-line {
+.outerspatial .leaflet-bar button:hover .icon-svg-line,
+.outerspatial-toolbar button:hover .icon-svg-line {
   stroke: #98ca43;
 }
 .outerspatial .leaflet-bar button.pressed .icon-svg-line,

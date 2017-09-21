@@ -12,31 +12,31 @@ var PrintControl = L.Control.extend({
   initialize: function (options) {
     L.Util.setOptions(this, options);
 
-    // if (this.options.ui === true) {
-    //   this._li = L.DomUtil.create('li', '');
-    //   this._button = L.DomUtil.create('button', 'print', this._li);
-    //   this._button.setAttribute('alt', 'Print the map');
-    //   L.DomEvent.addListener(this._button, 'click', this.print, this);
-    // }
+    this._frame = null;
+    this._supported = true;
 
-    return this;
-  },
-  // addTo: function (map) {
-  //   if (this.options.ui === true) {
-  //     var toolbar = util.getChildElementsByClassName(map.getContainer().parentNode.parentNode, 'outerspatial-toolbar')[0];
-  //     toolbar.childNodes[1].appendChild(this._li);
-  //     toolbar.style.display = 'block';
-  //     this._container = toolbar.parentNode.parentNode;
-  //     util.getChildElementsByClassName(this._container.parentNode, 'outerspatial-map-wrapper')[0].style.top = '28px';
-  //   }
-  //
-  //   this._map = map;
-  //   return this;
-  // },
-  onAdd: function () {
-    var container = L.DomUtil.create('div', 'leaflet-bar leaflet-control');
-    var button = L.DomUtil.create('button', undefined, container);
-    button.innerHTML = '' +
+    if ((window.self !== window.top) && document.referrer !== '') {
+      // The map is in an iframe.
+      try {
+        this._frame = window.frameElement;
+
+        if (this._frame) {
+          this._frameBody = this._getParentDocumentBody(this._frame);
+        }
+      } catch (exception) {
+        this._supported = false;
+      }
+
+      if (this.options.ui === true) {
+        this._li = L.DomUtil.create('li', '');
+        this._button = L.DomUtil.create('button', undefined, this._li);
+      } else {
+        this._container = L.DomUtil.create('div', 'leaflet-bar leaflet-control');
+        this._button = L.DomUtil.create('button', undefined, this._container);
+      }
+    }
+
+    this._button.innerHTML = '' +
       '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18">' +
         '<g class="icon-svg-line">' +
           '<polyline vector-effect="non-scaling-stroke" points="6 6 6 1 18 1 18 6"/>' +
@@ -45,9 +45,30 @@ var PrintControl = L.Control.extend({
           '<rect vector-effect="non-scaling-stroke" x="6" y="14" width="12" height="9"/>' +
         '</g>' +
       '</svg>';
-    button.setAttribute('alt', 'Print the map');
-    L.DomEvent.addListener(button, 'click', this.print, this);
-    return container;
+    this._button.setAttribute('alt', 'Print the map');
+    L.DomEvent.addListener(this._button, 'click', this.print, this);
+
+    return this;
+  },
+  addTo: function (map) {
+    if (this._frame === null) {
+      L.Control.prototype.addTo.call(this, map);
+    } else {
+      if (this.options.ui === true) {
+        var toolbar = util.getChildElementsByClassName(map.getContainer().parentNode.parentNode, 'outerspatial-toolbar')[0];
+        toolbar.childNodes[1].appendChild(this._li);
+        toolbar.style.display = 'block';
+        this._container = toolbar.parentNode.parentNode;
+        util.getChildElementsByClassName(this._container.parentNode, 'outerspatial-map-wrapper')[0].style.top = '28px';
+      }
+
+      this._map = map;
+    }
+
+    return this;
+  },
+  onAdd: function () {
+    return this._container;
   },
   _clean: function (layer) {
     delete layer.L;

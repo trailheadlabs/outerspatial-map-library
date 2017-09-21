@@ -238,6 +238,15 @@
   "title": "Print Control"
 }, {
   "category": "Controls",
+  "css": true,
+  "description": "",
+  "html": true,
+  "id": "print-control-iframe",
+  "js": false,
+  "include": true,
+  "title": "Print Control (Iframe)"
+}, {
+  "category": "Controls",
   "description": "",
   "id": "scale-control",
   "include": true,

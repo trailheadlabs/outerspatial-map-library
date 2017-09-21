@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        width: 100%;
+      }
+      #map {
+        height: 100%;
+        left: 0;
+        position: absolute;
+        top: 0;
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script>
+      var OuterSpatial = {
+        div: 'map',
+        printControl: true
+      };
+
+      (function() {
+        var s = document.createElement('script');
+        s.src = '../outerspatial-bootstrap.js';
+        document.body.appendChild(s);
+      })();
+    </script>
+  </body>
+</html>
