@@ -915,11 +915,11 @@
 
 /* Controls */
 .outerspatial .leaflet-control {
-  -webkit-box-shadow: 0 0 15px #888;
-     -moz-box-shadow: 0 0 15px #888;
-      -ms-box-shadow: 0 0 15px #888;
-       -o-box-shadow: 0 0 15px #888;
-          box-shadow: 0 0 15px #888;
+  -webkit-box-shadow: 0 0 4px rgba(0,0,0,.3);
+     -moz-box-shadow: 0 0 4px rgba(0,0,0,.3);
+      -ms-box-shadow: 0 0 4px rgba(0,0,0,.3);
+       -o-box-shadow: 0 0 4px rgba(0,0,0,.3);
+          box-shadow: 0 0 4px rgba(0,0,0,.3);
 }
 
 /* Attribution Control */
