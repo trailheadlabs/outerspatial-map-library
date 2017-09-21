@@ -7,10 +7,10 @@ var util = require('../util/util');
 var OverviewControl = L.Control.extend({
   options: {
     autoToggleDisplay: false,
-    height: 150,
+    height: 100,
     position: 'bottomright',
     toggleDisplay: true,
-    width: 150,
+    width: 140,
     zoomAnimation: false,
     zoomLevelFixed: false,
     zoomLevelOffset: -5
@@ -59,7 +59,7 @@ var OverviewControl = L.Control.extend({
     L.DomEvent.on(this._container, 'mousewheel', L.DomEvent.stopPropagation);
     this._mainMap = map;
     this._attributionContainer = this._mainMap.attributionControl._container;
-    this._container.style.margin = '0 0 ' + -this._attributionContainer.offsetHeight + 'px 0';
+    // this._container.style.margin = '0 0 ' + -this._attributionContainer.offsetHeight + 'px 0';
     this._miniMap = this.L = new L.Map(this._container, {
       attributionControl: false,
       autoToggleDisplay: this.options.autoToggleDisplay,

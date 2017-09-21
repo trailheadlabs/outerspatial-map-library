@@ -1,7 +1,7 @@
 var OuterSpatial = {
   div: 'map',
   overviewControl: {
-    layer: 'mapbox-light'
+    layer: 'mapbox-outdoors'
   }
 };
 

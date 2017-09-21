@@ -1167,12 +1167,14 @@
 
 /* Overview Control */
 .outerspatial .leaflet-control-overview {
-  -webkit-box-shadow: -1px 0 5px rgba(0,0,0,.28);
-     -moz-box-shadow: -1px 0 5px rgba(0,0,0,.28);
-          box-shadow: -1px 0 5px rgba(0,0,0,.28);
-  background-color: #fff;
-  border-left: solid #404041 3px;
-  border-top: solid #404041 3px;
+  -webkit-box-shadow: 0 0 4px rgba(0,0,0,.5);
+     -moz-box-shadow: 0 0 4px rgba(0,0,0,.5);
+          box-shadow: 0 0 4px rgba(0,0,0,.5);
+  background-color: #ffffff;
+  border: solid #ffffff 2px;
+  box-sizing: border-box;
+  margin-right: 20px;
+  margin-bottom: 20px;
   transition: all .2s;
 }
   .outerspatial .leaflet-control-overview button {
