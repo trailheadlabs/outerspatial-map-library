@@ -459,6 +459,24 @@
     line-height: inherit;
     margin: inherit;
   }
+.outerspatial .leaflet-top .leaflet-control {
+	margin-top: 6px;
+	}
+.outerspatial .leaflet-top .leaflet-control:first-child {
+	margin-top: 18px;
+	}
+.outerspatial .leaflet-bottom .leaflet-control {
+	margin-bottom: 6px;
+	}
+.outerspatial .leaflet-bottom .leaflet-control:last-child {
+	margin-bottom: 18px;
+	}
+.outerspatial .leaflet-left .leaflet-control {
+	margin-left: 18px;
+	}
+.outerspatial .leaflet-right .leaflet-control {
+	margin-right: 18px;
+	}
 
 /* Icons */
 .outerspatialsymbollibrary-icon.large {
@@ -934,7 +952,8 @@
   border-top-right-radius: 14px;
   display: inline-block;
   line-height: 13px;
-  margin-bottom: 10px;
+  margin-bottom: 10px !important;
+  margin-left: 0 !important;
   overflow: hidden;
   padding: 8px 13px;
   padding-right: 16px;
@@ -1218,8 +1237,7 @@
 .outerspatial .leaflet-control-scale {
   cursor: -webkit-grab;
   cursor: -moz-grab;
-  margin-bottom: 10px;
-  margin-left: 10px;
+  margin-bottom: 10px !important;
 }
 
 /* Share Control */
