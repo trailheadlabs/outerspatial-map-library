@@ -30,10 +30,10 @@ var PrintControl = L.Control.extend({
       if (this.options.ui === true) {
         this._li = L.DomUtil.create('li', '');
         this._button = L.DomUtil.create('button', undefined, this._li);
-      } else {
-        this._container = L.DomUtil.create('div', 'leaflet-bar leaflet-control');
-        this._button = L.DomUtil.create('button', undefined, this._container);
       }
+    } else {
+      this._container = L.DomUtil.create('div', 'leaflet-bar leaflet-control');
+      this._button = L.DomUtil.create('button', undefined, this._container);
     }
 
     this._button.innerHTML = '' +
