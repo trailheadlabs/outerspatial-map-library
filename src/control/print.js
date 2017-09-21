@@ -59,7 +59,7 @@ var PrintControl = L.Control.extend({
         toolbar.childNodes[1].appendChild(this._li);
         toolbar.style.display = 'block';
         this._container = toolbar.parentNode.parentNode;
-        util.getChildElementsByClassName(this._container.parentNode, 'outerspatial-map-wrapper')[0].style.top = '28px';
+        util.getChildElementsByClassName(this._container.parentNode, 'outerspatial-map-wrapper')[0].style.top = '30px';
       }
 
       this._map = map;
