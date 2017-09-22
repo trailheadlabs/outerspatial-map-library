@@ -133,15 +133,12 @@
     border-color: #41a7d0;
   }
 .outerspatial-toolbar {
-  -webkit-box-shadow: 0 0 4px 0 rgba(0, 0, 0, .15);
-     -moz-box-shadow: 0 0 4px 0 rgba(0, 0, 0, .15);
-          box-shadow: 0 0 4px 0 rgba(0, 0, 0, .15);
   background-color: #ffffff;
   border-top: 1px solid #dddddd;
   border-left: 1px solid #dddddd;
   border-right: 1px solid #dddddd;
+  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.3);
   box-sizing: border-box;
-  box-shadow: 0 0 4px 0 rgba(0,0,0,0.30);
   display: none;
   height: 30px;
   left: 0;
@@ -933,11 +930,7 @@
 
 /* Controls */
 .outerspatial .leaflet-control {
-  -webkit-box-shadow: 0 0 4px rgba(0,0,0,.3);
-     -moz-box-shadow: 0 0 4px rgba(0,0,0,.3);
-      -ms-box-shadow: 0 0 4px rgba(0,0,0,.3);
-       -o-box-shadow: 0 0 4px rgba(0,0,0,.3);
-          box-shadow: 0 0 4px rgba(0,0,0,.3);
+  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.3);
 }
 
 /* Attribution Control */
@@ -1188,11 +1181,9 @@
 
 /* Overview Control */
 .outerspatial .leaflet-control-overview {
-  -webkit-box-shadow: 0 0 4px rgba(0,0,0,.5);
-     -moz-box-shadow: 0 0 4px rgba(0,0,0,.5);
-          box-shadow: 0 0 4px rgba(0,0,0,.5);
   background-color: #ffffff;
   border: solid #ffffff 2px;
+  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.3);
   box-sizing: border-box;
   margin-right: 20px;
   margin-bottom: 20px;
@@ -1314,14 +1305,10 @@
     background-position: 8px;
   }
   .outerspatial-control-switcher ul {
-    -webkit-box-shadow: 0 2px 15px #888;
-       -moz-box-shadow: 0 2px 15px #888;
-        -ms-box-shadow: 0 2px 15px #888;
-         -o-box-shadow: 0 2px 15px #888;
-            box-shadow: 0 2px 15px #888;
     background-color: #fff;
     border-left: 1px solid #bdbbb1;
     border-right: 1px solid #bdbbb1;
+    box-shadow: 0 2px 15px #888;
     left: -15px;
     list-style-type: none;
     margin: 1px 0 0 0;
@@ -1442,14 +1429,13 @@
 }
 .outerspatial .humane,
 .outerspatial .humane-bootstrap {
-  -webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.5);
   -webkit-transform: translateX(-100px);
      -moz-transform: translateX(-100px);
       -ms-transform: translateX(-100px);
        -o-transform: translateX(-100px);
   background-color: #fff;
   border: 1px solid transparent;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.5);
+  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.3);
   display: table;
   font-size: 14px;
   left: 100px;
