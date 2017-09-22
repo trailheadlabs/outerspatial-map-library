@@ -777,21 +777,18 @@
   z-index: 650;
 }
 .outerspatial .leaflet-tooltip {
-  -webkit-border-radius: 1px;
-          border-radius: 1px;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-          user-select: none;
-  background-color: #f2f2f2;
-  border: 1px solid #bdbbb1;
-  box-shadow: 0 1px 7px rgba(0,0,0,0.4);
-  color: #464646;
+  background-color: #ffffff;
+  border: 1px solid #ffffff;
+  border-radius: 1px;
+  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.3);
+  color: #6c6d70;
   cursor: default;
   display: none;
   max-width: 250px;
   opacity: 0;
   padding: 7px 10px;
   position: absolute;
+  user-select: none;
   width: auto;
   z-index: 650;
 }
@@ -1044,7 +1041,8 @@
 
 /* Info Control */
 .outerspatial .leaflet-control-info {
-  background-color: #f2f2f2;
+  background-color: #ffffff;
+  color: #6c6d70;
   display: none;
   padding: 3px 5px;
   transition: all .2s;
