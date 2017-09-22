@@ -11,7 +11,7 @@ var HomeControl = L.Control.extend({
     return this;
   },
   onAdd: function () {
-    var container = L.DomUtil.create('div', 'leaflet-bar leaflet-control');
+    var container = L.DomUtil.create('div', 'leaflet-bar leaflet-bar-single leaflet-control');
     var button = L.DomUtil.create('button', 'leaflet-bar-single', container);
 
     button.innerHTML = '' +

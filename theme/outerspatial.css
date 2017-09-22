@@ -834,7 +834,7 @@
 /* Zoombox */
 .outerspatial .leaflet-zoom-box {
   border: 3px solid #c55337;
-  background: white;
+  background: #ffffff;
   opacity: 0.5;
 }
 
@@ -842,51 +842,57 @@
 .outerspatial .leaflet-bar button {
   display: inherit;
 }
-.outerspatial .leaflet-touch .leaflet-control-layers,
-.outerspatial .leaflet-touch .leaflet-bar {
-  border: none;
-}
 .outerspatial .leaflet-bar a,
 .outerspatial .leaflet-bar a:hover,
 .outerspatial .leaflet-bar button,
 .outerspatial .leaflet-bar button:hover,
 .outerspatial .leaflet-bar div,
 .outerspatial .leaflet-bar div:hover {
-  background-color: #fff;
-  border-top: none;
-  border-left: none;
-  border-right: none;
-  border-bottom: 1px solid #d8d8d8;
+  background-color: #ffffff;
+  border: 1px solid #ffffff;
+  border-radius: 0;
+  border-bottom-color: #d8d8d8;
+  box-sizing: border-box;
   color: #444444;
-  width: 18px;
-  height: 18px;
+  width: 30px;
+  height: 30px;
   font-size: 18px;
   line-height: 18px;
-  padding: 6px 6px 5px 6px;
+  padding: 5px;
   text-align: center;
   text-decoration: none;
+}
+.outerspatial .leaflet-bar a:first-child,
+.outerspatial .leaflet-bar button:first-child,
+.outerspatial .leaflet-bar div:first-child {
+  border-bottom-left-radius: 1px;
+  border-bottom-right-radius: 1px;
+  border-bottom-color: #d8d8d8;
 }
 .outerspatial .leaflet-bar a:last-child,
 .outerspatial .leaflet-bar button:last-child,
 .outerspatial .leaflet-bar div:last-child {
-  border-bottom: none;
-  padding-bottom: 6px;
+  border-top-left-radius: 1px;
+  border-top-right-radius: 1px;
 }
 .outerspatial .leaflet-bar a.leaflet-bar-single,
 .outerspatial .leaflet-bar button.leaflet-bar-single,
 .outerspatial .leaflet-bar div.leaflet-bar-single {
-  padding: 6px;
+  border-radius: 1px;
+  border-bottom-color: #ffffff;
 }
 .outerspatial .leaflet-bar a.leaflet-disabled,
 .outerspatial .leaflet-bar a.leaflet-disabled:hover,
 .outerspatial .leaflet-bar button.leaflet-disabled,
 .outerspatial .leaflet-bar button.leaflet-disabled:hover {
   background-color: #9b9b9b;
+  border-color: #9b9b9b;
 
 }
 .outerspatial .leaflet-bar a.pressed,
 .outerspatial .leaflet-bar button.pressed {
   background-color: #98ca43;
+  border-color: #98ca43;
 }
 .outerspatial .leaflet-bar button .icon-svg-line,
 .outerspatial-toolbar button .icon-svg-line {
@@ -930,6 +936,7 @@
 
 /* Controls */
 .outerspatial .leaflet-control {
+  border: none;
   box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.3);
 }
 
@@ -1408,11 +1415,9 @@
 
 /* ZoomDisplay Control */
 .leaflet-control-zoomdisplay div {
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
   cursor: default;
   font-family: sans-serif;
+  user-select: none;
 }
 
 /* Notifications */

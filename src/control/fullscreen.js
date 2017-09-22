@@ -58,8 +58,8 @@ var FullscreenControl = L.Control.extend({
   },
   onAdd: function (map) {
     if (this._frame === null) {
-      this._buttonContainer = L.DomUtil.create('div', 'leaflet-bar leaflet-control');
-      this._button = L.DomUtil.create('button', undefined, this._buttonContainer);
+      this._buttonContainer = L.DomUtil.create('div', 'leaflet-bar leaflet-bar-single leaflet-control');
+      this._button = L.DomUtil.create('button', 'leaflet-bar-single', this._buttonContainer);
       this._setIcon('enterFullscreen');
       this._button.setAttribute('alt', 'Enter fullscreen');
       L.DomEvent.addListener(this._button, 'click', this.fullscreen, this);

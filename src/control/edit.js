@@ -61,7 +61,7 @@ var EditControl = L.Control.extend({
     return this;
   },
   onAdd: function (map) {
-    var container = L.DomUtil.create('div', 'leaflet-control-edit leaflet-bar');
+    var container = L.DomUtil.create('div', 'leaflet-bar leaflet-control-edit');
     var me = this;
     var options = this.options;
     var editId;
@@ -240,7 +240,7 @@ var EditControl = L.Control.extend({
     this._modes[type].handler = handler;
 
     if (this.options.toolbar) {
-      button = L.DomUtil.create('button', undefined, container);
+      button = L.DomUtil.create('button', 'leaflet-bar', container);
       button.innerHTML = this._setIcon(type);
       button.setAttribute('alt', title);
       L.DomEvent

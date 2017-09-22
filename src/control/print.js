@@ -32,8 +32,8 @@ var PrintControl = L.Control.extend({
         this._button = L.DomUtil.create('button', undefined, this._li);
       }
     } else {
-      this._container = L.DomUtil.create('div', 'leaflet-bar leaflet-control');
-      this._button = L.DomUtil.create('button', undefined, this._container);
+      this._container = L.DomUtil.create('div', 'leaflet-bar leaflet-bar-single leaflet-control');
+      this._button = L.DomUtil.create('button', 'leaflet-bar-single', this._container);
     }
 
     this._button.innerHTML = '' +
