@@ -1102,8 +1102,7 @@
 /* Measure Control */
 .outerspatial-control-measure ul {
   display: none;
-  height: 18px;
-  left: 26px;
+  right: 30px;
   list-style: none;
   margin: 0;
   padding: 0;
@@ -1130,10 +1129,9 @@
       background-color: #6d6e70 !important;
       border: none !important;
       border-radius: 0 !important;
-      color: #fff !important;
+      color: #ffffff !important;
       display: block !important;
       font-size: 11px !important;
-      height: 18px !important;
       line-height: 18px !important;
       padding-left: 10px !important;
       padding-right: 10px !important;
