@@ -251,8 +251,11 @@ module.exports = function (grunt) {
     'cssmin',
     'usebanner'
   ]);
-  grunt.registerTask('deploy', [
-    's3:dist'
+  grunt.registerTask('deploy-production', [
+    's3:production'
+  ]);
+  grunt.registerTask('deploy-staging', [
+    's3:staging'
   ]);
   grunt.registerTask('examples', [
     'clean:examples',
