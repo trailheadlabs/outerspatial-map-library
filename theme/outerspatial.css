@@ -778,9 +778,9 @@
 
 /* Zoombox */
 .outerspatial .leaflet-zoom-box {
-  border: 3px solid #c55337;
-  background: #ffffff;
-  opacity: 0.5;
+  border: 3px solid #41a7d0;
+  background: rgba(65, 167, 208, 0.5);
+  /*opacity: 0.5;*/
 }
 
 /* Leaflet Bar */
