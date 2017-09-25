@@ -526,7 +526,7 @@
   pointer-events: none;
 }
 .outerspatial .leaflet-container a.leaflet-popup-close-button {
-  background: #c55337;
+  background: #41a7d0;
   border-radius: 90%;
   color: #ffffff;
   font-family: Arial;
@@ -542,7 +542,7 @@
 }
 .outerspatial .leaflet-container a.leaflet-popup-close-button:focus,
 .leaflet-container a.leaflet-popup-close-button:hover {
-  background-color: #ed6444;
+  background-color: #67cdf6;
   color: #ffffff;
   text-decoration: none;
 }
