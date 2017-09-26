@@ -46,26 +46,27 @@ var FullscreenControl = L.Control.extend({
       L.Control.prototype.addTo.call(this, map);
     } else {
       var toolbar = util.getChildElementsByClassName(map.getContainer().parentNode.parentNode, 'outerspatial-toolbar')[0];
+      this._container = this._li;
       toolbar.childNodes[1].appendChild(this._li);
       toolbar.style.display = 'block';
-      this._container = toolbar.parentNode.parentNode;
+      this._outerspatialContainer = toolbar.parentNode.parentNode;
       this._isFullscreen = false;
       this._map = map;
-      util.getChildElementsByClassName(this._container.parentNode, 'outerspatial-map-wrapper')[0].style.top = '30px';
+      util.getChildElementsByClassName(this._outerspatialContainer.parentNode, 'outerspatial-map-wrapper')[0].style.top = '30px';
     }
 
     return this;
   },
   onAdd: function (map) {
     if (this._frame === null) {
-      this._buttonContainer = L.DomUtil.create('div', 'leaflet-bar leaflet-bar-single leaflet-control');
-      this._button = L.DomUtil.create('button', 'leaflet-bar-single', this._buttonContainer);
+      this._container = L.DomUtil.create('div', 'leaflet-bar leaflet-bar-single leaflet-control');
+      this._button = L.DomUtil.create('button', 'leaflet-bar-single', this._container);
       this._setIcon('enterFullscreen');
       this._button.setAttribute('alt', 'Enter fullscreen');
       L.DomEvent.addListener(this._button, 'click', this.fullscreen, this);
       this._isFullscreen = false;
       this._map = map;
-      return this._buttonContainer;
+      return this._container;
     }
   },
   _setIcon: function (icon) {
@@ -104,7 +105,7 @@ var FullscreenControl = L.Control.extend({
       var utils;
 
       if (this._frame === null) {
-        this._container = this._buttonContainer.parentNode.parentNode.parentNode;
+        this._outerspatialContainer = this._container.parentNode.parentNode.parentNode;
       }
 
       if (this._isFullscreen) {
@@ -129,9 +130,9 @@ var FullscreenControl = L.Control.extend({
         body.style.margin = this._bodyMargin;
         body.style.overflow = this._bodyOverflow;
         body.style.padding = this._bodyPadding;
-        this._container.style.left = this._containerLeft;
-        this._container.style.position = this._containerPosition;
-        this._container.style.top = this._containerTop;
+        this._outerspatialContainer.style.left = this._containerLeft;
+        this._outerspatialContainer.style.position = this._containerPosition;
+        this._outerspatialContainer.style.top = this._containerTop;
         L.DomEvent.removeListener(document, 'keyup', this._onKeyUp);
         this._isFullscreen = false;
         this._setIcon('enterFullscreen');
@@ -191,12 +192,12 @@ var FullscreenControl = L.Control.extend({
         body.style.margin = '0';
         body.style.overflow = 'hidden';
         body.style.padding = '0';
-        this._containerLeft = this._container.style.left;
-        this._containerPosition = this._container.style.position;
-        this._containerTop = this._container.style.top;
-        this._container.style.left = '0';
-        this._container.style.position = 'fixed';
-        this._container.style.top = '0';
+        this._containerLeft = this._outerspatialContainer.style.left;
+        this._containerPosition = this._outerspatialContainer.style.position;
+        this._containerTop = this._outerspatialContainer.style.top;
+        this._outerspatialContainer.style.left = '0';
+        this._outerspatialContainer.style.position = 'fixed';
+        this._outerspatialContainer.style.top = '0';
         L.DomEvent.addListener(document, 'keyup', this._onKeyUp, this);
         this._isFullscreen = true;
         this._setIcon('exitFullscreen');

@@ -31,9 +31,24 @@ var PrintControl = L.Control.extend({
         this._li = L.DomUtil.create('li', '');
         this._button = L.DomUtil.create('button', undefined, this._li);
       }
+    }
+
+    return this;
+  },
+  addTo: function (map) {
+    if (this._frame === null) {
+      L.Control.prototype.addTo.call(this, map);
     } else {
-      this._container = L.DomUtil.create('div', 'leaflet-bar leaflet-bar-single leaflet-control');
-      this._button = L.DomUtil.create('button', 'leaflet-bar-single', this._container);
+      if (this.options.ui === true) {
+        var toolbar = util.getChildElementsByClassName(map.getContainer().parentNode.parentNode, 'outerspatial-toolbar')[0];
+        this._container = this._li;
+        toolbar.childNodes[1].appendChild(this._li);
+        toolbar.style.display = 'block';
+        this._outerspatialContainer = toolbar.parentNode.parentNode;
+        util.getChildElementsByClassName(this._outerspatialContainer.parentNode, 'outerspatial-map-wrapper')[0].style.top = '30px';
+      }
+
+      this._map = map;
     }
 
     this._button.innerHTML = '' +
@@ -47,27 +62,12 @@ var PrintControl = L.Control.extend({
       '</svg>';
     this._button.setAttribute('alt', 'Print the map');
     L.DomEvent.addListener(this._button, 'click', this.print, this);
-
     return this;
   },
-  addTo: function (map) {
-    if (this._frame === null) {
-      L.Control.prototype.addTo.call(this, map);
-    } else {
-      if (this.options.ui === true) {
-        var toolbar = util.getChildElementsByClassName(map.getContainer().parentNode.parentNode, 'outerspatial-toolbar')[0];
-        toolbar.childNodes[1].appendChild(this._li);
-        toolbar.style.display = 'block';
-        this._container = toolbar.parentNode.parentNode;
-        util.getChildElementsByClassName(this._container.parentNode, 'outerspatial-map-wrapper')[0].style.top = '30px';
-      }
-
-      this._map = map;
-    }
-
-    return this;
-  },
-  onAdd: function () {
+  onAdd: function (map) {
+    this._map = map;
+    this._container = L.DomUtil.create('div', 'leaflet-bar leaflet-bar-single leaflet-control');
+    this._button = L.DomUtil.create('button', 'leaflet-bar-single', this._container);
     return this._container;
   },
   _clean: function (layer) {
