@@ -6,7 +6,7 @@
 var util = require('../util/util');
 var SwitcherControl = L.Control.extend({
   options: {
-    position: 'topright'
+    position: 'topleft'
   },
   statics: {
     SELECTED_ID: 'basemap_listbox_selected'
