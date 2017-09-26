@@ -33,16 +33,22 @@ require('./popup.js');
       var overviewControl = util.getChildElementsByClassName(container, 'leaflet-control-overview')[0];
 
       if (left) {
-        left = left + 15;
+        left = left + 16;
       } else {
-        left = 10;
+        left = 8;
       }
+
+
+
 
       if (overviewControl && !util.isHidden(overviewControl)) {
         elAttribution.style['margin-right'] = util.getOuterDimensions(overviewControl).width + 'px';
       } else {
         elAttribution.style['margin-right'] = 0;
       }
+
+      console.log(elControl.childNodes[2]);
+      console.log(left);
 
       elAttribution.style['max-width'] = (util.getOuterDimensions(container).width - left) + 'px';
     }
