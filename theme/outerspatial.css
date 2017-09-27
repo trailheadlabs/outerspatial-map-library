@@ -536,7 +536,7 @@
 .outerspatial .leaflet-container a.leaflet-popup-close-button {
   background: #41a7d0;
   border-radius: 90%;
-  color: #ffffff;
+  color: #fff;
   font-family: Arial;
   height: 21px;
   line-height: 21px;
@@ -551,7 +551,7 @@
 .outerspatial .leaflet-container a.leaflet-popup-close-button:focus,
 .leaflet-container a.leaflet-popup-close-button:hover {
   background-color: #67cdf6;
-  color: #ffffff;
+  color: #fff;
   text-decoration: none;
 }
 .outerspatial .leaflet-popup-content {
@@ -563,7 +563,6 @@
   width: auto !important;
 }
 .outerspatial .leaflet-popup-content .content {
-  /*border-top: solid 1px #e3dfd8;*/
   padding: 10px;
 }
   .outerspatial .leaflet-popup-scrolled .content,
