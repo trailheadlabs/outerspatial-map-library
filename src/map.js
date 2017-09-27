@@ -165,7 +165,7 @@ MapExt = L.Map.extend({
       addnCls: 'humane-bootstrap-warning'
     });
     me._progress = new Nanobar({
-      bg: '#d29700',
+      bg: '#67cdf6',
       id: 'outerspatial-progress',
       target: map
     });
