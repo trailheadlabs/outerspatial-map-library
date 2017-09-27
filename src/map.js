@@ -53,6 +53,20 @@ require('./popup.js');
       elAttribution.style['max-width'] = (util.getOuterDimensions(container).width - left) + 'px';
     }
 
+    this._frame = null;
+
+    if ((window.self !== window.top) && document.referrer !== '') {
+      // The map is in an iframe.
+      this._frame = window.frameElement;
+      var outerspatialContainer = me.getContainer().parentNode.parentNode;
+      var toolbar = util.getChildElementsByClassName(outerspatialContainer, 'outerspatial-toolbar')[0];
+      var title = L.DomUtil.create('li', 'title');
+      toolbar.childNodes[0].appendChild(title);
+      title.innerHTML = me.options.title;
+      toolbar.style.display = 'block';
+      util.getChildElementsByClassName(outerspatialContainer, 'outerspatial-map-wrapper')[0].style.top = '40px';
+    }
+
     if (this.options.attributionControl) {
       this.attributionControl._update = function () {
         var attribs = [];
