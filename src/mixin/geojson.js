@@ -86,7 +86,7 @@ module.exports = {
 
     if (typeof config.clickable === 'undefined' || config.clickable === true) {
       var activeTip = null;
-      var detectAvailablePopupSpace = true;
+      var detectAvailablePopupSpace = false;
       var map = null;
 
       // TODO: If typeof config.onEachFeature === 'function', save it and call it.
@@ -98,10 +98,7 @@ module.exports = {
 
           if (!map) {
             map = target._map;
-
-            if (typeof map.options.detectAvailablePopupSpace !== 'undefined' && map.options.detectAvailablePopupSpace === false) {
-              detectAvailablePopupSpace = false;
-            }
+            detectAvailablePopupSpace = map.options.detectAvailablePopupSpace;
           }
 
           if (map._controllingInteractivity === 'map') {
@@ -112,9 +109,11 @@ module.exports = {
                 if (target._popup) {
                   target.openPopup();
                 } else {
-                  var container = map.getContainer();
                   var popup = L.outerspatial.popup({
-                    autoPanPaddingTopLeft: util._getAutoPanPaddingTopLeft(container),
+                    autoPanPaddingTopLeft: [
+                      16,
+                      16
+                    ],
                     maxHeight: (detectAvailablePopupSpace ? util._getAvailableVerticalSpace(map) - 84 : null),
                     maxWidth: (detectAvailablePopupSpace ? util._getAvailableHorizontalSpace(map) - 77 : null)
                   });

@@ -114,6 +114,7 @@ require('./popup.js');
 MapExt = L.Map.extend({
   options: {
     bounceAtZoomLimits: false,
+    detectAvailablePopupSpace: false,
     wheelPxPerZoomLevel: 120,
     worldCopyJump: true,
     zoomDelta: 0.5,
@@ -384,22 +385,12 @@ MapExt = L.Map.extend({
     this._container.style.cursor = type;
   },
   _setupPopup: function () {
-
-
-
-
-
-    
     var clicks = 0;
-    var detectAvailablePopupSpace = true;
+    var detectAvailablePopupSpace = this.options.detectAvailablePopupSpace;
     var me = this;
     var canceled;
     var changed;
     var hasArcGisServer;
-
-    if (typeof me.options.detectAvailablePopupSpace !== 'undefined' && me.options.detectAvailablePopupSpace === false) {
-      detectAvailablePopupSpace = false;
-    }
 
     function done () {
       me
@@ -499,7 +490,10 @@ MapExt = L.Map.extend({
 
               if (actual.length && !me._popup) {
                 var popup = L.outerspatial.popup({
-                  autoPanPaddingTopLeft: util._getAutoPanPaddingTopLeft(me.getContainer()),
+                  autoPanPaddingTopLeft: [
+                    16,
+                    16
+                  ],
                   maxHeight: (detectAvailablePopupSpace ? util._getAvailableVerticalSpace(me) - 84 : null),
                   maxWidth: (detectAvailablePopupSpace ? util._getAvailableHorizontalSpace(me) - 77 : null)
                 });

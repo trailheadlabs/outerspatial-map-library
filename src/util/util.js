@@ -162,11 +162,6 @@ module.exports = {
       node.style.display = 'block';
     }
   },
-  _getAutoPanPaddingTopLeft: function (el) {
-    var containers = this.getChildElementsByClassName(el, 'leaflet-top');
-
-    return [this.getOuterDimensions(containers[0]).width + 20, this.getOuterDimensions(containers[1]).height + 20];
-  },
   _getAvailableHorizontalSpace: function (map) {
     var container = map.getContainer();
     var leftBottom = this.getChildElementsByClassName(container, 'leaflet-bottom')[0];

@@ -58,7 +58,7 @@ The first, and only, argument is required. It must be a config object comprised 
 * (Required) `div` (Object or String): Either a reference to an HTML element or the id of an HTML element to render the map into.
 * (Optional) `baseLayers` (Array): An array of baseLayer configuration objects AND/OR [baseLayer preset](#baseLayer-presets) strings. Defaults to `['mapbox-outdoors']`.
 * (Optional) `description` (String): A description for the map. Used by some templates.
-* (Optional) `detectAvailablePopupSpace` (Boolean): Defaults to `undefined`. If `true` or `undefined`, OuterSpatial Map Library will detect the height and width available in your map and set the `maxHeight` and `maxWidth` properties of the map's popups automatically.
+* (Optional) `detectAvailablePopupSpace` (Boolean): Defaults to `false`. If `true`, OuterSpatial Map Library will detect the height and width available in your map and set the `maxHeight` and `maxWidth` properties of the map's popups automatically.
 * (Optional) `editControl` (Boolean or Object): Defaults to `undefined`.
 * (Optional) `events` (Array): An array of event objects to attach to the map. Defaults to `undefined`.
 * (Optional) `fullscreenControl` (Boolean or Object): Defaults to `undefined`.
