@@ -65,14 +65,48 @@ var Popup = L.Popup.extend({
   _createAction: function (config, data, div) {
     var a = document.createElement('a');
     var li = document.createElement('li');
+    var me = this;
 
     li.appendChild(a);
-    a.innerHTML = util.handlebars(config.text, data);
+
+    if (config.type && config.type === 'directions') {
+      var providers = config.providers;
+
+      if (providers && providers.constructor === Array) {
+        function handler (provider) {
+          var latLng = me.getLatLng();
+          var lat = latLng.lat;
+          var lng = latLng.lng;
+
+          console.log(provider);
+
+          if (provider === 'google') {
+            window.open('https://www.google.com/maps/dir/?api=1&&destination=' + lat + '%2c' + lng, '_blank');
+          } else if (provider === 'bing') {
+            window.open('http://bing.com/maps/default.aspx?rtp=~pos.' + lat + '_' + lng, '_blank');
+          }
+        }
+
+        config.menu = [];
+        config.text = 'Get Directions';
+
+        for (var i = 0; i < providers.length; i++) {
+          var menuItem = {};
+          var provider = providers[i];
+
+          menuItem.text = 'From ' + provider.charAt(0).toUpperCase() + provider.slice(1);
+          menuItem.handler = function () {
+            handler(provider);
+          };
+          config.menu.push(menuItem);
+        }
+      }
+    }
 
     if (config.menu) {
       var menu = L.DomUtil.create('ul', 'menu', div);
 
-      for (var i = 0; i < config.menu.length; i++) {
+      for (i = 0; i < config.menu.length; i++) {
         (function () {
           var item = config.menu[i];
           var itemA = document.createElement('a');
@@ -108,6 +142,8 @@ var Popup = L.Popup.extend({
         config.handler(data);
       });
     }
+
+    a.innerHTML = util.handlebars(config.text, data);
 
     return li;
   },
