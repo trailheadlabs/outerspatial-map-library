@@ -894,10 +894,6 @@
 
 /* Attribution Control */
 .outerspatial .leaflet-control-attribution {
-  -webkit-border-bottom-right-radius: 14px;
-  -webkit-border-top-right-radius: 14px;
-     -moz-border-radius-bottomright: 14px;
-     -moz-border-radius-topright: 14px;
   background-color: #fff;
   background-color: rgba(255, 255, 255, .8) !important;
   border-bottom-right-radius: 14px;
