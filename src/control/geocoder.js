@@ -38,8 +38,9 @@ var GeocoderControl = L.Control.extend({
     var container = L.DomUtil.create('div', 'leaflet-control-geocoder');
     var stopPropagation = L.DomEvent.stopPropagation;
 
-    this._button = L.DomUtil.create('button', 'search', container);
-    this._input = L.DomUtil.create('input', '', container);
+    this._button = L.DomUtil.create('button', 'button search', container);
+    this._setIcon('search');
+    this._input = L.DomUtil.create('input', 'input', container);
     this._ul = L.DomUtil.create('ul', 'leaflet-control', container);
     this._initalizeNpsIndex();
     L.DomEvent.disableClickPropagation(this._button);
@@ -224,6 +225,7 @@ var GeocoderControl = L.Control.extend({
     L.DomEvent.on(this._button, 'click', this._geocodeRequest, this);
     L.DomUtil.addClass(this._button, 'search');
     L.DomUtil.removeClass(this._button, 'working');
+    this._setIcon('search');
   },
   _initalizeNpsIndex: function () {
     var me = this;
@@ -398,10 +400,30 @@ var GeocoderControl = L.Control.extend({
       me._clearResults();
     }
   },
+  _setIcon: function (icon) {
+    if (icon === 'search') {
+      this._button.innerHTML = '' +
+        '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">' +
+          '<g class="icon-svg-path">' +
+            '<path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>' +
+          '</g>' +
+        '</svg>';
+    } else if (icon === 'working') {
+      this._button.innerHTML = '' +
+        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="18" height="18">' +
+          '<g class="icon-svg-path">' +
+            '<path vector-effect="non-scaling-stroke" d="M6,32C6,17.664,17.664,6,32,6c6.348,0,12.391,2.285,17.136,6.45l-6.843,6.843 c-0.271,0.271-0.363,0.673-0.238,1.035c0.126,0.362,0.447,0.62,0.828,0.665l17,2C59.922,22.998,59.961,23,60,23 c0.264,0,0.519-0.104,0.707-0.293c0.216-0.216,0.322-0.52,0.286-0.824l-2-17c-0.045-0.381-0.303-0.702-0.665-0.828 c-0.362-0.125-0.765-0.034-1.035,0.238l-5.326,5.326C46.462,4.703,39.412,2,32,2C15.458,2,2,15.458,2,32c0,1.104,0.896,2,2,2 S6,33.104,6,32z"/>' +
+            '<path vector-effect="non-scaling-stroke" d="M60,30c-1.104,0-2,0.896-2,2c0,14.337-11.664,26-26,26c-6.348,0-12.391-2.285-17.135-6.451l6.842-6.842 c0.271-0.271,0.363-0.673,0.238-1.035c-0.126-0.362-0.447-0.62-0.828-0.665l-17-2c-0.306-0.036-0.608,0.07-0.824,0.286 c-0.216,0.217-0.322,0.52-0.286,0.824l2,17c0.045,0.38,0.303,0.702,0.665,0.827C5.779,59.981,5.89,60,6,60 c0.261,0,0.517-0.103,0.707-0.293l5.326-5.326C17.538,59.297,24.587,62,32,62c16.542,0,30-13.458,30-30C62,30.896,61.104,30,60,30z"/>' +
+            '<animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 32 32" to="360 32 32" dur="1.0s" repeatCount="indefinite"/>' +
+          '</g>' +
+        '</svg>';
+    }
+  },
   _showLoading: function () {
     L.DomEvent.off(this._button, 'click', this._geocodeRequest);
-    L.DomUtil.removeClass(this._button, 'search');
     L.DomUtil.addClass(this._button, 'working');
+    L.DomUtil.removeClass(this._button, 'search');
+    this._setIcon('working');
   }
 });
 
