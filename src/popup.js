@@ -515,11 +515,9 @@ var Popup = L.Popup.extend({
   },
   _toggleMenu: function (menu, e) {
     if (!menu.style.display || menu.style.display === 'none') {
-      var to = e.toElement;
-
-      menu.style.bottom = '0';
+      menu.style.bottom = '35px';
       menu.style.display = 'block';
-      menu.style.left = to.offsetLeft + 'px';
+      menu.style.left = '-8px';
     } else {
       menu.style.display = 'none';
     }

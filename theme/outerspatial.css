@@ -33,9 +33,7 @@
 
 /* Modules */
 .outerspatial-modules {
-  -webkit-box-shadow: 2px 0 2px rgba(0,0,0,.2);
-     -moz-box-shadow: 2px 0 2px rgba(0,0,0,.2);
-          box-shadow: 2px 0 2px rgba(0,0,0,.2);
+  box-shadow: 2px 0 2px rgba(0,0,0,.2);
   background-color: #f2f2f2;
   display: none;
   height: 100%;
@@ -97,15 +95,9 @@
     z-index: 9999999; /* IE 8 */
   }
     .outerspatial-map-wrapper .outerspatial-modules-buttons button {
-      -webkit-border-radius: 0 3px 3px 0;
-         -moz-border-radius: 0 3px 3px 0;
-              border-radius: 0 3px 3px 0;
-      -webkit-background-clip: padding-box;
-         -moz-background-clip: padding;
-              background-clip: padding-box;
-      -webkit-box-shadow: 1px 2px 5px rgba(0,0,0,.4);
-         -moz-box-shadow: 1px 2px 5px rgba(0,0,0,.4);
-              box-shadow: 1px 2px 5px rgba(0,0,0,.4);
+      background-clip: padding-box;
+      border-radius: 0 3px 3px 0;
+      box-shadow: 1px 2px 5px rgba(0, 0, 0, .4);
       background-color: #404041;
       border: none;
       display: none;
@@ -130,13 +122,13 @@
   width: 100%;
 }
   .outerspatial-map:focus {
-    border-color: #41a7d0;
+    border-color: #3bafda;
   }
 .outerspatial-toolbar {
-  background-color: #ffffff;
-  border-top: 1px solid #dddddd;
-  border-left: 1px solid #dddddd;
-  border-right: 1px solid #dddddd;
+  background-color: #fff;
+  border-left: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+  border-top: 1px solid #ddd;
   box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.3);
   box-sizing: border-box;
   display: none;
@@ -149,12 +141,12 @@
 }
   .outerspatial-toolbar ul.left,
   .outerspatial-toolbar ul.right {
-    line-height: 18px;
+    box-sizing: border-box;
     height: 40px;
+    line-height: 18px;
     list-style-type: none;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
   }
   .outerspatial-toolbar ul.left {
     float: left;
@@ -162,8 +154,8 @@
     width: 65%
   }
     .outerspatial-toolbar ul.left li {
-      border-left: solid 1px #dddddd;
-      border-right: solid 1px #dddddd;
+      border-left: solid 1px #ddd;
+      border-right: solid 1px #ddd;
       float: left;
       height: 39px;
       width: 38px;
@@ -174,8 +166,8 @@
     width: 35%
   }
     .outerspatial-toolbar ul.right li {
-      border-left: solid 1px #dddddd;
-      border-right: solid 1px #dddddd;
+      border-left: solid 1px #ddd;
+      border-right: solid 1px #ddd;
       float: right;
       height: 39px;
       width: 38px;
@@ -187,7 +179,7 @@
   .outerspatial-toolbar ul.left .title {
     border-left: none;
     border-right: none;
-    color: #444444;
+    color: #444;
     display: inline-block;
     font-size: 18px;
     font-weight: bold;
@@ -199,7 +191,7 @@
     width: auto;
   }
   .outerspatial-toolbar button {
-    background-color: #ffffff;
+    background-color: #fff;
     border: none;
     position: relative;
     box-sizing: border-box;
@@ -216,10 +208,8 @@
   line-height: 14px;
 }
   .outerspatial input[type = 'text'] {
-    -webkit-box-sizing: border-box;
-       -moz-box-sizing: border-box;
-            box-sizing: border-box;
     border: 1px solid #c9c9c9;
+    box-sizing: border-box;
     color: #464646;
     font-size: 12px;
     font-weight: bold;
@@ -268,11 +258,6 @@
   background-image: none;
 }
 .outerspatial .btn {
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-       -o-user-select: none;
-          user-select: none;
   border: 1px solid transparent;
   border-radius: 4px;
   cursor: pointer;
@@ -283,28 +268,25 @@
   margin-bottom: 0;
   padding: 6px 12px;
   text-align: center;
+  user-select: none;
   vertical-align: middle;
   white-space: nowrap;
 }
   .outerspatial .btn:hover,
   .outerspatial .btn:focus {
-    color: #333333;
+    color: #333;
     text-decoration: none;
   }
   .outerspatial .btn:active,
   .outerspatial .btn.active {
-    -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
-       -moz-box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
-            box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
     background-image: none;
+    box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
     outline: 0;
   }
   .outerspatial .btn.disabled,
   .outerspatial .btn[disabled],
   .outerspatial fieldset[disabled] .btn {
-    -webkit-box-shadow: none;
-       -moz-box-shadow: none;
-            box-shadow: none;
+    box-shadow: none;
     cursor: not-allowed;
     filter: alpha(opacity=65);
     opacity: 0.65;
@@ -313,7 +295,7 @@
 .outerspatial .btn-default {
   background-color: #fff;
   border-color: #ccc;
-  color: #333333;
+  color: #333;
 }
   .outerspatial .btn-default:hover,
   .outerspatial .btn-default:focus,
@@ -321,7 +303,7 @@
   .outerspatial .btn-default.active {
     background-color: #ebebeb;
     border-color: #adadad;
-    color: #333333;
+    color: #333;
   }
   .outerspatial .btn-default:active,
   .outerspatial .btn-default.active {
@@ -346,8 +328,7 @@
     border-color: #ccc;
   }
 .outerspatial .btn-link {
-  -webkit-box-shadow: none;
-          box-shadow: none;
+  box-shadow: none;
   background-color: transparent;
   border-radius: 0;
   color: #936a00;
@@ -372,7 +353,7 @@
   .outerspatial .open .dropdown-toggle.btn-primary {
     background-color: #896300;
     border-color: #5b4200;
-    color: #ffffff;
+    color: #fff;
   }
   .outerspatial .btn-primary:active,
   .outerspatial .btn-primary.active {
@@ -536,13 +517,13 @@
 /* Popup */
 .outerspatial .leaflet-popup {
   margin-bottom: 15px;
-  margin-left: -2px;
+  margin-left: -1px;
 }
 .outerspatial .leaflet-popup-content-wrapper {
   background-clip: padding-box;
   border-radius: 4px;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.3);
-  background-color: #ffffff;
+  background-color: #fff;
   pointer-events: auto;
   overflow: auto;
   text-align: left;
@@ -551,7 +532,7 @@
   pointer-events: none;
 }
 .outerspatial .leaflet-container a.leaflet-popup-close-button {
-  background: #41a7d0;
+  background: #3bafda;
   border-radius: 90%;
   color: #fff;
   font-family: Arial;
@@ -653,9 +634,9 @@
     white-space: nowrap;
   }
   .outerspatial .leaflet-popup-content .actions {
-    display: block;
     border-top: solid 1px #e3dfd8;
     clear: both;
+    display: block;
     margin: 0 10px;
     padding-top: 10px;
     position: relative;
@@ -684,29 +665,24 @@
         text-decoration: none;
       }
     .outerspatial .leaflet-popup-content .actions .menu {
-      -webkit-box-shadow: 0 2px 3px rgba(0,0,0,.12);
-         -moz-box-shadow: 0 2px 3px rgba(0,0,0,.12);
-              box-shadow: 0 2px 3px rgba(0,0,0,.12);
-      background-color: #ffffff;
+      background-color: #fff;
+      box-shadow: 0 2px 3px rgba(0,0,0,.12);
       display: none;
+      list-style-type: none;
+      margin: 0;
+      max-width: 200px;
+      padding: 0;
       position: absolute;
       z-index: 1;
     }
       .outerspatial .leaflet-popup-content .actions .menu a {
-        color: #464646;
+        color: #6c6d70;
         display: block;
-        font-size: 11px;
-        padding: 5px 16px;
+        padding: 5px 9px;
       }
-      .outerspatial .leaflet-popup-content .actions .menu a:hover {
-        background-color: #f1f1ef;
-      }
-      .outerspatial .leaflet-popup-content .actions .menu {
-        list-style-type: none;
-        margin: 0;
-        padding: 0;
-        width: 100px;
-      }
+        .outerspatial .leaflet-popup-content .actions .menu a:hover {
+          background-color: #f1f1ef;
+        }
       .outerspatial .leaflet-popup-content .actions .menu li {
         border-top: 1px solid #f2f1ef;
         display: block;
@@ -714,9 +690,9 @@
         padding: 0;
         width: 100%;
       }
-      .outerspatial .leaflet-popup-content .actions .menu li:first-child {
-        border-top: 0;
-      }
+        .outerspatial .leaflet-popup-content .actions .menu li:first-child {
+          border-top: 0;
+        }
   .outerspatial .leaflet-popup-content .layer {
     clear: both;
     margin-bottom: 10px;
@@ -759,8 +735,11 @@
     padding: 10px;
   }
   .outerspatial .leaflet-popup-content .sublayer .title {
+    font-size: 20px;
     font-style: italic;
     font-weight: normal;
+    line-height: 22px;
+    padding-left: 0;
   }
   .outerspatial .leaflet-popup-content .description {
     display: inline-block;
@@ -781,8 +760,8 @@
   z-index: 650;
 }
 .outerspatial .leaflet-tooltip {
-  background-color: #ffffff;
-  border: 1px solid #ffffff;
+  background-color: #fff;
+  border: 1px solid #fff;
   border-radius: 1px;
   box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.3);
   color: #6c6d70;
@@ -802,8 +781,8 @@
 
 /* Zoombox */
 .outerspatial .leaflet-zoom-box {
-  border: 3px solid #41a7d0;
   background: rgba(65, 167, 208, 0.5);
+  border: 3px solid #3bafda;
 }
 
 /* Leaflet Bar */
@@ -833,9 +812,9 @@
 .outerspatial .leaflet-bar a:first-child,
 .outerspatial .leaflet-bar button:first-child,
 .outerspatial .leaflet-bar div:first-child {
+  border-bottom-color: #d8d8d8;
   border-bottom-left-radius: 1px;
   border-bottom-right-radius: 1px;
-  border-bottom-color: #d8d8d8;
 }
 .outerspatial .leaflet-bar a:last-child,
 .outerspatial .leaflet-bar button:last-child,
@@ -846,8 +825,8 @@
 .outerspatial .leaflet-bar a.leaflet-bar-single,
 .outerspatial .leaflet-bar button.leaflet-bar-single,
 .outerspatial .leaflet-bar div.leaflet-bar-single {
-  border-radius: 1px;
   border-bottom-color: #ffffff;
+  border-radius: 1px;
 }
 .outerspatial .leaflet-bar a.leaflet-disabled,
 .outerspatial .leaflet-bar a.leaflet-disabled:hover,
@@ -855,7 +834,6 @@
 .outerspatial .leaflet-bar button.leaflet-disabled:hover {
   background-color: #9b9b9b;
   border-color: #9b9b9b;
-
 }
 .outerspatial .leaflet-bar a.pressed,
 .outerspatial .leaflet-bar button.pressed {
@@ -864,12 +842,12 @@
 }
 .outerspatial .leaflet-bar button .icon-svg-line,
 .outerspatial-toolbar button .icon-svg-line {
-  stroke: #444444;
-  stroke-width: 1.5;
   fill: none;
+  fill-rule: evenodd;
+  stroke: #444;
   stroke-linecap: round;
   stroke-linejoin: round;
-  fill-rule: evenodd;
+  stroke-width: 1.5;
 }
 .outerspatial .leaflet-bar a:active,
 .outerspatial .leaflet-bar a:hover,
@@ -886,7 +864,7 @@
 }
 .outerspatial .leaflet-bar button .icon-svg-path,
 .outerspatial-toolbar button .icon-svg-path {
-  fill: #444444;
+  fill: #444;
 }
 .outerspatial .leaflet-bar a:active,
 .outerspatial .leaflet-bar a:hover,
@@ -945,10 +923,10 @@
 }
 .outerspatial .leaflet-draw-guide-dash {
   font-size: 1%;
+  height: 5px;
   opacity: 0.6;
   position: absolute;
   width: 5px;
-  height: 5px;
 }
 .outerspatial .leaflet-edit-move {
   cursor: move;
@@ -963,16 +941,10 @@
   z-index: 8;
 }
   .outerspatial .leaflet-control-geocoder button {
-    -webkit-background-clip: padding-box;
-       -moz-background-clip: padding;
-            background-clip: padding-box;
-    -webkit-border-radius: 1px;
-       -moz-border-radius: 1px;
-            border-radius: 1px;
-    -webkit-box-shadow: 0 0 5px rgba(0,0,0,.16);
-       -moz-box-shadow: 0 0 5px rgba(0,0,0,.16);
-            box-shadow: 0 0 5px rgba(0,0,0,.16);
+    background-clip: padding-box;
     border: none;
+    border-radius: 1px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, .16);
     box-sizing: border-box;
     height: 24px;
     position: absolute;
@@ -1018,8 +990,8 @@
 .outerspatial .leaflet-control-geocoder .search {
   background-color: #c55337;
   background-image: url('images/control/geocoder/search.png');
-  background-repeat: no-repeat;
   background-position: 5px;
+  background-repeat: no-repeat;
   background-size: 16px 16px;
 }
 .outerspatial .leaflet-retina .leaflet-control-geocoder .search {
@@ -1028,8 +1000,8 @@
 .outerspatial .leaflet-control-geocoder .working {
   background-color: #404041;
   background-image: url('images/control/geocoder/spinner.gif');
-  background-repeat: no-repeat;
   background-position: 4px;
+  background-repeat: no-repeat;
   background-size: 16px 16px;
   cursor: wait;
 }
@@ -1049,7 +1021,7 @@
 /* Legend Control */
 .outerspatial .leaflet-control-legend {
   background-color: #f2f2f2;
-  background-color: rgba(242,242,242,.8);
+  background-color: rgba(242, 242, 242, .8);
   padding: 10px;
 }
   .outerspatial .leaflet-control-legend h3 {
@@ -1066,11 +1038,11 @@
 /* Measure Control */
 .outerspatial-control-measure ul {
   display: none;
-  right: 30px;
   list-style: none;
   margin: 0;
   padding: 0;
   position: absolute;
+  right: 30px;
   white-space: nowrap;
   z-index: -1;
 }
@@ -1093,7 +1065,7 @@
       background-color: #6d6e70 !important;
       border: none !important;
       border-radius: 0 !important;
-      color: #ffffff !important;
+      color: #fff !important;
       display: block !important;
       font-size: 11px !important;
       line-height: 18px !important;
@@ -1150,12 +1122,12 @@
 
 /* Overview Control */
 .outerspatial .leaflet-control-overview {
-  background-color: #ffffff;
-  border: solid #ffffff 2px;
+  background-color: #fff;
+  border: solid #fff 2px;
   box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.3);
   box-sizing: border-box;
-  margin-right: 20px;
   margin-bottom: 20px;
+  margin-right: 20px;
   transition: all .2s;
 }
   .outerspatial .leaflet-control-overview button {
@@ -1183,11 +1155,7 @@
       width: 10px;
     }
       .outerspatial .leaflet-control-overview button span.minimized {
-        -webkit-transform: rotate(180deg);
-           -moz-transform: rotate(180deg);
-            -ms-transform: rotate(180deg);
-             -o-transform: rotate(180deg);
-                transform: rotate(180deg);
+        transform: rotate(180deg);
       }
   .outerspatial .leaflet-retina .leaflet-control-overview button span {
     background-image: url('images/control/overview/toggle@2x.png');
@@ -1217,9 +1185,9 @@
   min-width: 200px;
 }
   .outerspatial-control-switcher div:first-child {
-    border-radius: 1px;
     background-color: #fff;
     border: 1px solid #fff;
+    border-radius: 1px;
     cursor: pointer;
     min-height: 29px;
     position: relative;
@@ -1228,8 +1196,8 @@
     .outerspatial-control-switcher div:first-child div {
       border-right: solid 1px #d8d8d8;
       margin-left: 25px;
-      padding: 7px 8px 7px 8px;
       margin-right: 25px;
+      padding: 7px 8px 7px 8px;
       position: relative;
       user-select: none;
     }
@@ -1256,12 +1224,8 @@
     background-size: 10px 5px;
   }
   .outerspatial-control-switcher div:first-child span:last-child.open {
-    -webkit-transform: rotate(180deg);
-       -moz-transform: rotate(180deg);
-        -ms-transform: rotate(180deg);
-         -o-transform: rotate(180deg);
-            transform: rotate(180deg);
     background-position: 8px;
+    transform: rotate(180deg);
   }
   .outerspatial-control-switcher ul {
     background-color: #fff;
@@ -1375,10 +1339,6 @@
 /* Notifications */
 .outerspatial .humane,
 .outerspatial .humane-bootstrap {
-  -webkit-transition: all 0.4s ease-in-out;
-     -moz-transition: all 0.4s ease-in-out;
-      -ms-transition: all 0.4s ease-in-out;
-       -o-transition: all 0.4s ease-in-out;
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
   position: absolute;
   transition: all 0.4s ease-in-out;
@@ -1386,10 +1346,6 @@
 }
 .outerspatial .humane,
 .outerspatial .humane-bootstrap {
-  -webkit-transform: translateX(-100px);
-     -moz-transform: translateX(-100px);
-      -ms-transform: translateX(-100px);
-       -o-transform: translateX(-100px);
   background-color: #fff;
   border: 1px solid transparent;
   box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.3);
@@ -1440,25 +1396,17 @@
 .outerspatial .humane-animate,
 .outerspatial .humane-bootstrap.humane-bootstrap-animate {
   opacity: 1;
-  -moz-transform: translateY(0);
-  -webkit-transform: translateY(0);
-  -ms-transform: translateY(0);
-  -o-transform: translateY(0);
   transform: translateY(0);
 }
 .outerspatial .humane-js-animate,
 .outerspatial .humane-bootstrap.humane-bootstrap-js-animate {
   opacity: 1;
-  -moz-transform: translateY(0);
-  -webkit-transform: translateY(0);
-  -ms-transform: translateY(0);
-  -o-transform: translateY(0);
   transform: translateY(0);
 }
 .outerspatial .humane-js-animate:hover,
 .outerspatial .humane-bootstrap.humane-bootstrap-js-animate:hover {
-  opacity: 0.7;
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=70);
+  opacity: 0.7;
 }
 
 /* Modules */
@@ -1521,10 +1469,8 @@
     }
       #outerspatial-module_Directions .directions .maneuver-header .location .identifier,
       #outerspatial-module_Directions .directions .maneuver-footer .location .identifier {
-        -webkit-border-radius: 3px;
-           -moz-border-radius: 3px;
-                border-radius: 3px;
         background-color: #000;
+        border-radius: 3px;
         color: #fff;
         display: block;
         float: left;
@@ -1591,9 +1537,7 @@
       top: 0;
     }
       #outerspatial-module_Directions ul li button {
-        -webkit-background-clip: padding-box;
-           -moz-background-clip: padding;
-                background-clip: padding-box;
+        background-clip: padding-box;
         background-position: 4px 3px;
         background-repeat: no-repeat;
         background-size: 16px 16px;
@@ -1618,11 +1562,8 @@
       right: 28px;
     }
     #outerspatial-module_Directions ul li label {
-      -webkit-border-radius: 3px;
-         -moz-border-radius: 3px;
-           -o-border-radius: 3px;
-              border-radius: 3px;
       background: #000;
+      border-radius: 3px;
       color: #fff;
       cursor: move;
       display: block;
