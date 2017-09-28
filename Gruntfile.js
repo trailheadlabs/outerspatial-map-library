@@ -293,13 +293,9 @@ module.exports = function (grunt) {
 
       if (example.include && !example.under_development) {
         var css = grunt.file.read('examples/' + (example.css ? example.id : 'default') + '.css');
-
-        if (example.js !== false) {
-          var js = grunt.file.read('examples/' + example.id + '.js');
-        }
+        var js = (example.js === false ? null : grunt.file.read('examples/' + example.id + '.js'));
 
         html = grunt.file.read('examples/' + (example.html ? example.id : 'default') + '.html');
-
         grunt.file.copy('examples/template.html', 'dist/examples/' + example.id + '.html', {
           process: function (content) {
             content = content.replace(/{{ css }}/g, css);
