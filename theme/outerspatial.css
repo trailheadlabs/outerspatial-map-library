@@ -4,9 +4,7 @@
   width: 100%;
 }
   .outerspatial * {
-    -webkit-box-sizing: content-box;
-       -moz-box-sizing: content-box;
-            box-sizing: content-box;
+    box-sizing: content-box;
   }
   .outerspatial .clearfix:after,
   .outerspatial .clearfix:before {
@@ -24,6 +22,8 @@
     text-align: left;
     text-indent: -999em;
   }
+  .outerspatial h1,
+  .outerspatial h2,
 
 @media (max-width: 767px) {
   .outerspatial-hidden-xs {
@@ -211,9 +211,8 @@
     border: 1px solid #c9c9c9;
     box-sizing: border-box;
     color: #464646;
-    font-size: 12px;
-    font-weight: bold;
-    padding: 6px 8px;
+    font-size: 14px;
+    padding: 8px 10px;
   }
 .outerspatial button,
 .outerspatial input,
@@ -433,8 +432,8 @@
 /* Leaflet Overrides */
 .outerspatial .leaflet-container {
   color: inherit;
-  font-family: sans-serif;
-  font-size: inherit;
+  font-family: Karla,'Helvetica Neue',helvetica,arial,sans-serif;
+  font-size: 14px;
   overflow: hidden;
   touch-action: none;
 }
@@ -454,6 +453,7 @@
   .outerspatial .leaflet-container h4,
   .outerspatial .leaflet-container h5,
   .outerspatial .leaflet-container h6 {
+    font-family: 'PT Sans Narrow',sans-serif;
     font-size: inherit;
     line-height: inherit;
     margin: inherit;
@@ -960,7 +960,6 @@
     border: none;
     border-radius: inherit;
     box-sizing: border-box;
-    font-size: 14px;
     height: 40px;
     outline-offset: -1px;
     text-overflow: ellipsis;
@@ -1006,7 +1005,6 @@
   background-color: #fff;
 }
 .outerspatial .leaflet-control-geocoder .working {
-  background-color: #98ca43;
   cursor: wait;
 }
 .outerspatial .leaflet-control-geocoder .working .icon-svg-path {
@@ -1183,7 +1181,6 @@
   border-radius: 1px;
   color: #373a3c;
   font-size: 10px;
-  font-weight: bold;
   min-width: 200px;
 }
   .outerspatial-control-switcher div:first-child {
