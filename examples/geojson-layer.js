@@ -6,7 +6,9 @@ var OuterSpatial = {
     },
     popup: {
       actions: [{
-        provider: 'google',
+        providers: [
+          'google'
+        ],
         type: 'directions'
       }],
       title: '{{name}}'
@@ -21,7 +23,7 @@ var OuterSpatial = {
   }, {
     popup: {
       actions: [{
-        provider: [
+        providers: [
           'google',
           'bing'
         ],

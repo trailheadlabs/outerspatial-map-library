@@ -70,31 +70,36 @@ var Popup = L.Popup.extend({
     li.appendChild(a);
 
     if (config.type && config.type === 'directions') {
-      var directionsHandler = function (provider) {
-        if (provider === 'google') {
-          return function () {
-            window.open('https://www.google.com/maps/dir/?api=1&&destination=' + me.getLatLng().lat + '%2c' + me.getLatLng().lng, '_blank');
-          };
-        } else if (provider === 'bing') {
-          return function () {
-            window.open('http://bing.com/maps/default.aspx?rtp=~pos.' + me.getLatLng().lat + '_' + me.getLatLng().lng, '_blank');
-          };
+      var providers = config.providers;
+
+      if (providers && providers.constructor === Array) {
+        function handler (provider) {
+          var latLng = me.getLatLng();
+          var lat = latLng.lat;
+          var lng = latLng.lng;
+
+          console.log(provider);
+
+          if (provider === 'google') {
+            window.open('https://www.google.com/maps/dir/?api=1&&destination=' + lat + '%2c' + lng, '_blank');
+          } else if (provider === 'bing') {
+            window.open('http://bing.com/maps/default.aspx?rtp=~pos.' + lat + '_' + lng, '_blank');
+          }
         }
-      };
-      if (config.provider && config.provider.constructor === Array) {
+
         config.menu = [];
-        config.text = 'Get directions';
+        config.text = 'Get Directions';
 
-        for (var i = 0; i < config.provider.length; i++) {
+        for (var i = 0; i < providers.length; i++) {
           var menuItem = {};
+          var provider = providers[i];
 
-          menuItem.text = 'From ' + config.provider[i].charAt(0).toUpperCase() + config.provider[i].slice(1);
-          menuItem.handler = directionsHandler(config.provider[i]);
+          menuItem.text = 'From ' + provider.charAt(0).toUpperCase() + provider.slice(1);
+          menuItem.handler = function () {
+            handler(provider);
+          };
           config.menu.push(menuItem);
         }
-      } else {
-        config.text = 'Get directions from ' + config.provider.charAt(0).toUpperCase() + config.provider.slice(1);
-        config.handler = directionsHandler(config.provider);
       }
     }
 
