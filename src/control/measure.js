@@ -108,9 +108,32 @@ var MeasureControl = L.Control.extend({
             '<line data-color="color-2" x1="5" y1="14" x2="6" y2="15"/>' +
             '<rect x="1.393" y="8.464" transform="rotate(-45 12 12)" width="21.213" height="7.071"/>' +
           '</g>' +
-        '</svg>';
+        '</svg>' +
+      '';
 
       this._menu.appendChild(liSelect);
+      map
+        .addLayer(this._featureGroup)
+        .addLayer(this._featureGroupTooltips);
+
+      if (this._activeUnitArea) {
+        var liArea = L.DomUtil.create('li', '', this._menu);
+
+        html = '';
+        this._buttonArea = L.DomUtil.create('button', 'pressed', liArea);
+        this._buttonArea.innerHTML = 'Area';
+        this._selectUnitArea = L.DomUtil.create('select', '', liSelect);
+        liArea.className = 'first';
+
+        // TODO: Verify this is a supported unit.
+        for (i = 0; i < this.options.units.area.length; i++) {
+          unit = this.options.units.area[i];
+          html += '<option value="' + unit + '"' + (i === 0 ? ' selected' : '') + '>' + this.units.area[unit] + '</option>';
+        }
+
+        this._selectUnitArea.innerHTML = html;
+        this._initializeMode(this._buttonArea, new L.Draw.Polygon(map, this.options.polygon));
+      }
 
       if (this._activeUnitDistance) {
         var liDistance = L.DomUtil.create('li', '', this._menu);
@@ -126,6 +149,7 @@ var MeasureControl = L.Control.extend({
         })(), liDistance);
         this._buttonDistance.innerHTML = 'Distance';
         this._selectUnitDistance = L.DomUtil.create('select', '', liSelect);
+        liDistance.className = this._activeUnitArea ? 'second' : 'first';
 
         // TODO: Verify this is a supported unit.
         for (i = 0; i < this.options.units.distance.length; i++) {
@@ -134,30 +158,9 @@ var MeasureControl = L.Control.extend({
         }
 
         this._selectUnitDistance.innerHTML = html;
+        this._initializeMode(this._buttonDistance, new L.Draw.Polyline(map, this.options.polyline));
       }
 
-      if (this._activeUnitArea) {
-        var liArea = L.DomUtil.create('li', '', this._menu);
-
-        html = '';
-        this._buttonArea = L.DomUtil.create('button', 'pressed', liArea);
-        this._buttonArea.innerHTML = 'Area';
-        this._selectUnitArea = L.DomUtil.create('select', '', liSelect);
-
-        // TODO: Verify this is a supported unit.
-        for (i = 0; i < this.options.units.area.length; i++) {
-          unit = this.options.units.area[i];
-          html += '<option value="' + unit + '"' + (i === 0 ? ' selected' : '') + '>' + this.units.area[unit] + '</option>';
-        }
-
-        this._selectUnitArea.innerHTML = html;
-      }
-
-      map
-        .addLayer(this._featureGroup)
-        .addLayer(this._featureGroupTooltips);
-      this._initializeMode(this._buttonArea, new L.Draw.Polygon(map, this.options.polygon));
-      this._initializeMode(this._buttonDistance, new L.Draw.Polyline(map, this.options.polyline));
       this._setupListeners();
 
       return this._container;

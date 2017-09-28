@@ -25,21 +25,10 @@ require('./popup.js');
   L.Map.addInitHook(function () {
     var container = this.getContainer();
     var elAttribution = util.getChildElementsByClassName(container, 'leaflet-control-attribution')[0];
-    var elControl = util.getChildElementsByClassName(container, 'leaflet-control-container')[0];
     var me = this;
 
     function resize () {
-      var left = util.getOuterDimensions(elControl.childNodes[2]).width;
       var overviewControl = util.getChildElementsByClassName(container, 'leaflet-control-overview')[0];
-
-      if (left) {
-        left = left + 16;
-      } else {
-        left = 8;
-      }
-
-
-
 
       if (overviewControl && !util.isHidden(overviewControl)) {
         elAttribution.style['margin-right'] = util.getOuterDimensions(overviewControl).width + 'px';
@@ -47,22 +36,24 @@ require('./popup.js');
         elAttribution.style['margin-right'] = 0;
       }
 
-      console.log(elControl.childNodes[2]);
-      console.log(left);
-
-      elAttribution.style['max-width'] = (util.getOuterDimensions(container).width - left) + 'px';
+      elAttribution.style['max-width'] = (util.getOuterDimensions(container).width - 45) + 'px';
     }
 
     this._frame = null;
 
     if ((window.self !== window.top) && document.referrer !== '') {
-      // The map is in an iframe.
-      this._frame = window.frameElement;
-      var outerspatialContainer = me.getContainer().parentNode.parentNode;
+      var outerspatialContainer = container.parentNode.parentNode;
       var toolbar = util.getChildElementsByClassName(outerspatialContainer, 'outerspatial-toolbar')[0];
-      var title = L.DomUtil.create('li', 'title');
-      toolbar.childNodes[0].appendChild(title);
-      title.innerHTML = me.options.title;
+
+      this._frame = window.frameElement;
+
+      if (me.options.title) {
+        var title = L.DomUtil.create('li', 'title');
+
+        toolbar.childNodes[0].appendChild(title);
+        title.innerHTML = me.options.title;
+      }
+
       toolbar.style.display = 'block';
       util.getChildElementsByClassName(outerspatialContainer, 'outerspatial-map-wrapper')[0].style.top = '40px';
     }
@@ -393,6 +384,12 @@ MapExt = L.Map.extend({
     this._container.style.cursor = type;
   },
   _setupPopup: function () {
+
+
+
+
+
+    
     var clicks = 0;
     var detectAvailablePopupSpace = true;
     var me = this;

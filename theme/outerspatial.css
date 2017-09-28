@@ -439,13 +439,13 @@
   touch-action: none;
 }
   .outerspatial .leaflet-container a {
-    color: inherit;
+    color: #41a7d0;
     cursor: pointer;
     font-weight: normal;
     text-decoration: none;
   }
     .outerspatial .leaflet-container a:hover {
-      color: inherit;
+      color: #41a7d0;
       text-decoration: underline;
     }
   .outerspatial .leaflet-container h1,
@@ -623,12 +623,12 @@
     .outerspatial .leaflet-popup-content table td,
     .outerspatial .leaflet-popup-content table th {
       border: none;
-      padding-bottom: 7px;
-      padding-top: 7px;
+      padding-bottom: 8px;
+      padding-top: 8px;
     }
     .outerspatial .leaflet-popup-content table tr th:first-child,
     .outerspatial .leaflet-popup-content table tr td:first-child {
-      padding-right: 7px;
+      padding-right: 8px;
     }
   .outerspatial .leaflet-popup-content th {
     white-space: nowrap;
@@ -658,15 +658,9 @@
       .outerspatial .leaflet-popup-content .actions ul li:last-child {
         margin-right: 0;
       }
-    .outerspatial .leaflet-popup-content .actions a {
-      color: #41a7d0;
-    }
-      .outerspatial .leaflet-popup-content .actions a:hover {
-        text-decoration: none;
-      }
     .outerspatial .leaflet-popup-content .actions .menu {
       background-color: #fff;
-      box-shadow: 0 2px 3px rgba(0,0,0,.12);
+      box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.3);
       display: none;
       list-style-type: none;
       margin: 0;
@@ -681,7 +675,7 @@
         padding: 5px 9px;
       }
         .outerspatial .leaflet-popup-content .actions .menu a:hover {
-          background-color: #f1f1ef;
+          color: #98ca43;
         }
       .outerspatial .leaflet-popup-content .actions .menu li {
         border-top: 1px solid #f2f1ef;
@@ -730,19 +724,20 @@
       }
   .outerspatial .leaflet-popup-content .title {
     color: #3e3e3f;
-    font-size: 24px;
-    line-height: 26px;
+    font-size: 20px;
+    line-height: 22px;
     padding: 10px;
   }
   .outerspatial .leaflet-popup-content .sublayer .title {
-    font-size: 20px;
+    font-size: 18px;
     font-style: italic;
     font-weight: normal;
-    line-height: 22px;
+    line-height: 20px;
     padding-left: 0;
   }
   .outerspatial .leaflet-popup-content .description {
     display: inline-block;
+    width: 100%;
   }
 .outerspatial .leaflet-popup-scrolled {
   border-bottom: none;
@@ -972,7 +967,7 @@
     z-index: -1;
   }
     .outerspatial .leaflet-control-geocoder ul li {
-      border-top: 1px solid #f2f1ef;
+      border-top: 1px solid #d8d8d8;
       cursor: pointer;
       list-style-type: none;
       padding: 7px 10px;
@@ -988,12 +983,15 @@
       border-color: #ddd;
     }
 .outerspatial .leaflet-control-geocoder .search {
-  background-color: #c55337;
+  background-color: #3bafda;
   background-image: url('images/control/geocoder/search.png');
   background-position: 5px;
   background-repeat: no-repeat;
   background-size: 16px 16px;
 }
+  .outerspatial .leaflet-control-geocoder .search:hover {
+    background-color: #4fc1e9;
+  }
 .outerspatial .leaflet-retina .leaflet-control-geocoder .search {
   background-image: url('images/control/geocoder/search@2x.png');
 }
@@ -1042,25 +1040,19 @@
   margin: 0;
   padding: 0;
   position: absolute;
-  right: 30px;
+  right: 40px;
   white-space: nowrap;
   z-index: -1;
 }
   .outerspatial-control-measure ul li {
     display: inline-block;
   }
-    .outerspatial-control-measure ul li:first-child a {
-      border-left: none;
+    .outerspatial-control-measure ul li:first-child {
+      padding-right: 8px;
     }
-    .outerspatial-control-measure ul li:last-child {
-      vertical-align: middle;
+    .outerspatial-control-measure ul li select:first-child {
+      display: none;
     }
-      .outerspatial-control-measure ul li select {
-        margin-left: 5px;
-      }
-      .outerspatial-control-measure ul li select:first-child {
-        display: none;
-      }
     .outerspatial-control-measure ul li button {
       background-color: #6d6e70 !important;
       border: none !important;
@@ -1081,9 +1073,13 @@
       .outerspatial-control-measure ul li button.pressed {
         background-color: #404041 !important;
       }
-      .outerspatial-control-measure ul li:last-child button {
-        border-bottom-right-radius: 4px !important;
-        border-top-right-radius: 4px !important;
+      .outerspatial-control-measure ul li.first button {
+        border-bottom-left-radius: 1px !important;
+        border-top-left-radius: 1px !important;
+      }
+      .outerspatial-control-measure ul li.first,
+      .outerspatial-control-measure ul li.second {
+        box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.3);
       }
 .leaflet-draw-tooltip {
   visibility: hidden !important;

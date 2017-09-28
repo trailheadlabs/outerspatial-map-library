@@ -61,7 +61,7 @@ var GeocoderControl = L.Control.extend({
     this._input.setAttribute('aria-expanded', false);
     this._input.setAttribute('aria-label', 'Geocode');
     this._input.setAttribute('aria-owns', 'geocoder_listbox');
-    this._input.setAttribute('placeholder', 'Find a location');
+    this._input.setAttribute('placeholder', 'Find a Location');
     this._input.setAttribute('role', 'combobox');
     this._input.setAttribute('type', 'text');
     this._ul.setAttribute('id', 'geocoder_listbox');

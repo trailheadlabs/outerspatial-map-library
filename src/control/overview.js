@@ -74,7 +74,7 @@ var OverviewControl = L.Control.extend({
       zoomAnimation: this.options.zoomAnimation,
       zoomControl: false
     });
-    this._attributionContainer.style.marginRight = (this.options.width + 3) + 'px';
+    this._attributionContainer.style.marginRight = (this.options.width + 8) + 'px';
     this._miniMap.addLayer(this._layer);
     this._mainMapMoving = false;
     this._miniMapMoving = false;

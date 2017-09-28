@@ -9,8 +9,8 @@ var Popup = L.Popup.extend({
   options: {
     autoPanPadding: null,
     autoPanPaddingBottomRight: [
-      20,
-      20
+      16,
+      16
     ],
     autoPanPaddingTopLeft: [
       20,
@@ -78,8 +78,6 @@ var Popup = L.Popup.extend({
           var lat = latLng.lat;
           var lng = latLng.lng;
 
-          console.log(provider);
-
           if (provider === 'google') {
             window.open('https://www.google.com/maps/dir/?api=1&&destination=' + lat + '%2c' + lng, '_blank');
           } else if (provider === 'bing') {
@@ -91,14 +89,16 @@ var Popup = L.Popup.extend({
         config.text = 'Get Directions';
 
         for (var i = 0; i < providers.length; i++) {
-          var menuItem = {};
-          var provider = providers[i];
+          (function () {
+            var menuItem = {};
+            var provider = providers[i];
 
-          menuItem.text = 'From ' + provider.charAt(0).toUpperCase() + provider.slice(1);
-          menuItem.handler = function () {
-            handler(provider);
-          };
-          config.menu.push(menuItem);
+            menuItem.text = 'From ' + provider.charAt(0).toUpperCase() + provider.slice(1);
+            menuItem.handler = function () {
+              handler(provider);
+            };
+            config.menu.push(menuItem);
+          })();
         }
       }
     }
@@ -275,8 +275,6 @@ var Popup = L.Popup.extend({
           };
         }
       }
-
-      // TODO: Wrap title in an h3 (I believe?) with a zIndex of -1 and give it focus when popup is shown.
 
       if (config.title) {
         obj = null;
