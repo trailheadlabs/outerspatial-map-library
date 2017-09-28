@@ -65,14 +65,43 @@ var Popup = L.Popup.extend({
   _createAction: function (config, data, div) {
     var a = document.createElement('a');
     var li = document.createElement('li');
+    var me = this;
 
     li.appendChild(a);
-    a.innerHTML = util.handlebars(config.text, data);
+
+    if (config.type && config.type === 'directions') {
+      var directionsHandler = function (provider) {
+        if (provider === 'google') {
+          return function () {
+            window.open('https://www.google.com/maps/dir/?api=1&&destination=' + me.getLatLng().lat + '%2c' + me.getLatLng().lng, '_blank');
+          };
+        } else if (provider === 'bing') {
+          return function () {
+            window.open('http://bing.com/maps/default.aspx?rtp=~pos.' + me.getLatLng().lat + '_' + me.getLatLng().lng, '_blank');
+          };
+        }
+      };
+      if (config.provider && config.provider.constructor === Array) {
+        config.menu = [];
+        config.text = 'Get directions';
+
+        for (var i = 0; i < config.provider.length; i++) {
+          var menuItem = {};
+
+          menuItem.text = 'From ' + config.provider[i].charAt(0).toUpperCase() + config.provider[i].slice(1);
+          menuItem.handler = directionsHandler(config.provider[i]);
+          config.menu.push(menuItem);
+        }
+      } else {
+        config.text = 'Get directions from ' + config.provider.charAt(0).toUpperCase() + config.provider.slice(1);
+        config.handler = directionsHandler(config.provider);
+      }
+    }
 
     if (config.menu) {
       var menu = L.DomUtil.create('ul', 'menu', div);
 
-      for (var i = 0; i < config.menu.length; i++) {
+      for (i = 0; i < config.menu.length; i++) {
         (function () {
           var item = config.menu[i];
           var itemA = document.createElement('a');
@@ -108,6 +137,8 @@ var Popup = L.Popup.extend({
         config.handler(data);
       });
     }
+
+    a.innerHTML = util.handlebars(config.text, data);
 
     return li;
   },
