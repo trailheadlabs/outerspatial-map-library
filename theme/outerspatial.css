@@ -431,9 +431,10 @@
 
 /* Leaflet Overrides */
 .outerspatial .leaflet-container {
-  color: inherit;
+  color: #3e3e3f;
   font-family: Karla,'Helvetica Neue',helvetica,arial,sans-serif;
   font-size: 14px;
+  line-height: 1.42857143;
   overflow: hidden;
   touch-action: none;
 }
@@ -455,7 +456,7 @@
   .outerspatial .leaflet-container h6 {
     font-family: 'PT Sans Narrow',sans-serif;
     font-size: inherit;
-    line-height: inherit;
+    line-height: 1.1;
     margin: inherit;
   }
 .outerspatial .leaflet-top .leaflet-control {
