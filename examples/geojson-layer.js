@@ -5,6 +5,12 @@ var OuterSpatial = {
       return feature.properties.park === 'Yellowstone';
     },
     popup: {
+      actions: [{
+        providers: [
+          'google'
+        ],
+        type: 'directions'
+      }],
       title: '{{name}}'
     },
     styles: {
@@ -16,6 +22,13 @@ var OuterSpatial = {
     url: 'data/gateway-points-of-interest.geojson'
   }, {
     popup: {
+      actions: [{
+        providers: [
+          'google',
+          'bing'
+        ],
+        type: 'directions'
+      }],
       description: 'The alpha code is {{Code}}',
       title: '{{Name}}'
     },
