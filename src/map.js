@@ -33,7 +33,7 @@ require('./popup.js');
       me._frame = window.frameElement;
       L.DomUtil.addClass(elAttribution, 'collapsed');
 
-      if (me.options.title) {
+      if (me.options.meta.title) {
         var outerspatialContainer = container.parentNode.parentNode;
         var toolbar = util.getChildElementsByClassName(outerspatialContainer, 'outerspatial-toolbar')[0];
         var titleContainer = L.DomUtil.create('li', 'title');
@@ -41,7 +41,7 @@ require('./popup.js');
 
         titleContainer.appendChild(title);
         toolbar.childNodes[0].appendChild(titleContainer);
-        title.innerHTML = me.options.title;
+        title.innerHTML = me.options.meta.title;
         toolbar.style.display = 'block';
         util.getChildElementsByClassName(outerspatialContainer, 'outerspatial-map-wrapper')[0].style.top = '40px';
       }
