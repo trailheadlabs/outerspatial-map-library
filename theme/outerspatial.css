@@ -211,10 +211,8 @@
   .outerspatial-toolbar ul.left .title {
     border-left: none;
     border-right: none;
-    color: #444;
     display: inline-block;
-    font-size: 18px;
-    font-weight: bold;
+    font-size: 20px;
     line-height: 40px;
     max-width: 100%;
     overflow: hidden;

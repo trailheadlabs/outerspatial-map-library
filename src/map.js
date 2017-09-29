@@ -37,9 +37,11 @@ require('./popup.js');
       L.DomUtil.addClass(elAttribution, 'collapsed');
 
       if (me.options.title) {
-        var title = L.DomUtil.create('li', 'title');
+        var titleContainer = L.DomUtil.create('li', 'title');
+        var title = L.DomUtil.create('h1', 'title');
 
-        toolbar.childNodes[0].appendChild(title);
+        titleContainer.appendChild(title);
+        toolbar.childNodes[0].appendChild(titleContainer);
         title.innerHTML = me.options.title;
       }
 
