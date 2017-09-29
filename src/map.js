@@ -147,7 +147,7 @@ MapExt = L.Map.extend({
     if ((window.self !== window.top) && document.referrer !== '') {
       me._frame = window.frameElement;
 
-      if (me.options.meta.title) {
+      if (me.options.meta && me.options.meta.title) {
         var outerspatialContainer = container.parentNode.parentNode;
         var titleContainer = L.DomUtil.create('li', 'title');
         var title = L.DomUtil.create('h1', 'title');
