@@ -73,18 +73,6 @@ var Popup = L.Popup.extend({
       var providers = config.providers;
 
       if (providers && providers.constructor === Array) {
-        function handler (provider) {
-          var latLng = me.getLatLng();
-          var lat = latLng.lat;
-          var lng = latLng.lng;
-
-          if (provider === 'google') {
-            window.open('https://www.google.com/maps/dir/?api=1&&destination=' + lat + '%2c' + lng, '_blank');
-          } else if (provider === 'bing') {
-            window.open('http://bing.com/maps/default.aspx?rtp=~pos.' + lat + '_' + lng, '_blank');
-          }
-        }
-
         config.menu = [];
         config.text = 'Get Directions';
 
@@ -100,6 +88,18 @@ var Popup = L.Popup.extend({
             config.menu.push(menuItem);
           })();
         }
+      }
+    }
+
+    function handler (provider) {
+      var latLng = me.getLatLng();
+      var lat = latLng.lat;
+      var lng = latLng.lng;
+
+      if (provider === 'google') {
+        window.open('https://www.google.com/maps/dir/?api=1&&destination=' + lat + '%2c' + lng, '_blank');
+      } else if (provider === 'bing') {
+        window.open('http://bing.com/maps/default.aspx?rtp=~pos.' + lat + '_' + lng, '_blank');
       }
     }
 
