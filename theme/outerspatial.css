@@ -1339,7 +1339,7 @@
 /* ZoomDisplay Control */
 .leaflet-control-zoomdisplay div {
   cursor: default;
-  font-family: sans-serif;
+  line-height: 30px !important;
   user-select: none;
 }
 
