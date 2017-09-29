@@ -837,13 +837,13 @@
   border-color: #9b9b9b;
 }
 .outerspatial .leaflet-bar a.pressed,
-.outerspatial .leaflet-bar button.pressed,
-.outerspatial .leaflet-control-geocoder button.pressed {
+.outerspatial .leaflet-bar button.pressed {
   background-color: #98ca43;
   border-color: #98ca43;
 }
-.outerspatial .leaflet-bar button .icon-svg-line,
-.outerspatial-toolbar button .icon-svg-line {
+
+ /* SVG Buttons */
+.outerspatial button .icon-svg-line {
   fill: none;
   fill-rule: evenodd;
   stroke: #444;
@@ -851,36 +851,27 @@
   stroke-linejoin: round;
   stroke-width: 1.5;
 }
-.outerspatial .leaflet-bar a:active,
-.outerspatial .leaflet-bar a:hover,
-.outerspatial .leaflet-bar button:active .icon-svg-line,
-.outerspatial .leaflet-bar button:hover .icon-svg-line,
-.outerspatial-toolbar button:hover .icon-svg-line {
+.outerspatial button:active .icon-svg-line,
+.outerspatial button:hover .icon-svg-line {
   stroke: #98ca43;
 }
-.outerspatial .leaflet-bar button.pressed .icon-svg-line,
-.outerspatial .leaflet-bar button.pressed:hover .icon-svg-line,
-.outerspatial .leaflet-bar button.leaflet-disabled .icon-svg-line,
-.outerspatial .leaflet-bar button.leaflet-disabled:hover .icon-svg-line {
+.outerspatial button.pressed .icon-svg-line,
+.outerspatial button.pressed:hover .icon-svg-line,
+.outerspatial button.leaflet-disabled .icon-svg-line,
+.outerspatial button.leaflet-disabled:hover .icon-svg-line {
   stroke: #fff;
 }
-.outerspatial .leaflet-bar button .icon-svg-path,
-.outerspatial-toolbar button .icon-svg-path,
-.outerspatial-toolbar button .icon-svg-path,
-.outerspatial .leaflet-control-geocoder button .icon-svg-path {
+.outerspatial button .icon-svg-path {
   fill: #444;
 }
-.outerspatial .leaflet-bar a:active,
-.outerspatial .leaflet-bar a:hover,
-.outerspatial .leaflet-bar button:active .icon-svg-path,
-.outerspatial .leaflet-bar button:hover .icon-svg-path,
-.outerspatial-toolbar button:hover .icon-svg-path {
+.outerspatial button:active .icon-svg-path,
+.outerspatial button:hover .icon-svg-path {
   fill: #98ca43;
 }
-.outerspatial .leaflet-bar button.pressed .icon-svg-path,
-.outerspatial .leaflet-bar button.pressed:hover .icon-svg-path,
-.outerspatial .leaflet-bar button.leaflet-disabled .icon-svg-path,
-.outerspatial .leaflet-bar button.leaflet-disabled:hover .icon-svg-path {
+.outerspatial button.pressed .icon-svg-path,
+.outerspatial button.pressed:hover .icon-svg-path,
+.outerspatial button.leaflet-disabled .icon-svg-path,
+.outerspatial button.leaflet-disabled:hover .icon-svg-path {
   fill: #fff;
 }
 
@@ -951,7 +942,7 @@
   font-size: 14px;
   z-index: 8;
 }
-  .outerspatial .leaflet-control-geocoder .button {
+  .outerspatial .leaflet-control-geocoder button {
     background-clip: padding-box;
     border: none;
     border-left: 1px solid #d8d8d8;
@@ -964,10 +955,10 @@
     outline-offset: -1px;
     width: 40px;
   }
-  .outerspatial .leaflet-control-geocoder .button:focus {
+  .outerspatial .leaflet-control-geocoder button:focus {
     position: relative;
   }
-  .outerspatial .leaflet-control-geocoder .input {
+  .outerspatial .leaflet-control-geocoder input {
     color: #444;
     border: none;
     border-radius: inherit;
@@ -978,7 +969,7 @@
     white-space: nowrap;
     width: 200px;
   }
-  .outerspatial .leaflet-control-geocoder .input:focus {
+  .outerspatial .leaflet-control-geocoder input:focus {
     position: relative;
   }
   .outerspatial .leaflet-control-geocoder ul.leaflet-control {
@@ -1013,13 +1004,14 @@
       background-color: #ddd;
       border-color: #ddd;
     }
-.outerspatial .leaflet-control-geocoder .search {
+.outerspatial .leaflet-control-geocoder button.search {
   background-color: #fff;
 }
-.outerspatial .leaflet-control-geocoder .working {
+.outerspatial .leaflet-control-geocoder button.working {
+  background-color: #98ca43;
   cursor: wait;
 }
-.outerspatial .leaflet-control-geocoder .working .icon-svg-path {
+.outerspatial .leaflet-control-geocoder button.working .icon-svg-path {
   fill: #fff;
 }
 
