@@ -30,23 +30,21 @@ require('./popup.js');
     this._frame = null;
 
     if ((window.self !== window.top) && document.referrer !== '') {
-      var outerspatialContainer = container.parentNode.parentNode;
-      var toolbar = util.getChildElementsByClassName(outerspatialContainer, 'outerspatial-toolbar')[0];
-
-      this._frame = window.frameElement;
+      me._frame = window.frameElement;
       L.DomUtil.addClass(elAttribution, 'collapsed');
 
       if (me.options.title) {
+        var outerspatialContainer = container.parentNode.parentNode;
+        var toolbar = util.getChildElementsByClassName(outerspatialContainer, 'outerspatial-toolbar')[0];
         var titleContainer = L.DomUtil.create('li', 'title');
         var title = L.DomUtil.create('h1', 'title');
 
         titleContainer.appendChild(title);
         toolbar.childNodes[0].appendChild(titleContainer);
         title.innerHTML = me.options.title;
+        toolbar.style.display = 'block';
+        util.getChildElementsByClassName(outerspatialContainer, 'outerspatial-map-wrapper')[0].style.top = '40px';
       }
-
-      toolbar.style.display = 'block';
-      util.getChildElementsByClassName(outerspatialContainer, 'outerspatial-map-wrapper')[0].style.top = '40px';
     }
 
     function resize () {
