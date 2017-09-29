@@ -26,12 +26,12 @@ require('./popup.js');
     var container = this.getContainer();
     var elAttribution = util.getChildElementsByClassName(container, 'leaflet-control-attribution')[0];
     var me = this;
+    var initialAttributionWidth;
 
     this._frame = null;
 
     if ((window.self !== window.top) && document.referrer !== '') {
       me._frame = window.frameElement;
-      L.DomUtil.addClass(elAttribution, 'collapsed');
 
       if (me.options.meta.title) {
         var outerspatialContainer = container.parentNode.parentNode;
@@ -48,6 +48,7 @@ require('./popup.js');
     }
 
     function resize () {
+      var containerWidth = container.offsetWidth;
       var overviewControl = util.getChildElementsByClassName(container, 'leaflet-control-overview')[0];
 
       if (overviewControl && !util.isHidden(overviewControl)) {
@@ -56,10 +57,14 @@ require('./popup.js');
         elAttribution.style['margin-right'] = 0;
       }
 
-      if (me._frame) {
-        elAttribution.style['max-width'] = util.getOuterDimensions(container).width + 'px';
+      if (initialAttributionWidth + 45 > containerWidth) {
+        elAttribution.style['width'] = containerWidth + 'px';
+        elAttribution.style['max-width'] = (initialAttributionWidth + 45) + 'px';
+        L.DomUtil.addClass(elAttribution, 'collapsed');
       } else {
+        elAttribution.style['width'] = 'auto';
         elAttribution.style['max-width'] = (util.getOuterDimensions(container).width - 45) + 'px';
+        L.DomUtil.removeClass(elAttribution, 'collapsed');
       }
     }
 
@@ -100,9 +105,10 @@ require('./popup.js');
         if (typeof me._updateImproveLinks === 'function') {
           me._updateImproveLinks();
         }
+        initialAttributionWidth = elAttribution.offsetWidth;
+        resize();
       };
       this.on('resize', resize);
-      resize();
     }
 
     if (typeof me._updateImproveLinks === 'function') {
