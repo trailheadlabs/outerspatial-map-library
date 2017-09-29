@@ -1,5 +1,10 @@
-.outerspatial {
+.outerspatial,
+.outerspatial .leaflet-container {
+  color: #3e3e3f;
+  font-family: Karla, 'Helvetica Neue', helvetica, arial, sans-serif;
+  font-size: 14px;
   height: 100%;
+  line-height: 1.42857143;
   position: relative;
   width: 100%;
 }
@@ -23,7 +28,34 @@
     text-indent: -999em;
   }
   .outerspatial h1,
+  .outerspatial .leaflet-container h1,
   .outerspatial h2,
+  .outerspatial .leaflet-container h2,
+  .outerspatial h3,
+  .outerspatial .leaflet-container h3,
+  .outerspatial h4,
+  .outerspatial .leaflet-container h4,
+  .outerspatial h5,
+  .outerspatial .leaflet-container h5,
+  .outerspatial h6,
+  .outerspatial .leaflet-container h6 {
+    font-family: 'PT Sans Narrow', sans-serif;
+    font-size: inherit;
+    line-height: 1.1;
+    margin: inherit;
+  }
+  .outerspatial a,
+  .outerspatial .leaflet-container a {
+    color: #41a7d0;
+    cursor: pointer;
+    font-weight: normal;
+    text-decoration: none;
+  }
+    .outerspatial a:hover,
+    .outerspatial .leaflet-container a:hover {
+      color: #41a7d0;
+      text-decoration: underline;
+    }
 
 @media (max-width: 767px) {
   .outerspatial-hidden-xs {
@@ -431,34 +463,9 @@
 
 /* Leaflet Overrides */
 .outerspatial .leaflet-container {
-  color: #3e3e3f;
-  font-family: Karla,'Helvetica Neue',helvetica,arial,sans-serif;
-  font-size: 14px;
-  line-height: 1.42857143;
   overflow: hidden;
   touch-action: none;
 }
-  .outerspatial .leaflet-container a {
-    color: #41a7d0;
-    cursor: pointer;
-    font-weight: normal;
-    text-decoration: none;
-  }
-    .outerspatial .leaflet-container a:hover {
-      color: #41a7d0;
-      text-decoration: underline;
-    }
-  .outerspatial .leaflet-container h1,
-  .outerspatial .leaflet-container h2,
-  .outerspatial .leaflet-container h3,
-  .outerspatial .leaflet-container h4,
-  .outerspatial .leaflet-container h5,
-  .outerspatial .leaflet-container h6 {
-    font-family: 'PT Sans Narrow',sans-serif;
-    font-size: inherit;
-    line-height: 1.1;
-    margin: inherit;
-  }
 .outerspatial .leaflet-top .leaflet-control {
   margin-top: 6px;
 }
