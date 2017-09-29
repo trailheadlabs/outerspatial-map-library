@@ -898,6 +898,7 @@
   background-color: rgba(255, 255, 255, .8) !important;
   border-bottom-right-radius: 14px;
   border-top-right-radius: 14px;
+  box-sizing: border-box;
   color: #4a4a4a;
   display: inline-block;
   line-height: 13px;
@@ -907,6 +908,11 @@
   padding: 8px 16px 8px 13px;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+.outerspatial .leaflet-control-attribution.collapsed {
+  border-radius: 0;
+  margin-bottom: 0 !important;
+  padding: 8px;
 }
 
 /* Download Control */
