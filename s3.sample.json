@@ -1,14 +1,24 @@
 {
   "options": {
     "accessKeyId": "AWS_ACCESS_KEY_ID",
-    "bucket": "outerspatial-production",
     "gzip": true,
     "overwrite": false,
     "secretAccessKey": "AWS_SECRET_ACCESS_KEY"
   },
-  "dist": {
+  "production": {
+    "options": {
+      "bucket": "BUCKET_NAME"
+    },
     "cwd": "dist/",
-    "dest": "libs/outerspatial.js/<%= pkg.version %>/",
+    "dest": "PATH/<%= pkg.version %>/",
+    "src": "**"
+  },
+  "staging": {
+    "options": {
+      "bucket": "BUCKET_NAME"
+    },
+    "cwd": "dist/",
+    "dest": "PATH/<%= grunt.template.today('yyyy-mm-dd-HH:MM') %>/",
     "src": "**"
   }
 }
