@@ -590,6 +590,7 @@
   }
   .outerspatial .leaflet-popup-content ul {
     float: none;
+    margin-bottom: 0;
     margin-left: 0;
     margin-top: 0;
     padding-left: 25px;
@@ -598,7 +599,7 @@
       list-style: initial;
     }
   .outerspatial .leaflet-popup-content p {
-    margin: 6px 0;
+    padding: 0 16px;
   }
   /* TODO: Figure out a way to see if allowable width for popup is less than width of table, and, if it is, set table-layout: fixed; */
   .outerspatial .leaflet-popup-content table {
@@ -694,8 +695,12 @@
           border-top: 0;
         }
   .outerspatial .leaflet-popup-content .layer {
+    border-top: 1px solid #e3dfd8;
     clear: both;
     margin-bottom: 10px;
+  }
+  .outerspatial .leaflet-popup-content .layer:first-child {
+    border-top: none;
   }
   .outerspatial .leaflet-popup-content .layer div:first-child {
     border: none;
@@ -706,6 +711,9 @@
     .outerspatial .leaflet-popup-content .layer .sublayer {
       clear: both;
       margin-bottom: 8px;
+    }
+    .outerspatial .leaflet-popup-content .layer .sublayer:first-child {
+      margin-top: -6px;
     }
     .outerspatial .leaflet-popup-content .layer .sublayer:last-child {
       margin-bottom: 0;
@@ -732,7 +740,7 @@
     color: #3e3e3f;
     font-size: 20px;
     line-height: 22px;
-    padding: 10px;
+    padding: 16px;
   }
   .outerspatial .leaflet-popup-content .sublayer .title {
     font-size: 18px;
