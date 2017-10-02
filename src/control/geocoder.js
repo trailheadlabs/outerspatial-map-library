@@ -38,9 +38,9 @@ var GeocoderControl = L.Control.extend({
     var container = L.DomUtil.create('div', 'leaflet-control-geocoder');
     var stopPropagation = L.DomEvent.stopPropagation;
 
-    this._button = L.DomUtil.create('button', 'button search', container);
+    this._button = L.DomUtil.create('button', 'search', container);
     this._setIcon('search');
-    this._input = L.DomUtil.create('input', 'input', container);
+    this._input = L.DomUtil.create('input', undefined, container);
     this._ul = L.DomUtil.create('ul', 'leaflet-control', container);
     this._initalizeNpsIndex();
     L.DomEvent.disableClickPropagation(this._button);
