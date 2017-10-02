@@ -41,6 +41,7 @@ OuterSpatial Map Library is versioned using [semantic versioning](http://semver.
 - [v5.0.4](https://github.com/trailheadlabs/outerspatial-map-library/milestone/9?closed=1)
 - [v6.0.0](https://github.com/trailheadlabs/outerspatial-map-library/milestone/10?closed=1)
 - [v7.0.1](https://github.com/trailheadlabs/outerspatial-map-library/milestone/12?closed=1)
+- [v7.0.2](https://github.com/trailheadlabs/outerspatial-map-library/milestone/13?closed=1)
 
 ## Keys
 
