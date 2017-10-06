@@ -130,7 +130,7 @@
       background-clip: padding-box;
       border-radius: 0 3px 3px 0;
       box-shadow: 1px 2px 5px rgba(0, 0, 0, .4);
-      background-color: #404041;
+      background-color: blue;
       border: none;
       display: none;
       height: 24px;
@@ -805,6 +805,7 @@
 .outerspatial .leaflet-bar a,
 .outerspatial .leaflet-bar a:hover,
 .outerspatial .leaflet-bar button,
+.outerspatial .leaflet-bar button:active,
 .outerspatial .leaflet-bar button:hover,
 .outerspatial .leaflet-bar div,
 .outerspatial .leaflet-bar div:hover {
@@ -863,29 +864,29 @@
   stroke-linejoin: round;
   stroke-width: 1.5;
 }
-.outerspatial button:active .icon-svg-line,
-.outerspatial button:hover .icon-svg-line {
-  stroke: #98ca43;
-}
-.outerspatial button.pressed .icon-svg-line,
-.outerspatial button.pressed:hover .icon-svg-line,
-.outerspatial button.leaflet-disabled .icon-svg-line,
-.outerspatial button.leaflet-disabled:hover .icon-svg-line {
-  stroke: #fff;
-}
-.outerspatial button .icon-svg-path {
-  fill: #444;
-}
-.outerspatial button:active .icon-svg-path,
-.outerspatial button:hover .icon-svg-path {
-  fill: #98ca43;
-}
-.outerspatial button.pressed .icon-svg-path,
-.outerspatial button.pressed:hover .icon-svg-path,
-.outerspatial button.leaflet-disabled .icon-svg-path,
-.outerspatial button.leaflet-disabled:hover .icon-svg-path {
-  fill: #fff;
-}
+  .outerspatial button:active .icon-svg-line,
+  .outerspatial button:hover .icon-svg-line {
+    stroke: #98ca43;
+  }
+  .outerspatial button.pressed .icon-svg-line,
+  .outerspatial button.pressed:hover .icon-svg-line,
+  .outerspatial button.leaflet-disabled .icon-svg-line,
+  .outerspatial button.leaflet-disabled:hover .icon-svg-line {
+    stroke: #fff;
+  }
+  .outerspatial button .icon-svg-path {
+    fill: #444;
+  }
+  .outerspatial button:active .icon-svg-path,
+  .outerspatial button:hover .icon-svg-path {
+    fill: #98ca43;
+  }
+  .outerspatial button.pressed .icon-svg-path,
+  .outerspatial button.pressed:hover .icon-svg-path,
+  .outerspatial button.leaflet-disabled .icon-svg-path,
+  .outerspatial button.leaflet-disabled:hover .icon-svg-path {
+    fill: #fff;
+  }
 
 /* Controls */
 .outerspatial .leaflet-control {
