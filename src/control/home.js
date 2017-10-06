@@ -12,7 +12,7 @@ var HomeControl = L.Control.extend({
   },
   onAdd: function () {
     var container = L.DomUtil.create('div', 'leaflet-bar leaflet-bar-single leaflet-control');
-    var button = L.DomUtil.create('button', 'leaflet-bar-single', container);
+    var button = L.DomUtil.create('button', undefined, container);
 
     button.innerHTML = '' +
       '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="18" height="18">' +

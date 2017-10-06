@@ -24,7 +24,7 @@ var FullscreenControl = L.Control.extend({
       }
       // TODO: Also add ARIA attributes.
 
-      this._li = L.DomUtil.create('li', '');
+      this._li = L.DomUtil.create('li', undefined);
       this._button = L.DomUtil.create('button', undefined, this._li);
       this._setIcon('enterFullscreen');
       this._button.setAttribute('alt', 'Enter fullscreen');
@@ -60,7 +60,7 @@ var FullscreenControl = L.Control.extend({
   onAdd: function (map) {
     if (this._frame === null) {
       this._container = L.DomUtil.create('div', 'leaflet-bar leaflet-bar-single leaflet-control');
-      this._button = L.DomUtil.create('button', 'leaflet-bar-single', this._container);
+      this._button = L.DomUtil.create('button', undefined, this._container);
       this._setIcon('enterFullscreen');
       this._button.setAttribute('alt', 'Enter fullscreen');
       L.DomEvent.addListener(this._button, 'click', this.fullscreen, this);

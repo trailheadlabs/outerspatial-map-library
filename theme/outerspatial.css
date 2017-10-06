@@ -821,20 +821,19 @@
 .outerspatial .leaflet-bar a:first-child,
 .outerspatial .leaflet-bar button:first-child,
 .outerspatial .leaflet-bar div:first-child {
-  border-bottom-color: #d8d8d8;
-  border-bottom-left-radius: 1px;
-  border-bottom-right-radius: 1px;
+  border-top-left-radius: 1px;
+  border-top-right-radius: 1px;
 }
 .outerspatial .leaflet-bar a:last-child,
 .outerspatial .leaflet-bar button:last-child,
 .outerspatial .leaflet-bar div:last-child {
-  border-top-left-radius: 1px;
-  border-top-right-radius: 1px;
+  border-bottom-color: #fff;
+  border-bottom-left-radius: 1px;
+  border-bottom-right-radius: 1px;
 }
 .outerspatial .leaflet-bar a.leaflet-bar-single,
 .outerspatial .leaflet-bar button.leaflet-bar-single,
 .outerspatial .leaflet-bar div.leaflet-bar-single {
-  border-bottom-color: #ffffff;
   border-radius: 1px;
 }
 .outerspatial .leaflet-bar a.leaflet-disabled,
@@ -884,7 +883,8 @@
 }
 
 /* Controls */
-.outerspatial .leaflet-control {
+.outerspatial .leaflet-control,
+.outerspatial .leaflet-touch .leaflet-control {
   border: none;
   box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.3);
 }
@@ -950,13 +950,13 @@
   font-size: 14px;
   z-index: 8;
 }
-  .outerspatial .leaflet-control-geocoder button {
+  .outerspatial .leaflet-control-geocoder button,
+  .outerspatial .leaflet-control-geocoder button:hover {
     background-clip: padding-box;
     border: none;
     border-left: 1px solid #d8d8d8;
     border-bottom-right-radius: 1px;
     border-top-right-radius: 1px;
-    border-radius: 1px;
     box-sizing: border-box;
     float: right;
     height: 40px;
@@ -969,7 +969,10 @@
   .outerspatial .leaflet-control-geocoder input {
     color: #444;
     border: none;
-    border-radius: inherit;
+    border-bottom-left-radius: 1px;
+    border-bottom-right-radius: 0;
+    border-top-left-radius: 1px;
+    border-top-right-radius: 0;
     box-sizing: border-box;
     height: 40px;
     outline-offset: -1px;

@@ -63,7 +63,7 @@ var LocateControl = L.Control.extend({
     obj = {};
     L.extend(obj, this.options.circleStyle, this.options.followCircleStyle);
     this.options.followCircleStyle = obj;
-    me._button = L.DomUtil.create('button', 'leaflet-bar-single', this._container);
+    me._button = L.DomUtil.create('button', undefined, this._container);
     me._button.setAttribute('alt', this.options.strings.title);
     me.setIcon('default');
     L.DomEvent

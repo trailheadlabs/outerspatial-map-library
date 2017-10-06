@@ -28,7 +28,7 @@ var PrintControl = L.Control.extend({
       }
 
       if (this.options.ui === true) {
-        this._li = L.DomUtil.create('li', '');
+        this._li = L.DomUtil.create('li', undefined);
         this._button = L.DomUtil.create('button', undefined, this._li);
       }
     }
@@ -67,7 +67,7 @@ var PrintControl = L.Control.extend({
   onAdd: function (map) {
     this._map = map;
     this._container = L.DomUtil.create('div', 'leaflet-bar leaflet-bar-single leaflet-control');
-    this._button = L.DomUtil.create('button', 'leaflet-bar-single', this._container);
+    this._button = L.DomUtil.create('button', undefined, this._container);
     return this._container;
   },
   _clean: function (layer) {

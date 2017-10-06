@@ -240,7 +240,7 @@ var EditControl = L.Control.extend({
     this._modes[type].handler = handler;
 
     if (this.options.toolbar) {
-      button = L.DomUtil.create('button', 'leaflet-bar', container);
+      button = L.DomUtil.create('button', undefined, container);
       button.innerHTML = this._setIcon(type);
       button.setAttribute('alt', title);
       L.DomEvent

@@ -9,7 +9,7 @@ var ZoomDisplayControl = L.Control.extend({
   onAdd: function (map) {
     this._map = map;
     this._container = L.DomUtil.create('div', 'leaflet-bar leaflet-control leaflet-control-zoomdisplay');
-    this._control = L.DomUtil.create('div', 'leaflet-bar-single', this._container);
+    this._control = L.DomUtil.create('div', undefined, this._container);
     this._control.setAttribute('alt', 'Current zoom level');
     this.updateZoom(map.getZoom());
     map.on('zoomend', this.onMapZoomEnd, this);
