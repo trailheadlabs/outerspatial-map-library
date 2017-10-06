@@ -567,7 +567,7 @@
   width: auto !important;
 }
 .outerspatial .leaflet-popup-content .content {
-  padding: 10px 16px;
+  padding: 16px;
 }
   .outerspatial .leaflet-popup-scrolled .content,
   .outerspatial .content .leaflet-popup-scrolled audio,
@@ -599,8 +599,12 @@
       list-style: initial;
     }
   .outerspatial .leaflet-popup-content p {
-    padding: 0 16px;
+    margin: 0;
+    margin-bottom: 8px;
   }
+    .outerspatial .leaflet-popup-content p:last-child {
+      margin-bottom: 0;
+    }
   /* TODO: Figure out a way to see if allowable width for popup is less than width of table, and, if it is, set table-layout: fixed; */
   .outerspatial .leaflet-popup-content table {
     border: none;
@@ -801,6 +805,7 @@
 .outerspatial .leaflet-bar a,
 .outerspatial .leaflet-bar a:hover,
 .outerspatial .leaflet-bar button,
+.outerspatial .leaflet-bar button:active,
 .outerspatial .leaflet-bar button:hover,
 .outerspatial .leaflet-bar div,
 .outerspatial .leaflet-bar div:hover {
@@ -858,29 +863,29 @@
   stroke-linejoin: round;
   stroke-width: 1.5;
 }
-.outerspatial button:active .icon-svg-line,
-.outerspatial button:hover .icon-svg-line {
-  stroke: #98ca43;
-}
-.outerspatial button.pressed .icon-svg-line,
-.outerspatial button.pressed:hover .icon-svg-line,
-.outerspatial button.leaflet-disabled .icon-svg-line,
-.outerspatial button.leaflet-disabled:hover .icon-svg-line {
-  stroke: #fff;
-}
-.outerspatial button .icon-svg-path {
-  fill: #444;
-}
-.outerspatial button:active .icon-svg-path,
-.outerspatial button:hover .icon-svg-path {
-  fill: #98ca43;
-}
-.outerspatial button.pressed .icon-svg-path,
-.outerspatial button.pressed:hover .icon-svg-path,
-.outerspatial button.leaflet-disabled .icon-svg-path,
-.outerspatial button.leaflet-disabled:hover .icon-svg-path {
-  fill: #fff;
-}
+  .outerspatial button:active .icon-svg-line,
+  .outerspatial button:hover .icon-svg-line {
+    stroke: #98ca43;
+  }
+  .outerspatial button.pressed .icon-svg-line,
+  .outerspatial button.pressed:hover .icon-svg-line,
+  .outerspatial button.leaflet-disabled .icon-svg-line,
+  .outerspatial button.leaflet-disabled:hover .icon-svg-line {
+    stroke: #fff;
+  }
+  .outerspatial button .icon-svg-path {
+    fill: #444;
+  }
+  .outerspatial button:active .icon-svg-path,
+  .outerspatial button:hover .icon-svg-path {
+    fill: #98ca43;
+  }
+  .outerspatial button.pressed .icon-svg-path,
+  .outerspatial button.pressed:hover .icon-svg-path,
+  .outerspatial button.leaflet-disabled .icon-svg-path,
+  .outerspatial button.leaflet-disabled:hover .icon-svg-path {
+    fill: #fff;
+  }
 
 /* Controls */
 .outerspatial .leaflet-control,
@@ -1203,15 +1208,16 @@
     border: 1px solid #fff;
     border-radius: 1px;
     cursor: pointer;
-    min-height: 29px;
+    min-height: 38px;
     position: relative;
     width: 198px;
   }
     .outerspatial-control-switcher div:first-child div {
       border-right: solid 1px #d8d8d8;
-      margin-left: 25px;
+      font-size: 10px;
+      margin-left: 40px;
       margin-right: 25px;
-      padding: 7px 8px 7px 8px;
+      padding: 12px 0;
       position: relative;
       user-select: none;
     }
@@ -1221,7 +1227,7 @@
       left: 0;
       position: absolute;
       top: 0;
-      width: 25px;
+      width: 30px;
     }
     .outerspatial-control-switcher div:first-child span:last-child {
       background-image: url('images/control/switcher/toggle.png');
@@ -1282,7 +1288,7 @@
   background-image: url('images/control/switcher/aerial-small.png');
   height: 13px;
   margin-left: 11px;
-  margin-top: 7px;
+  margin-top: 12px;
   position: absolute;
   width: 13px;
 }
@@ -1295,7 +1301,7 @@
 .outerspatial-control-switcher .generic-small {
   background-image: url('images/control/switcher/eye-small.png');
   height: 10px;
-  margin-top: 9px;
+  margin-top: 14px;
   margin-left: 8px;
   position: absolute;
   width: 17px;
@@ -1324,7 +1330,7 @@
   background-image: url('images/control/switcher/street-small.png');
   height: 13px;
   margin-left: 9px;
-  margin-top: 8px;
+  margin-top: 13px;
   position: absolute;
   width: 17px;
 }
@@ -1336,11 +1342,11 @@
 }
 .outerspatial-control-switcher .topo-small {
   background-image: url('images/control/switcher/topo-small.png');
-  height: 13px;
-  margin-left: 9px;
-  margin-top: 8px;
+  height: 20px;
+  margin-left: 10px;
+  margin-top: 10px;
   position: absolute;
-  width: 17px;
+  width: 20px;
 }
 
 /* ZoomDisplay Control */

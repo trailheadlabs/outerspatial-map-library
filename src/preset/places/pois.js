@@ -1602,7 +1602,13 @@ var PoiLayer = L.GeoJSON.extend({
                     html += '<div class="title">' + row.name + '</div>';
                   }
 
-                  html += '<div class="description"><p>' + row.type + '</p></div>';
+                  html += '' +
+                    '<div class="content">' +
+                      '<div class="description">' +
+                        '<p>' + row.type + '</p>' +
+                      '</div>' +
+                    '</div>' +
+                  '';
 
                   return html;
                 })());

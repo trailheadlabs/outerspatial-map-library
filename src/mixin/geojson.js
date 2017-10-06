@@ -110,12 +110,8 @@ module.exports = {
                   target.openPopup();
                 } else {
                   var popup = L.outerspatial.popup({
-                    autoPanPaddingTopLeft: [
-                      16,
-                      16
-                    ],
-                    maxHeight: (detectAvailablePopupSpace ? util._getAvailableVerticalSpace(map) - 84 : null),
-                    maxWidth: (detectAvailablePopupSpace ? util._getAvailableHorizontalSpace(map) - 77 : null)
+                    maxHeight: (detectAvailablePopupSpace ? util._getAvailableVerticalSpace(map) - 84 : undefined),
+                    maxWidth: (detectAvailablePopupSpace ? util._getAvailableHorizontalSpace(map) - 77 : 285)
                   });
                   var properties = feature.properties;
                   var html = popup._resultToHtml(properties, config.popup, null, null, map.options.popup);
