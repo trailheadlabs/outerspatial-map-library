@@ -498,13 +498,10 @@ MapExt = L.Map.extend({
               }
 
               if (actual.length && !me._popup) {
+                console.log('here');
                 var popup = L.outerspatial.popup({
-                  autoPanPaddingTopLeft: [
-                    16,
-                    16
-                  ],
-                  maxHeight: (detectAvailablePopupSpace ? util._getAvailableVerticalSpace(me) - 84 : null),
-                  maxWidth: (detectAvailablePopupSpace ? util._getAvailableHorizontalSpace(me) - 77 : null)
+                  maxHeight: (detectAvailablePopupSpace ? util._getAvailableVerticalSpace(me) - 84 : undefined),
+                  maxWidth: (detectAvailablePopupSpace ? util._getAvailableHorizontalSpace(me) - 77 : 285)
                 });
 
                 popup
