@@ -13,11 +13,11 @@ var Popup = L.Popup.extend({
       16
     ],
     autoPanPaddingTopLeft: [
-      20,
-      20
+      16,
+      16
     ],
     maxWidth: null,
-    minWidth: 350,
+    minWidth: 285,
     offset: [
       0,
       -1
