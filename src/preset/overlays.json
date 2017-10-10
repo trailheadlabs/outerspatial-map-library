@@ -62,5 +62,37 @@
         "user": "nps"
       }
     }
+  },
+  "outerspatial": {
+    "areas": {
+      "attribution": "© <a href=\"https://www.outerspatial.com/\" target=\"_blank\">OuterSpatial</a>",
+      "locationType": "areas",
+      "name": "Areas",
+      "type": "geojson"
+    },
+    "campgrounds": {
+      "attribution": "© <a href=\"https://www.outerspatial.com/\" target=\"_blank\">OuterSpatial</a>",
+      "locationType": "campgrounds",
+      "name": "Campgrounds",
+      "type": "geojson"
+    },
+    "pointsOfInterest": {
+      "attribution": "© <a href=\"https://www.outerspatial.com/\" target=\"_blank\">OuterSpatial</a>",
+      "locationType": "points_of_interest",
+      "name": "Points of Interest",
+      "type": "geojson"
+    },
+    "trailheads": {
+      "attribution": "© <a href=\"https://www.outerspatial.com/\" target=\"_blank\">OuterSpatial</a>",
+      "locationType": "trailheads",
+      "name": "Trailheads",
+      "type": "geojson"
+    },
+    "trails": {
+      "attribution": "© <a href=\"https://www.outerspatial.com/\" target=\"_blank\">OuterSpatial</a>",
+      "locationType": "trails",
+      "name": "Trails",
+      "type": "geojson"
+    }
   }
 }

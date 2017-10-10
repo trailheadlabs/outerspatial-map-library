@@ -262,6 +262,9 @@ MapExt = L.Map.extend({
                 case 'nps-places-pois':
                   overlay.L = L.outerspatial.preset.places.pois(overlay);
                   break;
+                case 'outerspatial':
+                  overlay.L = L.outerspatial.preset.outerspatial(overlay);
+                  break;
               }
             } else if (overlay.type === 'arcgisserver') {
               overlay.L = me._createArcGisServerLayer(overlay);
@@ -498,7 +501,6 @@ MapExt = L.Map.extend({
               }
 
               if (actual.length && !me._popup) {
-                console.log('here');
                 var popup = L.outerspatial.popup({
                   maxHeight: (detectAvailablePopupSpace ? util._getAvailableVerticalSpace(me) - 84 : undefined),
                   maxWidth: (detectAvailablePopupSpace ? util._getAvailableHorizontalSpace(me) - 77 : 285)
