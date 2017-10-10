@@ -1210,7 +1210,7 @@
     cursor: pointer;
     min-height: 38px;
     position: relative;
-    width: 198px;
+    width: 238px;
   }
     .outerspatial-control-switcher div:first-child div {
       border-right: solid 1px #d8d8d8;
@@ -1252,7 +1252,6 @@
     border-left: 1px solid #bdbbb1;
     border-right: 1px solid #bdbbb1;
     box-shadow: 0 2px 15px #888;
-    left: -15px;
     list-style-type: none;
     margin: 1px 0 0 0;
     max-height: 300px;
