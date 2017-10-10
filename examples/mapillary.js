@@ -1,4 +1,4 @@
-var OuterSpatial = {
+window.OuterSpatial = {
   center: {
     lat: 44.32,
     lng: -110.42
@@ -6,7 +6,7 @@ var OuterSpatial = {
   div: 'map',
   hooks: {
     init: function (callback) {
-      var bounds = OuterSpatial.config.L.getBounds();
+      var bounds = window.OuterSpatial.config.L.getBounds();
 
       window.L.outerspatial.layer.geojson({
         attribution: '<a href="https://www.mapillary.com">Mapillary</a>',
@@ -14,7 +14,7 @@ var OuterSpatial = {
           description: '<img src="https://d1cuyjsrcm0gby.cloudfront.net/{{key}}/thumb-320.jpg" style="height:240px;width:320px;">'
         },
         url: 'https://a.mapillary.com/v2/search/im/geojson?client_id=REVmc0hVYk13NF82NDlGcDQ3VVI2Zzo1ZjljYTA2MTQ4NWI2ZjEx&max_lat=' + bounds.getNorth() + '&max_lon=' + bounds.getEast() + '&min_lat=' + bounds.getSouth() + '&min_lon=' + bounds.getWest() + '&limit=100&page=0'
-      }).addTo(OuterSpatial.config.L);
+      }).addTo(window.OuterSpatial.config.L);
       callback();
     }
   },

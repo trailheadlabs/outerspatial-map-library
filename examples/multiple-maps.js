@@ -1,4 +1,4 @@
-var OuterSpatial = [{
+window.OuterSpatial = [{
   div: 'map-1',
   scrollWheelZoom: false
 }, {

@@ -1,6 +1,10 @@
 window.OuterSpatial = {
   div: 'map',
-  zoomdisplayControl: true
+  hooks: {
+    init: function (callback) {
+      setTimeout(callback, 10000);
+    }
+  }
 };
 
 (function () {

@@ -1,8 +1,8 @@
-var OuterSpatial = {
+window.OuterSpatial = {
   div: 'map',
   hooks: {
     init: function (callback) {
-      OuterSpatial.config.L.notify
+      window.OuterSpatial.config.L.notify
         .success('Good Job!')
         .info('Some helpful information.')
         .warning('Something may go wrong.')

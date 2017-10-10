@@ -1,4 +1,4 @@
-var OuterSpatial = {
+window.OuterSpatial = {
   center: {
     lat: 44.51511,
     lng: -110.46066
@@ -15,7 +15,7 @@ var OuterSpatial = {
           lineCap: 'square',
           weight: 3,
           opacity: 1
-        }).addTo(OuterSpatial.config.L);
+        }).addTo(window.OuterSpatial.config.L);
         window.L.outerspatial.layer.geojson({
           color: '#7570b3',
           dashArray: '4,5',
@@ -23,7 +23,7 @@ var OuterSpatial = {
           lineCap: 'square',
           weight: 3,
           lineOpacity: 1
-        }).addTo(OuterSpatial.config.L);
+        }).addTo(window.OuterSpatial.config.L);
       },
       type: 'ready'
     }],

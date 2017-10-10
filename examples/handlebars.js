@@ -1,4 +1,4 @@
-var OuterSpatial = {
+window.OuterSpatial = {
   div: 'map',
   overlays: [{
     attribution: '<a href="https://www.nps.gov/npmap/" target="_blank">NPMap</a>',

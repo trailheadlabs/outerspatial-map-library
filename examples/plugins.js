@@ -1,4 +1,4 @@
-var OuterSpatial = {
+window.OuterSpatial = {
   center: {
     lat: 44.617844,
     lng: -110.541687
@@ -10,8 +10,8 @@ var OuterSpatial = {
     events: [{
       fn: function () {
         var layers = this.getLayers();
-        var map = OuterSpatial.config.L;
-        console.log('ready');
+        var map = window.OuterSpatial.config.L;
+
         map.editControl._modes.marker.handler.setOptions({guideLayers: layers});
 
         map.on('draw:created', function (e) {
