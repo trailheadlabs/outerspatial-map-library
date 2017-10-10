@@ -8,6 +8,7 @@ var OuterSpatial = {
     lng: -118.75
   },
   div: 'map',
+  geocoderControl: true,
   overlays: [{
     locationType: 'trails',
     organizationId: 6372,
