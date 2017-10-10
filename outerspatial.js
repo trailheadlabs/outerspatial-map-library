@@ -8,6 +8,7 @@ L.outerspatial = module.exports = {
   VERSION: version,
   // Preserve order of controls because it affects the display hierarchy.
   control: {
+    switcher: require('./src/control/switcher'),
     geocoder: require('./src/control/geocoder'),
     download: require('./src/control/download'),
     home: require('./src/control/home'),
@@ -23,7 +24,6 @@ L.outerspatial = module.exports = {
     print: require('./src/control/print'),
     scale: require('./src/control/scale'),
     share: require('./src/control/share'),
-    switcher: require('./src/control/switcher'),
     zoomdisplay: require('./src/control/zoomdisplay')
   },
   icon: {
