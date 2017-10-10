@@ -1,4 +1,4 @@
-var OuterSpatial = {
+window.OuterSpatial = {
   div: 'map',
   maxZoom: 13,
   overlays: [{

@@ -1,4 +1,4 @@
-var OuterSpatial =  {
+window.OuterSpatial =  {
   baseLayers: [
     'outerspatial-outdoors',
     'bing-aerial',

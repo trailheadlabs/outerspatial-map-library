@@ -1,12 +1,11 @@
 var el = document.getElementById('events');
-var OuterSpatial;
 
 function addMessage (message) {
   el.innerHTML += message + '<br>';
   el.scrollTop = el.scrollHeight;
 }
 
-OuterSpatial = {
+window.OuterSpatial = {
   div: 'map',
   events: [{
     fn: function () {

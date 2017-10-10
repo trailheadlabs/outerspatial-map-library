@@ -1,4 +1,4 @@
-var OuterSpatialUtils = {
+window.OuterSpatialUtils = {
   fullscreenControl: {
     listeners: {
       enterfullscreen: function () {

@@ -1,4 +1,4 @@
-var OuterSpatial = {
+window.OuterSpatial = {
   baseLayers: [{
     attribution: 'Harpers Ferry Center',
     height: 6738,

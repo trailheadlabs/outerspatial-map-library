@@ -1,5 +1,6 @@
 var attribution = '<a href="https://www.mapbox.com/about/maps" target="_blank">MapBox</a>, &copy; <a href="https://openstreetmap.org/copyright">OpenStreetMap</a> contributors';
-var OuterSpatial = {
+
+window.OuterSpatial = {
   baseLayers: [{
     attribution: attribution,
     id: 'mapbox.geography-class',

@@ -1,4 +1,4 @@
-var OuterSpatial = {
+window.OuterSpatial = {
   center: {
     lat: 44.617844,
     lng: -110.541687
