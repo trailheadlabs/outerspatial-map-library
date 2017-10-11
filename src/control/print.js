@@ -136,7 +136,15 @@ var PrintControl = L.Control.extend({
     L.DomEvent.preventDefault(e);
 
     if (mapId) {
-      url = 'https://www.outerspatial.com/builder_maps/' + mapId + '/print/';
+      url = 'https://';
+
+      if (window.location.host.indexOf('staging-manager') > -1) {
+        url += 'staging';
+      } else {
+        url += 'www';
+      }
+
+      url += '.outerspatial.com/builder_maps/' + mapId + '/print/';
     } else {
       url = me.options.url;
     }
