@@ -10,7 +10,7 @@ var OuterSpatialLayer = L.GeoJSON.extend({
   ],
   options: {
     environment: 'production',
-    search: this._search
+    addToGeocoder: false
   },
   initialize: function (options) {
     var me = this;
@@ -30,6 +30,30 @@ var OuterSpatialLayer = L.GeoJSON.extend({
       organizationId = this.options.organizationId;
     } else {
       console.error('The "organizationId" property is required for the OuterSpatial preset.');
+    }
+
+    if (this.options.addToGeocoder) {
+      options.search = function (value) {
+        var layers = this.L._layers;
+        var re = new RegExp(value, 'i');
+        var results = [];
+
+        for (var key in layers) {
+          if (layers.hasOwnProperty(key)) {
+            if (layers[key].hasOwnProperty('feature')) {
+              if (re.test(layers[key].feature.properties.name)) {
+                results.push({
+                  bounds: layers[key].getBounds(),
+                  latLng: null,
+                  name: layers[key].feature.properties.name
+                });
+              }
+            }
+          }
+        }
+
+        return results;
+      };
     }
 
     environment = this.options.environment;
