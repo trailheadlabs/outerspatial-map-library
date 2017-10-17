@@ -10,7 +10,7 @@ var OuterSpatialLayer = L.GeoJSON.extend({
   ],
   options: {
     environment: 'production',
-    addToGeocoder: false
+    searchable: false
   },
   initialize: function (options) {
     var me = this;
@@ -32,7 +32,7 @@ var OuterSpatialLayer = L.GeoJSON.extend({
       console.error('The "organizationId" property is required for the OuterSpatial preset.');
     }
 
-    if (this.options.addToGeocoder) {
+    if (this.options.searchable) {
       options.search = function (value) {
         var layers = this.L._layers;
         var re = new RegExp(value, 'i');

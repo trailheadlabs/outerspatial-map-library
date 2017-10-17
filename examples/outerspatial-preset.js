@@ -13,7 +13,7 @@ var OuterSpatial = {
     locationType: 'trails',
     organizationId: 6372,
     preset: 'outerspatial',
-    addToGeocoder: true
+    searchable: true
   }],
   zoom: 7
 };
