@@ -39,11 +39,19 @@ var OuterSpatialLayer = L.GeoJSON.extend({
         var results = [];
 
         for (var key in layers) {
-          if (layers.hasOwnProperty(key)) {
-            if (layers[key].hasOwnProperty('feature')) {
-              if (re.test(layers[key].feature.properties.name)) {
+          var layer = layers[key];
+
+          if (layers.hasOwnProperty(key) && layer.hasOwnProperty('feature')) {
+            if (re.test(layer.feature.properties.name)) {
+              if (layer.feature.geometry.type.toLowerCase() === 'point') {
                 results.push({
-                  bounds: layers[key].getBounds(),
+                  bounds: null,
+                  latLng: layer.getLatLng(),
+                  name: layers[key].feature.properties.name
+                });
+              } else {
+                results.push({
+                  bounds: layer.getBounds(),
                   latLng: null,
                   name: layers[key].feature.properties.name
                 });
