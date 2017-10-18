@@ -960,7 +960,9 @@
     background-clip: padding-box;
     border: none;
     border-left: 1px solid #d8d8d8;
+    border-bottom-left-radius: 0;
     border-bottom-right-radius: 1px;
+    border-top-left-radius: 0;
     border-top-right-radius: 1px;
     box-sizing: border-box;
     float: right;

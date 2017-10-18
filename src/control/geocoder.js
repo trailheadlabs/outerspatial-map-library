@@ -30,13 +30,14 @@ var GeocoderControl = L.Control.extend({
   onAdd: function (map) {
     var attribution = GeocoderControl.ATTRIBUTIONS[this.options.provider.toUpperCase()];
     var container = L.DomUtil.create('div', 'leaflet-control-geocoder');
+    var me = this;
     var stopPropagation = L.DomEvent.stopPropagation;
 
     this._button = L.DomUtil.create('button', 'search', container);
     this._setIcon('search');
     this._input = L.DomUtil.create('input', undefined, container);
     this._ul = L.DomUtil.create('ul', 'leaflet-control', container);
-    this._initalizeNpsIndex();
+    this._initalizeIndex();
     L.DomEvent.disableClickPropagation(this._button);
     L.DomEvent.disableClickPropagation(this._input);
     L.DomEvent.disableClickPropagation(this._ul);
@@ -45,6 +46,12 @@ var GeocoderControl = L.Control.extend({
       .on(this._button, 'mousewheel', stopPropagation)
       .on(this._input, 'focus', function () {
         this.value = this.value;
+        if (me._results) {
+          me._resultsReady(this.value, me._results);
+        }
+      })
+      .on(this._input, 'focusout', function () {
+        me._ul.style.display = 'none';
       })
       .on(this._input, 'mousewheel', stopPropagation)
       .on(this._ul, 'mousewheel', stopPropagation);
@@ -171,7 +178,6 @@ var GeocoderControl = L.Control.extend({
 
     this._clearResults();
     this._isDirty = false;
-    this._input.focus();
     this._input.setAttribute('aria-activedescendant', id);
 
     if (me._results[id].latLng) {
@@ -186,7 +192,7 @@ var GeocoderControl = L.Control.extend({
     L.DomUtil.removeClass(this._button, 'working');
     this._setIcon('search');
   },
-  _initalizeNpsIndex: function () {
+  _initalizeIndex: function () {
     var me = this;
 
     L.DomEvent.on(me._input, 'keyup', me._debounce(function (e) {
@@ -212,6 +218,20 @@ var GeocoderControl = L.Control.extend({
                 }
               }
 
+              me._results.sort(function (a, b) {
+                var resultA = a.name.toUpperCase();
+                var resultB = b.name.toUpperCase();
+
+                if (resultA < resultB) {
+                  return -1;
+                }
+
+                if (resultA > resultB) {
+                  return 1;
+                }
+
+                return 0;
+              });
               me._resultsReady(value, me._results);
             }
           }
@@ -284,14 +304,13 @@ var GeocoderControl = L.Control.extend({
         var result = results[i];
         var d = result.name;
         var j;
-        var type;
 
         li.className = 'outerspatial-geocoder-result-park';
         li.id = i;
 
         j = d.toLowerCase().indexOf(value.toLowerCase());
-        li.innerHTML = (d.slice(0, j) + '<strong>' + d.slice(j, j + value.length) + '</strong>' + d.slice(j + value.length) + (me.options.searchPlaces ? ('<br>' + (type === 'park' ? 'NPS Unit' : result.t)) : ''));
-        L.DomEvent.on(li, 'click', function () {
+        li.innerHTML = (d.slice(0, j) + '<strong>' + d.slice(j, j + value.length) + '</strong>' + d.slice(j + value.length));
+        L.DomEvent.on(li, 'mousedown', function () {
           me._handleSelect(this);
         });
       }
