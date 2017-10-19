@@ -50,9 +50,6 @@ var GeocoderControl = L.Control.extend({
           me._resultsReady(this.value, me._results);
         }
       })
-      .on(this._input, 'focusout', function () {
-        me._ul.style.display = 'none';
-      })
       .on(this._input, 'mousewheel', stopPropagation)
       .on(this._ul, 'mousewheel', stopPropagation);
 
@@ -185,6 +182,9 @@ var GeocoderControl = L.Control.extend({
     } else {
       me._map.fitBounds(me._results[id].bounds);
     }
+
+    me._ul.style.display = 'none';
+    me._map.options.div.focus();
   },
   _hideLoading: function () {
     L.DomEvent.on(this._button, 'click', this._geocodeRequest, this);
@@ -311,7 +311,7 @@ var GeocoderControl = L.Control.extend({
 
         j = d.toLowerCase().indexOf(value.toLowerCase());
         li.innerHTML = (d.slice(0, j) + '<strong>' + d.slice(j, j + value.length) + '</strong>' + d.slice(j + value.length) + '<br><i>' + t + '</i>');
-        L.DomEvent.on(li, 'mousedown', function () {
+        L.DomEvent.on(li, 'click', function () {
           me._handleSelect(this);
         });
       }
