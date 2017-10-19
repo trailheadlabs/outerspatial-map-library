@@ -105,7 +105,7 @@ var OuterSpatialLayer = L.GeoJSON.extend({
 
         return me;
       },
-      url: 'https://' + (environment === 'production' ? '' : 'staging-') + 'cdn.outerspatial.com/static_data/organizations/' + organizationId + '/' + locationType + '.geojson'
+      url: 'https://' + (environment === 'production' ? '' : 'staging-') + 'cdn.outerspatial.com/static_data/organizations/' + organizationId + '/api_v2/' + locationType + '.geojson'
     });
   }
   /*
