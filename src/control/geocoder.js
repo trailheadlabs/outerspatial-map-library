@@ -304,12 +304,13 @@ var GeocoderControl = L.Control.extend({
         var result = results[i];
         var d = result.name;
         var j;
+        var t = result.type;
 
         li.className = 'outerspatial-geocoder-result-park';
         li.id = i;
 
         j = d.toLowerCase().indexOf(value.toLowerCase());
-        li.innerHTML = (d.slice(0, j) + '<strong>' + d.slice(j, j + value.length) + '</strong>' + d.slice(j + value.length));
+        li.innerHTML = (d.slice(0, j) + '<strong>' + d.slice(j, j + value.length) + '</strong>' + d.slice(j + value.length) + '<br><i>' + t + '</i>');
         L.DomEvent.on(li, 'mousedown', function () {
           me._handleSelect(this);
         });
