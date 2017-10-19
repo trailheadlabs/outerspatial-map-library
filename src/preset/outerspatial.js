@@ -37,6 +37,15 @@ var OuterSpatialLayer = L.GeoJSON.extend({
         var layers = this.L._layers;
         var re = new RegExp(value, 'i');
         var results = [];
+        var type = options.locationType;
+
+        if (type === 'points_of_interest') {
+          type = 'Point of Interest';
+        } else if (type === 'trail_segments') {
+          type = 'Trail Segment';
+        } else {
+          type = type.charAt(0).toUpperCase() + type.slice(1, type.length - 1);
+        }
 
         for (var key in layers) {
           var layer = layers[key];
@@ -47,13 +56,15 @@ var OuterSpatialLayer = L.GeoJSON.extend({
                 results.push({
                   bounds: null,
                   latLng: layer.getLatLng(),
-                  name: layers[key].feature.properties.name
+                  name: layers[key].feature.properties.name,
+                  type: type
                 });
               } else {
                 results.push({
                   bounds: layer.getBounds(),
                   latLng: null,
-                  name: layers[key].feature.properties.name
+                  name: layers[key].feature.properties.name,
+                  type: type
                 });
               }
             }
