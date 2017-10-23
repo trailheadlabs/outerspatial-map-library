@@ -10,25 +10,65 @@ var OuterSpatialLayer = L.GeoJSON.extend({
   ],
   options: {
     environment: 'production',
-    searchable: false
+    searchable: false,
+    formatPopups: true
+  },
+  _collapseFeatureAttributes: function (features, type) {
+    features.forEach(function (feature) {
+      var area = feature.properties.area;
+      var tags = feature.properties.tags;
+      var contentBlocks = feature.properties.content_blocks;
+
+      if (area !== null) {
+        for (var prop in area) {
+          if (
+            prop === 'address' ||
+            prop === 'name' ||
+            prop === 'area_type' ||
+            prop === 'created_at' ||
+            prop === 'description' ||
+            prop === 'id' ||
+            prop === 'updated_at' ||
+            prop === 'slug' ||
+            prop === 'phone_number' ||
+            prop === 'website' ||
+            prop === 'logo_image_id'
+          ) {
+            feature.properties['area:' + prop] = area[prop];
+          }
+        }
+
+        delete feature.properties.area;
+      }
+
+      tags.forEach(function (tag) {
+        tag.categories.forEach(function (category) {
+          feature.properties['tag:' + category.name + ':' + tag.key] = tag.value;
+        });
+      });
+
+      delete feature.properties.tags;
+
+      if (contentBlocks) {
+        contentBlocks.forEach(function (contentBlock) {
+          feature.properties['contentBlock:' + contentBlock.title] = contentBlock.body;
+        });
+      }
+
+      delete feature.properties.content_blocks;
+    });
   },
   initialize: function (options) {
     var me = this;
-    var environment;
-    var locationType;
-    var organizationId;
 
     L.Util.setOptions(this, this._toLeaflet(options));
+    options = this.options;
 
-    if (this.options.locationType) {
-      locationType = this.options.locationType;
-    } else {
+    if (!this.options.locationType) {
       console.error('The "locationType" property is required for the OuterSpatial preset.');
     }
 
-    if (this.options.organizationId) {
-      organizationId = this.options.organizationId;
-    } else {
+    if (!this.options.organizationId) {
       console.error('The "organizationId" property is required for the OuterSpatial preset.');
     }
 
@@ -75,8 +115,6 @@ var OuterSpatialLayer = L.GeoJSON.extend({
       };
     }
 
-    environment = this.options.environment;
-
     reqwest({
       error: function (error) {
         var obj = L.extend(error, {
@@ -90,7 +128,13 @@ var OuterSpatialLayer = L.GeoJSON.extend({
         var obj;
 
         if (response && response.responseText) {
-          L.GeoJSON.prototype.initialize.call(me, JSON.parse(response.responseText), options);
+          var geojson = JSON.parse(response.responseText);
+
+          if (options.formatPopups) {
+            me._collapseFeatureAttributes(geojson.features);
+          }
+
+          L.GeoJSON.prototype.initialize.call(me, geojson, options);
           me.fire('ready');
           me._loaded = true;
           me.readyFired = true;
@@ -105,7 +149,7 @@ var OuterSpatialLayer = L.GeoJSON.extend({
 
         return me;
       },
-      url: 'https://' + (environment === 'production' ? '' : 'staging-') + 'cdn.outerspatial.com/static_data/organizations/' + organizationId + '/api_v2/' + locationType + '.geojson'
+      url: 'https://' + (options.environment === 'production' ? '' : 'staging-') + 'cdn.outerspatial.com/static_data/organizations/' + options.organizationId + '/api_v2/' + options.locationType + '.geojson'
     });
   }
   /*
