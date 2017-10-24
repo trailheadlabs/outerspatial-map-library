@@ -13,7 +13,137 @@ var OuterSpatialLayer = L.GeoJSON.extend({
     searchable: false,
     formatPopups: true
   },
-  _collapseFeatureAttributes: function (features, type) {
+  initialize: function (options) {
+    var me;
+    var type;
+
+    L.Util.setOptions(this, this._toLeaflet(options));
+
+    if (!this.options.locationType) {
+      console.error('The "locationType" property is required for the OuterSpatial preset.');
+    }
+
+    if (!this.options.organizationId) {
+      console.error('The "organizationId" property is required for the OuterSpatial preset.');
+    }
+
+    type = options.locationType;
+
+    if (type === 'points_of_interest') {
+      type = 'Point of Interest';
+    } else if (type === 'trail_segments') {
+      type = 'Trail Segment';
+    } else {
+      type = type.charAt(0).toUpperCase() + type.slice(1, type.length - 1);
+    }
+
+
+    if (this.options.formatPopups) {
+      options.popup = {
+        title: function (properties) {
+          if (type === 'Area') {
+            return '{{name}}</br><span class="subtitle">' + type + ' in ' + properties.name + '</span>';
+          } else {
+            return '{{name}}</br><span class="subtitle">' + type + (properties.area_id ? ' in ' + properties.area.name + '</span>' : '</span>');
+          }
+        },
+        description: function (properties) {
+          var description = '';
+
+          if (properties.image_attachments.length > 0) {
+            description = '<section class="image"><img src="' + properties.image_attachments[0].image.versions.small_square.url + '" height=253px width=253px></section>';
+          }
+          if (properties.description !== '') {
+            description = description + '<section>{{description}}</section>';
+          }
+
+          if (properties.address && properties.address !== '' && properties.address !== null) {
+            description = description + '<section><span class="section-heading">' + type + ' Address</span></br>' + properties.address + '</section>';
+          }
+
+          if (properties.website && properties.website !== '' && properties.website !== null) {
+            description = description + '<section><span class="section-heading">Website</span></br><a href="' + properties.website + '" target="_blank">' + properties.website + '</section>';
+          }
+
+          return description;
+        }
+      };
+    }
+
+    if (this.options.searchable) {
+      options.search = function (value) {
+        var layers = this.L._layers;
+        var re = new RegExp(value, 'i');
+        var results = [];
+
+        for (var key in layers) {
+          var layer = layers[key];
+
+          if (layers.hasOwnProperty(key) && layer.hasOwnProperty('feature')) {
+            if (re.test(layer.feature.properties.name)) {
+              if (layer.feature.geometry.type.toLowerCase() === 'point') {
+                results.push({
+                  bounds: null,
+                  latLng: layer.getLatLng(),
+                  name: layers[key].feature.properties.name,
+                  type: type
+                });
+              } else {
+                results.push({
+                  bounds: layer.getBounds(),
+                  latLng: null,
+                  name: layers[key].feature.properties.name,
+                  type: type
+                });
+              }
+            }
+          }
+        }
+
+        return results;
+      };
+    }
+
+    me = this;
+
+    reqwest({
+      error: function (error) {
+        var obj = L.extend(error, {
+          message: 'There was an error loading the data from OuterSpatial.'
+        });
+
+        me.fire('error', obj);
+        me.errorFired = obj;
+      },
+      success: function (response) {
+        var obj;
+
+        if (response && response.responseText) {
+          var geojson = JSON.parse(response.responseText);
+
+          if (me.options.formatPopups) {
+            me._collapseFeatureAttributes(geojson.features);
+          }
+
+          L.GeoJSON.prototype.initialize.call(me, geojson, me.options);
+          me.fire('ready');
+          me._loaded = true;
+          me.readyFired = true;
+        } else {
+          obj = {
+            message: 'There was an error loading the data from OuterSpatial.'
+          };
+
+          me.fire('error', obj);
+          me.errorFired = obj;
+        }
+
+        return me;
+      },
+      url: 'https://' + (me.options.environment === 'production' ? '' : 'staging-') + 'cdn.outerspatial.com/static_data/organizations/' + me.options.organizationId + '/api_v2/' + me.options.locationType + '.geojson'
+    });
+  },
+  _collapseFeatureAttributes: function (features) {
     features.forEach(function (feature) {
       var area = feature.properties.area;
       var tags = feature.properties.tags;
@@ -50,138 +180,6 @@ var OuterSpatialLayer = L.GeoJSON.extend({
           feature.properties['contentBlock:' + contentBlock.title] = contentBlock.body;
         });
       }
-    });
-  },
-  initialize: function (options) {
-    var me = this;
-
-    options.popup = {
-      title: function (properties) {
-        var type = properties.class_name;
-
-        if (type === 'PointOfInterest') {
-          return '{{name}}</br><span class="subtitle">Point of Interest' + (properties.area_id ? ' in ' + properties.area.name + '</span>' : '</span>');
-        } else if (type === 'Area') {
-          return '{{name}}</br><span class="subtitle">' + type + ' in ' + properties.name + '</span>';
-        } else {
-          return '{{name}}</br><span class="subtitle">' + type + (properties.area_id ? ' in ' + properties.area.name + '</span>' : '</span>');
-        }
-      },
-      description: function (properties) {
-        var description = '';
-
-        if (properties.image_attachments.length > 0) {
-          description = '<img src="' + properties.image_attachments[0].image.versions.small_square.url + '" height=253px width=253px>';
-        }
-        if (properties.description !== '') {
-          return description + '{{description}}';
-        } else {
-          return null;
-        }
-      },
-      actions: function (properties) {
-        if (properties.website && properties.website !== '' && properties.website !== null) {
-          return [{
-            handler: function () {
-              window.open(properties.website, '_blank');
-            },
-            text: 'Website'
-          }];
-        } else {
-          return null;
-        }
-      }
-    };
-
-    L.Util.setOptions(this, this._toLeaflet(options));
-    options = this.options;
-
-    if (!this.options.locationType) {
-      console.error('The "locationType" property is required for the OuterSpatial preset.');
-    }
-
-    if (!this.options.organizationId) {
-      console.error('The "organizationId" property is required for the OuterSpatial preset.');
-    }
-
-    if (this.options.searchable) {
-      options.search = function (value) {
-        var layers = this.L._layers;
-        var re = new RegExp(value, 'i');
-        var results = [];
-        var type = options.locationType;
-
-        if (type === 'points_of_interest') {
-          type = 'Point of Interest';
-        } else if (type === 'trail_segments') {
-          type = 'Trail Segment';
-        } else {
-          type = type.charAt(0).toUpperCase() + type.slice(1, type.length - 1);
-        }
-
-        for (var key in layers) {
-          var layer = layers[key];
-
-          if (layers.hasOwnProperty(key) && layer.hasOwnProperty('feature')) {
-            if (re.test(layer.feature.properties.name)) {
-              if (layer.feature.geometry.type.toLowerCase() === 'point') {
-                results.push({
-                  bounds: null,
-                  latLng: layer.getLatLng(),
-                  name: layers[key].feature.properties.name,
-                  type: type
-                });
-              } else {
-                results.push({
-                  bounds: layer.getBounds(),
-                  latLng: null,
-                  name: layers[key].feature.properties.name,
-                  type: type
-                });
-              }
-            }
-          }
-        }
-
-        return results;
-      };
-    }
-
-    reqwest({
-      error: function (error) {
-        var obj = L.extend(error, {
-          message: 'There was an error loading the data from OuterSpatial.'
-        });
-
-        me.fire('error', obj);
-        me.errorFired = obj;
-      },
-      success: function (response) {
-        var obj;
-
-        if (response && response.responseText) {
-          var geojson = JSON.parse(response.responseText);
-
-          if (options.formatPopups) {
-            me._collapseFeatureAttributes(geojson.features);
-          }
-
-          L.GeoJSON.prototype.initialize.call(me, geojson, options);
-          me.fire('ready');
-          me._loaded = true;
-          me.readyFired = true;
-        } else {
-          obj = {
-            message: 'There was an error loading the data from OuterSpatial.'
-          };
-
-          me.fire('error', obj);
-          me.errorFired = obj;
-        }
-
-        return me;
-      },
-      url: 'https://' + (options.environment === 'production' ? '' : 'staging-') + 'cdn.outerspatial.com/static_data/organizations/' + options.organizationId + '/api_v2/' + options.locationType + '.geojson'
     });
   }
   /*

@@ -10,7 +10,27 @@ var OuterSpatial = {
   div: 'map',
   geocoderControl: true,
   overlays: [{
+    locationType: 'points_of_interest',
+    organizationId: 6372,
+    preset: 'outerspatial',
+    searchable: true
+  }, {
+    locationType: 'campgrounds',
+    organizationId: 6372,
+    preset: 'outerspatial',
+    searchable: true
+  }, {
+    locationType: 'trailheads',
+    organizationId: 6372,
+    preset: 'outerspatial',
+    searchable: true
+  }, {
     locationType: 'trails',
+    organizationId: 6372,
+    preset: 'outerspatial',
+    searchable: true
+  }, {
+    locationType: 'areas',
     organizationId: 6372,
     preset: 'outerspatial',
     searchable: true

@@ -756,6 +756,23 @@
     display: inline-block;
     width: 100%;
   }
+  .outerspatial .leaflet-popup-content .description section {
+    border-bottom: solid 1px #e3dfd8;
+    padding: 10px 0;
+  }
+  .outerspatial .leaflet-popup-content .description section.image {
+    border-bottom: none;
+  }
+  .outerspatial .leaflet-popup-content .description section:first-child {
+    padding-top: 0;
+  }
+  .outerspatial .leaflet-popup-content .description section:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+  .outerspatial .leaflet-popup-content .description .section-heading {
+    color: #3e3e3f;
+  }
 .outerspatial .leaflet-popup-scrolled {
   border-bottom: none;
   border-top: none;
