@@ -57,7 +57,15 @@ var OuterSpatialLayer = L.GeoJSON.extend({
 
     options.popup = {
       title: function (properties) {
-        return '{{name}}</br><span class="subtitle">' + properties.class_name + ' in ' + properties.area.name + '</span>';
+        var type = properties.class_name;
+
+        if (type === 'PointOfInterest') {
+          return '{{name}}</br><span class="subtitle">Point of Interest' + (properties.area_id ? ' in ' + properties.area.name + '</span>' : '</span>');
+        } else if (type === 'Area') {
+          return '{{name}}</br><span class="subtitle">' + type + ' in ' + properties.name + '</span>';
+        } else {
+          return '{{name}}</br><span class="subtitle">' + type + (properties.area_id ? ' in ' + properties.area.name + '</span>' : '</span>');
+        }
       },
       description: function (properties) {
         var description = '';
