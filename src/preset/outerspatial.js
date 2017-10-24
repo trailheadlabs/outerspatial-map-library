@@ -37,8 +37,6 @@ var OuterSpatialLayer = L.GeoJSON.extend({
             feature.properties['area:' + prop] = area[prop];
           }
         }
-
-        delete feature.properties.area;
       }
 
       tags.forEach(function (tag) {
@@ -47,19 +45,43 @@ var OuterSpatialLayer = L.GeoJSON.extend({
         });
       });
 
-      delete feature.properties.tags;
-
       if (contentBlocks) {
         contentBlocks.forEach(function (contentBlock) {
           feature.properties['contentBlock:' + contentBlock.title] = contentBlock.body;
         });
       }
-
-      delete feature.properties.content_blocks;
     });
   },
   initialize: function (options) {
     var me = this;
+
+    options.popup = {
+      title: '{{name}}',
+      description: function (properties) {
+        var description = '';
+
+        if (properties.image_attachments.length > 0) {
+          description = '<img src="' + properties.image_attachments[0].image.versions.small_square.url + '" height=253px width=253px>';
+        }
+        if (properties.description !== '') {
+          return description + '{{description}}';
+        } else {
+          return null;
+        }
+      },
+      actions: function (properties) {
+        if (properties.website && properties.website !== '' && properties.website !== null) {
+          return [{
+            handler: function () {
+              window.open(properties.website, '_blank');
+            },
+            text: 'Website'
+          }];
+        } else {
+          return null;
+        }
+      }
+    };
 
     L.Util.setOptions(this, this._toLeaflet(options));
     options = this.options;

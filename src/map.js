@@ -106,7 +106,7 @@ require('./popup.js');
 MapExt = L.Map.extend({
   options: {
     bounceAtZoomLimits: false,
-    detectAvailablePopupSpace: false,
+    detectAvailablePopupSpace: true,
     wheelPxPerZoomLevel: 120,
     worldCopyJump: true,
     zoomDelta: 0.5,

@@ -292,7 +292,6 @@ var Popup = L.Popup.extend({
       }
 
       if (config.description) {
-        divContent = L.DomUtil.create('div', 'content', div);
         obj = null;
 
         if (typeof config.description === 'function') {
@@ -308,6 +307,7 @@ var Popup = L.Popup.extend({
             obj = util.dataToTable(result, obj.fields);
           }
 
+          divContent = L.DomUtil.create('div', 'content', div);
           description = L.DomUtil.create('div', 'description', divContent);
 
           if (typeof obj === 'string') {

@@ -569,13 +569,6 @@
 .outerspatial .leaflet-popup-content .content {
   padding: 16px;
 }
-  .outerspatial .leaflet-popup-scrolled .content,
-  .outerspatial .content .leaflet-popup-scrolled audio,
-  .outerspatial .content .leaflet-popup-scrolled iframe,
-  .outerspatial .content .leaflet-popup-scrolled img,
-  .outerspatial .content .leaflet-popup-scrolled video {
-    margin-right: 15px;
-  }
   .outerspatial .leaflet-popup-content dt {
     clear: both;
     float: left;
@@ -761,12 +754,7 @@
   border-bottom: none;
   border-top: none;
   margin: 0;
-  padding: 15px;
 }
-  .outerspatial .leaflet-popup-scrolled .actions ul li {
-    display: inline-block;
-    margin-bottom: 0;
-  }
 
 /* Tooltip */
 .outerspatial .leaflet-tooltip-container {
