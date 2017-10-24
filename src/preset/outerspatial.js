@@ -56,7 +56,9 @@ var OuterSpatialLayer = L.GeoJSON.extend({
     var me = this;
 
     options.popup = {
-      title: '{{name}}',
+      title: function (properties) {
+        return '{{name}}</br><span class="subtitle">' + properties.class_name + ' in ' + properties.area.name + '</span>';
+      },
       description: function (properties) {
         var description = '';
 
