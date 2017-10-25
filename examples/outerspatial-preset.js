@@ -13,7 +13,15 @@ var OuterSpatial = {
     locationType: 'points_of_interest',
     organizationId: 6372,
     preset: 'outerspatial',
-    searchable: true
+    searchable: true,
+    popup: {
+      actions: [{
+        providers: [
+          'google'
+        ],
+        type: 'directions'
+      }]
+    }
   }, {
     locationType: 'campgrounds',
     organizationId: 6372,
