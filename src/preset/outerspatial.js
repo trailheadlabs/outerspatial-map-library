@@ -37,39 +37,6 @@ var OuterSpatialLayer = L.GeoJSON.extend({
       type = type.charAt(0).toUpperCase() + type.slice(1, type.length - 1);
     }
 
-
-    if (this.options.formatPopups) {
-      options.popup = {
-        title: function (properties) {
-          if (type === 'Area') {
-            return '{{name}}</br><span class="subtitle">' + type + ' in ' + properties.name + '</span>';
-          } else {
-            return '{{name}}</br><span class="subtitle">' + type + (properties.area_id ? ' in ' + properties.area.name + '</span>' : '</span>');
-          }
-        },
-        description: function (properties) {
-          var description = '';
-
-          if (properties.image_attachments.length > 0) {
-            description = '<section class="image"><img src="' + properties.image_attachments[0].image.versions.small_square.url + '" height=253px width=253px></section>';
-          }
-          if (properties.description !== '') {
-            description = description + '<section>{{description}}</section>';
-          }
-
-          if (properties.address && properties.address !== '' && properties.address !== null) {
-            description = description + '<section><span class="section-heading">' + type + ' Address</span></br>' + properties.address + '</section>';
-          }
-
-          if (properties.website && properties.website !== '' && properties.website !== null) {
-            description = description + '<section><span class="section-heading">Website</span></br><a href="' + properties.website + '" target="_blank">' + properties.website + '</section>';
-          }
-
-          return description;
-        }
-      };
-    }
-
     if (this.options.searchable) {
       options.search = function (value) {
         var layers = this.L._layers;
@@ -143,6 +110,52 @@ var OuterSpatialLayer = L.GeoJSON.extend({
       url: 'https://' + (me.options.environment === 'production' ? '' : 'staging-') + 'cdn.outerspatial.com/static_data/organizations/' + me.options.organizationId + '/api_v2/' + me.options.locationType + '.geojson'
     });
   },
+  onAdd: function () {
+    if (this.options.formatPopups) {
+      var config;
+
+      if (this.options.popup) {
+        config = this.options.popup;
+      } else {
+        config = {};
+      }
+      config.title = function (properties) {
+        var type = properties.class_name;
+
+        if (type === 'Area') {
+          return '{{name}}</br><span class="subtitle">' + type + ' in ' + properties.name + '</span>';
+        } else {
+          return '{{name}}</br><span class="subtitle">' + type + (properties.area_id ? ' in ' + properties.area.name + '</span>' : '</span>');
+        }
+      };
+
+      config.description = function (properties) {
+        var description = '';
+
+        if (properties.image_attachments.length > 0) {
+          description = '<section class="image"><img src="' + properties.image_attachments[0].image.versions.small_square.url + '" height=253px width=253px></section>';
+        }
+        if (properties.description !== '') {
+          description = description + '<section>{{description}}</section>';
+        }
+
+        if (properties.address && properties.address !== '' && properties.address !== null) {
+          description = description + '<section><span class="section-heading">' + properties.class_name + ' Address</span></br>' + properties.address + '</section>';
+        }
+
+        if (properties.website && properties.website !== '' && properties.website !== null) {
+          description = description + '<section><span class="section-heading">Website</span></br><a href="' + properties.website + '" target="_blank">' + properties.website + '</section>';
+        }
+
+        return description;
+      };
+
+      this.options.popup = config;
+      L.Util.setOptions(this, this._toLeaflet(this.options));
+    }
+
+    return this;
+  },
   _collapseFeatureAttributes: function (features) {
     features.forEach(function (feature) {
       var area = feature.properties.area;
@@ -182,40 +195,6 @@ var OuterSpatialLayer = L.GeoJSON.extend({
       }
     });
   }
-  /*
-
-      areas: "id":"23132","name":"Humber Park","steward_id":"6372","segment_ids":"","osm_tags":"","outerspatial":{"id":"23132","steward_id":"6372","segment_ids":[]}
-
-      campgrounds: "audio_description":null,"description":"<p>Dry camping area with quick access to the Ocotillo Wells Badlands, Truckhaven, and northern sections of the park. Each site has a shade ramada, picnic table, and a fire ring. This area is also conveniently located near Salton City businesses that offer, food, fuel, and more.</p>\n<p>All camping in Ocotillo Wells SVRA is free, and on a first come, first serve basis.</p><p><br></p>","created_at":"2017-08-01T22:57:56.201Z","id":225,"name":"Crossover Camp North","updated_at":"2017-10-03T17:25:30.967Z"
-
-      points_of_interest: "audio_description":null,"description":"","created_at":"2017-08-14T19:03:24.453Z","id":1330,"name":"Clay Flats","point_type":null,"updated_at":"2017-09-08T19:21:38.889Z"
-
-      trailheads: "id":"23132","name":"Humber Park","steward_id":"6372","segment_ids":"","osm_tags":"","outerspatial":{"id":"23132","steward_id":"6372","segment_ids":[]}
-
-      trails: "id":"149490","steward_id":null,"osm_tags":"","ot_id":"149490","name":"Stone Creek Trail","os_length":1318.06848534449,"os_last_modified":"2017-09-08T19:22:10.017Z","os_id":"149490","os_steward_id":"6372"
-
-  */
-  /*
-  _search: function (phrase) {
-    var match = [];
-
-    switch this.options.locationType:
-      case 'areas':
-        match = [
-          'name'
-        ];
-        break;
-      case 'campgrounds':
-        match = [
-          'name'
-        ];
-        break;
-      case 'points_of_interest',
-        match = [
-
-        ]
-  }
-  */
 });
 
 module.exports = function (options) {
