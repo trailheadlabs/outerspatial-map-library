@@ -23,10 +23,11 @@ require('./popup.js');
     prefix: '&copy; <a href="https://www.outerspatial.com/" target="_blank">OuterSpatial</a>'
   });
   L.Map.addInitHook(function () {
+    var attributionTextWidth;
     var container = this.getContainer();
     var elAttribution = util.getChildElementsByClassName(container, 'leaflet-control-attribution')[0];
     var me = this;
-    var initialAttributionWidth;
+    var span;
 
     function resize () {
       var containerWidth = container.offsetWidth;
@@ -38,9 +39,9 @@ require('./popup.js');
         elAttribution.style['margin-right'] = 0;
       }
 
-      if (initialAttributionWidth + 45 > containerWidth) {
+      if (attributionTextWidth + 45 > containerWidth) {
         elAttribution.style['width'] = containerWidth + 'px';
-        elAttribution.style['max-width'] = (initialAttributionWidth + 45) + 'px';
+        elAttribution.style['max-width'] = (attributionTextWidth + 45) + 'px';
         L.DomUtil.addClass(elAttribution, 'collapsed');
       } else {
         elAttribution.style['width'] = 'auto';
@@ -81,12 +82,16 @@ require('./popup.js');
           prefixAndAttribs.push(attribs.join(' | '));
         }
 
-        this._container.innerHTML = prefixAndAttribs.join(' | ');
+        this._container.innerHTML = '';
+        span = document.createElement('span');
+        this._container.appendChild(span);
+        span.innerHTML = prefixAndAttribs.join(' | ');
 
         if (typeof me._updateImproveLinks === 'function') {
           me._updateImproveLinks();
         }
-        initialAttributionWidth = elAttribution.offsetWidth;
+
+        attributionTextWidth = span.offsetWidth + 29;
         resize();
       };
       this.on('resize', resize);
