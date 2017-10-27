@@ -263,7 +263,8 @@ module.exports = {
 
       return new L.Marker(latLng, L.extend(config, {
         icon: icon,
-        keyboard: false
+        keyboard: false,
+        pane: 'markerPane'
       }));
     };
     config.style = function (feature) {

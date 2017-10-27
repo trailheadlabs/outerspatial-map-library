@@ -335,7 +335,8 @@ var MeasureControl = L.Control.extend({
           -5,
           -5
         ]
-      })
+      }),
+      pane: 'tooltipPane'
     }).addTo(this._featureGroupTooltips);
   },
   _handlerActivated: function (e) {
