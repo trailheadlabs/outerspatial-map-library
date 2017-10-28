@@ -30,12 +30,14 @@ var OuterSpatialLayer = L.GeoJSON.extend({
     type = options.locationType;
 
     if (type === 'points_of_interest') {
-      type = 'Point of Interest';
+      this._singularLocationType = 'Point of Interest';
     } else if (type === 'trail_segments') {
-      type = 'Trail Segment';
+      this._singularLocationType = 'Trail Segment';
     } else {
-      type = type.charAt(0).toUpperCase() + type.slice(1, type.length - 1);
+      this._singularLocationType = type.charAt(0).toUpperCase() + type.slice(1, type.length - 1);
     }
+
+    type = this._singularLocationType;
 
     if (this.options.searchable) {
       options.search = function (value) {
@@ -113,6 +115,7 @@ var OuterSpatialLayer = L.GeoJSON.extend({
   onAdd: function () {
     if (this.options.formatPopups) {
       var config;
+      var type = this._singularLocationType;
 
       if (this.options.popup) {
         config = this.options.popup;
@@ -120,8 +123,6 @@ var OuterSpatialLayer = L.GeoJSON.extend({
         config = {};
       }
       config.title = function (properties) {
-        var type = properties.class_name;
-
         if (type === 'Area') {
           return '{{name}}</br><span class="subtitle">' + type + ' in ' + properties.name + '</span>';
         } else {
@@ -133,7 +134,7 @@ var OuterSpatialLayer = L.GeoJSON.extend({
         var description = '';
 
         if (properties.image_attachments.length > 0) {
-          description = '<section class="image"><img src="' + properties.image_attachments[0].image.versions.small_square.url + '" height=253px width=253px></section>';
+          description = '<section class="image"><img src="' + properties.image_attachments[0].image.versions.small_square.url + '" height="256px" width="256px"></section>';
         }
         if (properties.description !== '') {
           description = description + '<section>{{description}}</section>';
