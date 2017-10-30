@@ -191,15 +191,6 @@ module.exports = {
             }
           }
         });
-
-        layer.on('add', function (e) {
-          console.log(e.constructor)
-          // var popupLatLng = e.popup.getLatLng();
-          // var flyToPoint = map.latLngToContainerPoint(popupLatLng);
-          //
-          // flyToPoint.y = flyToPoint.y - flyToPoint.y / 2;
-          // map.flyTo(map.containerPointToLatLng(flyToPoint), map.getZoom())
-        });
       };
     }
 
