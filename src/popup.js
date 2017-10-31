@@ -9,15 +9,14 @@ var Popup = L.Popup.extend({
   options: {
     autoPanPadding: null,
     autoPanPaddingBottomRight: [
-      16,
-      16
+      60,
+      90
     ],
     autoPanPaddingTopLeft: [
-      16,
-      16
+      60,
+      160
     ],
-    maxWidth: 285,
-    minWidth: 285,
+    minWidth: 200,
     offset: [
       0,
       -1
@@ -45,14 +44,6 @@ var Popup = L.Popup.extend({
       var node = document.createElement('div');
       node.innerHTML = content;
       content = node;
-    }
-
-    if (typeof this.options.maxWidth === 'number') {
-      content.style.maxWidth = this.options.maxWidth + 'px';
-    }
-
-    if (typeof this.options.minWidth === 'number') {
-      content.style.minWidth = this.options.minWidth + 'px';
     }
 
     L.Popup.prototype.setContent.call(this, content);
@@ -256,8 +247,10 @@ var Popup = L.Popup.extend({
       var actions;
       var description;
       var divContent;
+      var image;
       var media;
       var obj;
+      var responsiveContainer;
       var title;
       var ul;
 
@@ -291,8 +284,21 @@ var Popup = L.Popup.extend({
         }
       }
 
+      if (config.image) {
+        if (typeof config.image === 'function') {
+          obj = config.image(result);
+        } else {
+          obj = config.image;
+        }
+
+        if (obj) {
+          responsiveContainer = L.DomUtil.create('div', 'responsive-container', div);
+          image = L.DomUtil.create('img', undefined, responsiveContainer);
+          image.src = obj;
+        }
+      }
+
       if (config.description) {
-        divContent = L.DomUtil.create('div', 'content', div);
         obj = null;
 
         if (typeof config.description === 'function') {
@@ -308,6 +314,7 @@ var Popup = L.Popup.extend({
             obj = util.dataToTable(result, obj.fields);
           }
 
+          divContent = L.DomUtil.create('div', 'content', div);
           description = L.DomUtil.create('div', 'description', divContent);
 
           if (typeof obj === 'string') {
@@ -515,7 +522,6 @@ var Popup = L.Popup.extend({
     if (!menu.style.display || menu.style.display === 'none') {
       menu.style.bottom = '35px';
       menu.style.display = 'block';
-      menu.style.left = '-8px';
     } else {
       menu.style.display = 'none';
     }

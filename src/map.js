@@ -111,7 +111,7 @@ require('./popup.js');
 MapExt = L.Map.extend({
   options: {
     bounceAtZoomLimits: false,
-    detectAvailablePopupSpace: false,
+    detectAvailablePopupSpace: true,
     wheelPxPerZoomLevel: 120,
     worldCopyJump: true,
     zoomDelta: 0.5,
@@ -507,8 +507,8 @@ MapExt = L.Map.extend({
 
               if (actual.length && !me._popup) {
                 var popup = L.outerspatial.popup({
-                  maxHeight: (detectAvailablePopupSpace ? util._getAvailableVerticalSpace(me) - 84 : undefined),
-                  maxWidth: (detectAvailablePopupSpace ? util._getAvailableHorizontalSpace(me) - 77 : 285)
+                  maxHeight: (detectAvailablePopupSpace ? util._getAvailableVerticalSpace(me) : undefined),
+                  maxWidth: (detectAvailablePopupSpace ? (util._getAvailableHorizontalSpace(me) < 400 ? util._getAvailableHorizontalSpace(me) : 400) : 400)
                 });
 
                 popup

@@ -8,7 +8,7 @@ window.OuterSpatial = {
       description: {
         format: 'table'
       },
-      title: '{{alphacode}}'
+      title: '{{display_name}}'
     },
     styles: {
       'fill': '#7c117c'

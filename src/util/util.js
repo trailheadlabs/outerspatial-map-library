@@ -163,43 +163,10 @@ module.exports = {
     }
   },
   _getAvailableHorizontalSpace: function (map) {
-    var container = map.getContainer();
-    var leftBottom = this.getChildElementsByClassName(container, 'leaflet-bottom')[0];
-    var leftTop = this.getChildElementsByClassName(container, 'leaflet-top')[0];
-    var leftWidth = this.getOuterDimensions(leftBottom).width;
-    var available;
-
-    if (this.getOuterDimensions(leftTop).width > leftWidth) {
-      leftWidth = this.getOuterDimensions(leftTop).width;
-    }
-
-    // Should this be 'leaflet-bottom'[0].width?
-    available = this.getOuterDimensions(container).width - leftWidth - this.getOuterDimensions(this.getChildElementsByClassName(container, 'leaflet-top')[1]).width;
-
-    if (available > 249) {
-      return available;
-    } else {
-      return 250;
-    }
+    return map.getContainer().clientWidth - 120;
   },
   _getAvailableVerticalSpace: function (map) {
-    var container = map.getContainer();
-    var bottomLeft = this.getChildElementsByClassName(container, 'leaflet-bottom')[0];
-    var bottomRight = this.getChildElementsByClassName(container, 'leaflet-bottom')[1];
-    var bottomHeight = this.getOuterDimensions(bottomLeft).height;
-    var available;
-
-    if (this.getOuterDimensions(bottomRight).height > bottomHeight) {
-      bottomHeight = this.getOuterDimensions(bottomRight).height;
-    }
-
-    available = this.getOuterDimensions(container).height - bottomHeight - this.getOuterDimensions(this.getChildElementsByClassName(container, 'leaflet-top')[1]).height;
-
-    if (available > 149) {
-      return available;
-    } else {
-      return 150;
-    }
+    return map.getContainer().clientHeight - 320;
   },
   _lazyLoader: require('./lazyloader.js'),
   _parseLocalUrl: function (url) {

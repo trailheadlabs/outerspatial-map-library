@@ -527,11 +527,12 @@
 }
 .outerspatial .leaflet-popup-content-wrapper {
   background-clip: padding-box;
+  background-color: #fff;
   border-radius: 4px;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.3);
-  background-color: #fff;
-  pointer-events: auto;
   overflow: auto;
+  padding: 0;
+  pointer-events: auto;
   text-align: left;
 }
 .outerspatial .leaflet-popup-pane {
@@ -564,18 +565,11 @@
   letter-spacing: -0.58px;
   line-height: 18px;
   margin: 0;
-  width: auto !important;
+  padding: 16px 0;
 }
 .outerspatial .leaflet-popup-content .content {
-  padding: 16px;
+  border-top: 1px solid #e3dfd8;
 }
-  .outerspatial .leaflet-popup-scrolled .content,
-  .outerspatial .content .leaflet-popup-scrolled audio,
-  .outerspatial .content .leaflet-popup-scrolled iframe,
-  .outerspatial .content .leaflet-popup-scrolled img,
-  .outerspatial .content .leaflet-popup-scrolled video {
-    margin-right: 15px;
-  }
   .outerspatial .leaflet-popup-content dt {
     clear: both;
     float: left;
@@ -645,11 +639,10 @@
     white-space: nowrap;
   }
   .outerspatial .leaflet-popup-content .actions {
-    border-top: solid 1px #e3dfd8;
+    border-top: 1px solid  #e3dfd8;
     clear: both;
     display: block;
-    margin: 0 16px;
-    padding-top: 10px;
+    padding: 10px 16px;
     position: relative;
     user-select: none;
   }
@@ -661,7 +654,6 @@
       .outerspatial .leaflet-popup-content .actions ul li {
         float: left;
         list-style-type: none;
-        margin: 0 5px 10px 5px;
       }
       .outerspatial .leaflet-popup-content .actions ul li:first-child {
         margin-left: 0;
@@ -689,7 +681,6 @@
           color: #98ca43;
         }
       .outerspatial .leaflet-popup-content .actions .menu li {
-        border-top: 1px solid #f2f1ef;
         display: block;
         margin: 0;
         padding: 0;
@@ -699,18 +690,17 @@
           border-top: 0;
         }
   .outerspatial .leaflet-popup-content .layer {
-    border-top: 1px solid #e3dfd8;
     clear: both;
     margin-bottom: 10px;
+    width: 100%;
   }
-  .outerspatial .leaflet-popup-content .layer:first-child {
+  .outerspatial .leaflet-popup-content .layer > div:first-child {
     border-top: none;
+    padding-top: 0;
   }
-  .outerspatial .leaflet-popup-content .layer div:first-child {
-    border: none;
-  }
-  .outerspatial .leaflet-popup-content .layer div:nth-child(2) {
-    border-top: 1px solid #e3dfd8;
+  .outerspatial .leaflet-popup-content .layer > div:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
   }
     .outerspatial .leaflet-popup-content .layer .sublayer {
       clear: both;
@@ -744,7 +734,13 @@
     color: #3e3e3f;
     font-size: 20px;
     line-height: 22px;
-    padding: 16px;
+    padding: 10px 16px;
+  }
+  .outerspatial .leaflet-popup-content .subtitle {
+    color: #6c6d70;
+    display: block;
+    font-size: 14px;
+    line-height: 14px;
   }
   .outerspatial .leaflet-popup-content .sublayer .title {
     font-size: 18px;
@@ -753,20 +749,47 @@
     line-height: 20px;
     padding-left: 0;
   }
-  .outerspatial .leaflet-popup-content .description {
-    display: inline-block;
+  .outerspatial .leaflet-popup-content .responsive-container {
+    box-sizing: border-box;
+    padding-bottom: 100%;
+    position: relative;
     width: 100%;
+  }
+  .outerspatial .leaflet-popup-content .responsive-container img {
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+  }
+  .outerspatial .leaflet-popup-content .responsive-container + .content {
+    border-top: none;
+  }
+  .outerspatial .leaflet-popup-content .description {
+    box-sizing: border-box;
+    display: inline-block;
+    padding: 10px 16px;
+    width: 100%;
+  }
+  .outerspatial .leaflet-popup-content .description section {
+    border-bottom: solid 1px #e3dfd8;
+    padding: 10px 0;
+  }
+  .outerspatial .leaflet-popup-content .description section:first-child {
+    padding-top: 0;
+  }
+  .outerspatial .leaflet-popup-content .description section:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+  .outerspatial .leaflet-popup-content .description .section-heading {
+    color: #3e3e3f;
   }
 .outerspatial .leaflet-popup-scrolled {
   border-bottom: none;
   border-top: none;
   margin: 0;
-  padding: 15px;
 }
-  .outerspatial .leaflet-popup-scrolled .actions ul li {
-    display: inline-block;
-    margin-bottom: 0;
-  }
 
 /* Tooltip */
 .outerspatial .leaflet-tooltip-container {

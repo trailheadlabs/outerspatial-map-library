@@ -10,42 +10,40 @@ var OuterSpatialLayer = L.GeoJSON.extend({
   ],
   options: {
     environment: 'production',
-    searchable: false
+    searchable: false,
+    formatPopups: true
   },
   initialize: function (options) {
-    var me = this;
-    var environment;
-    var locationType;
-    var organizationId;
+    var me;
+    var type;
 
     L.Util.setOptions(this, this._toLeaflet(options));
 
-    if (this.options.locationType) {
-      locationType = this.options.locationType;
-    } else {
+    if (!this.options.locationType) {
       console.error('The "locationType" property is required for the OuterSpatial preset.');
     }
 
-    if (this.options.organizationId) {
-      organizationId = this.options.organizationId;
-    } else {
+    if (!this.options.organizationId) {
       console.error('The "organizationId" property is required for the OuterSpatial preset.');
     }
+
+    type = options.locationType;
+
+    if (type === 'points_of_interest') {
+      this._singularLocationType = 'Point of Interest';
+    } else if (type === 'trail_segments') {
+      this._singularLocationType = 'Trail Segment';
+    } else {
+      this._singularLocationType = type.charAt(0).toUpperCase() + type.slice(1, type.length - 1);
+    }
+
+    type = this._singularLocationType;
 
     if (this.options.searchable) {
       options.search = function (value) {
         var layers = this.L._layers;
         var re = new RegExp(value, 'i');
         var results = [];
-        var type = options.locationType;
-
-        if (type === 'points_of_interest') {
-          type = 'Point of Interest';
-        } else if (type === 'trail_segments') {
-          type = 'Trail Segment';
-        } else {
-          type = type.charAt(0).toUpperCase() + type.slice(1, type.length - 1);
-        }
 
         for (var key in layers) {
           var layer = layers[key];
@@ -75,7 +73,7 @@ var OuterSpatialLayer = L.GeoJSON.extend({
       };
     }
 
-    environment = this.options.environment;
+    me = this;
 
     reqwest({
       error: function (error) {
@@ -90,7 +88,13 @@ var OuterSpatialLayer = L.GeoJSON.extend({
         var obj;
 
         if (response && response.responseText) {
-          L.GeoJSON.prototype.initialize.call(me, JSON.parse(response.responseText), options);
+          var geojson = JSON.parse(response.responseText);
+
+          if (me.options.formatPopups) {
+            me._collapseFeatureAttributes(geojson.features);
+          }
+
+          L.GeoJSON.prototype.initialize.call(me, geojson, me.options);
           me.fire('ready');
           me._loaded = true;
           me.readyFired = true;
@@ -105,43 +109,110 @@ var OuterSpatialLayer = L.GeoJSON.extend({
 
         return me;
       },
-      url: 'https://' + (environment === 'production' ? '' : 'staging-') + 'cdn.outerspatial.com/static_data/organizations/' + organizationId + '/api_v2/' + locationType + '.geojson'
+      url: 'https://' + (me.options.environment === 'production' ? '' : 'staging-') + 'cdn.outerspatial.com/static_data/organizations/' + me.options.organizationId + '/api_v2/' + me.options.locationType + '.geojson'
+    });
+  },
+  onAdd: function () {
+    if (this.options.formatPopups) {
+      var config;
+      var type = this._singularLocationType;
+
+      if (this.options.popup) {
+        config = this.options.popup;
+      } else {
+        config = {};
+      }
+      config.title = function (properties) {
+        if (type === 'Area') {
+          return '{{name}}</br><span class="subtitle">' + type + ' in ' + properties.name + '</span>';
+        } else {
+          return '{{name}}</br><span class="subtitle">' + type + (properties.area_id ? ' in ' + properties.area.name + '</span>' : '</span>');
+        }
+      };
+
+      config.image = function (properties) {
+        if (properties.image_attachments.length > 0) {
+          if (window.innerWidth <= 320) {
+            return properties.image_attachments[0].image.versions.small_square.url;
+          } else {
+            return properties.image_attachments[0].image.versions.medium_square.url;
+          }
+        } else {
+          return null;
+        }
+      };
+
+      config.description = function (properties) {
+        var description = '';
+
+        if (properties.description !== '' && properties.description !== null) {
+          description = description + '<section>{{description}}</section>';
+        }
+
+        if (properties.length && properties.length !== '' && properties.length !== null) {
+          description = description + '<section><span class="section-heading">Trail Length</span></br>' + (properties.length / 1609.33).toFixed(2) + ' mi</section>';
+        }
+
+        if (properties.address && properties.address !== '' && properties.address !== null) {
+          description = description + '<section><span class="section-heading">' + properties.class_name + ' Address</span></br>' + properties.address + '</section>';
+        }
+
+        if (properties.website && properties.website !== '' && properties.website !== null) {
+          description = description + '<section><span class="section-heading">Website</span></br><a href="' + properties.website + '" target="_blank">' + properties.website + '</section>';
+        }
+
+        if (description === '') {
+          return null;
+        } else {
+          return description;
+        }
+      };
+
+      this.options.popup = config;
+      L.Util.setOptions(this, this._toLeaflet(this.options));
+    }
+
+    return this;
+  },
+  _collapseFeatureAttributes: function (features) {
+    features.forEach(function (feature) {
+      var area = feature.properties.area;
+      var tags = feature.properties.tags;
+      var contentBlocks = feature.properties.content_blocks;
+
+      if (area !== null) {
+        for (var prop in area) {
+          if (
+            prop === 'address' ||
+            prop === 'name' ||
+            prop === 'area_type' ||
+            prop === 'created_at' ||
+            prop === 'description' ||
+            prop === 'id' ||
+            prop === 'updated_at' ||
+            prop === 'slug' ||
+            prop === 'phone_number' ||
+            prop === 'website' ||
+            prop === 'logo_image_id'
+          ) {
+            feature.properties['area:' + prop] = area[prop];
+          }
+        }
+      }
+
+      tags.forEach(function (tag) {
+        tag.categories.forEach(function (category) {
+          feature.properties['tag:' + category.name + ':' + tag.key] = tag.value;
+        });
+      });
+
+      if (contentBlocks) {
+        contentBlocks.forEach(function (contentBlock) {
+          feature.properties['contentBlock:' + contentBlock.title] = contentBlock.body;
+        });
+      }
     });
   }
-  /*
-
-      areas: "id":"23132","name":"Humber Park","steward_id":"6372","segment_ids":"","osm_tags":"","outerspatial":{"id":"23132","steward_id":"6372","segment_ids":[]}
-
-      campgrounds: "audio_description":null,"description":"<p>Dry camping area with quick access to the Ocotillo Wells Badlands, Truckhaven, and northern sections of the park. Each site has a shade ramada, picnic table, and a fire ring. This area is also conveniently located near Salton City businesses that offer, food, fuel, and more.</p>\n<p>All camping in Ocotillo Wells SVRA is free, and on a first come, first serve basis.</p><p><br></p>","created_at":"2017-08-01T22:57:56.201Z","id":225,"name":"Crossover Camp North","updated_at":"2017-10-03T17:25:30.967Z"
-
-      points_of_interest: "audio_description":null,"description":"","created_at":"2017-08-14T19:03:24.453Z","id":1330,"name":"Clay Flats","point_type":null,"updated_at":"2017-09-08T19:21:38.889Z"
-
-      trailheads: "id":"23132","name":"Humber Park","steward_id":"6372","segment_ids":"","osm_tags":"","outerspatial":{"id":"23132","steward_id":"6372","segment_ids":[]}
-
-      trails: "id":"149490","steward_id":null,"osm_tags":"","ot_id":"149490","name":"Stone Creek Trail","os_length":1318.06848534449,"os_last_modified":"2017-09-08T19:22:10.017Z","os_id":"149490","os_steward_id":"6372"
-
-  */
-  /*
-  _search: function (phrase) {
-    var match = [];
-
-    switch this.options.locationType:
-      case 'areas':
-        match = [
-          'name'
-        ];
-        break;
-      case 'campgrounds':
-        match = [
-          'name'
-        ];
-        break;
-      case 'points_of_interest',
-        match = [
-
-        ]
-  }
-  */
 });
 
 module.exports = function (options) {
