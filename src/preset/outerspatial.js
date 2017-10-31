@@ -149,6 +149,10 @@ var OuterSpatialLayer = L.GeoJSON.extend({
           description = description + '<section>{{description}}</section>';
         }
 
+        if (properties.length && properties.length !== '' && properties.length !== null) {
+          description = description + '<section><span class="section-heading">Trail Length</span></br>' + (properties.length / 1609.33).toFixed(2) + ' mi</section>';
+        }
+
         if (properties.address && properties.address !== '' && properties.address !== null) {
           description = description + '<section><span class="section-heading">' + properties.class_name + ' Address</span></br>' + properties.address + '</section>';
         }
