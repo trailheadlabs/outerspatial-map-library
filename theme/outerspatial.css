@@ -568,7 +568,7 @@
   padding: 16px 0;
 }
 .outerspatial .leaflet-popup-content .content {
-  padding: 10px 16px;
+  border-top: 1px solid #e3dfd8;
 }
   .outerspatial .leaflet-popup-content dt {
     clear: both;
@@ -639,6 +639,7 @@
     white-space: nowrap;
   }
   .outerspatial .leaflet-popup-content .actions {
+    border-top: 1px solid  #e3dfd8;
     clear: both;
     display: block;
     padding: 10px 16px;
@@ -693,15 +694,13 @@
     margin-bottom: 10px;
     width: 100%;
   }
-  .outerspatial .leaflet-popup-content .layer div:first-child {
+  .outerspatial .leaflet-popup-content .layer > div:first-child {
     border-top: none;
     padding-top: 0;
   }
-  .outerspatial .leaflet-popup-content .layer div:last-child {
+  .outerspatial .leaflet-popup-content .layer > div:last-child {
+    border-bottom: none;
     padding-bottom: 0;
-  }
-  .outerspatial .leaflet-popup-content .layer div {
-    border-top: 1px solid #e3dfd8;
   }
     .outerspatial .leaflet-popup-content .layer .sublayer {
       clear: both;
@@ -750,26 +749,32 @@
     line-height: 20px;
     padding-left: 0;
   }
+  .outerspatial .leaflet-popup-content .responsive-container {
+    box-sizing: border-box;
+    padding-bottom: 100%;
+    position: relative;
+    width: 100%;
+  }
+  .outerspatial .leaflet-popup-content .responsive-container img {
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+  }
+  .outerspatial .leaflet-popup-content .responsive-container + .content {
+    border-top: none;
+  }
   .outerspatial .leaflet-popup-content .description {
+    box-sizing: border-box;
     display: inline-block;
-    padding: 0;
+    padding: 10px 16px;
     width: 100%;
   }
   .outerspatial .leaflet-popup-content .description section {
     border-bottom: solid 1px #e3dfd8;
     padding: 10px 0;
   }
-  .outerspatial .leaflet-popup-content .description section.image img {
-    border-bottom: none;
-    display: block;
-    margin: auto;
-    max-width: 368px;
-  }
-  @media all and (max-width: 400px) {
-    .outerspatial .leaflet-popup-content .description section.image {
-      display: none;
-    }
-}
   .outerspatial .leaflet-popup-content .description section:first-child {
     padding-top: 0;
   }

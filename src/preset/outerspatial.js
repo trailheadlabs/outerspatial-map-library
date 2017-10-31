@@ -130,13 +130,22 @@ var OuterSpatialLayer = L.GeoJSON.extend({
         }
       };
 
+      config.image = function (properties) {
+        if (properties.image_attachments.length > 0) {
+          if (window.innerWidth <= 320) {
+            return properties.image_attachments[0].image.versions.small_square.url;
+          } else {
+            return properties.image_attachments[0].image.versions.medium_square.url;
+          }
+        } else {
+          return null;
+        }
+      };
+
       config.description = function (properties) {
         var description = '';
 
-        if (properties.image_attachments.length > 0) {
-          description = '<section class="image"><img src="' + properties.image_attachments[0].image.versions.small_square.url + '" height="256px" width="256px"></section>';
-        }
-        if (properties.description !== '') {
+        if (properties.description !== '' && properties.description !== null) {
           description = description + '<section>{{description}}</section>';
         }
 
@@ -148,7 +157,11 @@ var OuterSpatialLayer = L.GeoJSON.extend({
           description = description + '<section><span class="section-heading">Website</span></br><a href="' + properties.website + '" target="_blank">' + properties.website + '</section>';
         }
 
-        return description;
+        if (description === '') {
+          return null;
+        } else {
+          return description;
+        }
       };
 
       this.options.popup = config;

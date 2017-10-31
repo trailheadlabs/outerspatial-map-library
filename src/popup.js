@@ -247,8 +247,10 @@ var Popup = L.Popup.extend({
       var actions;
       var description;
       var divContent;
+      var image;
       var media;
       var obj;
+      var responsiveContainer;
       var title;
       var ul;
 
@@ -279,6 +281,20 @@ var Popup = L.Popup.extend({
         if (obj && typeof obj === 'string') {
           title = L.DomUtil.create('div', 'title', div);
           title.innerHTML = util.unescapeHtml(util.handlebars(obj, result));
+        }
+      }
+
+      if (config.image) {
+        if (typeof config.image === 'function') {
+          obj = config.image(result);
+        } else {
+          obj = config.image;
+        }
+
+        if (obj) {
+          responsiveContainer = L.DomUtil.create('div', 'responsive-container', div);
+          image = L.DomUtil.create('img', undefined, responsiveContainer);
+          image.src = obj;
         }
       }
 
