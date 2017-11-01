@@ -751,7 +751,7 @@
   }
   .outerspatial .leaflet-popup-content .responsive-container {
     box-sizing: border-box;
-    padding-bottom: 100%;
+    padding-top: 100%;
     position: relative;
     width: 100%;
   }
