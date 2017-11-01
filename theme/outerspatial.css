@@ -762,7 +762,8 @@
     top: 0;
     width: 100%;
   }
-  .outerspatial .leaflet-popup-content .responsive-container + .content {
+  .outerspatial .leaflet-popup-content .responsive-container + .content,
+  .outerspatial .leaflet-popup-content .responsive-container + .actions {
     border-top: none;
   }
   .outerspatial .leaflet-popup-content .description {
