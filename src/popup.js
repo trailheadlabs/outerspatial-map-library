@@ -16,7 +16,6 @@ var Popup = L.Popup.extend({
       60,
       160
     ],
-    minWidth: 200,
     offset: [
       0,
       -1
