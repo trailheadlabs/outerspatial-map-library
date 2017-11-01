@@ -122,51 +122,54 @@ var OuterSpatialLayer = L.GeoJSON.extend({
       } else {
         config = {};
       }
-      config.title = function (properties) {
-        if (type === 'Area') {
-          return '{{name}}</br><span class="subtitle">' + type + ' in ' + properties.name + '</span>';
-        } else {
-          return '{{name}}</br><span class="subtitle">' + type + (properties.area_id ? ' in ' + properties.area.name + '</span>' : '</span>');
-        }
-      };
 
-      config.image = function (properties) {
-        if (properties.image_attachments.length > 0) {
-          if (window.innerWidth <= 320) {
-            return properties.image_attachments[0].image.versions.small_square.url;
+      if (!config.title && !config.description) {
+        config.title = function (properties) {
+          if (type === 'Area') {
+            return '{{name}}</br><span class="subtitle">' + type + ' in ' + properties.name + '</span>';
           } else {
-            return properties.image_attachments[0].image.versions.medium_square.url;
+            return '{{name}}</br><span class="subtitle">' + type + (properties.area_id ? ' in ' + properties.area.name + '</span>' : '</span>');
           }
-        } else {
-          return null;
-        }
-      };
+        };
 
-      config.description = function (properties) {
-        var description = '';
+        config.image = function (properties) {
+          if (properties.image_attachments.length > 0) {
+            if (window.innerWidth <= 320) {
+              return properties.image_attachments[0].image.versions.small_square.url;
+            } else {
+              return properties.image_attachments[0].image.versions.medium_square.url;
+            }
+          } else {
+            return null;
+          }
+        };
 
-        if (properties.description !== '' && properties.description !== null) {
-          description = description + '<section>{{description}}</section>';
-        }
+        config.description = function (properties) {
+          var description = '';
 
-        if (properties.length && properties.length !== '' && properties.length !== null) {
-          description = description + '<section><span class="section-heading">Trail Length</span></br>' + (properties.length / 1609.34).toFixed(1) + ' mi</section>';
-        }
+          if (properties.description !== '' && properties.description !== null) {
+            description = description + '<section>{{description}}</section>';
+          }
 
-        if (properties.address && properties.address !== '' && properties.address !== null) {
-          description = description + '<section><span class="section-heading">' + properties.class_name + ' Address</span></br>' + properties.address + '</section>';
-        }
+          if (properties.length && properties.length !== '' && properties.length !== null) {
+            description = description + '<section><span class="section-heading">Trail Length</span></br>' + (properties.length / 1609.34).toFixed(1) + ' mi</section>';
+          }
 
-        if (properties.website && properties.website !== '' && properties.website !== null) {
-          description = description + '<section><span class="section-heading">Website</span></br><a href="' + properties.website + '" target="_blank">' + properties.website + '</section>';
-        }
+          if (properties.address && properties.address !== '' && properties.address !== null) {
+            description = description + '<section><span class="section-heading">' + properties.class_name + ' Address</span></br>' + properties.address + '</section>';
+          }
 
-        if (description === '') {
-          return null;
-        } else {
-          return description;
-        }
-      };
+          if (properties.website && properties.website !== '' && properties.website !== null) {
+            description = description + '<section><span class="section-heading">Website</span></br><a href="' + properties.website + '" target="_blank">' + properties.website + '</section>';
+          }
+
+          if (description === '') {
+            return null;
+          } else {
+            return description;
+          }
+        };
+      }
 
       this.options.popup = config;
       L.Util.setOptions(this, this._toLeaflet(this.options));
