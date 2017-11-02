@@ -7,9 +7,6 @@ window.OuterSpatial = {
     },
     popup: {
       actions: [{
-        providers: [
-          'google'
-        ],
         type: 'directions'
       }],
       title: '{{name}}'
@@ -45,10 +42,6 @@ window.OuterSpatial = {
   }, {
     popup: {
       actions: [{
-        providers: [
-          'google',
-          'bing'
-        ],
         type: 'directions'
       }],
       description: 'The alpha code is {{Code}}',

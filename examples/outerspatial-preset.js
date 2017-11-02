@@ -16,9 +16,6 @@ var OuterSpatial = {
     searchable: true,
     popup: {
       actions: [{
-        providers: [
-          'google'
-        ],
         type: 'directions'
       }]
     }

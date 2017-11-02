@@ -60,43 +60,20 @@ var Popup = L.Popup.extend({
     li.appendChild(a);
 
     if (config.type && config.type === 'directions') {
-      var providers = config.providers;
+      config.text = 'Get Directions';
+      config.handler = function () {
+        var latLng = me.getLatLng();
+        var lat = latLng.lat;
+        var lng = latLng.lng;
 
-      if (providers && providers.constructor === Array) {
-        config.menu = [];
-        config.text = 'Get Directions';
-
-        for (var i = 0; i < providers.length; i++) {
-          (function () {
-            var menuItem = {};
-            var provider = providers[i];
-
-            menuItem.text = 'From ' + provider.charAt(0).toUpperCase() + provider.slice(1);
-            menuItem.handler = function () {
-              handler(provider);
-            };
-            config.menu.push(menuItem);
-          })();
-        }
-      }
-    }
-
-    function handler (provider) {
-      var latLng = me.getLatLng();
-      var lat = latLng.lat;
-      var lng = latLng.lng;
-
-      if (provider === 'google') {
-        window.open('https://www.google.com/maps/dir/?api=1&&destination=' + lat + '%2c' + lng, '_blank');
-      } else if (provider === 'bing') {
-        window.open('http://bing.com/maps/default.aspx?rtp=~pos.' + lat + '_' + lng, '_blank');
-      }
+        window.open('https://maps.apple.com/?daddr=' + lat + '%2c' + lng, '_blank');
+      };
     }
 
     if (config.menu) {
       var menu = L.DomUtil.create('ul', 'menu', div);
 
-      for (i = 0; i < config.menu.length; i++) {
+      for (var i = 0; i < config.menu.length; i++) {
         (function () {
           var item = config.menu[i];
           var itemA = document.createElement('a');
