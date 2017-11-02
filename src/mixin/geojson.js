@@ -111,7 +111,7 @@ module.exports = {
                 } else {
                   var popup = L.outerspatial.popup({
                     maxHeight: (detectAvailablePopupSpace ? util._getAvailableVerticalSpace(map) : undefined),
-                    maxWidth: (detectAvailablePopupSpace ? (util._getAvailableHorizontalSpace(map) < 400 ? util._getAvailableHorizontalSpace(map) : 400) : 400)
+                    maxWidth: (detectAvailablePopupSpace ? (util._getAvailableHorizontalSpace(map) < 300 ? util._getAvailableHorizontalSpace(map) : 300) : 300)
                   });
                   var properties = feature.properties;
                   var html = popup._resultToHtml(properties, config.popup, null, null, map.options.popup);

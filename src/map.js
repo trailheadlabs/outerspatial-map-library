@@ -508,7 +508,7 @@ MapExt = L.Map.extend({
               if (actual.length && !me._popup) {
                 var popup = L.outerspatial.popup({
                   maxHeight: (detectAvailablePopupSpace ? util._getAvailableVerticalSpace(me) : undefined),
-                  maxWidth: (detectAvailablePopupSpace ? (util._getAvailableHorizontalSpace(me) < 400 ? util._getAvailableHorizontalSpace(me) : 400) : 400)
+                  maxWidth: (detectAvailablePopupSpace ? (util._getAvailableHorizontalSpace(me) < 300 ? util._getAvailableHorizontalSpace(me) : 300) : 300)
                 });
 
                 popup
