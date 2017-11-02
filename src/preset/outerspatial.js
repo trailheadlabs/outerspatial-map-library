@@ -145,28 +145,38 @@ var OuterSpatialLayer = L.GeoJSON.extend({
         };
 
         config.description = function (properties) {
-          var description = '';
+          var address = properties.address;
+          var content = '';
+          var description = properties.description;
+          var length = properties.length;
+          var website = properties.website;
 
-          if (properties.description !== '' && properties.description !== null) {
-            description = description + '<section>{{description}}</section>';
+          if (description && description !== '' && description !== null) {
+            content = content + '<section>' + description + '</section>';
           }
 
-          if (properties.length && properties.length !== '' && properties.length !== null) {
-            description = description + '<section><span class="section-heading">Trail Length</span></br>' + (properties.length / 1609.34).toFixed(1) + ' mi</section>';
+          if (length && length !== '' && length !== null) {
+            content = content + '<section><span class="section-heading">Trail Length</span></br>' + (length / 1609.34).toFixed(1) + ' mi</section>';
           }
 
-          if (properties.address && properties.address !== '' && properties.address !== null) {
-            description = description + '<section><span class="section-heading">' + properties.class_name + ' Address</span></br>' + properties.address + '</section>';
+          if (address && address !== '' && address !== null) {
+            try {
+              address = JSON.parse(address).label;
+            } catch (e) {
+              // address is not JSON
+            }
+
+            content = content + '<section><span class="section-heading">' + properties.class_name + ' Address</span></br>' + address + '</section>';
           }
 
-          if (properties.website && properties.website !== '' && properties.website !== null) {
-            description = description + '<section><span class="section-heading">Website</span></br><a href="' + properties.website + '" target="_blank">' + properties.website + '</section>';
+          if (website && website !== '' && website !== null) {
+            content = content + '<section><span class="section-heading">Website</span></br><a href="' + properties.website + '" target="_blank">' + properties.website + '</section>';
           }
 
-          if (description === '') {
+          if (content === '') {
             return null;
           } else {
-            return description;
+            return content;
           }
         };
       }
