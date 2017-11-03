@@ -126,7 +126,7 @@ var OuterSpatialLayer = L.GeoJSON.extend({
       if (!config.title && !config.description) {
         config.title = function (properties) {
           if (type === 'Area') {
-            return '{{name}}</br><span class="subtitle">' + type + ' in ' + properties.name + '</span>';
+            return '{{name}}</br><span class="subtitle">Area</span>';
           } else {
             return '{{name}}</br><span class="subtitle">' + type + (properties.area_id ? ' in ' + properties.area.name + '</span>' : '</span>');
           }
