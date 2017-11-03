@@ -33,7 +33,13 @@ var ClusterLayer = L.MarkerClusterGroup.extend({
     this._nonPointGroup = L.featureGroup();
     this._nonPointGroup.addEventParent(this);
     this._queue = [];
-    this.L = L.outerspatial.layer[options.type](options);
+
+    if (options.preset === 'outerspatial') {
+      this.L = L.outerspatial.preset[options.preset](options);
+    } else {
+      this.L = L.outerspatial.layer[options.type](options);
+    }
+
     interval = setInterval(function () {
       if (me.L._loaded) {
         clearInterval(interval);
