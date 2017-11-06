@@ -2,6 +2,7 @@
 
 'use strict';
 
+var util = require('../util/util');
 var HashControl = L.Class.extend({
   addTo: function (map) {
     var me = this;
@@ -23,12 +24,16 @@ var HashControl = L.Class.extend({
     if ((window.self !== window.top) && document.referrer !== '') {
       this._embeddedInIframe = true;
 
-      try {
-        if (!window.frameElement) {
+      if (util.parseDomainFromUrl(document.referrer) === util.parseDomainFromUrl(window.location.href)) {
+        try {
+          this._window = window.top;
+
+          if (!window.frameElement) {
+            this._crossOrigin = true;
+          }
+        } catch (exception) {
           this._crossOrigin = true;
         }
-      } catch (exception) {
-        this._crossOrigin = true;
       }
     }
 
@@ -106,7 +111,7 @@ var HashControl = L.Class.extend({
     hash = this._formatHash(this._map);
 
     if (this._lastHash !== hash) {
-      window.history.replaceState(undefined, undefined, hash);
+      this._window.history.replaceState(undefined, undefined, hash);
 
       if (this._embeddedInIframe && this._crossOrigin) {
         window.parent.postMessage({
