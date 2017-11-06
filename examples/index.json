@@ -164,9 +164,11 @@
   "title": "Hash Control"
 }, {
   "category": "Controls",
+  "css": true,
   "description": "",
+  "html": true,
   "id": "hash-control-iframe",
-  "include": false,
+  "include": true,
   "title": "Hash Control (Iframe)"
 }, {
   "category": "Advanced",

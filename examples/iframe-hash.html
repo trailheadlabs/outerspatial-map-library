@@ -2,7 +2,8 @@
 <html>
   <head>
     <style>
-      html, body {
+      html,
+      body {
         height: 100%;
         margin: 0;
         padding: 0;
@@ -20,14 +21,14 @@
   <body>
     <div id="map"></div>
     <script>
-      var OuterSpatial = {
+      window.OuterSpatial = {
         div: 'map',
         hashControl: true
       };
 
-      (function() {
+      (function () {
         var s = document.createElement('script');
-        s.src = '../dist/outerspatial-bootstrap.js';
+        s.src = '../outerspatial-bootstrap.js';
         document.body.appendChild(s);
       })();
     </script>

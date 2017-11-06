@@ -1,4 +1,11 @@
-#map {
-  height: 400px;
-  width: 600px;
+body {
+  display: block;
+  margin: 8px;
+}
+p {
+  display: block;
+  -webkit-margin-after: 1em;
+  -webkit-margin-before: 1em;
+  -webkit-margin-end: 0;
+  -webkit-margin-start: 0;
 }
