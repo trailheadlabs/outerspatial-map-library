@@ -241,6 +241,12 @@
 }, {
   "category": "Presets",
   "description": "",
+  "id": "outerspatial-preset-clustered",
+  "include": true,
+  "title": "OuterSpatial Preset (Clustered)"
+}, {
+  "category": "Presets",
+  "description": "",
   "id": "places-pois-preset",
   "include": true,
   "title": "Places Points of Interest Preset"

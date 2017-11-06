@@ -112,7 +112,16 @@ var OuterSpatialLayer = L.GeoJSON.extend({
       url: 'https://' + (me.options.environment === 'production' ? '' : 'staging-') + 'cdn.outerspatial.com/static_data/organizations/' + me.options.organizationId + '/api_v2/' + me.options.locationType + '.geojson'
     });
   },
-  onAdd: function () {
+  onAdd: function (map) {
+    this._map = map;
+    this._addAttribution();
+
+    if (this.options.zoomToBounds) {
+      this.on('ready', function () {
+        map.fitBounds(this.getBounds());
+      });
+    }
+
     if (this.options.formatPopups) {
       var config;
       var type = this._singularLocationType;
@@ -183,6 +192,7 @@ var OuterSpatialLayer = L.GeoJSON.extend({
 
       this.options.popup = config;
       L.Util.setOptions(this, this._toLeaflet(this.options));
+      L.GeoJSON.prototype.onAdd.call(this, map);
     }
 
     return this;

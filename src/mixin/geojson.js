@@ -277,6 +277,8 @@ module.exports = {
           return 'point';
         } else if (t.indexOf('polygon') !== -1) {
           return 'polygon';
+        } else if (t === 'geometrycollection') {
+          return 'collection';
         }
       })();
 
@@ -302,7 +304,15 @@ module.exports = {
         configStyles = typeof config.styles === 'function' ? config.styles(properties) : config.styles;
 
         if (configStyles) {
-          configStyles = typeof configStyles[type] === 'function' ? configStyles[type](properties) : configStyles[type];
+          if (type === 'collection') {
+            if (configStyles.polygon) {
+              configStyles = typeof configStyles.polygon === 'function' ? configStyles.polygon(properties) : configStyles.polygon;
+            } else {
+              configStyles = typeof configStyles.line === 'function' ? configStyles.line(properties) : configStyles.line;
+            }
+          } else {
+            configStyles = typeof configStyles[type] === 'function' ? configStyles[type](properties) : configStyles[type];
+          }
 
           if (configStyles) {
             for (property in matchSimpleStyles) {
