@@ -166,7 +166,7 @@ module.exports = {
     return map.getContainer().clientWidth - 120;
   },
   _getAvailableVerticalSpace: function (map) {
-    return map.getContainer().clientHeight - 352;
+    return map.getContainer().clientHeight - 300;
   },
   _lazyLoader: require('./lazyloader.js'),
   _parseLocalUrl: function (url) {
