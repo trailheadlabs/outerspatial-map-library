@@ -19,29 +19,22 @@ var HashControl = L.Class.extend({
   initialize: function () {
     this._crossOrigin = false;
     this._embeddedInIframe = false;
+    this._supportsHashChange = (function () {
+      var docMode = window.documentMode;
+
+      return ('onhashchange' in window) && (docMode === undefined || docMode > 7);
+    })();
     this._window = window;
 
     if ((window.self !== window.top) && document.referrer !== '') {
       this._embeddedInIframe = true;
 
       if (util.parseDomainFromUrl(document.referrer) === util.parseDomainFromUrl(window.location.href)) {
-        try {
-          this._window = window.top;
-
-          if (!window.frameElement) {
-            this._crossOrigin = true;
-          }
-        } catch (exception) {
-          this._crossOrigin = true;
-        }
+        this._window = window.top;
+      } else {
+        this._crossOrigin = true;
       }
     }
-
-    this._supportsHashChange = (function () {
-      var docMode = window.documentMode;
-
-      return ('onhashchange' in window) && (docMode === undefined || docMode > 7);
-    })();
 
     if (this._crossOrigin) {
       console.warn('This map is in an iframe embedded in a web page hosted from a domain other than outerspatial.com. To get the hash control to work, you\'ll need to either listen for window.postMessage(\'outerspatial_map_library-moveend\') and implement the hash functionality yourself or install the OuterSpatial Embed Helpers (https://github.com/trailheadlabs/outerspatial-embed-helpers/) in the parent page.');
