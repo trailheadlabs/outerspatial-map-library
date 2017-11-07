@@ -26,29 +26,6 @@ OuterSpatial Map Library is versioned using [semantic versioning](http://semver.
 
 2.0.0 was the first official OuterSpatial Map Library version.
 
-## Changelog
-
-- v3.0.18: The first version imported under the Trailhead Labs GitHub organization
-- v4.0.0: The first version under the `OuterSpatial` namespace
-- [v4.0.1](https://github.com/trailheadlabs/outerspatial-map-library/milestone/1?closed=1)
-- [v4.0.2](https://github.com/trailheadlabs/outerspatial-map-library/milestone/2?closed=1)
-- [v4.0.3](https://github.com/trailheadlabs/outerspatial-map-library/milestone/3?closed=1)
-- [v4.0.4](https://github.com/trailheadlabs/outerspatial-map-library/milestone/5?closed=1)
-- [v5.0.0](https://github.com/trailheadlabs/outerspatial-map-library/milestone/4?closed=1)
-- [v5.0.1](https://github.com/trailheadlabs/outerspatial-map-library/milestone/6?closed=1)
-- [v5.0.2](https://github.com/trailheadlabs/outerspatial-map-library/milestone/7?closed=1)
-- [v5.0.3](https://github.com/trailheadlabs/outerspatial-map-library/milestone/8?closed=1)
-- [v5.0.4](https://github.com/trailheadlabs/outerspatial-map-library/milestone/9?closed=1)
-- [v6.0.0](https://github.com/trailheadlabs/outerspatial-map-library/milestone/10?closed=1)
-- [v7.0.1](https://github.com/trailheadlabs/outerspatial-map-library/milestone/12?closed=1)
-- [v7.0.2](https://github.com/trailheadlabs/outerspatial-map-library/milestone/13?closed=1)
-- [v7.0.3](https://github.com/trailheadlabs/outerspatial-map-library/milestone/14?closed=1)
-- [v7.1.0](https://github.com/trailheadlabs/outerspatial-map-library/milestone/15?closed=1)
-- [v7.1.1](https://github.com/trailheadlabs/outerspatial-map-library/milestone/16?closed=1)
-- [v7.1.2](https://github.com/trailheadlabs/outerspatial-map-library/milestone/17?closed=1)
-- [v7.1.3](https://github.com/trailheadlabs/outerspatial-map-library/milestone/18?closed=1)
-- [v7.1.4](https://github.com/trailheadlabs/outerspatial-map-library/milestone/19?closed=1)
-
 ## Keys
 
 OuterSpatial Map Library supports connecting to a number of services that require API keys. You will need to create a copy of `keys.sample.json`, rename it `keys.json`, add your keys, and run `grunt build` to bundle your keys into the build of OuterSpatial Map Library that is created in the `_dist` folder.
