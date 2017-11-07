@@ -192,8 +192,9 @@ var OuterSpatialLayer = L.GeoJSON.extend({
 
       this.options.popup = config;
       L.Util.setOptions(this, this._toLeaflet(this.options));
-      L.GeoJSON.prototype.onAdd.call(this, map);
     }
+
+    L.GeoJSON.prototype.onAdd.call(this, map);
 
     return this;
   },
