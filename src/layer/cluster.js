@@ -35,7 +35,7 @@ var ClusterLayer = L.MarkerClusterGroup.extend({
     this._queue = [];
 
     if (options.preset === 'outerspatial') {
-      this.L = L.outerspatial.preset[options.preset](options);
+      this.L = L.outerspatial.preset.outerspatial(options);
     } else {
       this.L = L.outerspatial.layer[options.type](options);
     }

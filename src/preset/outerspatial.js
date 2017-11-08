@@ -15,6 +15,14 @@ var OuterSpatialLayer = L.GeoJSON.extend({
   },
   initialize: function (options) {
     var me;
+    var singularTypes = {
+      points_of_interest: 'Point of Interest',
+      trail_segments: 'Trail Segment',
+      areas: 'Area',
+      trails: 'Trail',
+      trailheads: 'Trailhead',
+      campgrounds: 'Campground'
+    };
     var type;
 
     L.Util.setOptions(this, this._toLeaflet(options));
@@ -27,23 +35,19 @@ var OuterSpatialLayer = L.GeoJSON.extend({
       console.error('The "organizationId" property is required for the OuterSpatial preset.');
     }
 
-    type = options.locationType;
-
-    if (type === 'points_of_interest') {
-      this._singularLocationType = 'Point of Interest';
-    } else if (type === 'trail_segments') {
-      this._singularLocationType = 'Trail Segment';
-    } else {
-      this._singularLocationType = type.charAt(0).toUpperCase() + type.slice(1, type.length - 1);
-    }
-
-    type = this._singularLocationType;
+    type = singularTypes[this.options.locationType];
 
     if (this.options.searchable) {
       options.search = function (value) {
-        var layers = this.L._layers;
+        var layers;
         var re = new RegExp(value, 'i');
         var results = [];
+
+        if (this.L.options.cluster) {
+          layers = this.L.L._layers;
+        } else {
+          layers = this.L._layers;
+        }
 
         for (var key in layers) {
           var layer = layers[key];
@@ -73,58 +77,8 @@ var OuterSpatialLayer = L.GeoJSON.extend({
       };
     }
 
-    me = this;
-
-    reqwest({
-      error: function (error) {
-        var obj = L.extend(error, {
-          message: 'There was an error loading the data from OuterSpatial.'
-        });
-
-        me.fire('error', obj);
-        me.errorFired = obj;
-      },
-      success: function (response) {
-        var obj;
-
-        if (response && response.responseText) {
-          var geojson = JSON.parse(response.responseText);
-
-          if (me.options.formatPopups) {
-            me._collapseFeatureAttributes(geojson.features);
-          }
-
-          L.GeoJSON.prototype.initialize.call(me, geojson, me.options);
-          me.fire('ready');
-          me._loaded = true;
-          me.readyFired = true;
-        } else {
-          obj = {
-            message: 'There was an error loading the data from OuterSpatial.'
-          };
-
-          me.fire('error', obj);
-          me.errorFired = obj;
-        }
-
-        return me;
-      },
-      url: 'https://' + (me.options.environment === 'production' ? '' : 'staging-') + 'cdn.outerspatial.com/static_data/organizations/' + me.options.organizationId + '/api_v2/' + me.options.locationType + '.geojson'
-    });
-  },
-  onAdd: function (map) {
-    this._map = map;
-    this._addAttribution();
-
-    if (this.options.zoomToBounds) {
-      this.on('ready', function () {
-        map.fitBounds(this.getBounds());
-      });
-    }
-
     if (this.options.formatPopups) {
       var config;
-      var type = this._singularLocationType;
 
       if (this.options.popup) {
         config = this.options.popup;
@@ -194,8 +148,56 @@ var OuterSpatialLayer = L.GeoJSON.extend({
       L.Util.setOptions(this, this._toLeaflet(this.options));
     }
 
-    L.GeoJSON.prototype.onAdd.call(this, map);
+    me = this;
 
+    reqwest({
+      error: function (error) {
+        var obj = L.extend(error, {
+          message: 'There was an error loading the data from OuterSpatial.'
+        });
+
+        me.fire('error', obj);
+        me.errorFired = obj;
+      },
+      success: function (response) {
+        var obj;
+
+        if (response && response.responseText) {
+          var geojson = JSON.parse(response.responseText);
+
+          if (me.options.formatPopups) {
+            me._collapseFeatureAttributes(geojson.features);
+          }
+
+          L.GeoJSON.prototype.initialize.call(me, geojson, me.options);
+          me.fire('ready');
+          me._loaded = true;
+          me.readyFired = true;
+        } else {
+          obj = {
+            message: 'There was an error loading the data from OuterSpatial.'
+          };
+
+          me.fire('error', obj);
+          me.errorFired = obj;
+        }
+
+        return me;
+      },
+      url: 'https://' + (me.options.environment === 'production' ? '' : 'staging-') + 'cdn.outerspatial.com/static_data/organizations/' + me.options.organizationId + '/api_v2/' + me.options.locationType + '.geojson'
+    });
+  },
+  onAdd: function (map) {
+    this._map = map;
+    this._addAttribution();
+
+    if (this.options.zoomToBounds) {
+      this.on('ready', function () {
+        map.fitBounds(this.getBounds());
+      });
+    }
+
+    L.GeoJSON.prototype.onAdd.call(this, map);
     return this;
   },
   _collapseFeatureAttributes: function (features) {
