@@ -243,6 +243,10 @@ var Popup = L.Popup.extend({
             }
           };
         }
+      } else if (!config.description) {
+        config.description = {
+          format: 'table'
+        };
       }
 
       if (config.title) {
