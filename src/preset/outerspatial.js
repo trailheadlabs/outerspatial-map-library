@@ -90,13 +90,15 @@ var OuterSpatialLayer = L.GeoJSON.extend({
         config.title = function (properties) {
           if (type === 'Area') {
             return '{{name}}</br><span class="subtitle">Area</span>';
+          } else if (type === 'Trail Segment') {
+            return type;
           } else {
             return '{{name}}</br><span class="subtitle">' + type + (properties.area_id ? ' in ' + properties.area.name + '</span>' : '</span>');
           }
         };
 
         config.image = function (properties) {
-          if (properties.image_attachments.length > 0) {
+          if (properties.image_attachments && properties.image_attachments.length > 0) {
             if (window.innerWidth <= 320) {
               return properties.image_attachments[0].image.versions.small_square.url;
             } else {
