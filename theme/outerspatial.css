@@ -565,7 +565,6 @@
   letter-spacing: -0.58px;
   line-height: 18px;
   margin: 0;
-  padding: 16px 0;
 }
 .outerspatial .leaflet-popup-content .content {
   border-top: 1px solid #e3dfd8;
@@ -699,11 +698,9 @@
   }
   .outerspatial .leaflet-popup-content .layer > div:first-child {
     border-top: none;
-    padding-top: 0;
   }
   .outerspatial .leaflet-popup-content .layer > div:last-child {
     border-bottom: none;
-    padding-bottom: 0;
   }
     .outerspatial .leaflet-popup-content .layer .sublayer {
       clear: both;
