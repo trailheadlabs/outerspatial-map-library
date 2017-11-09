@@ -115,11 +115,72 @@ var OuterSpatialLayer = L.GeoJSON.extend({
           var content = '';
           var description = properties.description;
           var length = properties.length;
+          var tags = properties.tags;
           var website = properties.website;
           var contentBlocks = properties.content_blocks;
 
           if (description && description !== '' && description !== null) {
             content = content + '<section>' + description + '</section>';
+          }
+
+          if (tags) {
+            var tagSections = {};
+            var tagCategories = {
+              Area: [
+                'Activities',
+                'Good For',
+                'Status'
+              ],
+              Campground: [
+                'Accessibility',
+                'Amenities',
+                'Status'
+              ],
+              PointOfInterest: [
+                'Accessibility',
+                'Status'
+              ],
+              Trailhead: [
+                'Accessibility',
+                'Amenities',
+                'Status'
+              ],
+              Trail: [
+                'Accessibility',
+                'Allowed Use',
+                'Difficulty',
+                'Status',
+                'Trail Type'
+              ],
+              TrailSegment: [
+                'Accessibility',
+                'Allowed Use',
+                'Difficulty',
+                'Status',
+                'Trail Type'
+              ]
+            };
+
+            tags.forEach(function (tag) {
+              if (tag.value === 'yes') {
+                if (tag.categories.length > 0) {
+                  tag.categories.forEach(function (category) {
+                    if (tagCategories[properties.class_name].indexOf(category.name) > -1) {
+                      if (!tagSections.hasOwnProperty(category.name)) {
+                        tagSections[category.name] = [];
+                      }
+
+                      tagSections[category.name].push(handleTag(tag.key));
+                    }
+                  });
+                }
+              }
+            });
+
+            console.log(tagSections);
+            for (var key in tagSections) {
+              content = content + '<section><span class="section-heading">' + key + '</span></br>' + tagSections[key].sort().join(', ') + '</section>';
+            }
           }
 
           if (accessibilityDescription && accessibilityDescription !== '' && accessibilityDescription !== null) {
@@ -200,6 +261,20 @@ var OuterSpatialLayer = L.GeoJSON.extend({
       },
       url: 'https://' + (me.options.environment === 'production' ? '' : 'staging-') + 'cdn.outerspatial.com/static_data/organizations/' + me.options.organizationId + '/api_v2/' + me.options.locationType + '.geojson'
     });
+
+    function handleTag (key) {
+      return key
+        .toLowerCase()
+        .split('_')
+        .map(function (word) {
+          if (word === 'rv') {
+            return word.toUpperCase();
+          } else {
+            return word[0].toUpperCase() + word.substr(1);
+          }
+        })
+        .join(' ');
+    }
   },
   onAdd: function (map) {
     this._map = map;
