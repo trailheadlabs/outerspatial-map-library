@@ -110,14 +110,26 @@ var OuterSpatialLayer = L.GeoJSON.extend({
         };
 
         config.description = function (properties) {
+          var accessibilityDescription = properties.accessibility_description;
           var address = properties.address;
           var content = '';
           var description = properties.description;
           var length = properties.length;
           var website = properties.website;
+          var contentBlocks = properties.content_blocks;
 
           if (description && description !== '' && description !== null) {
             content = content + '<section>' + description + '</section>';
+          }
+
+          if (accessibilityDescription && accessibilityDescription !== '' && accessibilityDescription !== null) {
+            content = content + '<section><span class="section-heading">Accessibility Description</span></br>' + accessibilityDescription + '</section>';
+          }
+
+          if (contentBlocks) {
+            contentBlocks.forEach(function (contentBlock) {
+              content = content + '<section><span class="section-heading">' + contentBlock.title + '</span></br>' + contentBlock.body + '</section>';
+            });
           }
 
           if (length && length !== '' && length !== null) {
