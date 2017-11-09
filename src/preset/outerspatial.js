@@ -177,7 +177,6 @@ var OuterSpatialLayer = L.GeoJSON.extend({
               }
             });
 
-            console.log(tagSections);
             for (var key in tagSections) {
               content = content + '<section><span class="section-heading">' + key + '</span></br>' + tagSections[key].sort().join(', ') + '</section>';
             }
