@@ -259,7 +259,7 @@ var OuterSpatialLayer = L.GeoJSON.extend({
 
         return me;
       },
-      url: 'https://' + (me.options.environment === 'production' ? '' : 'staging-') + 'cdn.outerspatial.com/static_data/organizations/' + me.options.organizationId + '/api_v2/' + me.options.locationType + '.geojson'
+      url: 'https://' + (me.options.environment === 'production' ? '' : 'staging-') + 'cdn.outerspatial.com/static_data/organizations/' + me.options.organizationId + '/api_v2/' + me.options.locationType + '.geojson' + '?_=' + new Date().getTime()
     });
 
     function handleTag (key) {
