@@ -530,7 +530,6 @@
   background-color: #fff;
   border-radius: 4px;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.3);
-  overflow: auto;
   padding: 0;
   pointer-events: auto;
   text-align: left;
@@ -782,16 +781,12 @@
     color: #3e3e3f;
   }
 .outerspatial .leaflet-popup-scrolled {
-  /*overflow: visible;*/
   border-bottom: none;
   border-top: none;
+  padding-right: 15px;
 }
-.outerspatial .leaflet-popup-scrolled .title,
-.outerspatial .leaflet-popup-scrolled .responsive-container,
-.outerspatial .leaflet-popup-scrolled .content,
-.outerspatial .leaflet-popup-scrolled .actions,
-.outerspatial .leaflet-popup-scrolled .media {
-  margin-right: 15px;
+.outerspatial .leaflet-popup-scrolled .layer {
+  width: inherit;
 }
 
 /* Tooltip */
