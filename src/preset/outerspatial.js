@@ -162,22 +162,23 @@ var OuterSpatialLayer = L.GeoJSON.extend({
             };
 
             tags.forEach(function (tag) {
-              if (tag.value === 'yes') {
-                if (tag.categories.length > 0) {
-                  tag.categories.forEach(function (category) {
-                    if (tagCategories[properties.class_name].indexOf(category.name) > -1) {
-                      if (!tagSections.hasOwnProperty(category.name)) {
-                        tagSections[category.name] = [];
-                      }
-
-                      tagSections[category.name].push(handleTag(tag.key));
+              if (tag.value === 'yes' && tag.categories.length > 0) {
+                tag.categories.forEach(function (category) {
+                  if (tagCategories[properties.class_name].indexOf(category.name) > -1) {
+                    if (!tagSections.hasOwnProperty(category.name)) {
+                      tagSections[category.name] = [];
                     }
-                  });
-                }
+
+                    tagSections[category.name].push(handleTag(tag.key));
+                  }
+                });
               }
             });
 
             for (var key in tagSections) {
+              if (key === 'Status') {
+                continue;
+              }
               content = content + '<section><span class="section-heading">' + key + '</span></br>' + tagSections[key].sort().join(', ') + '</section>';
             }
           }
