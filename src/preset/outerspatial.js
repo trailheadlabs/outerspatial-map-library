@@ -88,12 +88,18 @@ var OuterSpatialLayer = L.GeoJSON.extend({
 
       if (!config.title && !config.description) {
         config.title = function (properties) {
+          var banner = '';
+
+          if (properties['tag:Status:closed'] === 'yes') {
+            banner = '<img class="banner" width=51 height=20 alt="Closed banner" src="' + window.L.Icon.Default.imagePath + '/outerspatial/closed-indicator-right' + (L.Browser.retina ? '@2x' : '') + '.png"/>';
+          }
+
           if (type === 'Area') {
-            return '{{name}}</br><span class="subtitle">Area</span>';
+            return banner + '{{name}}</br><span class="subtitle">Area</span>';
           } else if (type === 'Trail Segment') {
-            return type;
+            return banner + type;
           } else {
-            return '{{name}}</br><span class="subtitle">' + type + (properties.area_id ? ' in ' + properties.area.name + '</span>' : '</span>');
+            return '{{name}}</br><span class="subtitle">' + type + (properties.area_id ? ' in ' + properties.area.name + '</span>' : '</span>') + banner;
           }
         };
 

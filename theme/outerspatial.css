@@ -733,6 +733,12 @@
     font-size: 20px;
     line-height: 22px;
     padding: 10px 16px;
+    position: relative;
+  }
+  .outerspatial .leaflet-popup-content .title .banner {
+    top: 12px;
+    right: 0;
+    position: absolute;
   }
   .outerspatial .leaflet-popup-content .subtitle {
     color: #6c6d70;
