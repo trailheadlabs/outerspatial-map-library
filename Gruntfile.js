@@ -223,7 +223,7 @@ module.exports = function (grunt) {
           'examples/index.json',
           'Gruntfile.js'
         ],
-        tasks: ['build'],
+        tasks: ['build-dev'],
         options: {
           interrupt: true
         }
@@ -249,6 +249,19 @@ module.exports = function (grunt) {
     'browserify',
     'uglify',
     'cssmin',
+    'usebanner'
+  ]);
+  grunt.registerTask('build-dev', [
+    'prebuild',
+    'clean:dist',
+    'copy:css',
+    'examples',
+    'copy:images',
+    'copy:javascript',
+    'copy:outerspatialSymbolLibrary',
+    'copy:plugins',
+    'concat',
+    'browserify',
     'usebanner'
   ]);
   grunt.registerTask('deploy-production', [
