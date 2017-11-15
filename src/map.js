@@ -166,11 +166,11 @@ MapExt = L.Map.extend({
       }
     }
 
-    me.on('popupclose', function () {
-      if (me._selectedLayer) {
-        me._selectedLayer.overlay.resetStyle(me._selectedLayer);
+    me.on('popupclose', function (e) {
+      if (e.target._selectedLayer) {
+        e.target._selectedLayer.overlay.resetStyle(e.target._selectedLayer);
+        e.target._selectedLayer = null;
       }
-      me._selectedLayer = null;
     });
     me.on('autopanstart', function () {
       me._setCursor('');

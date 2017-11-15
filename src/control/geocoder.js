@@ -196,13 +196,12 @@ var GeocoderControl = L.Control.extend({
       me._map._selectedLayer = me._results[id].layer;
     }
 
-    // setTimeout(function () {
-      me._map.on('mousedown', function (e) {
-        console.log('moveend')
-        me._results[id].layer.overlay.resetStyle(me._results[id].layer);
+    me._map.on('mousedown', function (e) {
+      if (me._map._selectedLayer) {
+        me._results[id].layer.overlay.resetStyle(me._map._selectedLayer);
         me._map._selectedLayer = null;
-      });
-    // }, 2000);
+      }
+    });
 
     me._ul.style.display = 'none';
     me._map.options.div.focus();
