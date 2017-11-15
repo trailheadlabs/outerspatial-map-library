@@ -284,19 +284,6 @@ var OuterSpatialLayer = L.GeoJSON.extend({
         .join(' ');
     }
   },
-  onAdd: function (map) {
-    this._map = map;
-    this._addAttribution();
-
-    if (this.options.zoomToBounds) {
-      this.on('ready', function () {
-        map.fitBounds(this.getBounds());
-      });
-    }
-
-    L.GeoJSON.prototype.onAdd.call(this, map);
-    return this;
-  },
   _collapseFeatureAttributes: function (features) {
     features.forEach(function (feature) {
       var area = feature.properties.area;
