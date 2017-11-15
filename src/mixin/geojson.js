@@ -83,6 +83,7 @@ module.exports = {
       'stroke-width': 'weight'
     };
     var configStyles;
+    var me = this;
 
     if (typeof config.clickable === 'undefined' || config.clickable === true) {
       var activeTip = null;
@@ -93,12 +94,36 @@ module.exports = {
       config.onEachFeature = function (feature, layer) {
         var clicks = 0;
 
+        layer.overlay = me;
+        layer.on('mouseover', function (e) {
+          if (!e.target._map._selectedLayer && e.target.feature.geometry.type.toLowerCase().indexOf('line') !== -1) {
+            e.target.setStyle({color: 'yellow'});
+          }
+        });
+        layer.on('mouseout', function (e) {
+          if (!e.target._map._selectedLayer && e.target.feature.geometry.type.toLowerCase().indexOf('line') !== -1) {
+            me.resetStyle(e.target);
+          }
+        });
         layer.on('click', function (e) {
           var target = e.target;
 
           if (!map) {
             map = target._map;
             detectAvailablePopupSpace = map.options.detectAvailablePopupSpace;
+          }
+
+          if (e.target.feature.geometry.type !== 'Point') {
+            if (map._selectedLayer) {
+              if (map._selectedLayer._leaflet_id !== target._leaflet_id) {
+                target.setStyle({color: 'yellow'});
+                me.resetStyle(map._selectedLayer);
+                map._selectedLayer = target;
+              }
+            } else {
+              target.setStyle({color: 'yellow'});
+              map._selectedLayer = target;
+            }
           }
 
           if (map._controllingInteractivity === 'map') {

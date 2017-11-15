@@ -12,6 +12,7 @@
     "leaflet": "1.2.0",
     "leaflet-draw": "0.4.12",
     "leaflet.markercluster": "~1.1.0",
+    "leaflet.smooth_marker_bouncing": "^1.1.4",
     "maki": "~0.5.0",
     "nanobar": "0.4.2",
     "outerspatial-symbol-library": "https://github.com/trailheadlabs/outerspatial-symbol-library/archive/3.1.0.tar.gz",

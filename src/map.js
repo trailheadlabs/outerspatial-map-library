@@ -148,6 +148,7 @@ MapExt = L.Map.extend({
     me._controllingInteractivity = 'map';
     me._defaultCursor = me.getContainer().style.cursor;
     me._frame = null;
+    me._selectedLayer = null;
 
     if ((window.self !== window.top) && document.referrer !== '') {
       me._frame = window.frameElement;
@@ -165,6 +166,12 @@ MapExt = L.Map.extend({
       }
     }
 
+    me.on('popupclose', function () {
+      if (me._selectedLayer) {
+        me._selectedLayer.overlay.resetStyle(me._selectedLayer);
+      }
+      me._selectedLayer = null;
+    });
     me.on('autopanstart', function () {
       me._setCursor('');
     });

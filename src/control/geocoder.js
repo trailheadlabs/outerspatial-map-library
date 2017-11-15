@@ -2,6 +2,8 @@
 
 'use strict';
 
+require('leaflet.smooth_marker_bouncing');
+
 var geocode = require('../util/geocode');
 var util = require('../util/util');
 var GeocoderControl = L.Control.extend({
@@ -182,6 +184,25 @@ var GeocoderControl = L.Control.extend({
     } else {
       me._map.fitBounds(me._results[id].bounds);
     }
+
+    if (me._results[id].layer.feature.geometry.type === 'Point') {
+      me._results[id].layer.setBouncingOptions({
+        bounceHeight: 30,
+        bounceSpeed: 78,
+        exclusive: true
+      }).bounce(3);
+    } else {
+      me._results[id].layer.setStyle({color: 'blue', weight: 5, opacity: 1.0});
+      me._map._selectedLayer = me._results[id].layer;
+    }
+
+    // setTimeout(function () {
+      me._map.on('mousedown', function (e) {
+        console.log('moveend')
+        me._results[id].layer.overlay.resetStyle(me._results[id].layer);
+        me._map._selectedLayer = null;
+      });
+    // }, 2000);
 
     me._ul.style.display = 'none';
     me._map.options.div.focus();
