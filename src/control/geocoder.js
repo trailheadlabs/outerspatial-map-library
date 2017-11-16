@@ -5,7 +5,7 @@
 var geocode = require('../util/geocode');
 var util = require('../util/util');
 var GeocoderControl = L.Control.extend({
-  includes: L.Evented.prototype,
+  includes: L.Evented,
   options: {
     position: 'topleft',
     provider: 'esri'

@@ -9,7 +9,7 @@ require('../icon/maki');
 require('../icon/outerspatialsymbollibrary');
 
 var EditControl = L.Control.extend({
-  includes: L.Evented.prototype,
+  includes: L.Evented,
   options: {
     circle: {
       shapeOptions: {
@@ -179,17 +179,17 @@ var EditControl = L.Control.extend({
     }
 
     map._controllingInteractivity = 'edit';
-    this.fire('activated');
+    e.target.fire('activated');
     map.closePopup();
   },
-  _handlerDeactivated: function () {
+  _handlerDeactivated: function (e) {
     if (this._activeMode.button) {
       L.DomUtil.removeClass(this._activeMode.button, 'pressed');
     }
 
     this._activeMode = null;
     this._map._controllingInteractivity = 'map';
-    this.fire('deactivated');
+    e.target.fire('deactivated');
   },
   _setIcon: function (type) {
     if (type === 'circle') {
