@@ -3,6 +3,7 @@
 
 'use strict';
 
+var colorPresets = require('../preset/colors.json');
 var topojson = require('../util/topojson');
 var util = require('../util/util');
 
@@ -96,12 +97,12 @@ module.exports = {
 
         layer.overlay = me;
         layer.on('mouseover', function (e) {
-          if (!e.target._map._selectedLayer && e.target.feature.geometry.type.toLowerCase().indexOf('line') !== -1) {
+          if (!e.target._map._selectedLayer && (e.target.feature.geometry.type === 'GeometryCollection' || e.target.feature.geometry.type.toLowerCase().indexOf('line') !== -1)) {
             e.target.setStyle({color: 'yellow'});
           }
         });
         layer.on('mouseout', function (e) {
-          if (!e.target._map._selectedLayer && e.target.feature.geometry.type.toLowerCase().indexOf('line') !== -1) {
+          if (!e.target._map._selectedLayer && (e.target.feature.geometry.type === 'GeometryCollection' || e.target.feature.geometry.type.toLowerCase().indexOf('line') !== -1)) {
             me.resetStyle(e.target);
           }
         });
@@ -310,9 +311,13 @@ module.exports = {
       if (type !== 'point') {
         // TODO: Add support for passing Leaflet styles in.
         var count = 0;
-        var style = {};
+        var style = colorPresets.gold;
         var properties;
         var property;
+
+        if (type === 'line') {
+          delete style.fill;
+        }
 
         if (typeof feature.properties === 'object') {
           properties = feature.properties;
