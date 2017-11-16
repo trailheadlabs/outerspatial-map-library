@@ -775,6 +775,7 @@
   .outerspatial .leaflet-popup-content .description section {
     border-bottom: solid 1px #e3dfd8;
     padding: 10px 0;
+    word-wrap: break-word;
   }
   .outerspatial .leaflet-popup-content .description section:first-child {
     padding-top: 0;
