@@ -97,12 +97,12 @@ module.exports = {
 
         layer.overlay = me;
         layer.on('mouseover', function (e) {
-          if (!e.target._map._selectedLayer && (e.target.feature.geometry.type === 'GeometryCollection' || e.target.feature.geometry.type.toLowerCase().indexOf('line') !== -1)) {
+          if (!e.target._map._selectedLayer && e.target.feature.geometry.type !== 'Point') {
             e.target.setStyle({color: 'yellow'});
           }
         });
         layer.on('mouseout', function (e) {
-          if (!e.target._map._selectedLayer && (e.target.feature.geometry.type === 'GeometryCollection' || e.target.feature.geometry.type.toLowerCase().indexOf('line') !== -1)) {
+          if (!e.target._map._selectedLayer && e.target.feature.geometry.type !== 'Point') {
             me.resetStyle(e.target);
           }
         });
