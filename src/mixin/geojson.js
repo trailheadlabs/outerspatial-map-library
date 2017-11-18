@@ -96,44 +96,58 @@ module.exports = {
         var clicks = 0;
 
         layer.overlay = me;
+        layer.deselectLayer = function () {
+          if (layer.feature.geometry.type !== 'Point') {
+            this.overlay.resetStyle(this);
+          } else {
+            this._circle.removeFrom(this._map);
+          }
+        };
+
+        layer.selectLayer = function () {
+          if (!this._map._isCurrentlySelected(this)) {
+            if (this.feature.geometry.type !== 'Point') {
+              this.setStyle({color: 'yellow'});
+            } else {
+              if (!this._circle) {
+                this._circle = L.circleMarker(layer.getLatLng(), {radius: 10, color: 'yellow', fillColor: 'yellow', fillOpacity: 0.2});
+              }
+
+              this._circle.addTo(this._map);
+            }
+          }
+        };
         layer.on('mouseover', function (e) {
-          if (!e.target._map._selectedLayer && e.target.feature.geometry.type !== 'Point') {
-            e.target.setStyle({color: 'yellow'});
+          var layer = e.target;
+
+          if (!layer._map._isCurrentlySelected(layer)) {
+            layer.selectLayer();
           }
         });
         layer.on('mouseout', function (e) {
-          if (!e.target._map._selectedLayer && e.target.feature.geometry.type !== 'Point') {
-            me.resetStyle(e.target);
+          var layer = e.target;
+
+          if (!layer._map._isCurrentlySelected(layer)) {
+            layer.deselectLayer();
           }
         });
         layer.on('click', function (e) {
-          var target = e.target;
+          var layer = e.target;
 
           if (!map) {
-            map = target._map;
+            map = layer._map;
             detectAvailablePopupSpace = map.options.detectAvailablePopupSpace;
           }
 
-          if (e.target.feature.geometry.type !== 'Point') {
-            if (map._selectedLayer) {
-              if (map._selectedLayer._leaflet_id !== target._leaflet_id) {
-                target.setStyle({color: 'yellow'});
-                me.resetStyle(map._selectedLayer);
-                map._selectedLayer = target;
-              }
-            } else {
-              target.setStyle({color: 'yellow'});
-              map._selectedLayer = target;
-            }
-          }
+          map.setSelectedLayer(layer);
 
           if (map._controllingInteractivity === 'map') {
             clicks = 0;
 
             setTimeout(function () {
               if (!clicks) {
-                if (target._popup) {
-                  target.openPopup();
+                if (layer._popup) {
+                  layer.openPopup();
                 } else {
                   var popup = L.outerspatial.popup({
                     maxHeight: (detectAvailablePopupSpace ? util._getAvailableVerticalSpace(map) : undefined),
@@ -149,14 +163,14 @@ module.exports = {
 
                     if (feature.geometry.type === 'Point') {
                       popup.setContent(html);
-                      target
+                      layer
                         .bindPopup(popup)
                         .openPopup();
                     } else {
                       popup
                         .setContent(html)
                         .setLatLng(e.latlng.wrap())
-                        .openOn(target._map);
+                        .openOn(layer._map);
                     }
                   }
                 }
