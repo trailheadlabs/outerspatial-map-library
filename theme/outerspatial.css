@@ -39,19 +39,19 @@
   .outerspatial .leaflet-container h5,
   .outerspatial h6,
   .outerspatial .leaflet-container h6 {
-    color: #3e3e3f;
-    font-family: 'PT Sans Narrow', sans-serif;
+    color: #6c6d70;
+    font-weight: normal;
     line-height: 1.1;
     margin: inherit;
   }
-  .outerspatial h4,
-  .outerspatial .leaflet-container h4,
-  .outerspatial h5,
-  .outerspatial .leaflet-container h5,
-  .outerspatial h6,
-  .outerspatial .leaflet-container h6 {
-    color: #6c6d70;
-
+  .outerspatial h1,
+  .outerspatial .leaflet-container h1,
+  .outerspatial h2,
+  .outerspatial .leaflet-container h2,
+  .outerspatial h3,
+  .outerspatial .leaflet-container h3 {
+    color: #3e3e3f;
+    font-family: 'PT Sans Narrow', sans-serif;
   }
   .outerspatial a,
   .outerspatial .leaflet-container a {
