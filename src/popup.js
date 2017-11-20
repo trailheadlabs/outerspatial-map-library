@@ -258,9 +258,16 @@ var Popup = L.Popup.extend({
           obj = config.title;
         }
 
+        title = L.DomUtil.create('div', 'title', div);
+
         if (obj && typeof obj === 'string') {
-          title = L.DomUtil.create('div', 'title', div);
-          title.innerHTML = util.unescapeHtml(util.handlebars(obj, result));
+          title.innerHTML = '<h3>' + util.unescapeHtml(util.handlebars(obj, result)) + '</h3>';
+        } else if (obj && typeof obj === 'object') {
+          title.innerHTML = '' +
+            '<h3>' + util.unescapeHtml(util.handlebars(obj.title, result)) + '</h3>' +
+            (obj.subtitle ? '<h5>' + util.unescapeHtml(util.handlebars(obj.subtitle, result)) + '</h5>' : '') +
+            (obj.image ? util.unescapeHtml(util.handlebars(obj.image, result)) : '') +
+          '';
         }
       }
 

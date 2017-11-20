@@ -94,13 +94,11 @@ var OuterSpatialLayer = L.GeoJSON.extend({
             banner = '<img class="banner" width=51 height=20 alt="Closed banner" src="' + window.L.Icon.Default.imagePath + '/outerspatial/closed-indicator-right' + (L.Browser.retina ? '@2x' : '') + '.png"/>';
           }
 
-          if (type === 'Area') {
-            return banner + '{{name}}</br><span class="subtitle">Area</span>';
-          } else if (type === 'Trail Segment') {
-            return banner + type;
-          } else {
-            return '{{name}}</br><span class="subtitle">' + type + (properties.area_id ? ' in ' + properties.area.name + '</span>' : '</span>') + banner;
-          }
+          return {
+            title: '{{name}}',
+            subtitle: (type === 'Area' || type === 'Trail Segment' ? type : type + (properties.area_id ? ' in ' + properties.area.name : '')),
+            image: banner
+          };
         };
 
         config.image = function (properties) {

@@ -39,10 +39,19 @@
   .outerspatial .leaflet-container h5,
   .outerspatial h6,
   .outerspatial .leaflet-container h6 {
+    color: #3e3e3f;
     font-family: 'PT Sans Narrow', sans-serif;
-    font-size: inherit;
     line-height: 1.1;
     margin: inherit;
+  }
+  .outerspatial h4,
+  .outerspatial .leaflet-container h4,
+  .outerspatial h5,
+  .outerspatial .leaflet-container h5,
+  .outerspatial h6,
+  .outerspatial .leaflet-container h6 {
+    color: #6c6d70;
+
   }
   .outerspatial a,
   .outerspatial .leaflet-container a {
@@ -729,9 +738,6 @@
         max-width: 100%;
       }
   .outerspatial .leaflet-popup-content .title {
-    color: #3e3e3f;
-    font-size: 20px;
-    line-height: 22px;
     padding: 10px 16px;
     position: relative;
   }
@@ -739,12 +745,6 @@
     top: 12px;
     right: 0;
     position: absolute;
-  }
-  .outerspatial .leaflet-popup-content .subtitle {
-    color: #6c6d70;
-    display: block;
-    font-size: 14px;
-    line-height: 14px;
   }
   .outerspatial .leaflet-popup-content .sublayer .title {
     font-size: 18px;
