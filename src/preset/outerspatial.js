@@ -101,13 +101,24 @@ var OuterSpatialLayer = L.GeoJSON.extend({
           };
         };
 
-        config.image = function (properties) {
+        config.images = function (properties) {
+          var images = [];
+
           if (properties.image_attachments && properties.image_attachments.length > 0) {
-            if (window.innerWidth <= 320) {
-              return properties.image_attachments[0].image.versions.small_square.url;
-            } else {
-              return properties.image_attachments[0].image.versions.medium_square.url;
-            }
+            properties.image_attachments.forEach(function (imageAttachment) {
+              var image = {};
+
+              if (window.innerWidth <= 320) {
+                image.src = imageAttachment.image.versions.small_square.url;
+              } else {
+                image.src = imageAttachment.image.versions.medium_square.url;
+              }
+
+              image.caption = imageAttachment.image.caption;
+              image.description = imageAttachment.image.description;
+              images.push(image);
+            });
+            return images;
           } else {
             return null;
           }

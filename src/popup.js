@@ -201,6 +201,28 @@ var Popup = L.Popup.extend({
   _resultToHtml: function (result, layerConfig, resultConfig, addBack, mapConfig) {
     var div;
 
+    function plusDivs (n) {
+      showDivs(slideIndex += n);
+    }
+
+    function showDivs (n) {
+      var i;
+      var x = responsiveContainer.getElementsByClassName('slide');
+
+      if (n > x.length) {
+        slideIndex = 1;
+      }
+
+      if (n < 1) {
+        slideIndex = x.length;
+      }
+
+      for (i = 0; i < x.length; i++) {
+        x[i].style.display = 'none';
+      }
+      x[slideIndex - 1].style.display = 'block';
+    }
+
     if (mapConfig && typeof mapConfig === 'function') {
       var html = mapConfig(result);
 
@@ -221,12 +243,14 @@ var Popup = L.Popup.extend({
     } else {
       var config = layerConfig;
       var actions;
+      var buttonPrev;
+      var buttonNext;
       var description;
       var divContent;
-      var image;
       var media;
       var obj;
       var responsiveContainer;
+      var slide;
       var title;
       var ul;
 
@@ -271,17 +295,44 @@ var Popup = L.Popup.extend({
         }
       }
 
-      if (config.image) {
-        if (typeof config.image === 'function') {
-          obj = config.image(result);
+      if (config.images) {
+        if (typeof config.images === 'function') {
+          obj = config.images(result);
         } else {
-          obj = config.image;
+          obj = config.images;
         }
 
-        if (obj) {
+        if (obj && obj.constructor === Array) {
           responsiveContainer = L.DomUtil.create('div', 'responsive-container', div);
-          image = L.DomUtil.create('img', undefined, responsiveContainer);
-          image.src = obj;
+          obj.forEach(function (image) {
+            slide = L.DomUtil.create('img', 'slide', responsiveContainer);
+            slide.src = image.src;
+            slide.alt = image.description;
+          });
+
+          if (obj.length > 1) {
+            buttonPrev = L.DomUtil.create('button', 'slide-nav prev', responsiveContainer);
+            buttonNext = L.DomUtil.create('button', 'slide-nav next', responsiveContainer);
+            buttonPrev.innerHTML = '' +
+            '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">' +
+              '<polyline class="icon-svg-line" vector-effect="non-scaling-stroke" points="16,1 8,12 16,23"/>' +
+            '</svg>' +
+            '';
+            L.DomEvent.on(buttonPrev, 'click', function () {
+              plusDivs(-1);
+            });
+            buttonNext.innerHTML = '' +
+              '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">' +
+                '<polyline class="icon-svg-line" vector-effect="non-scaling-stroke" points="8,1 16,12 8,23"/>' +
+              '</svg>' +
+            '';
+            L.DomEvent.on(buttonNext, 'click', function () {
+              plusDivs(+1);
+            });
+
+            var slideIndex = 1;
+            showDivs(slideIndex);
+          }
         }
       }
 
