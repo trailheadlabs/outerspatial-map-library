@@ -102,7 +102,7 @@
     }
     .outerspatial-modules .module .title {
       border-bottom: solid 1px #404041;
-      padding: 10px 15px;
+      padding: 14px 10px;
       margin: 0;
     }
 .outerspatial-modules-buttons .outerspatial-modules-buttons-button {
@@ -571,7 +571,7 @@
   color: #6c6d70;
   font-size: 14px;
   letter-spacing: -0.58px;
-  line-height: 18px;
+  line-height: 19px;
   margin: 0;
 }
 .outerspatial .leaflet-popup-content .content {
@@ -589,15 +589,16 @@
     float: left;
     margin-left: 5px;
   }
+  .outerspatial .leaflet-popup-content ol,
   .outerspatial .leaflet-popup-content ul {
     float: none;
     margin-bottom: 0;
     margin-left: 0;
     margin-top: 0;
-    padding-left: 25px;
+    padding-left: 15px;
   }
-    .outerspatial .leaflet-popup-content ul li {
-      list-style: initial;
+    .outerspatial .leaflet-popup-content .content li {
+      margin-bottom: 6px;
     }
   .outerspatial .leaflet-popup-content p {
     margin: 0;
@@ -650,7 +651,7 @@
     clear: both;
     display: block;
     line-height: 14px;
-    padding: 10px 16px;
+    padding: 14px 10px;
     position: relative;
     user-select: none;
   }
@@ -770,12 +771,17 @@
     border-top: none;
   }
   .outerspatial .leaflet-popup-content .description {
-    padding: 10px 16px;
+    padding: 14px 10px;
   }
   .outerspatial .leaflet-popup-content .description section {
     border-bottom: solid 1px #e3dfd8;
-    padding: 10px 0;
+    padding: 14px 0;
     word-wrap: break-word;
+  }
+  .outerspatial .leaflet-popup-content .description section h5 {
+    color: #3e3e3f;
+    font-weight: bold;
+    margin-bottom: 2px;
   }
   .outerspatial .leaflet-popup-content .description section:first-child {
     padding-top: 0;
@@ -783,9 +789,6 @@
   .outerspatial .leaflet-popup-content .description section:last-child {
     border-bottom: none;
     padding-bottom: 0;
-  }
-  .outerspatial .leaflet-popup-content .description .section-heading {
-    color: #3e3e3f;
   }
 .outerspatial .leaflet-popup-scrolled {
   border-bottom: none;

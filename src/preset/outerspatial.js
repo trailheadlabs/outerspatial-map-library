@@ -183,22 +183,22 @@ var OuterSpatialLayer = L.GeoJSON.extend({
               if (key === 'Status') {
                 continue;
               }
-              content = content + '<section><span class="section-heading">' + key + '</span></br>' + tagSections[key].sort().join(', ') + '</section>';
+              content = content + '<section><h5>' + key + '</h5><span style="color: #7da836">' + tagSections[key].sort().join(', ') + '</span></section>';
             }
           }
 
           if (accessibilityDescription && accessibilityDescription !== '' && accessibilityDescription !== null) {
-            content = content + '<section><span class="section-heading">Accessibility Description</span></br>' + accessibilityDescription + '</section>';
+            content = content + '<section><h5>Accessibility Description</h5>' + accessibilityDescription + '</section>';
           }
 
           if (contentBlocks) {
             contentBlocks.forEach(function (contentBlock) {
-              content = content + '<section><span class="section-heading">' + contentBlock.title + '</span></br>' + contentBlock.body + '</section>';
+              content = content + '<section><h5>' + contentBlock.title + '</h5>' + contentBlock.body + '</section>';
             });
           }
 
           if (length && length !== '' && length !== null) {
-            content = content + '<section><span class="section-heading">Trail Length</span></br>' + (length / 1609.34).toFixed(1) + ' mi</section>';
+            content = content + '<section><h5>Length</h5>' + (length / 1609.34).toFixed(1) + ' mi</section>';
           }
 
           if (address && address !== '' && address !== null) {
@@ -208,11 +208,11 @@ var OuterSpatialLayer = L.GeoJSON.extend({
               // address is not JSON
             }
 
-            content = content + '<section><span class="section-heading">' + properties.class_name + ' Address</span></br>' + address + '</section>';
+            content = content + '<section><h5>' + properties.class_name + ' Address</h5>' + address + '</section>';
           }
 
           if (website && website !== '' && website !== null) {
-            content = content + '<section><span class="section-heading">Website</span></br><a href="' + properties.website + '" target="_blank">' + properties.website + '</section>';
+            content = content + '<section><h5>Website</h5><a href="' + properties.website + '" target="_blank">' + properties.website + '</section>';
           }
 
           if (content === '') {
