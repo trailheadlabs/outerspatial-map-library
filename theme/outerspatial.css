@@ -102,7 +102,7 @@
     }
     .outerspatial-modules .module .title {
       border-bottom: solid 1px #404041;
-      padding: 14px 10px;
+      padding: 10px 15px;
       margin: 0;
     }
 .outerspatial-modules-buttons .outerspatial-modules-buttons-button {
@@ -728,7 +728,7 @@
         max-width: 100%;
       }
   .outerspatial .leaflet-popup-content .title {
-    padding: 10px 16px;
+    padding: 14px 10px;
     position: relative;
   }
   .outerspatial .leaflet-popup-content .title .banner {
