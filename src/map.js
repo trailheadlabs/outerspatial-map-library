@@ -191,7 +191,12 @@ MapExt = L.Map.extend({
     });
 
     if (!me._loaded) {
-      me.setView(options.center, options.zoom);
+      if (options.initialBounds) {
+        console.log('bounds')
+        me.fitBounds(options.initialBounds);
+      } else {
+        me.setView(options.center, options.zoom);
+      }
     }
 
     if (options.baseLayers.length) {
@@ -781,7 +786,9 @@ MapExt = L.Map.extend({
     config.center = (function () {
       var c = config.center;
 
-      if (c) {
+      if (config.initialBounds) {
+        return null;
+      } else if (c) {
         return new L.LatLng(c.lat, c.lng);
       } else {
         return new L.LatLng(39.06, -96.02);
