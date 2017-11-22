@@ -172,18 +172,43 @@ var GeocoderControl = L.Control.extend({
   _handleSelect: function (li) {
     var id = li.id;
     var me = this;
+    var result = me._results[id];
 
     this._clearResults();
     this._isDirty = false;
     this._input.setAttribute('aria-activedescendant', id);
 
-    if (me._results[id].latLng) {
-      me._map.setView(me._results[id].latLng, 17);
-    } else {
-      me._map.fitBounds(me._results[id].bounds);
-    }
+    me._map.setSelectedLayer(result.layer);
 
-    me._map.setSelectedLayer(me._results[id].layer);
+    if (result.layer.feature.geometry.type === 'Point') {
+      if (!result.layer.isPopupOpen()) {
+        result.layer.fire('click');
+      }
+      me._map.setView(result.latLng, 17);
+    } else if (result.layer.feature.geometry.type.toLowerCase().indexOf('line') !== -1) {
+      var coordinates = result.layer.feature.geometry.coordinates;
+      var midPoint;
+
+      if (coordinates.length > 1) {
+        coordinates = Array.prototype.concat.apply([], coordinates);
+      } else {
+        coordinates = coordinates[0];
+      }
+      midPoint = coordinates[Math.round(((coordinates.length - 1) / 2))];
+      result.layer.fire('click', {
+        latlng: L.latLng(midPoint[1], midPoint[0]),
+        target: result.layer,
+        type: 'click'
+      });
+      me._map.fitBounds(result.bounds);
+    } else {
+      result.layer.fire('click', {
+        latlng: L.latLng(me._map.fitBounds(result.bounds).getCenter()),
+        target: result.layer,
+        type: 'click'
+      });
+      me._map.fitBounds(result.bounds);
+    }
 
     me._ul.style.display = 'none';
     me._map.options.div.focus();

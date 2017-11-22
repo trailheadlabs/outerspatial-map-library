@@ -167,6 +167,7 @@ module.exports = {
                         .bindPopup(popup)
                         .openPopup();
                     } else {
+                      console.log(e.latlng)
                       popup
                         .setContent(html)
                         .setLatLng(e.latlng.wrap())
