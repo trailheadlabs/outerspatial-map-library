@@ -3,6 +3,7 @@
 
 'use strict';
 
+var colorPresets = require('../preset/colors.json');
 var topojson = require('../util/topojson');
 var util = require('../util/util');
 
@@ -83,6 +84,7 @@ module.exports = {
       'stroke-width': 'weight'
     };
     var configStyles;
+    var me = this;
 
     if (typeof config.clickable === 'undefined' || config.clickable === true) {
       var activeTip = null;
@@ -93,21 +95,59 @@ module.exports = {
       config.onEachFeature = function (feature, layer) {
         var clicks = 0;
 
+        layer.overlay = me;
+        layer.deselectLayer = function () {
+          if (layer.feature.geometry.type !== 'Point') {
+            this.overlay.resetStyle(this);
+          } else {
+            this._circle.removeFrom(this._map);
+          }
+        };
+
+        layer.selectLayer = function () {
+          if (!this._map._isCurrentlySelected(this)) {
+            if (this.feature.geometry.type !== 'Point') {
+              this.setStyle({color: 'yellow'});
+            } else {
+              if (!this._circle) {
+                this._circle = L.circleMarker(layer.getLatLng(), {radius: 10, color: 'yellow', fillColor: 'yellow', fillOpacity: 0.2});
+              }
+
+              this._circle.addTo(this._map);
+            }
+          }
+        };
+        layer.on('mouseover', function (e) {
+          var layer = e.target;
+
+          if (!layer._map._isCurrentlySelected(layer)) {
+            layer.selectLayer();
+          }
+        });
+        layer.on('mouseout', function (e) {
+          var layer = e.target;
+
+          if (!layer._map._isCurrentlySelected(layer)) {
+            layer.deselectLayer();
+          }
+        });
         layer.on('click', function (e) {
-          var target = e.target;
+          var layer = e.target;
 
           if (!map) {
-            map = target._map;
+            map = layer._map;
             detectAvailablePopupSpace = map.options.detectAvailablePopupSpace;
           }
+
+          map.setSelectedLayer(layer);
 
           if (map._controllingInteractivity === 'map') {
             clicks = 0;
 
             setTimeout(function () {
               if (!clicks) {
-                if (target._popup) {
-                  target.openPopup();
+                if (layer._popup) {
+                  layer.openPopup();
                 } else {
                   var popup = L.outerspatial.popup({
                     maxHeight: (detectAvailablePopupSpace ? util._getAvailableVerticalSpace(map) : undefined),
@@ -123,14 +163,14 @@ module.exports = {
 
                     if (feature.geometry.type === 'Point') {
                       popup.setContent(html);
-                      target
+                      layer
                         .bindPopup(popup)
                         .openPopup();
                     } else {
                       popup
                         .setContent(html)
                         .setLatLng(e.latlng.wrap())
-                        .openOn(target._map);
+                        .openOn(layer._map);
                     }
                   }
                 }
@@ -264,7 +304,8 @@ module.exports = {
       return new L.Marker(latLng, L.extend(config, {
         icon: icon,
         keyboard: false,
-        pane: 'markerPane'
+        pane: 'markerPane',
+        riseOnHover: true
       }));
     };
     config.style = function (feature) {
@@ -285,9 +326,13 @@ module.exports = {
       if (type !== 'point') {
         // TODO: Add support for passing Leaflet styles in.
         var count = 0;
-        var style = {};
+        var style = colorPresets.gold;
         var properties;
         var property;
+
+        if (type === 'line') {
+          delete style.fill;
+        }
 
         if (typeof feature.properties === 'object') {
           properties = feature.properties;

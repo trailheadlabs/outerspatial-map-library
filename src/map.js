@@ -148,6 +148,7 @@ MapExt = L.Map.extend({
     me._controllingInteractivity = 'map';
     me._defaultCursor = me.getContainer().style.cursor;
     me._frame = null;
+    me._selectedLayer = null;
 
     if ((window.self !== window.top) && document.referrer !== '') {
       me._frame = window.frameElement;
@@ -165,6 +166,11 @@ MapExt = L.Map.extend({
       }
     }
 
+    me.on('popupclose', function (e) {
+      if (e.target._selectedLayer) {
+        this.clearSelectedLayer();
+      }
+    });
     me.on('autopanstart', function () {
       me._setCursor('');
     });
@@ -401,6 +407,13 @@ MapExt = L.Map.extend({
           button.style.display = 'inline-block';
         }
       }
+    }
+  },
+  _isCurrentlySelected: function (layer) {
+    if (layer._map._selectedLayer && (layer._map._selectedLayer._leaflet_id === layer._leaflet_id)) {
+      return true;
+    } else {
+      return false;
     }
   },
   _setCursor: function (type) {
@@ -850,6 +863,12 @@ MapExt = L.Map.extend({
       }
     }
   },
+  clearSelectedLayer: function () {
+    if (this._selectedLayer !== null) {
+      this._selectedLayer.deselectLayer();
+      this._selectedLayer = null;
+    }
+  },
   closeModules: function () {
     var buttons = this._divModuleButtons.childNodes;
 
@@ -865,6 +884,15 @@ MapExt = L.Map.extend({
     }
 
     this.invalidateSize();
+  },
+  setSelectedLayer: function (layer) {
+    var map = layer._map;
+
+    if (!this._isCurrentlySelected(layer)) {
+      this.clearSelectedLayer(map);
+      layer.selectLayer();
+      map._selectedLayer = layer;
+    }
   },
   showModule: function (title) {
     var divModules = this._divModules;

@@ -58,6 +58,7 @@ var OuterSpatialLayer = L.GeoJSON.extend({
                 results.push({
                   bounds: null,
                   latLng: layer.getLatLng(),
+                  layer: layer,
                   name: layers[key].feature.properties.name,
                   type: type
                 });
@@ -65,6 +66,7 @@ var OuterSpatialLayer = L.GeoJSON.extend({
                 results.push({
                   bounds: layer.getBounds(),
                   latLng: null,
+                  layer: layer,
                   name: layers[key].feature.properties.name,
                   type: type
                 });

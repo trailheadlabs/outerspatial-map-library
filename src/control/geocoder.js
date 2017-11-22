@@ -183,6 +183,8 @@ var GeocoderControl = L.Control.extend({
       me._map.fitBounds(me._results[id].bounds);
     }
 
+    me._map.setSelectedLayer(me._results[id].layer);
+
     me._ul.style.display = 'none';
     me._map.options.div.focus();
   },
