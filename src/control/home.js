@@ -33,7 +33,12 @@ var HomeControl = L.Control.extend({
     var map = this._map;
     var options = map.options;
 
-    map.setView(options.center, options.zoom);
+    if (options.initialBounds) {
+      map.fitBounds(options.initialBounds);
+    } else {
+      map.setView(options.center, options.zoom);
+    }
+
     map.closePopup();
   }
 });
