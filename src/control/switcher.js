@@ -96,10 +96,12 @@ var SwitcherControl = L.Control.extend({
             this._map.setView(this._map.getCenter(), baseLayer.maxZoom);
           }
 
-          if (baseLayer.maxZoom) {
-            this._map.options.maxZoom = baseLayer.maxZoom;
-          } else {
-            this._map.options.maxZoom = 19;
+          if (!this._map.options.maxZoom) {
+            if (baseLayer.maxZoom) {
+              this._map.options.maxZoom = baseLayer.maxZoom;
+            } else {
+              this._map.options.maxZoom = 19;
+            }
           }
 
           this._map.addLayer(baseLayer.L);
