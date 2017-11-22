@@ -185,10 +185,6 @@ var GeocoderControl = L.Control.extend({
 
     me._map.setSelectedLayer(me._results[id].layer);
 
-    me._map.on('mousedown', function (e) {
-      this.clearSelectedLayer();
-    });
-
     me._ul.style.display = 'none';
     me._map.options.div.focus();
   },
