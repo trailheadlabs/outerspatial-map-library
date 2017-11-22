@@ -514,6 +514,17 @@
   margin-top: 4px;
   width: 12px;
 }
+.outerspatial [class^="icon-"],
+[class*=" icon-"] {
+  background-image: url('images/icon/sprite.png');
+  background-repeat: no-repeat;
+  display: inline-block;
+  height: 14px;
+  line-height: 14px;
+  margin-top: 1px;
+  vertical-align: text-top;
+  width: 14px;
+}
 .leaflet-marker-icon {
   background-size: 100%;
 }
@@ -747,21 +758,6 @@
     padding-top: 100%;
     position: relative;
     width: 100%;
-  }
-  .outerspatial .leaflet-popup-content .responsive-container .slide-nav {
-    box-sizing: border-box;
-    height: 40px;
-    padding: 10px;
-    position: absolute;
-    top: 50%;
-    transform: translate(0, -50%);
-    width: 40px;
-  }
-  .outerspatial .leaflet-popup-content .responsive-container .prev {
-    left: 0;
-  }
-  .outerspatial .leaflet-popup-content .responsive-container .next {
-    right: 0;
   }
   .outerspatial .leaflet-popup-content .responsive-container img {
     height: 100%;
