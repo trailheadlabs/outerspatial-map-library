@@ -61,7 +61,6 @@ var CartoDbLayer = L.TileLayer.extend({
             type: 'cartodb'
           };
           var queryFields = [];
-          var i;
 
           if (me.options.cartocss) {
             me._cartocss = me.options.cartocss;
@@ -77,9 +76,17 @@ var CartoDbLayer = L.TileLayer.extend({
           } else if (me.options.clickable !== false && response.rows) {
             me._interactivity = [];
 
-            for (i = 0; i < response.rows.length; i++) {
-              if (response.rows[i].cdb_columnnames !== 'the_geom' && response.rows[i].cdb_columnnames !== 'the_geom_webmercator') {
-                me._interactivity.push(response.rows[i].cdb_columnnames);
+            for (var prop in response.fields) {
+              if (prop === 'the_geom' || prop === 'the_geom_webmercator') {
+                queryFields.push(prop);
+              } else {
+                if (response.fields[prop].type === 'date') {
+                  me._interactivity.push(prop);
+                  queryFields.push('to_char(' + prop + ', \'YYYY-MM-DD-THH24:MI:SS TZ\') AS ' + prop);
+                } else {
+                  me._interactivity.push(prop);
+                  queryFields.push(prop);
+                }
               }
             }
           }
@@ -88,19 +95,7 @@ var CartoDbLayer = L.TileLayer.extend({
             me._hasInteractivity = true;
           }
 
-          for (i = 0; i < response.rows.length; i++) {
-            var columnNames = response.rows[i].cdb_columnnames;
-
-            if (response.rows[i].cdb_columntype === 'timestamp without time zone') {
-              queryFields.push('to_char(' + columnNames + ', \'YYYY-MM-DD-THH24:MI:SS\') AS ' + columnNames);
-            } else if (response.rows[i].cdb_columntype === 'timestamp with time zone') {
-              queryFields.push('to_char(' + columnNames + ', \'YYYY-MM-DD-THH24:MI:SS TZ\') AS ' + columnNames);
-            } else {
-              queryFields.push(columnNames);
-            }
-          }
-
-          layer.options.sql = me._sql = (me.options.sql || ('SELECT ' + queryFields.toString() + ' FROM ' + me.options.table + ';'));
+          layer.options.sql = me._sql = (me.options.sql || ('SELECT ' + queryFields.join(',') + ' FROM ' + me.options.table + ';'));
 
           if (me._cartocss) {
             layer.options.cartocss = me._cartocss;
@@ -169,7 +164,7 @@ var CartoDbLayer = L.TileLayer.extend({
       },
       type: 'json',
       url: util.buildUrl(this._urlApi, {
-        q: 'SELECT DISTINCT CDB_ColumnNames,CDB_ColumnType(\'' + this.options.table + '\',cdb_columnnames) FROM CDB_ColumnNames(\'' + this.options.table + '\');'
+        q: 'SELECT * FROM ' + this.options.table + ' LIMIT 1;'
       })
     });
     reqwest({
