@@ -196,12 +196,10 @@ MapExt = L.Map.extend({
       target: map
     });
 
-    if (!me._loaded) {
-      if (options.initialBounds) {
-        me.fitBounds(options.initialBounds);
-      } else {
-        me.setView(options.center, options.zoom);
-      }
+    if (options.initialBounds) {
+      me.fitBounds(options.initialBounds);
+    } else {
+      me.setView(options.center, options.zoom);
     }
 
     if (options.baseLayers.length) {
@@ -798,9 +796,7 @@ MapExt = L.Map.extend({
     config.center = (function () {
       var c = config.center;
 
-      if (config.initialBounds) {
-        return null;
-      } else if (c) {
+      if (c) {
         return new L.LatLng(c.lat, c.lng);
       } else {
         return new L.LatLng(39.06, -96.02);
