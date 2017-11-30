@@ -281,7 +281,11 @@ var Popup = L.Popup.extend({
         if (obj) {
           responsiveContainer = L.DomUtil.create('div', 'responsive-container', div);
           image = L.DomUtil.create('img', undefined, responsiveContainer);
-          image.src = obj;
+          image.src = obj.url;
+
+          if (obj.caption !== '') {
+            image.alt = obj.caption;
+          }
         }
       }
 

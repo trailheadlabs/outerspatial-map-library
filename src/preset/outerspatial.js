@@ -105,11 +105,17 @@ var OuterSpatialLayer = L.GeoJSON.extend({
 
         config.image = function (properties) {
           if (properties.image_attachments && properties.image_attachments.length > 0) {
+            var image = {
+              caption: properties.image_attachments[0].image.caption
+            };
+
             if (window.innerWidth <= 320) {
-              return properties.image_attachments[0].image.versions.small_square.url;
+              image.url = properties.image_attachments[0].image.versions.small_square.url;
             } else {
-              return properties.image_attachments[0].image.versions.medium_square.url;
+              image.url = properties.image_attachments[0].image.versions.medium_square.url;
             }
+
+            return image;
           } else {
             return null;
           }
