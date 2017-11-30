@@ -171,6 +171,14 @@ MapExt = L.Map.extend({
         this.clearSelectedLayer();
       }
     });
+    me.on('popupopen', function (e) {
+      if (e.popup.getContent().firstChild.className === 'title') {
+        var title = e.popup.getContent().firstChild.firstChild;
+
+        title.tabIndex = -1;
+        title.focus();
+      }
+    });
     me.on('autopanstart', function () {
       me._setCursor('');
     });
