@@ -276,6 +276,10 @@ MapExt = L.Map.extend({
                   overlay.L = L.outerspatial.preset.places.pois(overlay);
                   break;
                 case 'outerspatial':
+                  if (overlay.locationType === 'trails' || overlay.locationType === 'trail_segments') {
+                    me.createPane('trailsPane').style.zIndex = 450;
+                    overlay.pane = 'trailsPane';
+                  }
                   overlay.L = L.outerspatial.preset.outerspatial(overlay);
                   break;
               }
