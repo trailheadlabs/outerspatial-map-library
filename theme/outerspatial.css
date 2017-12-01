@@ -830,9 +830,6 @@
 }
 
 /* Leaflet Bar */
-.outerspatial .leaflet-bar {
-  border-radius: 1px;
-}
 .outerspatial .leaflet-bar button {
   display: inherit;
 }
@@ -842,12 +839,11 @@
 .outerspatial .leaflet-bar button:active,
 .outerspatial .leaflet-bar button:hover,
 .outerspatial .leaflet-bar div,
-.outerspatial .leaflet-bar div:hover
-{
+.outerspatial .leaflet-bar div:hover {
   background-color: #fff;
   border: 1px solid #fff;
   border-radius: 0;
-  border-top-color: #d8d8d8;
+  border-bottom-color: #d8d8d8;
   box-sizing: border-box;
   color: #444;
   width: 40px;
@@ -861,15 +857,20 @@
 .outerspatial .leaflet-bar a:first-child,
 .outerspatial .leaflet-bar button:first-child,
 .outerspatial .leaflet-bar div:first-child {
-  border-top-color: #fff;
   border-top-left-radius: 1px;
   border-top-right-radius: 1px;
 }
 .outerspatial .leaflet-bar a:last-child,
 .outerspatial .leaflet-bar button:last-child,
 .outerspatial .leaflet-bar div:last-child {
+  border-bottom-color: #fff;
   border-bottom-left-radius: 1px;
   border-bottom-right-radius: 1px;
+}
+.outerspatial .leaflet-bar a.leaflet-bar-single,
+.outerspatial .leaflet-bar button.leaflet-bar-single,
+.outerspatial .leaflet-bar div.leaflet-bar-single {
+  border-radius: 1px;
 }
 .outerspatial .leaflet-bar a.leaflet-disabled,
 .outerspatial .leaflet-bar a.leaflet-disabled:hover,
@@ -1229,20 +1230,7 @@
 }
 
 /* Switcher Control */
-.outerspatial .leaflet-bar div.outerspatial-control-switcher,
-.outerspatial .leaflet-bar div.outerspatial-control-switcher:hover {
-  background-color: #fff;
-  display: none;
-  border: 0;
-  padding: 0;
-  color: #373a3c;
-  text-align: left;
-  font-size: 10px;
-  min-width: 200px;
-}
-.outerspatial-control-switcher button {
-  background-color: #fff;
-  display: none;
+.outerspatial-control-switcher {
   border-radius: 1px;
   color: #373a3c;
   font-size: 10px;
@@ -1294,12 +1282,16 @@
   }
   .outerspatial-control-switcher ul {
     background-color: #fff;
+    border-left: 1px solid #bdbbb1;
+    border-right: 1px solid #bdbbb1;
+    box-shadow: 0 2px 15px #888;
     list-style-type: none;
     margin: 1px 0 0 0;
     max-height: 300px;
     overflow-x: hidden;
     overflow-y: auto;
     padding-left: 0;
+    position: absolute;
     width: 213px;
   }
   .outerspatial-control-switcher li {
