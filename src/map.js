@@ -196,8 +196,8 @@ MapExt = L.Map.extend({
       target: map
     });
 
-    if (options.initialBounds) {
-      me.fitBounds(options.initialBounds);
+    if (options.bounds) {
+      me.fitBounds(options.bounds);
     } else {
       me.setView(options.center, options.zoom);
     }

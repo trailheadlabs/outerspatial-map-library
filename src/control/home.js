@@ -33,8 +33,8 @@ var HomeControl = L.Control.extend({
     var map = this._map;
     var options = map.options;
 
-    if (options.initialBounds) {
-      map.fitBounds(options.initialBounds);
+    if (options.bounds) {
+      map.fitBounds(options.bounds);
     } else {
       map.setView(options.center, options.zoom);
     }
