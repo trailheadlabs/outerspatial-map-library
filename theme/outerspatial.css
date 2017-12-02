@@ -830,6 +830,9 @@
 }
 
 /* Leaflet Bar */
+.outerspatial .leaflet-bar {
+  border-radius: 1px;
+}
 .outerspatial .leaflet-bar button {
   display: inherit;
 }
@@ -839,11 +842,12 @@
 .outerspatial .leaflet-bar button:active,
 .outerspatial .leaflet-bar button:hover,
 .outerspatial .leaflet-bar div,
-.outerspatial .leaflet-bar div:hover {
+.outerspatial .leaflet-bar div:hover
+{
   background-color: #fff;
   border: 1px solid #fff;
   border-radius: 0;
-  border-bottom-color: #d8d8d8;
+  border-top-color: #d8d8d8;
   box-sizing: border-box;
   color: #444;
   width: 40px;
@@ -857,20 +861,15 @@
 .outerspatial .leaflet-bar a:first-child,
 .outerspatial .leaflet-bar button:first-child,
 .outerspatial .leaflet-bar div:first-child {
+  border-top-color: #fff;
   border-top-left-radius: 1px;
   border-top-right-radius: 1px;
 }
 .outerspatial .leaflet-bar a:last-child,
 .outerspatial .leaflet-bar button:last-child,
 .outerspatial .leaflet-bar div:last-child {
-  border-bottom-color: #fff;
   border-bottom-left-radius: 1px;
   border-bottom-right-radius: 1px;
-}
-.outerspatial .leaflet-bar a.leaflet-bar-single,
-.outerspatial .leaflet-bar button.leaflet-bar-single,
-.outerspatial .leaflet-bar div.leaflet-bar-single {
-  border-radius: 1px;
 }
 .outerspatial .leaflet-bar a.leaflet-disabled,
 .outerspatial .leaflet-bar a.leaflet-disabled:hover,
@@ -1231,21 +1230,48 @@
 
 /* Switcher Control */
 .outerspatial-control-switcher {
+  background-color: #fff;
   border-radius: 1px;
+  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.3);
+  box-sizing: border-box;
   color: #373a3c;
-  font-size: 10px;
-  min-width: 200px;
+  height: 40px;
+  min-width: 280px;
+  padding: 5px;
+  text-align: left;
 }
-  .outerspatial-control-switcher div:first-child {
+.outerspatial-control-switcher .title {
+  color: #979797;
+  font-family: 'PT Sans Narrow', sans-serif;
+  font-size: 10px;
+}
+.outerspatial-control-switcher .baselayer-name {
+  font-size: 14px;
+}
+.outerspatial-control-switcher .current-baselayer {
+  float: left;
+  font-weight: bold;
+}
+.outerspatial-control-switcher button {
+  border-radius: 3px;
+  border: 1px solid #7da836;
+  color: #7da836;
+  float: right;
+  font-size: 12px;
+  margin-top: 2px;
+  padding: 5px;
+}
+  /*.outerspatial-control-switcher:first-child {
     background-color: #fff;
     border: 1px solid #fff;
     border-radius: 1px;
-    cursor: pointer;
-    min-height: 38px;
+    cursor: pointer;*/
+    float: left;
+    min-height: 40px;
     position: relative;
     width: 238px;
-  }
-    .outerspatial-control-switcher div:first-child div {
+  }*/
+    /*.outerspatial-control-switcher div:first-child div {
       border-right: solid 1px #d8d8d8;
       font-size: 10px;
       margin-left: 40px;
@@ -1253,7 +1279,7 @@
       padding: 12px 0;
       position: relative;
       user-select: none;
-    }
+    }*/
     .outerspatial-control-switcher div:first-child span:first-child {
       float: left;
       height: 100%;
@@ -1282,16 +1308,12 @@
   }
   .outerspatial-control-switcher ul {
     background-color: #fff;
-    border-left: 1px solid #bdbbb1;
-    border-right: 1px solid #bdbbb1;
-    box-shadow: 0 2px 15px #888;
     list-style-type: none;
     margin: 1px 0 0 0;
     max-height: 300px;
     overflow-x: hidden;
     overflow-y: auto;
     padding-left: 0;
-    position: absolute;
     width: 213px;
   }
   .outerspatial-control-switcher li {
