@@ -148,7 +148,7 @@
       "icon": "topo",
       "maxZoom": 17,
       "minZoom": 1,
-      "name": "Esri Topo",
+      "name": "Esri Topographic",
       "popup": false,
       "tiled": true,
       "type": "arcgisserver",
