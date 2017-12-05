@@ -14,17 +14,36 @@ var SwitcherControl = L.Control.extend({
   initialize: function (baseLayers) {
     this._baseLayers = baseLayers;
   },
-  _addLi: function (baseLayer) {
-    var li = L.DomUtil.create('li', (baseLayer.visible ? 'selected' : null));
+  _addSection: function (baseLayer) {
+    var section = L.DomUtil.create('section', (baseLayer.visible ? 'selected' : null));
+    var imageFileName;
 
+    baseLayer.name.split(' ').forEach(function (word, index) {
+      if (index === 0) {
+        imageFileName = word.toLowerCase();
+      } else if (index === 1) {
+        imageFileName = imageFileName + '-' + word.toLowerCase();
+      } else {
+        imageFileName = imageFileName + word.charAt(0).toUpperCase() + word.slice(1);
+      }
+    });
+    imageFileName = imageFileName.replace(/[(),]/g, '');
+
+    // imageFileName = imageFileName[0] + '-' + .toLowerCase();
     if (baseLayer.visible) {
-      li.setAttribute('id', SwitcherControl.SELECTED_ID);
-      this._active.setAttribute('aria-activedescendant', SwitcherControl.SELECTED_ID);
+      section.setAttribute('id', SwitcherControl.SELECTED_ID);
+      this._list.setAttribute('aria-activedescendant', SwitcherControl.SELECTED_ID);
     }
 
-    li.innerHTML = baseLayer.name;
-    li.layerId = L.stamp(baseLayer);
-    this._list.appendChild(li);
+    // window.L.Icon.Default.imagePath
+    var img = L.DomUtil.create('img', 'baselayer-image', section);
+    img.src = 'http://127.0.0.1:8080/images/control/switcher/base-maps/' + imageFileName + '.png';
+    var name = L.DomUtil.create('div', 'baselayer-name', section);
+    name.innerHTML = baseLayer.name;
+    var description = L.DomUtil.create('div', 'baselayer-description', section);
+    description.innerHTML = 'Lorem ipsum dolor sit amet, sed nulla, maecenas libero ut. Urna purus justo, elit congue, facilisi auctor.';
+    section.layerId = L.stamp(baseLayer);
+    this._list.appendChild(section);
   },
   _initLayout: function () {
     var container = this._container = L.DomUtil.create('div', 'outerspatial-control-switcher');
@@ -41,19 +60,20 @@ var SwitcherControl = L.Control.extend({
     // '';
 
 
-    this._active = L.DomUtil.create('div', undefined, container);
-    this._active.setAttribute('aria-expanded', false);
-    this._active.setAttribute('aria-haspopup', true);
-    this._active.setAttribute('aria-label', 'Switch base maps');
-    this._active.setAttribute('aria-owns', 'basemap_listbox');
-    // this._active.setAttribute('role', 'combobox');
-    this._list = L.DomUtil.create('ul', null, this._active);
-    this._list.setAttribute('id', 'basemap_listbox');
-    this._list.setAttribute('role', 'listbox');
+    this._list = L.DomUtil.create('div', 'list-container', container);
     this._list.style.display = 'none';
+    // this._active.setAttribute('aria-expanded', false);
+    // this._active.setAttribute('aria-haspopup', true);
+    // this._active.setAttribute('aria-label', 'Switch base maps');
+    // this._active.setAttribute('aria-owns', 'basemap_listbox');
+    // this._active.setAttribute('role', 'combobox');
+    // this._list = L.DomUtil.create('ul', 'list-container', container);
+    // this._list.setAttribute('id', 'basemap_listbox');
+    // this._list.setAttribute('role', 'listbox');
+    // this._list.style.display = 'none';
     // this._activeIcon = L.DomUtil.create('span', null, this._active);
     L.DomUtil.create('ico', null, this._activeIcon);
-    var activeContainer = L.DomUtil.create('div', 'current-baselayer', this._active);
+    var activeContainer = L.DomUtil.create('div', 'current-baselayer', container);
     var title = L.DomUtil.create('div', 'title', activeContainer);
     title.innerHTML = 'BASE LAYER';
     this._activeText = L.DomUtil.create('div', 'baselayer-name', activeContainer);
@@ -65,28 +85,29 @@ var SwitcherControl = L.Control.extend({
   },
   _onClick: function (e) {
     var target = util.getEventObjectTarget(e);
+    console.log(target)
 
     this._button.style.display = 'inline';
 
-    if (!L.DomUtil.hasClass(target, 'selected')) {
+    if (!L.DomUtil.hasClass(target.parentNode, 'selected')) {
       var added = false;
-      var children = util.getChildElementsByNodeName(this._list, 'li');
+      var children = util.getChildElementsByNodeName(this._list, 'section');
       var removed = false;
       var selectedId = SwitcherControl.SELECTED_ID;
       var i;
-
+console.log(selectedId)
       for (i = 0; i < children.length; i++) {
         var li = children[i];
 
         if (L.DomUtil.hasClass(li, 'selected')) {
-          li.removeAttribute('id');
+          li.parentNode.removeAttribute('id');
           L.DomUtil.removeClass(li, 'selected');
           break;
         }
       }
 
-      target.setAttribute('id', selectedId);
-      this._active.setAttribute('aria-activedescendant', selectedId);
+      target.parentNode.setAttribute('id', selectedId);
+      this._list.setAttribute('aria-activedescendant', selectedId);
 
       for (i = 0; i < this._baseLayers.length; i++) {
         var baseLayer = this._baseLayers[i];
@@ -96,7 +117,7 @@ var SwitcherControl = L.Control.extend({
           baseLayer.visible = false;
           removed = true;
           delete baseLayer.L;
-        } else if (target.layerId === baseLayer._leaflet_id) {
+        } else if (target.parentNode.layerId === baseLayer._leaflet_id) {
           baseLayer.visible = true;
 
           if (baseLayer.type === 'arcgisserver') {
@@ -122,7 +143,7 @@ var SwitcherControl = L.Control.extend({
           }
 
           this._map.addLayer(baseLayer.L);
-          L.DomUtil.addClass(target, 'selected');
+          L.DomUtil.addClass(target.parentNode, 'selected');
           this._setActive(baseLayer);
           added = baseLayer.L;
         }
@@ -154,12 +175,12 @@ var SwitcherControl = L.Control.extend({
     if (this._list.style.display && this._list.style.display === 'none') {
       this._list.style.display = 'block';
       // L.DomUtil.addClass(this._activeDropdown, 'open');
-      this._active.setAttribute('aria-expanded', true);
+      this._list.setAttribute('aria-expanded', true);
       this._button.style.display = 'none';
     } else {
       this._list.style.display = 'none';
       // L.DomUtil.removeClass(this._activeDropdown, 'open');
-      this._active.setAttribute('aria-expanded', false);
+      this._list.setAttribute('aria-expanded', false);
       this._button.style.display = 'block';
     }
   },
@@ -169,19 +190,19 @@ var SwitcherControl = L.Control.extend({
 
     // this._activeIcon.childNodes[0].innerHTML = '';
     this._activeText.innerHTML = '';
-    this._list.innerHTML = '';
+    // this._list.innerHTML = '';
 
     for (i = 0; i < this._baseLayers.length; i++) {
       var baseLayer = this._baseLayers[i];
 
-      this._addLi(baseLayer);
+      this._addSection(baseLayer);
 
       if (baseLayer.visible) {
         this._setActive(baseLayer);
       }
     }
 
-    children = util.getChildElementsByNodeName(this._list, 'li');
+    children = util.getChildElementsByNodeName(this._list, 'section');
 
     for (i = 0; i < children.length; i++) {
       L.DomEvent.addListener(children[i], 'click', this._onClick, this);

@@ -35,38 +35,38 @@
       "type": "bing"
     }
   },
-  "cartodb": {
+  "carto": {
     "darkMatter": {
-      "attribution": "&copy; <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a> contributors, &copy; <a href='https://cartodb.com/attributions'>CartoDB</a>",
+      "attribution": "&copy; <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a> contributors, &copy; <a href='https://carto.com/attribution'>CARTO</a>",
       "icon": "street",
-      "name": "CartoDB Dark Matter",
+      "name": "CARTO Dark Matter",
       "retinaId": "@2x",
       "type": "tiled",
-      "url": "https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}{{retina}}.png"
+      "url": "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{{retina}}.png"
     },
     "darkMatterNoLabels": {
-      "attribution": "&copy; <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a> contributors, &copy; <a href='https://cartodb.com/attributions'>CartoDB</a>",
+      "attribution": "&copy; <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a> contributors, &copy; <a href='https://carto.com/attribution'>CARTO</a>",
       "icon": "street",
-      "name": "CartoDB Dark Matter (No Labels)",
+      "name": "CARTO Dark Matter (No Labels)",
       "retinaId": "@2x",
       "type": "tiled",
-      "url": "https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_nolabels/{z}/{x}/{y}{{retina}}.png"
+      "url": "https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{{retina}}.png"
     },
     "positron": {
-      "attribution": "&copy; <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a> contributors, &copy; <a href='https://cartodb.com/attributions'>CartoDB</a>",
+      "attribution": "&copy; <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a> contributors, &copy; <a href='https://carto.com/attribution'>CARTO</a>",
       "icon": "street",
-      "name": "CartoDB Positron",
+      "name": "CARTO Positron",
       "retinaId": "@2x",
       "type": "tiled",
-      "url": "https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}{{retina}}.png"
+      "url": "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{{retina}}.png"
     },
     "positronNoLabels": {
-      "attribution": "&copy; <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a> contributors, &copy; <a href='https://cartodb.com/attributions'>CartoDB</a>",
+      "attribution": "&copy; <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a> contributors, &copy; <a href='https://carto.com/attribution'>CARTO</a>",
       "icon": "street",
-      "name": "CartoDB Positron (No Labels)",
+      "name": "CARTO Positron (No Labels)",
       "retinaId": "@2x",
       "type": "tiled",
-      "url": "https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_nolabels/{z}/{x}/{y}{{retina}}.png"
+      "url": "https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{{retina}}.png"
     }
   },
   "esri": {
