@@ -95,7 +95,7 @@ var SwitcherControl = L.Control.extend({
         var section = children[i];
 
         if (L.DomUtil.hasClass(section, 'selected')) {
-          section.parentNode.removeAttribute('id');
+          section.removeAttribute('id');
           L.DomUtil.removeClass(section, 'selected');
           break;
         }
