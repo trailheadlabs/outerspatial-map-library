@@ -60,8 +60,8 @@ var SwitcherControl = L.Control.extend({
     this._listShadowBox = L.DomUtil.create('div', 'list-shadow', container);
 
     this._list = L.DomUtil.create('div', 'list-container', container);
-    this._listShadowBox.style.display = 'none';
-    this._list.style.display = 'none';
+    this._listShadowBox.style.visibility = 'hidden';
+    this._list.style.visibility = 'hidden';
     this._list.setAttribute('id', 'basemap_listbox');
     this._list.setAttribute('role', 'listbox');
     // this._activeIcon = L.DomUtil.create('span', null, this._active);
@@ -167,20 +167,35 @@ var SwitcherControl = L.Control.extend({
     this._activeText.innerHTML = baseLayer.name;
   },
   _toggleList: function () {
-    if (this._list.style.display && this._list.style.display === 'none') {
-      this._activeContainer.style.display = 'none';
-      this._listShadowBox.style.display = 'block';
-      this._list.style.display = 'block';
+    var topRightControls = document.getElementsByClassName('leaflet-top leaflet-right');
+    var i;
+
+    if (this._list.style.visibility && this._list.style.visibility === 'hidden') {
+      if (this._map.overviewControl) {
+        this._map.overviewControl.remove();
+      }
+
+      for (i = 0; i < topRightControls.length; i++) {
+        topRightControls[i].style.visibility = 'hidden';
+      }
+
+      this._listShadowBox.style.visibility = 'visible';
+      this._list.style.visibility = 'visible';
       // L.DomUtil.addClass(this._activeDropdown, 'open');
       this._list.setAttribute('aria-expanded', true);
-      this._button.style.display = 'none';
     } else {
-      this._activeContainer.style.display = 'block';
-      this._listShadowBox.style.display = 'none';
-      this._list.style.display = 'none';
+      if (this._map.overviewControl) {
+        this._map.addControl(this._map.overviewControl);
+      }
+      for (i = 0; i < topRightControls.length; i++) {
+        topRightControls[i].style.visibility = 'visible';
+      }
+
+      this._listShadowBox.style.visibility = 'hidden';
+      this._list.style.visibility = 'hidden';
+      // this._list.style.display = 'none';
       // L.DomUtil.removeClass(this._activeDropdown, 'open');
       this._list.setAttribute('aria-expanded', false);
-      this._button.style.display = 'block';
     }
   },
   _update: function () {

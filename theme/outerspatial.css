@@ -1236,10 +1236,9 @@
   box-sizing: border-box;
   color: #373a3c;
   height: 40px;
-  min-width: 232px;
+  min-width: 280px;
   padding: 5px;
   text-align: left;
-  z-index: 801;
 }
 .outerspatial-control-switcher .title {
   color: #979797;
@@ -1255,7 +1254,7 @@
 .outerspatial-control-switcher .current-baselayer {
   float: left;
   font-weight: bold;
-  max-width: 156px;
+  max-width: 205px;
   padding-right: 12px;
 }
 .outerspatial-control-switcher .list-shadow {
@@ -1267,16 +1266,6 @@
   top: -16px;
   opacity: 0.4;
 }
-.outerspatial-control-switcher .list-container {
-  color: #6c6d70;
-  height: 100vh;
-  overflow-x: hidden;
-  overflow-y: auto;
-  position: absolute;
-  right: 0;
-  top: 0;
-  width: 232px;
-}
 .outerspatial-control-switcher button {
   border: 1px solid #7da836;
   border-radius: 3px;
@@ -1285,6 +1274,19 @@
   font-size: 12px;
   margin-top: 2px;
   padding: 5px;
+}
+.outerspatial-control-switcher .list-container {
+  box-sizing: border-box;
+  color: #6c6d70;
+  height: 100vh;
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding-bottom: 20px;
+  padding-right: 20px;
+  padding-top: 20px;
+  position: absolute;
+  right: -16px;
+  top: -16px;
 }
   /*.outerspatial-control-switcher:first-child {
     background-color: #fff;
@@ -1345,6 +1347,7 @@
     cursor: pointer;
     font-size: 14px;
     margin-bottom: 12px;
+    width: 232px;
   }
     .outerspatial-control-switcher section.selected,
     .outerspatial-control-switcher section.selected:hover {
@@ -1354,7 +1357,7 @@
       background-color: #f1f1ef;
     }
     .outerspatial-control-switcher section:last-child {
-      border-bottom: none;
+      margin-bottom: 0;
     }
     .outerspatial-control-switcher section .baselayer-image {
       border-radius: 2px 2px 0 0;
