@@ -109,6 +109,7 @@ var SwitcherControl = L.Control.extend({
 
         if (baseLayer.L) {
           this._map.removeLayer(baseLayer.L);
+          this._map.attributionControl.removeAttribution(baseLayer.attribution);
           baseLayer.visible = false;
           removed = true;
           delete baseLayer.L;
@@ -169,11 +170,17 @@ var SwitcherControl = L.Control.extend({
   _toggleList: function () {
     var topRightControls = document.getElementsByClassName('leaflet-top leaflet-right');
     var i;
+    var mapHeight = this._map.getContainer().offsetHeight;
+
+    this._list.style.height = mapHeight + 'px';
+    this._listShadowBox.style.height = mapHeight + 'px';
 
     if (this._list.style.visibility && this._list.style.visibility === 'hidden') {
       if (this._map.overviewControl) {
         this._map.overviewControl.remove();
       }
+
+      this._map.attributionControl.remove();
 
       for (i = 0; i < topRightControls.length; i++) {
         topRightControls[i].style.visibility = 'hidden';
@@ -187,6 +194,9 @@ var SwitcherControl = L.Control.extend({
       if (this._map.overviewControl) {
         this._map.addControl(this._map.overviewControl);
       }
+
+      this._map.addControl(this._map.attributionControl);
+
       for (i = 0; i < topRightControls.length; i++) {
         topRightControls[i].style.visibility = 'visible';
       }

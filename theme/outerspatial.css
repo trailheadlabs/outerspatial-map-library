@@ -1259,14 +1259,14 @@
 }
 .outerspatial-control-switcher .list-shadow {
   background-image: linear-gradient(90deg, rgba(0,0,0,0.00) 0%, #000000 100%);
-  height: 100vh;
-  width: 35vh;
+  width: 120%;
   position: absolute;
   right: -16px;
   top: -16px;
   opacity: 0.4;
 }
 .outerspatial-control-switcher button {
+  background-color: #fff;
   border: 1px solid #7da836;
   border-radius: 3px;
   color: #7da836;
@@ -1278,7 +1278,6 @@
 .outerspatial-control-switcher .list-container {
   box-sizing: border-box;
   color: #6c6d70;
-  height: 100vh;
   overflow-x: hidden;
   overflow-y: auto;
   padding-bottom: 20px;
