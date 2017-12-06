@@ -4,6 +4,8 @@
       "attribution": "&copy; <a href='https://www.mapbox.com/about/maps/' target='_blank'>Mapbox</a> &copy; <a href='https://www.openstreetmap.org/copyright' target='_blank'>OpenStreetMap</a> contributors",
       "icon": "topo",
       "id": "trailheadlabs.cj5wmcjku2mls2stllpydix9b",
+      "maxZoom": 18,
+      "minZoom": 0,
       "name": "OuterSpatial Outdoors",
       "styled": true,
       "type": "mapbox"
@@ -35,38 +37,45 @@
       "type": "bing"
     }
   },
-  "cartodb": {
+  "carto": {
     "darkMatter": {
-      "attribution": "&copy; <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a> contributors, &copy; <a href='https://cartodb.com/attributions'>CartoDB</a>",
+      "attribution": "&copy; <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a> contributors, &copy; <a href='https://carto.com/attribution'>CARTO</a>",
       "icon": "street",
-      "name": "CartoDB Dark Matter",
+      "maxZoom": 18,
+      "minZoom": 0,
+      "name": "CARTO Dark Matter",
       "retinaId": "@2x",
       "type": "tiled",
-      "url": "https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}{{retina}}.png"
+      "url": "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{{retina}}.png"
     },
     "darkMatterNoLabels": {
-      "attribution": "&copy; <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a> contributors, &copy; <a href='https://cartodb.com/attributions'>CartoDB</a>",
+      "attribution": "&copy; <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a> contributors, &copy; <a href='https://carto.com/attribution'>CARTO</a>",
       "icon": "street",
-      "name": "CartoDB Dark Matter (No Labels)",
+      "maxZoom": 18,
+      "minZoom": 0,
+      "name": "CARTO Dark Matter (No Labels)",
       "retinaId": "@2x",
       "type": "tiled",
-      "url": "https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_nolabels/{z}/{x}/{y}{{retina}}.png"
+      "url": "https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{{retina}}.png"
     },
     "positron": {
-      "attribution": "&copy; <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a> contributors, &copy; <a href='https://cartodb.com/attributions'>CartoDB</a>",
+      "attribution": "&copy; <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a> contributors, &copy; <a href='https://carto.com/attribution'>CARTO</a>",
       "icon": "street",
-      "name": "CartoDB Positron",
+      "maxZoom": 18,
+      "minZoom": 0,
+      "name": "CARTO Positron",
       "retinaId": "@2x",
       "type": "tiled",
-      "url": "https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}{{retina}}.png"
+      "url": "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{{retina}}.png"
     },
     "positronNoLabels": {
-      "attribution": "&copy; <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a> contributors, &copy; <a href='https://cartodb.com/attributions'>CartoDB</a>",
+      "attribution": "&copy; <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a> contributors, &copy; <a href='https://carto.com/attribution'>CARTO</a>",
       "icon": "street",
-      "name": "CartoDB Positron (No Labels)",
+      "maxZoom": 18,
+      "name": "CARTO Positron (No Labels)",
       "retinaId": "@2x",
       "type": "tiled",
-      "url": "https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_nolabels/{z}/{x}/{y}{{retina}}.png"
+      "url": "https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{{retina}}.png"
     }
   },
   "esri": {
@@ -102,7 +111,7 @@
     },
     "oceans": {
       "attribution": "Esri",
-      "maxZoom": 16,
+      "maxZoom": 13,
       "minZoom": 1,
       "name": "Esri Oceans",
       "tiled": true,
@@ -148,7 +157,7 @@
       "icon": "topo",
       "maxZoom": 17,
       "minZoom": 1,
-      "name": "Esri Topo",
+      "name": "Esri Topographic",
       "popup": false,
       "tiled": true,
       "type": "arcgisserver",
@@ -160,6 +169,8 @@
       "attribution": "&copy; <a href='https://www.mapbox.com/about/maps/' target='_blank'>Mapbox</a> &copy; <a href='https://www.openstreetmap.org/copyright' target='_blank'>OpenStreetMap</a> contributors",
       "icon": "street",
       "id": "mapbox.dark",
+      "maxZoom": 22,
+      "minZoom": 0,
       "name": "Mapbox Dark",
       "type": "mapbox"
     },
@@ -167,6 +178,8 @@
       "attribution": "&copy; <a href='https://www.mapbox.com/about/maps/' target='_blank'>Mapbox</a> &copy; <a href='https://www.openstreetmap.org/copyright' target='_blank'>OpenStreetMap</a> contributors",
       "icon": "street",
       "id": "mapbox.emerald",
+      "maxZoom": 22,
+      "minZoom": 0,
       "name": "Mapbox Emerald",
       "type": "mapbox"
     },
@@ -174,6 +187,8 @@
       "attribution": "&copy; <a href='https://www.mapbox.com/about/maps/' target='_blank'>Mapbox</a> &copy; <a href='https://www.openstreetmap.org/copyright' target='_blank'>OpenStreetMap</a> contributors",
       "icon": "street",
       "id": "mapbox.high-contrast",
+      "maxZoom": 22,
+      "minZoom": 0,
       "name": "Mapbox High Contrast",
       "type": "mapbox"
     },
@@ -190,6 +205,8 @@
       "attribution": "&copy; <a href='https://www.mapbox.com/about/maps/' target='_blank'>Mapbox</a> &copy; <a href='https://www.openstreetmap.org/copyright' target='_blank'>OpenStreetMap</a> contributors",
       "icon": "street",
       "id": "mapbox.light",
+      "maxZoom": 22,
+      "minZoom": 0,
       "name": "Mapbox Light",
       "type": "mapbox"
     },
@@ -197,6 +214,8 @@
       "attribution": "&copy; <a href='https://www.mapbox.com/about/maps/' target='_blank'>Mapbox</a> &copy; <a href='https://www.openstreetmap.org/copyright' target='_blank'>OpenStreetMap</a> contributors",
       "icon": "topo",
       "id": "mapbox.outdoors",
+      "maxZoom": 21,
+      "minZoom": 0,
       "name": "Mapbox Outdoors",
       "type": "mapbox"
     },
@@ -204,6 +223,8 @@
       "attribution": "&copy; <a href='https://www.mapbox.com/about/maps/' target='_blank'>Mapbox</a> &copy; <a href='https://www.openstreetmap.org/copyright' target='_blank'>OpenStreetMap</a> contributors",
       "icon": "street",
       "id": "mapbox.pencil",
+      "maxZoom": 21,
+      "minZoom": 0,
       "name": "Mapbox Pencil",
       "type": "mapbox"
     },
@@ -211,6 +232,8 @@
       "attribution": "&copy; <a href='https://www.mapbox.com/about/maps/' target='_blank'>Mapbox</a> &copy; <a href='https://www.openstreetmap.org/copyright' target='_blank'>OpenStreetMap</a> contributors",
       "icon": "topo",
       "id": "mapbox.run-bike-hike",
+      "maxZoom": 22,
+      "minZoom": 0,
       "name": "Mapbox Run, Bike, and Hike",
       "type": "mapbox"
     },
@@ -218,7 +241,8 @@
       "attribution": "&copy; <a href='https://www.mapbox.com/about/maps/' target='_blank'>Mapbox</a>",
       "icon": "aerial",
       "id": "mapbox.satellite",
-      "maxNativeZoom": 18,
+      "maxZoom": 22,
+      "minZoom": 0,
       "name": "Mapbox Satellite",
       "type": "mapbox"
     },
@@ -226,7 +250,8 @@
       "attribution": "&copy; <a href='https://www.mapbox.com/about/maps/' target='_blank'>Mapbox</a> &copy; <a href='https://www.openstreetmap.org/copyright' target='_blank'>OpenStreetMap</a> contributors",
       "icon": "aerial",
       "id": "mapbox.streets-satellite",
-      "maxNativeZoom": 18,
+      "maxZoom": 22,
+      "minZoom": 0,
       "name": "Mapbox Hybrid",
       "type": "mapbox"
     },
@@ -234,6 +259,8 @@
       "attribution": "&copy; <a href='https://www.mapbox.com/about/maps/' target='_blank'>Mapbox</a> &copy; <a href='https://www.openstreetmap.org/copyright' target='_blank'>OpenStreetMap</a> contributors",
       "icon": "street",
       "id": "mapbox.streets-basic",
+      "maxZoom": 19,
+      "minZoom": 0,
       "name": "Mapbox Streets",
       "type": "mapbox"
     },
@@ -241,6 +268,8 @@
       "attribution": "&copy; <a href='https://www.mapbox.com/about/maps/' target='_blank'>Mapbox</a> &copy; <a href='https://www.openstreetmap.org/copyright' target='_blank'>OpenStreetMap</a> contributors",
       "icon": "topo",
       "id": "mapbox.streets",
+      "maxZoom": 19,
+      "minZoom": 0,
       "name": "Mapbox Terrain",
       "type": "mapbox"
     }
@@ -248,6 +277,8 @@
   "openstreetmap": {
     "attribution": "&copy; <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a> contributors",
     "icon": "street",
+    "maxZoom": 18,
+    "minZoom": 0,
     "name": "OpenStreetMap",
     "type": "tiled",
     "url": "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -256,12 +287,13 @@
     "terrain": {
       "attribution": "Map tiles by <a href='http://stamen.com'>Stamen Design</a>, under <a href='https://creativecommons.org/licenses/by/3.0/'>CC BY 3.0</a>. Data &copy; <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a> contributors.",
       "icon": "topo",
-      "maxZoom": 18,
+      "maxZoom": 13,
       "minZoom": 0,
       "name": "Stamen Terrain",
+      "retinaId": "@2x",
       "subdomains": "abcd",
       "type": "tiled",
-      "url": "https://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}.jpg"
+      "url": "http://{s}.tile.stamen.com/terrain/{z}/{x}/{y}{{retina}}.png"
     },
     "toner": {
       "attribution": "Map tiles by <a href='http://stamen.com'>Stamen Design</a>, under <a href='https://creativecommons.org/licenses/by/3.0/'>CC BY 3.0</a>. Data &copy; <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a> contributors.",
@@ -269,9 +301,10 @@
       "maxZoom": 20,
       "minZoom": 0,
       "name": "Stamen Toner",
+      "retinaId": "@2x",
       "subdomains": "abcd",
       "type": "tiled",
-      "url": "https://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}.png"
+      "url": "http://{s}.tile.stamen.com/toner/{z}/{x}/{y}{{retina}}.png"
     },
     "watercolor": {
       "attribution": "Map tiles by <a href='http://stamen.com'>Stamen Design</a>, under <a href='https://creativecommons.org/licenses/by/3.0/'>CC BY 3.0</a>. Data &copy; <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a> contributors.",
@@ -280,7 +313,7 @@
       "name": "Stamen Watercolor",
       "subdomains": "abcd",
       "type": "tiled",
-      "url": "https://stamen-tiles-{s}.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.jpg"
+      "url": "http://{s}.tile.stamen.com/watercolor/{z}/{x}/{y}.jpg"
     }
   }
 }
