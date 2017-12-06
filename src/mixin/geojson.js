@@ -95,12 +95,54 @@ module.exports = {
       config.onEachFeature = function (feature, layer) {
         var clicks = 0;
 
+        function mouseout (e) {
+          var layer = e.target;
+
+          if (!layer._map._isCurrentlySelected(layer)) {
+            layer.deselectLayer();
+          }
+        }
+
+        function mouseover (e) {
+          var layer = e.target;
+          var tooltipConfig = config.tooltip;
+
+          if (!layer._map._isCurrentlySelected(layer)) {
+            layer.selectLayer();
+          }
+
+          if (tooltipConfig) {
+            var properties = feature.properties;
+            var tip;
+
+            if (typeof tooltipConfig === 'function') {
+              tip = tooltipConfig(properties);
+            } else if (typeof tooltipConfig === 'string') {
+              tip = util.handlebars(tooltipConfig, properties);
+            }
+
+            if (tip) {
+              var target = e.target;
+              var obj = {
+                html: tip,
+                layerId: target._leaflet_id
+              };
+
+              target._map._tooltips.push(obj);
+              activeTip = obj;
+            }
+          }
+        }
+
         layer.overlay = me;
         layer.deselectLayer = function () {
           if (layer.feature.geometry.type !== 'Point') {
             this.overlay.resetStyle(this);
           } else {
-            this._circle.removeFrom(this._map);
+            if (this._circle) {
+              this._circle.removeFrom(this._map);
+              delete this._circle;
+            }
           }
         };
 
@@ -117,20 +159,21 @@ module.exports = {
             }
           }
         };
-        layer.on('mouseover', function (e) {
-          var layer = e.target;
 
-          if (!layer._map._isCurrentlySelected(layer)) {
-            layer.selectLayer();
-          }
-        });
-        layer.on('mouseout', function (e) {
-          var layer = e.target;
+        if (layer.feature.geometry.type === 'Point') {
+          layer.on('movestart', function (e) {
+            this.deselectLayer();
+            this.off('mouseover', mouseover);
+            this.off('mouseout', mouseout);
+          });
+          layer.on('moveend', function (e) {
+            this.on('mouseover', mouseover);
+            this.on('mouseout', mouseout);
+          });
+        }
 
-          if (!layer._map._isCurrentlySelected(layer)) {
-            layer.deselectLayer();
-          }
-        });
+        layer.on('mouseover', mouseover);
+        layer.on('mouseout', mouseout);
         layer.on('click', function (e) {
           var layer = e.target;
 
@@ -204,31 +247,6 @@ module.exports = {
             }
 
             activeTip = null;
-          }
-        });
-        layer.on('mouseover', function (e) {
-          var tooltipConfig = config.tooltip;
-
-          if (tooltipConfig) {
-            var properties = feature.properties;
-            var tip;
-
-            if (typeof tooltipConfig === 'function') {
-              tip = tooltipConfig(properties);
-            } else if (typeof tooltipConfig === 'string') {
-              tip = util.handlebars(tooltipConfig, properties);
-            }
-
-            if (tip) {
-              var target = e.target;
-              var obj = {
-                html: tip,
-                layerId: target._leaflet_id
-              };
-
-              target._map._tooltips.push(obj);
-              activeTip = obj;
-            }
           }
         });
       };
