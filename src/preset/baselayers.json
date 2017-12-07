@@ -5,7 +5,7 @@
       "icon": "topo",
       "id": "trailheadlabs.cj5wmcjku2mls2stllpydix9b",
       "maxZoom": 18,
-      "minZoom": 0,
+      "minZoom": 0.5,
       "name": "OuterSpatial Outdoors",
       "styled": true,
       "type": "mapbox"
