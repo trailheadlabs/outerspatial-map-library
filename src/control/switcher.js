@@ -34,9 +34,8 @@ var SwitcherControl = L.Control.extend({
       this._button.setAttribute('aria-activedescendant', SwitcherControl.SELECTED_ID);
     }
 
-    // window.L.Icon.Default.imagePath
     var img = L.DomUtil.create('img', 'baselayer-image', section);
-    img.src = 'http://127.0.0.1:8080/images/control/switcher/base-maps/' + imageFileName + '.png';
+    img.src = window.L.Icon.Default.imagePath + '/control/switcher/base-maps/' + imageFileName + '.png';
     var name = L.DomUtil.create('div', 'baselayer-name', section);
     name.innerHTML = baseLayer.name;
     var description = L.DomUtil.create('div', 'baselayer-description', section);
