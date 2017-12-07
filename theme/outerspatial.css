@@ -1258,8 +1258,7 @@
   padding-right: 12px;
 }
 .outerspatial-control-switcher .list-shadow {
-  background-image: linear-gradient(90deg, rgba(0,0,0,0.00) 0%, #000000 100%);
-  width: 120%;
+  background-image: linear-gradient(90deg, rgba(0,0,0,0) 0%, #000000 100%);
   position: absolute;
   right: -16px;
   top: -16px;
@@ -1275,73 +1274,21 @@
   margin-top: 2px;
   padding: 5px;
 }
+.outerspatial-control-switcher button:hover {
+  background-color: #7da836;
+  color: #fff;
+}
 .outerspatial-control-switcher .list-container {
   box-sizing: border-box;
   color: #6c6d70;
   overflow-x: hidden;
   overflow-y: auto;
-  padding-bottom: 20px;
-  padding-right: 20px;
-  padding-top: 20px;
+  padding: 20px;
   position: absolute;
   right: -16px;
   top: -16px;
 }
-  /*.outerspatial-control-switcher:first-child {
-    background-color: #fff;
-    border: 1px solid #fff;
-    border-radius: 1px;
-    cursor: pointer;
-    float: left;
-    min-height: 40px;
-    position: relative;
-    width: 238px;
-  }
-    .outerspatial-control-switcher div:first-child div {
-      border-right: solid 1px #d8d8d8;
-      font-size: 10px;
-      margin-left: 40px;
-      margin-right: 25px;
-      padding: 12px 0;
-      position: relative;
-      user-select: none;
-    }*/
-    /*.outerspatial-control-switcher div:first-child span:first-child {
-      float: left;
-      height: 100%;
-      left: 0;
-      position: absolute;
-      top: 0;
-      width: 30px;
-    }*/
-    /*.outerspatial-control-switcher div:first-child span:last-child {
-      background-image: url('images/control/switcher/toggle.png');
-      background-position: 6px;
-      background-repeat: no-repeat;
-      height: 100%;
-      position: absolute;
-      right: 0;
-      top: 0;
-      width: 25px;
-    }
-  .leaflet-retina .outerspatial-control-switcher div:first-child span:last-child {
-    background-image: url('images/control/switcher/toggle@2x.png');
-    background-size: 10px 5px;
-  }
-  .outerspatial-control-switcher div:first-child span:last-child.open {
-    background-position: 8px;
-    transform: rotate(180deg);
-  }*/
-  /*.outerspatial-control-switcher ul {
-    color: #6c6d70;
-    list-style-type: none;
-    height: 100vh;
-    margin-top: 20px;
-    margin-right: 20px;
-  }*/
   .outerspatial-control-switcher section {
-    background-color: #fff;
-    border-radius: 2px;
     box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.3);
     cursor: pointer;
     font-size: 14px;
@@ -1350,25 +1297,40 @@
   }
     .outerspatial-control-switcher section.selected,
     .outerspatial-control-switcher section.selected:hover {
-      background-color: #d9d9d6;
+      box-shadow: 0 0 4px 3px #7da836;
     }
     .outerspatial-control-switcher section:hover {
-      background-color: #f1f1ef;
+      box-shadow: 0 0 4px 3px #7da836;
     }
     .outerspatial-control-switcher section:last-child {
       margin-bottom: 0;
     }
+    .outerspatial-control-switcher section .baselayer-image-container {
+      border-radius: 2px 2px 0 0;
+      height: 103px;
+      width: 100%;
+      overflow: hidden;
+      pointer-events: none;
+    }
     .outerspatial-control-switcher section .baselayer-image {
       border-radius: 2px 2px 0 0;
-      width: 100%;
+      pointer-events: none;
+      position: relative;
+      bottom: 90px;
+      width: 232px;
     }
     .outerspatial-control-switcher section .baselayer-name {
+      background-color: #fff;
       font-weight: bold;
       padding: 8px 12px 0;
+      pointer-events: none;
     }
     .outerspatial-control-switcher section .baselayer-description {
+      background-color: #fff;
+      border-radius: 0 0 2px 2px;
       font-size: 12px;
       padding: 0 12px 14px;
+      pointer-events: none;
     }
 .outerspatial-control-switcher .aerial {
   background-image: url('images/control/switcher/aerial.png');

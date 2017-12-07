@@ -33,8 +33,8 @@ var SwitcherControl = L.Control.extend({
       section.setAttribute('id', SwitcherControl.SELECTED_ID);
       this._button.setAttribute('aria-activedescendant', SwitcherControl.SELECTED_ID);
     }
-
-    var img = L.DomUtil.create('img', 'baselayer-image', section);
+    var imgContainer = L.DomUtil.create('div', 'baselayer-image-container', section);
+    var img = L.DomUtil.create('img', 'baselayer-image', imgContainer);
     img.src = window.L.Icon.Default.imagePath + '/control/switcher/base-maps/' + imageFileName + '.png';
     var name = L.DomUtil.create('div', 'baselayer-name', section);
     name.innerHTML = baseLayer.name;
@@ -67,7 +67,7 @@ var SwitcherControl = L.Control.extend({
     L.DomUtil.create('ico', null, this._activeIcon);
     this._activeContainer = L.DomUtil.create('div', 'current-baselayer', container);
     var title = L.DomUtil.create('div', 'title', this._activeContainer);
-    title.innerHTML = 'BASE LAYER';
+    title.innerHTML = 'BASEMAP';
     this._activeText = L.DomUtil.create('div', 'baselayer-name', this._activeContainer);
     this._button = L.DomUtil.create('button', undefined, container);
     this._button.innerHTML = 'Change';
@@ -79,11 +79,12 @@ var SwitcherControl = L.Control.extend({
 
     // this._activeDropdown = L.DomUtil.create('span', null, this._active);
     L.DomEvent.addListener(this._button, 'click', this._toggleList, this);
+    L.DomEvent.addListener(this._listShadowBox, 'click', this._toggleList, this);
   },
   _onClick: function (e) {
     var target = util.getEventObjectTarget(e);
 
-    if (!L.DomUtil.hasClass(target.parentNode, 'selected')) {
+    if (!L.DomUtil.hasClass(target, 'selected')) {
       var added = false;
       var children = util.getChildElementsByNodeName(this._list, 'section');
       var removed = false;
@@ -100,7 +101,7 @@ var SwitcherControl = L.Control.extend({
         }
       }
 
-      target.parentNode.setAttribute('id', selectedId);
+      target.setAttribute('id', selectedId);
       this._button.setAttribute('aria-activedescendant', selectedId);
 
       for (i = 0; i < this._baseLayers.length; i++) {
@@ -112,7 +113,7 @@ var SwitcherControl = L.Control.extend({
           baseLayer.visible = false;
           removed = true;
           delete baseLayer.L;
-        } else if (target.parentNode.layerId === baseLayer._leaflet_id) {
+        } else if (target.layerId === baseLayer._leaflet_id) {
           baseLayer.visible = true;
 
           if (baseLayer.type === 'arcgisserver') {
@@ -146,7 +147,7 @@ var SwitcherControl = L.Control.extend({
           }
 
           this._map.addLayer(baseLayer.L);
-          L.DomUtil.addClass(target.parentNode, 'selected');
+          L.DomUtil.addClass(target, 'selected');
           this._setActive(baseLayer);
           added = baseLayer.L;
         }
@@ -178,9 +179,11 @@ var SwitcherControl = L.Control.extend({
     var topRightControls = document.getElementsByClassName('leaflet-top leaflet-right');
     var i;
     var mapHeight = this._map.getContainer().offsetHeight;
+    var mapWidth = this._map.getContainer().offsetWidth;
 
     this._list.style.height = mapHeight + 'px';
     this._listShadowBox.style.height = mapHeight + 'px';
+    this._listShadowBox.style.width = mapWidth + 'px';
 
     if (this._list.style.visibility && this._list.style.visibility === 'hidden') {
       if (this._map.overviewControl) {
