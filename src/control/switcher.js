@@ -130,11 +130,19 @@ var SwitcherControl = L.Control.extend({
             this._map.setView(this._map.getCenter(), baseLayer.maxZoom);
           }
 
-          if (!this._map.options.maxZoom) {
-            if (baseLayer.maxZoom) {
-              this._map.options.maxZoom = baseLayer.maxZoom;
+          if (this._map._initialMinZoom) {
+            if (this._map._initialMinZoom < baseLayer.minZoom) {
+              this._map.setMinZoom(baseLayer.minZoom);
             } else {
-              this._map.options.maxZoom = 19;
+              this._map.setMinZoom(this._map._initialMinZoom);
+            }
+          }
+
+          if (this._map._initialMaxZoom) {
+            if (this._map._initialMaxZoom > baseLayer.maxZoom) {
+              this._map.setMaxZoom(baseLayer.maxZoom);
+            } else {
+              this._map.setMaxZoom(this._map._initialMaxZoom);
             }
           }
 

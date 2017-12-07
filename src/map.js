@@ -825,8 +825,12 @@ MapExt = L.Map.extend({
       config.overlays = [];
     }
 
-    if (typeof config.maxZoom !== 'number') {
-      config.maxZoom = 19;
+    if (typeof config.maxZoom === 'number') {
+      this._initialMaxZoom = config.maxZoom;
+    }
+
+    if (typeof config.minZoom === 'number') {
+      this._initialMinZoom = config.minZoom;
     }
 
     if (config.baseLayers.length !== 0 && config.maxZoom > config.baseLayers[0].maxZoom) {
