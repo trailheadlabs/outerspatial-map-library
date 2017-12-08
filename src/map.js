@@ -256,7 +256,7 @@ MapExt = L.Map.extend({
     }
 
     if (!zoomifyMode && options.overlays.length) {
-      var zIndex = 1;
+      var zIndex = 401;
 
       for (var j = 0; j < options.overlays.length; j++) {
         var overlay = options.overlays[j];
@@ -267,8 +267,14 @@ MapExt = L.Map.extend({
           throw new Error('Zoomify layers can only be added in the "baseLayers" config property.');
         } else {
           if (overlay.visible || typeof overlay.visible === 'undefined') {
+            var pane;
+            var paneName;
+
             overlay.visible = true;
-            overlay.zIndex = zIndex;
+            paneName = overlay.name ? overlay.name.replace(/ /g, '-').toLowerCase() : String(zIndex);
+            pane = me.createPane(paneName);
+            pane.style.zIndex = zIndex;
+            overlay.pane = paneName;
 
             if (overlay.preset) {
               switch (overlay.preset) {
@@ -276,10 +282,6 @@ MapExt = L.Map.extend({
                   overlay.L = L.outerspatial.preset.places.pois(overlay);
                   break;
                 case 'outerspatial':
-                  if (overlay.locationType === 'trails' || overlay.locationType === 'trail_segments') {
-                    me.createPane('trailsPane').style.zIndex = 450;
-                    overlay.pane = 'trailsPane';
-                  }
                   overlay.L = L.outerspatial.preset.outerspatial(overlay);
                   break;
               }
