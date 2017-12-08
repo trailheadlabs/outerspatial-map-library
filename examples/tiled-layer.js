@@ -3,9 +3,9 @@ window.OuterSpatial = {
   div: 'map',
   maxZoom: 13,
   overlays: [{
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="https://cartodb.com/attributions">CartoDB</a>',
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="https://cartodb.com/attributions">CARTO</a>',
     icon: 'street',
-    name: 'CartoDB Dark Matter',
+    name: 'CARTO Dark Matter',
     retinaId: '@2x',
     type: 'tiled',
     url: 'https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}{{retina}}.png'
