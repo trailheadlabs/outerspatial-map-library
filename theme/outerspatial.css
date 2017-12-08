@@ -816,6 +816,7 @@
   padding: 7px 10px;
   position: absolute;
   user-select: none;
+  white-space: normal;
   width: auto;
   z-index: 650;
 }
