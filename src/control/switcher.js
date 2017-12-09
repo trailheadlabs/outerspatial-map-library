@@ -35,7 +35,7 @@ var SwitcherControl = L.Control.extend({
     }
     var imgContainer = L.DomUtil.create('div', 'baselayer-image-container', section);
     var img = L.DomUtil.create('img', 'baselayer-image', imgContainer);
-    img.src = window.L.Icon.Default.imagePath + '/control/switcher/base-maps/' + imageFileName + '.png';
+    img.src = window.L.Icon.Default.imagePath + '/control/switcher/' + imageFileName + '.png';
     var name = L.DomUtil.create('div', 'baselayer-name', section);
     name.innerHTML = baseLayer.name;
     var description = L.DomUtil.create('div', 'baselayer-description', section);
