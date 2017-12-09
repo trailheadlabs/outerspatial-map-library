@@ -9,7 +9,6 @@ require('../icon/maki');
 require('../icon/outerspatialsymbollibrary');
 
 var EditControl = L.Control.extend({
-  includes: L.Evented,
   options: {
     circle: {
       shapeOptions: {
