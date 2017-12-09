@@ -312,7 +312,7 @@ var GeocoderControl = L.Control.extend({
         li.id = i;
 
         j = d.toLowerCase().indexOf(value.toLowerCase());
-        li.innerHTML = (d.slice(0, j) + '<strong>' + d.slice(j, j + value.length) + '</strong>' + d.slice(j + value.length) + '<br><i>' + t + '</i>');
+        li.innerHTML = (d.slice(0, j) + '<strong>' + d.slice(j, j + value.length) + '</strong>' + d.slice(j + value.length) + (t ? '<br><i>' + t + '</i>' : ''));
         L.DomEvent.on(li, 'click', function () {
           me._handleSelect(this);
         });

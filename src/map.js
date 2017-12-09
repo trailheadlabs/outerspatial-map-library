@@ -413,7 +413,7 @@ MapExt = L.Map.extend({
     }
   },
   _isCurrentlySelected: function (layer) {
-    if (layer._map._selectedLayer && (layer._map._selectedLayer._leaflet_id === layer._leaflet_id)) {
+    if (this._selectedLayer && (this._selectedLayer._leaflet_id === layer._leaflet_id)) {
       return true;
     } else {
       return false;
@@ -891,12 +891,10 @@ MapExt = L.Map.extend({
     this.invalidateSize();
   },
   setSelectedLayer: function (layer) {
-    var map = layer._map;
-
     if (!this._isCurrentlySelected(layer)) {
-      this.clearSelectedLayer(map);
+      this.clearSelectedLayer(this);
       layer.selectLayer();
-      map._selectedLayer = layer;
+      this._selectedLayer = layer;
     }
   },
   showModule: function (title) {

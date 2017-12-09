@@ -28,6 +28,7 @@ window.OuterSpatial = {
               results.push({
                 bounds: null,
                 latLng: layers[key].getLatLng(),
+                layer: layers[key],
                 name: layers[key].feature.properties.name
               });
             }
@@ -59,6 +60,7 @@ window.OuterSpatial = {
               results.push({
                 bounds: null,
                 latLng: layers[key].getLatLng(),
+                layer: layers[key],
                 name: layers[key].feature.properties.Name
               });
             }
