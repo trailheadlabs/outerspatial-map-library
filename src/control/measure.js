@@ -7,7 +7,6 @@ require('leaflet-draw');
 
 var util = require('../util/util');
 var MeasureControl = L.Control.extend({
-  includes: L.Evented,
   options: {
     polygon: {
       allowIntersection: false,
@@ -345,11 +344,9 @@ var MeasureControl = L.Control.extend({
     }
 
     this._activeMode = this._modes[e.handler];
-    this.fire('activated');
   },
   _handlerDeactivated: function () {
     this._resetVariables();
-    this.fire('deactivated');
   },
   _initializeMode: function (button, handler) {
     var type = handler.type;
