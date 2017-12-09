@@ -613,7 +613,7 @@
     border-collapse: collapse;
     margin: 0;
     width: 100%;
-    word-wrap: break-word;
+    word-break:break-all;
   }
     .outerspatial .leaflet-popup-content table tr {
       border-bottom: 1px solid  #e3dfd8;
@@ -636,6 +636,7 @@
     .outerspatial .leaflet-popup-content table td,
     .outerspatial .leaflet-popup-content table th {
       border: none;
+      min-width: 100px;
       padding-bottom: 8px;
       padding-top: 8px;
     }
@@ -776,7 +777,7 @@
   .outerspatial .leaflet-popup-content .description section {
     border-bottom: solid 1px #e3dfd8;
     padding: 14px 0;
-    word-wrap: break-word;
+    word-break:break-all;
   }
   .outerspatial .leaflet-popup-content .description section h5 {
     color: #3e3e3f;
