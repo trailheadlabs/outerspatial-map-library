@@ -15,31 +15,36 @@ var SwitcherControl = L.Control.extend({
     this._baseLayers = baseLayers;
   },
   _addSection: function (baseLayer) {
+    var description;
+    var img;
+    var imgFileName;
+    var imgContainer;
+    var name;
     var section = L.DomUtil.create('section', (baseLayer.visible ? 'selected' : null));
-    var imageFileName;
 
     baseLayer.name.split(' ').forEach(function (word, index) {
       if (index === 0) {
-        imageFileName = word.toLowerCase();
+        imgFileName = word.toLowerCase();
       } else if (index === 1) {
-        imageFileName = imageFileName + '-' + word.toLowerCase();
+        imgFileName = imgFileName + '-' + word.toLowerCase();
       } else {
-        imageFileName = imageFileName + word.charAt(0).toUpperCase() + word.slice(1);
+        imgFileName = imgFileName + word.charAt(0).toUpperCase() + word.slice(1);
       }
     });
-    imageFileName = imageFileName.replace(/[(),]/g, '');
+    imgFileName = imgFileName.replace(/[(),]/g, '');
 
     if (baseLayer.visible) {
       section.setAttribute('id', SwitcherControl.SELECTED_ID);
       this._button.setAttribute('aria-activedescendant', SwitcherControl.SELECTED_ID);
     }
-    var imgContainer = L.DomUtil.create('div', 'baselayer-image-container', section);
-    var img = L.DomUtil.create('img', 'baselayer-image', imgContainer);
-    img.src = window.L.Icon.Default.imagePath + '/control/switcher/' + imageFileName + '.png';
-    var name = L.DomUtil.create('div', 'baselayer-name', section);
+
+    imgContainer = L.DomUtil.create('div', 'baselayer-image-container', section);
+    img = L.DomUtil.create('img', 'baselayer-image', imgContainer);
+    img.src = window.L.Icon.Default.imagePath + '/control/switcher/' + imgFileName + '.png';
+    name = L.DomUtil.create('div', 'baselayer-name', section);
     name.innerHTML = baseLayer.name;
-    var description = L.DomUtil.create('div', 'baselayer-description', section);
-    description.innerHTML = 'Lorem ipsum dolor sit amet, sed nulla, maecenas libero ut. Urna purus justo, elit congue, facilisi auctor.';
+    description = L.DomUtil.create('div', 'baselayer-description', section);
+    description.innerHTML = baseLayer.description ? baseLayer.description : '';
     section.layerId = L.stamp(baseLayer);
     this._list.appendChild(section);
   },
