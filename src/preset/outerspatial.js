@@ -19,6 +19,20 @@ var OuterSpatialLayer = L.GeoJSON.extend({
     maxZoom: 22,
     priority: 1
   }, {
+    type: 'Campground',
+    symbol: 'campground',
+    minZoom: 7,
+    minZoomFactor: 7,
+    maxZoom: 22,
+    priority: 2
+  }, {
+    type: 'Trailhead',
+    symbol: 'trailhead',
+    minZoom: 7,
+    minZoomFactor: 8,
+    maxZoom: 22,
+    priority: 3
+  }, {
     type: 'Store',
     symbol: 'store',
     minZoom: 4,
@@ -102,9 +116,9 @@ var OuterSpatialLayer = L.GeoJSON.extend({
       console.error('The "organizationId" property is required for the OuterSpatial preset.');
     }
 
-    type = singularTypes[this.options.locationType];
+    type = this._singularType = singularTypes[this.options.locationType];
 
-    if (type === 'Point of Interest') {
+    if (type === 'Point of Interest' || type === 'Trailhead' || type === 'Campground') {
       this.options.prioritization = true;
     }
 
@@ -418,9 +432,11 @@ var OuterSpatialLayer = L.GeoJSON.extend({
     for (i = 0; i < me._include.length; i++) {
       config = me._include[i];
 
-      if (typeof config.minZoomFactor === 'number' || (me._map.getZoom() >= config.minZoom)) {
+      if (me._map.getZoom() >= config.minZoom) {
         active.push(config.type);
       }
+
+      console.log(active)
     }
 
     i = layers.length;
@@ -428,7 +444,7 @@ var OuterSpatialLayer = L.GeoJSON.extend({
     while (i--) {
       marker = layers[i];
 
-      if (active.indexOf(marker.feature.properties.point_type) === -1 || !bounds.contains(marker.getLatLng())) {
+      if ((marker.feature.properties.point_type && active.indexOf(marker.feature.properties.point_type) === -1) || active.indexOf(me._singularType) === -1 || !bounds.contains(marker.getLatLng())) {
         me._removedLayers.push(marker);
         marker.deselectLayer();
         me.removeLayer(marker);
@@ -439,7 +455,12 @@ var OuterSpatialLayer = L.GeoJSON.extend({
       var index;
 
       marker = me._removedLayers[i];
-      type = marker.feature.properties.point_type;
+
+      if (marker.feature.properties.point_type) {
+        type = marker.feature.properties.point_type;
+      } else {
+        type = me._singularType;
+      }
 
       if (active.indexOf(type) > -1) {
         if (bounds.contains(marker.getLatLng())) {
@@ -482,7 +503,6 @@ var OuterSpatialLayer = L.GeoJSON.extend({
               me.removeLayer(marker);
             }
           } else
-
           if (!me.hasLayer(marker)) {
             me.addLayer(marker);
             index = me._removedLayers.indexOf(marker);
