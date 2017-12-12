@@ -9,34 +9,35 @@ var OuterSpatialLayer = L.GeoJSON.extend({
     type: 'Visitor Center',
     symbol: 'visitor-center',
     minZoom: 4,
+    minZoomFactor: 0,
     maxZoom: 22,
     priority: 1
   }, {
     type: 'Entrance',
     symbol: 'entrance-station',
     minZoom: 4,
-    minZoomFactor: 6,
+    minZoomFactor: 0,
     maxZoom: 22,
     priority: 1
   }, {
     type: 'Campground',
     symbol: 'campground',
     minZoom: 7,
-    minZoomFactor: 7,
+    minZoomFactor: 0,
     maxZoom: 22,
     priority: 2
   }, {
     type: 'Trailhead',
     symbol: 'trailhead',
     minZoom: 7,
-    minZoomFactor: 8,
+    minZoomFactor: 0,
     maxZoom: 22,
     priority: 3
   }, {
     type: 'Store',
     symbol: 'store',
-    minZoom: 4,
-    minZoomFactor: 7,
+    minZoom: 7,
+    minZoomFactor: 0,
     maxZoom: 22,
     priority: 3
   }, {
@@ -45,6 +46,24 @@ var OuterSpatialLayer = L.GeoJSON.extend({
     minZoom: 12,
     maxZoom: 22,
     priority: 3
+  }, {
+    type: 'Drinking Water',
+    symbol: 'drinking-water',
+    minZoom: 16,
+    maxZoom: 22,
+    priority: 4
+  }, {
+    type: 'Food Service',
+    symbol: 'food-service',
+    minZoom: 16,
+    maxZoom: 22,
+    priority: 4
+  }, {
+    type: 'Information',
+    symbol: 'information',
+    minZoom: 16,
+    maxZoom: 22,
+    priority: 4
   }, {
     type: 'Interpretive Exhibit',
     symbol: 'interpretive-exhibit',
@@ -70,8 +89,26 @@ var OuterSpatialLayer = L.GeoJSON.extend({
     maxZoom: 22,
     priority: 4
   }, {
+    type: 'Sanitary Disposal Station',
+    symbol: 'sanitary-disposal-station',
+    minZoom: 16,
+    maxZoom: 22,
+    priority: 4
+  }, {
     type: 'Showers',
     symbol: 'showers',
+    minZoom: 16,
+    maxZoom: 22,
+    priority: 4
+  }, {
+    type: null,
+    symbol: null,
+    minZoom: 16,
+    maxZoom: 22,
+    priority: 4
+  }, {
+    type: '',
+    symbol: null,
     minZoom: 16,
     maxZoom: 22,
     priority: 4
@@ -83,16 +120,6 @@ var OuterSpatialLayer = L.GeoJSON.extend({
     environment: 'production',
     formatPopups: true,
     searchable: false
-  },
-  onAdd: function () {
-    var me = this;
-    if (me.options.prioritization) {
-      me._map.on('moveend', function () {
-        me._update();
-      });
-    }
-
-    L.GeoJSON.prototype.onAdd.call(this, this._map);
   },
   initialize: function (options) {
     var me;
@@ -332,6 +359,7 @@ var OuterSpatialLayer = L.GeoJSON.extend({
         me.errorFired = obj;
       },
       success: function (response) {
+        var config;
         var obj;
 
         if (response && response.responseText) {
@@ -341,7 +369,49 @@ var OuterSpatialLayer = L.GeoJSON.extend({
             me._collapseFeatureAttributes(geojson.features);
           }
 
-          L.GeoJSON.prototype.initialize.call(me, geojson, me.options);
+          if (me.options.locationType === 'campgrounds' || me.options.locationType === 'trailheads') {
+            config = (function () {
+              var c;
+
+              for (var j = 0; j < me._include.length; j++) {
+                if (me._include[j].type === type) {
+                  c = me._include[j];
+                  break;
+                }
+              }
+
+              if (c) {
+                return c;
+              }
+            })();
+            L.extend(me.options, {
+              zIndexOffset: config.priority * -1000
+            });
+            L.GeoJSON.prototype.initialize.call(me, geojson, me.options);
+          } else if (me.options.locationType === 'points_of_interest') {
+            L.GeoJSON.prototype.initialize.call(me, geojson, me.options);
+
+            me.getLayers().forEach(function (layer) {
+              config = (function () {
+                var c;
+
+                for (var i = 0; i < me._include.length; i++) {
+                  if (me._include[i].type === layer.feature.properties.point_type) {
+                    c = me._include[i];
+                    break;
+                  }
+                }
+
+                if (c) {
+                  return c;
+                }
+              })();
+              layer.setZIndexOffset(config.priority * -1000);
+            });
+          } else {
+            L.GeoJSON.prototype.initialize.call(me, geojson, me.options);
+          }
+
           me.fire('ready');
           me._loaded = true;
           me.readyFired = true;
@@ -376,6 +446,17 @@ var OuterSpatialLayer = L.GeoJSON.extend({
         })
         .join(' ');
     }
+  },
+  onAdd: function () {
+    var me = this;
+
+    if (me.options.prioritization) {
+      me._map.on('moveend', function () {
+        me._update();
+      });
+    }
+
+    L.GeoJSON.prototype.onAdd.call(this, this._map);
   },
   _collapseFeatureAttributes: function (features) {
     features.forEach(function (feature) {
@@ -424,6 +505,7 @@ var OuterSpatialLayer = L.GeoJSON.extend({
     var config;
     var i;
     var marker;
+    var removedLayersClone;
 
     if (!me._removedLayers) {
       me._removedLayers = [];
@@ -435,28 +517,36 @@ var OuterSpatialLayer = L.GeoJSON.extend({
       if (me._map.getZoom() >= config.minZoom) {
         active.push(config.type);
       }
-
-      console.log(active)
     }
 
     i = layers.length;
 
     while (i--) {
+      var pointType;
       marker = layers[i];
 
-      if ((marker.feature.properties.point_type && active.indexOf(marker.feature.properties.point_type) === -1) || active.indexOf(me._singularType) === -1 || !bounds.contains(marker.getLatLng())) {
+      if (marker.feature.properties.point_type !== undefined) {
+        pointType = marker.feature.properties.point_type;
+      } else {
+        pointType = me._singularType;
+      }
+
+      if (active.indexOf(pointType) === -1 || !bounds.contains(marker.getLatLng())) {
         me._removedLayers.push(marker);
         marker.deselectLayer();
         me.removeLayer(marker);
       }
     }
-    for (i = 0; i < me._removedLayers.length; i++) {
+
+    removedLayersClone = me._removedLayers.slice(0);
+
+    for (var j = 0; j < removedLayersClone.length; j++) {
       var type;
       var index;
 
-      marker = me._removedLayers[i];
+      marker = removedLayersClone[j];
 
-      if (marker.feature.properties.point_type) {
+      if (marker.feature.properties.point_type !== undefined) {
         type = marker.feature.properties.point_type;
       } else {
         type = me._singularType;
@@ -502,8 +592,7 @@ var OuterSpatialLayer = L.GeoJSON.extend({
               marker.deselectLayer();
               me.removeLayer(marker);
             }
-          } else
-          if (!me.hasLayer(marker)) {
+          } else if (!me.hasLayer(marker)) {
             me.addLayer(marker);
             index = me._removedLayers.indexOf(marker);
 
