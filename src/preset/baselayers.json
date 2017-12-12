@@ -37,7 +37,7 @@
       "type": "bing"
     }
   },
-  "carto": {
+  "cartodb": {
     "darkMatter": {
       "attribution": "&copy; <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a> contributors, &copy; <a href='https://carto.com/attribution'>CARTO</a>",
       "icon": "street",
@@ -76,6 +76,33 @@
       "retinaId": "@2x",
       "type": "tiled",
       "url": "https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{{retina}}.png"
+    },
+    "voyager": {
+      "attribution": "&copy; <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a> contributors, &copy; <a href='https://carto.com/attribution'>CARTO</a>",
+      "icon": "street",
+      "maxZoom": 18,
+      "name": "CARTO Voyager",
+      "retinaId": "@2x",
+      "type": "tiled",
+      "url": "https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{{retina}}.png"
+    },
+    "voyagerLabelsUnder": {
+      "attribution": "&copy; <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a> contributors, &copy; <a href='https://carto.com/attribution'>CARTO</a>",
+      "icon": "street",
+      "maxZoom": 18,
+      "name": "CARTO Voyager (Labels Under)",
+      "retinaId": "@2x",
+      "type": "tiled",
+      "url": "https://{s}.basemaps.cartocdn.com/rastertiles/voyager_labels_under/{z}/{x}/{y}{{retina}}.png"
+    },
+    "voyagerNoLabels": {
+      "attribution": "&copy; <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a> contributors, &copy; <a href='https://carto.com/attribution'>CARTO</a>",
+      "icon": "street",
+      "maxZoom": 18,
+      "name": "CARTO Voyager (No Labels)",
+      "retinaId": "@2x",
+      "type": "tiled",
+      "url": "https://{s}.basemaps.cartocdn.com/rastertiles/voyager_nolabels/{z}/{x}/{y}{{retina}}.png"
     }
   },
   "esri": {
