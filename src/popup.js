@@ -66,7 +66,11 @@ var Popup = L.Popup.extend({
         var lat = latLng.lat;
         var lng = latLng.lng;
 
-        window.open('https://maps.apple.com/?daddr=' + lat + '%2c' + lng, '_blank');
+        if (L.Browser.mobile && L.Browser.safari) {
+          window.open('https://maps.apple.com/?daddr=' + lat + '%2c' + lng, '_blank');
+        } else {
+          window.open('https://maps.google.com/maps?daddr=' + lat + '%2c' + lng, '_blank');
+        }
       };
     }
 
