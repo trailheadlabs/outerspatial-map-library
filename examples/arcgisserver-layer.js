@@ -8,11 +8,6 @@ window.OuterSpatial = {
     url: 'https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer'
   }],
   overlays: [{
-    attribution: 'Land Resources Division',
-    name: 'National Parks',
-    type: 'geojson',
-    url: 'https://outerspatial-utilities.herokuapp.com/arcgis2geojson/?url=https://mapservices.nps.gov/arcgis/rest/services/LandResourcesDivisionTractAndBoundaryService/MapServer/1'
-  }, {
     attribution: 'Great Smoky Mountains National Park',
     name: 'Restrooms',
     styles: {
@@ -23,6 +18,11 @@ window.OuterSpatial = {
     },
     type: 'geojson',
     url: 'https://services1.arcgis.com/fBc8EJBxQRMcHlei/ArcGIS/rest/services/GRSM_RESTROOMS/FeatureServer/0/query?f=geojson&outSR=4326&where=OBJECTID+IS+NOT+NULL'
+  }, {
+    attribution: 'Land Resources Division',
+    name: 'National Parks',
+    type: 'geojson',
+    url: 'https://outerspatial-utilities.herokuapp.com/arcgis2geojson/?url=https://mapservices.nps.gov/arcgis/rest/services/LandResourcesDivisionTractAndBoundaryService/MapServer/1'
   }, {
     attribution: 'Esri',
     layers: '2',

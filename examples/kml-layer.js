@@ -2,12 +2,6 @@ window.OuterSpatial = {
   div: 'map',
   overlays: [{
     popup: {
-      title: '{{alphacode}}'
-    },
-    type: 'kml',
-    url: 'data/national-parks.kml'
-  }, {
-    popup: {
       title: '{{name}}'
     },
     styles: {
@@ -17,6 +11,12 @@ window.OuterSpatial = {
     },
     type: 'kml',
     url: 'data/dc.kml'
+  }, {
+    popup: {
+      title: '{{alphacode}}'
+    },
+    type: 'kml',
+    url: 'data/national-parks.kml'
   }]
 };
 

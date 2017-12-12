@@ -3,21 +3,6 @@ window.OuterSpatial = {
   maxZoom: 13,
   overlays: [{
     attribution: 'NPMap Team',
-    name: 'Parks',
-    popup: {
-      description: {
-        format: 'table'
-      },
-      title: '{{display_name}}'
-    },
-    styles: {
-      'fill': '#7c117c'
-    },
-    table: 'parks',
-    type: 'cartodb',
-    user: 'nps'
-  }, {
-    attribution: 'NPMap Team',
     name: 'Yellowstone Roads',
     popup: {
       description: {
@@ -33,6 +18,21 @@ window.OuterSpatial = {
     table: 'roads',
     type: 'cartodb',
     user: 'nps-yell'
+  }, {
+    attribution: 'NPMap Team',
+    name: 'Parks',
+    popup: {
+      description: {
+        format: 'table'
+      },
+      title: '{{display_name}}'
+    },
+    styles: {
+      'fill': '#7c117c'
+    },
+    table: 'parks',
+    type: 'cartodb',
+    user: 'nps'
   }]
 };
 

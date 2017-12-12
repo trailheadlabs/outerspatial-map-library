@@ -258,7 +258,7 @@ MapExt = L.Map.extend({
     if (!zoomifyMode && options.overlays.length) {
       var zIndex = 401;
 
-      for (var j = 0; j < options.overlays.length; j++) {
+      for (var j = options.overlays.length - 1; j > -1; j--) {
         var overlay = options.overlays[j];
 
         if (typeof overlay === 'string') {

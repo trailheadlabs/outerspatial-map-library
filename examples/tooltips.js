@@ -13,19 +13,6 @@ window.OuterSpatial = {
     type: 'geojson',
     url: 'data/rectangle.geojson'
   }, {
-    attribution: 'NPMap Team',
-    styles: {
-      'fill': '#d39800',
-      'fill-opacity': 0.2,
-      'stroke': '#d39800',
-      'stroke-opacity': 0.8,
-      'stroke-width': 3
-    },
-    table: 'parks',
-    tooltip: 'Alpha code: {{unit_code}}',
-    type: 'cartodb',
-    user: 'nps'
-  }, {
     attribution: 'Land Resources Division',
     popup: {
       description: 'The alpha code is {{Code}}.',
@@ -40,6 +27,19 @@ window.OuterSpatial = {
     tooltip: 'Center point for {{Code}}',
     type: 'geojson',
     url: 'data/national-parks.geojson'
+  }, {
+    attribution: 'NPMap Team',
+    styles: {
+      'fill': '#d39800',
+      'fill-opacity': 0.2,
+      'stroke': '#d39800',
+      'stroke-opacity': 0.8,
+      'stroke-width': 3
+    },
+    table: 'parks',
+    tooltip: 'Alpha code: {{unit_code}}',
+    type: 'cartodb',
+    user: 'nps'
   }],
   zoom: 6
 };
