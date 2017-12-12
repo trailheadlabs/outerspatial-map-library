@@ -385,7 +385,13 @@ var OuterSpatialLayer = L.GeoJSON.extend({
               }
             })();
             L.extend(me.options, {
-              zIndexOffset: config.priority * -1000
+              zIndexOffset: config.priority * -1000,
+              styles: {
+                point: {
+                  'marker-library': 'outerspatialsymbollibrary',
+                  'marker-symbol': config.symbol + '-white'
+                }
+              }
             });
             L.GeoJSON.prototype.initialize.call(me, geojson, me.options);
           } else if (me.options.locationType === 'points_of_interest') {
@@ -407,6 +413,10 @@ var OuterSpatialLayer = L.GeoJSON.extend({
                 }
               })();
               layer.setZIndexOffset(config.priority * -1000);
+              var icon = L.outerspatial.icon.outerspatialsymbollibrary({
+                'marker-symbol': config.symbol + '-white'
+              });
+              layer.setIcon(icon);
             });
           } else {
             L.GeoJSON.prototype.initialize.call(me, geojson, me.options);
