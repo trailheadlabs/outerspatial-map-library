@@ -84,7 +84,7 @@ var OuterSpatialLayer = L.GeoJSON.extend({
     priority: 4
   }, {
     type: 'POI',
-    symbol: 'playground',
+    symbol: 'dot',
     minZoom: 16,
     maxZoom: 22,
     priority: 4
@@ -102,13 +102,13 @@ var OuterSpatialLayer = L.GeoJSON.extend({
     priority: 4
   }, {
     type: null,
-    symbol: null,
+    symbol: 'letter-x',
     minZoom: 16,
     maxZoom: 22,
     priority: 4
   }, {
     type: '',
-    symbol: null,
+    symbol: 'letter-x',
     minZoom: 16,
     maxZoom: 22,
     priority: 4
