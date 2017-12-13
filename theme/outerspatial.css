@@ -1254,8 +1254,8 @@
 }
 .outerspatial-control-switcher .baselayer-name {
   font-size: 14px;
-  text-overflow: ellipsis;
   overflow: hidden;
+  text-overflow: ellipsis;
   white-space: nowrap;
 }
 .outerspatial-control-switcher .current-baselayer {
@@ -1266,10 +1266,10 @@
 }
 .outerspatial-control-switcher .list-shadow {
   background-image: linear-gradient(90deg, rgba(0,0,0,0) 0%, #000000 100%);
+  opacity: 0.4;
   position: absolute;
   right: -16px;
   top: -16px;
-  opacity: 0.4;
 }
 .outerspatial-control-switcher button {
   background-color: #fff;
@@ -1302,8 +1302,7 @@
     margin-bottom: 12px;
     width: 232px;
   }
-    .outerspatial-control-switcher section.selected,
-    .outerspatial-control-switcher section.selected:hover {
+    .outerspatial-control-switcher section.selected {
       box-shadow: 0 0 4px 3px #7da836;
     }
     .outerspatial-control-switcher section:hover {
@@ -1315,15 +1314,15 @@
     .outerspatial-control-switcher section .baselayer-image-container {
       border-radius: 2px 2px 0 0;
       height: 103px;
-      width: 100%;
       overflow: hidden;
       pointer-events: none;
+      width: 100%;
     }
     .outerspatial-control-switcher section .baselayer-image {
       border-radius: 2px 2px 0 0;
+      bottom: 90px;
       pointer-events: none;
       position: relative;
-      bottom: 90px;
       width: 232px;
     }
     .outerspatial-control-switcher section .baselayer-name {
@@ -1339,76 +1338,6 @@
       padding: 0 12px 14px;
       pointer-events: none;
     }
-.outerspatial-control-switcher .aerial {
-  background-image: url('images/control/switcher/aerial.png');
-  height: 22px;
-  position: absolute;
-  width: 17px;
-}
-.outerspatial-control-switcher .aerial-small {
-  background-image: url('images/control/switcher/aerial-small.png');
-  height: 13px;
-  margin-left: 11px;
-  margin-top: 12px;
-  position: absolute;
-  width: 13px;
-}
-.outerspatial-control-switcher .generic {
-  background-image: url('images/control/switcher/eye.png');
-  height: 22px;
-  position: absolute;
-  width: 17px;
-}
-.outerspatial-control-switcher .generic-small {
-  background-image: url('images/control/switcher/eye-small.png');
-  height: 10px;
-  margin-top: 14px;
-  margin-left: 8px;
-  position: absolute;
-  width: 17px;
-}
-.outerspatial-control-switcher .nps {
-  background-image: url('images/control/switcher/nps.png');
-  height: 22px;
-  position: absolute;
-  width: 17px;
-}
-.outerspatial-control-switcher .nps-small {
-  background-image: url('images/control/switcher/nps-small.png');
-  height: 15px;
-  margin-left: 12px;
-  margin-top: 6px;
-  position: absolute;
-  width: 12px;
-}
-.outerspatial-control-switcher .street {
-  background-image: url('images/control/switcher/street.png');
-  height: 22px;
-  position: absolute;
-  width: 17px;
-}
-.outerspatial-control-switcher .street-small {
-  background-image: url('images/control/switcher/street-small.png');
-  height: 13px;
-  margin-left: 9px;
-  margin-top: 13px;
-  position: absolute;
-  width: 17px;
-}
-.outerspatial-control-switcher .topo {
-  background-image: url('images/control/switcher/topo.png');
-  height: 22px;
-  position: absolute;
-  width: 17px;
-}
-.outerspatial-control-switcher .topo-small {
-  background-image: url('images/control/switcher/topo-small.png');
-  height: 20px;
-  margin-left: 10px;
-  margin-top: 10px;
-  position: absolute;
-  width: 20px;
-}
 
 /* ZoomDisplay Control */
 .leaflet-control-zoomdisplay div {
