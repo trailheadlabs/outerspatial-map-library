@@ -1296,6 +1296,7 @@
   top: -16px;
 }
   .outerspatial-control-switcher section {
+    border-radius: 2px;
     box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.3);
     cursor: pointer;
     font-size: 14px;
