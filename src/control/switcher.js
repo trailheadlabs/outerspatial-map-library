@@ -161,6 +161,7 @@ var SwitcherControl = L.Control.extend({
     this._activeText.innerHTML = baseLayer.name;
   },
   _toggleList: function () {
+    var bottomControls = document.getElementsByClassName('leaflet-bottom');
     var topRightControls = document.getElementsByClassName('leaflet-top leaflet-right');
     var i;
     var mapHeight = this._map.getContainer().offsetHeight;
@@ -171,28 +172,24 @@ var SwitcherControl = L.Control.extend({
     this._listShadowBox.style.width = mapWidth + 'px';
 
     if (this._list.style.visibility && this._list.style.visibility === 'hidden') {
-      if (this._map.overviewControl) {
-        this._map.overviewControl.remove();
-      }
-
-      this._map.attributionControl.remove();
-
       for (i = 0; i < topRightControls.length; i++) {
         topRightControls[i].style.visibility = 'hidden';
+      }
+
+      for (i = 0; i < bottomControls.length; i++) {
+        bottomControls[i].style.display = 'none';
       }
 
       this._listShadowBox.style.visibility = 'visible';
       this._list.style.visibility = 'visible';
       this._list.setAttribute('aria-expanded', true);
     } else {
-      if (this._map.overviewControl) {
-        this._map.addControl(this._map.overviewControl);
-      }
-
-      this._map.addControl(this._map.attributionControl);
-
       for (i = 0; i < topRightControls.length; i++) {
         topRightControls[i].style.visibility = 'visible';
+      }
+
+      for (i = 0; i < bottomControls.length; i++) {
+        bottomControls[i].style.display = '';
       }
 
       this._listShadowBox.style.visibility = 'hidden';
