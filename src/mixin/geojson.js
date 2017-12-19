@@ -9,6 +9,7 @@ var util = require('../util/util');
 
 module.exports = {
   _types: {
+    'GeometryCollection': 'collection',
     'LineString': 'line',
     'MultiLineString': 'line',
     'MultiPoint': 'point',
@@ -61,8 +62,32 @@ module.exports = {
     if (feature.geometry && feature.geometry.type) {
       var type = this._types[feature.geometry.type];
 
-      if (this._geometryTypes.indexOf(type) === -1) {
-        this._geometryTypes.push(type);
+      if (type === 'collection') {
+        for (var i = 0; i < feature.geometry.geometries.length - 1; i++) {
+          var geometry = feature.geometry.geometries[i];
+
+          type = (function () {
+            var t = geometry.type.toLowerCase();
+
+            if (t.indexOf('line') !== -1) {
+              return 'line';
+            } else if (t.indexOf('point') !== -1) {
+              return 'point';
+            } else if (t.indexOf('polygon') !== -1) {
+              return 'polygon';
+            } else if (t === 'geometrycollection') {
+              return 'collection';
+            }
+          })();
+
+          if (this._geometryTypes.indexOf(type) === -1) {
+            this._geometryTypes.push(type);
+          }
+        }
+      } else {
+        if (this._geometryTypes.indexOf(type) === -1) {
+          this._geometryTypes.push(type);
+        }
       }
     }
   },
@@ -339,6 +364,32 @@ module.exports = {
           return 'collection';
         }
       })();
+
+      if (type === 'collection') {
+        var collectionTypes = [];
+
+        feature.geometry.geometries.forEach(function (geometry) {
+          if (collectionTypes.indexOf(geometry.type) === -1) {
+            collectionTypes.push(geometry.type);
+          }
+        });
+
+        if (collectionTypes.length === 1) {
+          type = (function () {
+            var t = collectionTypes[0].toLowerCase();
+
+            if (t.indexOf('line') !== -1) {
+              return 'line';
+            } else if (t.indexOf('point') !== -1) {
+              return 'point';
+            } else if (t.indexOf('polygon') !== -1) {
+              return 'polygon';
+            } else if (t === 'geometrycollection') {
+              return 'collection';
+            }
+          })();
+        }
+      }
 
       if (type !== 'point') {
         // TODO: Add support for passing Leaflet styles in.
