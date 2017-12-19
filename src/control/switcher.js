@@ -60,7 +60,6 @@ var SwitcherControl = L.Control.extend({
     this._list.style.visibility = 'hidden';
     this._list.setAttribute('id', 'basemap_listbox');
     this._list.setAttribute('role', 'listbox');
-    L.DomUtil.create('ico', null, this._activeIcon);
     this._activeContainer = L.DomUtil.create('div', 'current-baselayer', container);
     title = L.DomUtil.create('div', 'title', this._activeContainer);
     title.innerHTML = 'BASEMAP';
@@ -74,6 +73,20 @@ var SwitcherControl = L.Control.extend({
     this._button.setAttribute('role', 'combobox');
     L.DomEvent.addListener(this._button, 'click', this._toggleList, this);
     L.DomEvent.addListener(this._listShadowBox, 'click', this._toggleList, this);
+
+    if (this._map.getContainer().clientWidth < 600) {
+      this.collapse();
+    }
+  },
+  collapse: function () {
+    this._activeContainer.style.display = 'none';
+    this.getContainer().style.minWidth = 0;
+    this._button.innerHTML = 'Basemap';
+  },
+  expand: function () {
+    this._activeContainer.style.display = 'block';
+    this.getContainer().style.minWidth = '280px';
+    this._button.innerHTML = 'Change';
   },
   _onClick: function (e) {
     var target = util.getEventObjectTarget(e);
@@ -231,6 +244,14 @@ var SwitcherControl = L.Control.extend({
 L.Map.addInitHook(function () {
   if (this.options.baseLayers && this.options.baseLayers.length > 1) {
     this.switcherControl = L.outerspatial.control.switcher(this.options.baseLayers).addTo(this);
+
+    this.on('resize', function (e) {
+      if (e.newSize.x > 598) {
+        this.switcherControl.expand();
+      } else {
+        this.switcherControl.collapse();
+      }
+    });
   }
 });
 

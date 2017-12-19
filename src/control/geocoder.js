@@ -75,6 +75,10 @@ var GeocoderControl = L.Control.extend({
       }
     }
 
+    if (this._map.getContainer().clientWidth < 375) {
+      this.collapse();
+    }
+
     return container;
   },
   onRemove: function (map) {
@@ -89,6 +93,14 @@ var GeocoderControl = L.Control.extend({
         map.attributionControl.removeAttribution(attribution);
       }
     }
+  },
+  collapse: function () {
+    this._input.style.width = '160px';
+    this._ul.style.width = '200px';
+  },
+  expand: function () {
+    this._input.style.width = '200px';
+    this._ul.style.width = '240px';
   },
   _checkScroll: function () {
     if (this._selected) {
@@ -363,6 +375,14 @@ L.Map.addInitHook(function () {
 
     this.geocoderControl = L.outerspatial.control.geocoder(options).addTo(this);
   }
+
+  this.on('resize', function (e) {
+    if (e.newSize.x >= 373) {
+      this.geocoderControl.expand();
+    } else {
+      this.geocoderControl.collapse();
+    }
+  });
 });
 
 module.exports = function (options) {
