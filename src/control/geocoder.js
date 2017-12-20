@@ -374,15 +374,14 @@ L.Map.addInitHook(function () {
     }
 
     this.geocoderControl = L.outerspatial.control.geocoder(options).addTo(this);
+    this.on('resize', function (e) {
+      if (e.newSize.x >= 373) {
+        this.geocoderControl.expand();
+      } else {
+        this.geocoderControl.collapse();
+      }
+    });
   }
-
-  this.on('resize', function (e) {
-    if (e.newSize.x >= 373) {
-      this.geocoderControl.expand();
-    } else {
-      this.geocoderControl.collapse();
-    }
-  });
 });
 
 module.exports = function (options) {
