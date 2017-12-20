@@ -256,9 +256,11 @@
 .outerspatial button,
 .outerspatial input,
 .outerspatial select,
+.outerspatial select[multiple],
 .outerspatial textarea {
+  background-image: none;
   font-family: inherit;
-  font-size: 100%;
+  font-size: inherit;
   margin: 0;
 }
 .outerspatial button,
@@ -281,19 +283,6 @@
 .outerspatial input::-moz-focus-inner {
   border: 0;
   padding: 0;
-}
-.outerspatial input,
-.outerspatial button,
-.outerspatial select,
-.outerspatial textarea {
-  font-family: inherit;
-  font-size: inherit;
-}
-.outerspatial button,
-.outerspatial input,
-.outerspatial select[multiple],
-.outerspatial textarea {
-  background-image: none;
 }
 .outerspatial .btn {
   border: 1px solid transparent;
