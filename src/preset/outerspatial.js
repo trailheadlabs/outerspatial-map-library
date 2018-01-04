@@ -91,14 +91,24 @@ var OuterSpatialLayer = L.GeoJSON.extend({
       if (!config.title && !config.description) {
         config.title = function (properties) {
           var banner = '';
+          var title;
+          var subtitle;
+
+          if (properties['name']) {
+            title = '{{name}}';
+            subtitle = (type === 'Area' || type === 'Trail Segment' ? type : type + (properties.area_id ? ' in ' + properties.area.name : ''));
+          } else {
+            title = type;
+            subtitle = properties.area.name ? properties.area.name : null;
+          }
 
           if (properties['tag:Status:closed'] === 'yes') {
             banner = '<img class="banner" width=51 height=20 alt="Closed banner" src="' + window.L.Icon.Default.imagePath + '/outerspatial/closed-indicator-right' + (L.Browser.retina ? '@2x' : '') + '.png"/>';
           }
 
           return {
-            title: '{{name}}',
-            subtitle: (type === 'Area' || type === 'Trail Segment' ? type : type + (properties.area_id ? ' in ' + properties.area.name : '')),
+            title: title,
+            subtitle: subtitle,
             image: banner
           };
         };
