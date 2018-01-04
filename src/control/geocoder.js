@@ -28,7 +28,7 @@ var GeocoderControl = L.Control.extend({
   },
   onAdd: function (map) {
     var attribution = GeocoderControl.ATTRIBUTIONS[this.options.provider.toUpperCase()];
-    var container = L.DomUtil.create('div', 'leaflet-control-geocoder');
+    var container = L.DomUtil.create('form', 'leaflet-control-geocoder');
     var me = this;
     var stopPropagation = L.DomEvent.stopPropagation;
 
@@ -198,6 +198,7 @@ var GeocoderControl = L.Control.extend({
 
     me._ul.style.display = 'none';
     me._map.options.div.focus();
+    this._container.reset();
   },
   _hideLoading: function () {
     L.DomEvent.on(this._button, 'click', this._geocodeRequest, this);
