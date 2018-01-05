@@ -74,20 +74,30 @@ if (typeof window.OuterSpatial !== 'object') {
       var dev = false;
       var head = document.head || document.getElementsByTagName('head')[0];
       var loaderCss = '' +
-        '.loader {' +
-          '-webkit-animation: spin 0.9s linear infinite;' +
-          'animation: spin 0.9s linear infinite;' +
-          'border: 1.1em solid rgba(0, 0, 0, 0.2);' +
+        '.centeredLoader {' +
+          '-ms-flex-pack: center;' +
+          '-ms-flex-align: center;' +
+          'align-items: center;' +
+          'display: flex;' +
+          'height: 100%;' +
+          'justify-content: center;' +
+        '}' +
+        '.centeredLoader-loader {' +
           'border-radius: 50%;' +
-          'border-top: 1.1em solid #3bafda;' +
-          'height: 10em;' +
           'width: 10em;' +
+          'height: 10em;' +
+          'margin: 60px 0;' +
+          'font-size: 4px;' +
+          'position: relative;' +
+          'text-indent: -9999em;' +
+          'border-top: 1.1em solid rgba(0, 0, 0, 0.2);' +
+          'border-right: 1.1em solid rgba(0, 0, 0, 0.2);' +
+          'border-bottom: 1.1em solid rgba(0, 0, 0, 0.2);' +
+          'border-left: 1.1em solid rgba(0, 0, 0, 0.5);' +
+          'transform: translateZ(0);' +
+          'animation: load8 1.1s infinite linear;' +
         '}' +
-        '@-webkit-keyframes spin {' +
-          '0% { -webkit-transform: rotate(0deg); }' +
-          '100% { -webkit-transform: rotate(360deg); }' +
-        '}' +
-        '@keyframes spin {' +
+        '@keyframes load8 {' +
           '0% { transform: rotate(0deg); }' +
           '100% { transform: rotate(360deg); }' +
         '}' +
@@ -200,7 +210,10 @@ if (typeof window.OuterSpatial !== 'object') {
           div = document.getElementById(div);
         }
 
-        mask.innerHTML = '<div style="height:114px;left:50%;margin:-57px 0 0 -57px;position:absolute;width:114px;top:50%;" class="loader"></div>';
+        mask.innerHTML = '' +
+          '<div class="centeredLoader">' +
+            '<div class="centeredLoader-loader"></div>' +
+          '</div>';
         div.appendChild(mask);
 
         return mask;
