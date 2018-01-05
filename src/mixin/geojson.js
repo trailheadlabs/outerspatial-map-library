@@ -119,6 +119,32 @@ module.exports = {
       // TODO: If typeof config.onEachFeature === 'function', save it and call it.
       config.onEachFeature = function (feature, layer) {
         var clicks = 0;
+        var geometry = layer.feature.geometry;
+
+        function createBuffer (layer, latLngs) {
+          var polyline;
+
+          if (latLngs === undefined) {
+            latLngs = layer.getLatLngs();
+          }
+
+          polyline = L.polyline(latLngs, {
+            opacity: 0,
+            pane: me.options.pane,
+            weight: 15
+          });
+          polyline.on('click', function (e) {
+            layer.fire('click', e);
+          });
+          polyline.on('mouseover', function (e) {
+            layer.fire('mouseover', e);
+          });
+          polyline.on('mouseout', function (e) {
+            layer.fire('mouseout', e);
+          });
+
+          return polyline;
+        }
 
         function mouseout (e) {
           var layer = e.target;
@@ -274,6 +300,22 @@ module.exports = {
             activeTip = null;
           }
         });
+
+        if (geometry.type === 'MultiLineString' || geometry.type === 'LineString' || geometry.type === 'GeometryCollection') {
+          if (geometry.geometries) {
+            geometry.geometries.forEach(function (geometry) {
+              if (geometry.type === 'MultiLineString') {
+                geometry.coordinates.forEach(function (line) {
+                  me.addLayer(createBuffer(layer, L.GeoJSON.coordsToLatLngs(line)));
+                });
+              } else {
+                me.addLayer(createBuffer(layer, L.GeoJSON.coordsToLatLngs(geometry.coordinates)));
+              }
+            });
+          } else {
+            me.addLayer(createBuffer(layer));
+          }
+        }
       };
     }
 
