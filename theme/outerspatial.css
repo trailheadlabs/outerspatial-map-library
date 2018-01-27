@@ -754,7 +754,9 @@
   }
   .outerspatial .leaflet-popup-content .description section {
     border-bottom: solid 1px #e3dfd8;
+    overflow-wrap: break-word;
     padding: 14px 0;
+    word-wrap: break-word;
   }
   .outerspatial .leaflet-popup-content .description section h5 {
     color: #3e3e3f;
