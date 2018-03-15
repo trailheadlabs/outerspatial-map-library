@@ -36,80 +36,80 @@ var OuterSpatialLayer = L.GeoJSON.extend({
   }, {
     type: 'Store',
     symbol: 'store',
-    minZoom: 7,
+    minZoom: 14,
     minZoomFactor: 0,
     maxZoom: 22,
     priority: 3
   }, {
     type: 'Restrooms',
     symbol: 'restrooms',
-    minZoom: 12,
+    minZoom: 14,
     maxZoom: 22,
     priority: 3
   }, {
     type: 'Drinking Water',
     symbol: 'drinking-water',
-    minZoom: 16,
+    minZoom: 14,
     maxZoom: 22,
     priority: 4
   }, {
     type: 'Food Service',
     symbol: 'food-service',
-    minZoom: 16,
+    minZoom: 14,
     maxZoom: 22,
     priority: 4
   }, {
     type: 'Information',
     symbol: 'information',
-    minZoom: 16,
+    minZoom: 14,
     maxZoom: 22,
     priority: 4
   }, {
     type: 'Interpretive Exhibit',
     symbol: 'interpretive-exhibit',
-    minZoom: 16,
+    minZoom: 14,
     maxZoom: 22,
     priority: 4
   }, {
     type: 'Parking',
     symbol: 'parking',
-    minZoom: 16,
+    minZoom: 14,
     maxZoom: 22,
     priority: 4
   }, {
     type: 'Playground',
     symbol: 'playground',
-    minZoom: 16,
+    minZoom: 14,
     maxZoom: 22,
     priority: 4
   }, {
     type: 'POI',
     symbol: 'dot',
-    minZoom: 16,
+    minZoom: 14,
     maxZoom: 22,
     priority: 4
   }, {
     type: 'Sanitary Disposal Station',
     symbol: 'sanitary-disposal-station',
-    minZoom: 16,
+    minZoom: 14,
     maxZoom: 22,
     priority: 4
   }, {
     type: 'Showers',
     symbol: 'showers',
-    minZoom: 16,
+    minZoom: 14,
     maxZoom: 22,
     priority: 4
   }, {
     type: null,
     symbol: 'letter-x',
-    minZoom: 16,
+    minZoom: 14,
     maxZoom: 22,
     priority: 4
   }, {
     type: '',
     symbol: 'letter-x',
-    minZoom: 16,
+    minZoom: 14,
     maxZoom: 22,
     priority: 4
   }],
