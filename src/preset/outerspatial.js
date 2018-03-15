@@ -5,13 +5,121 @@
 var reqwest = require('reqwest');
 
 var OuterSpatialLayer = L.GeoJSON.extend({
+  _include: [{
+    type: 'Visitor Center',
+    symbol: 'visitor-center',
+    minZoom: 4,
+    minZoomFactor: 0,
+    maxZoom: 22,
+    priority: 1
+  }, {
+    type: 'Entrance',
+    symbol: 'entrance-station',
+    minZoom: 4,
+    minZoomFactor: 0,
+    maxZoom: 22,
+    priority: 1
+  }, {
+    type: 'Campground',
+    symbol: 'campground',
+    minZoom: 7,
+    minZoomFactor: 0,
+    maxZoom: 22,
+    priority: 2
+  }, {
+    type: 'Trailhead',
+    symbol: 'trailhead',
+    minZoom: 7,
+    minZoomFactor: 0,
+    maxZoom: 22,
+    priority: 3
+  }, {
+    type: 'Store',
+    symbol: 'store',
+    minZoom: 7,
+    minZoomFactor: 0,
+    maxZoom: 22,
+    priority: 3
+  }, {
+    type: 'Restrooms',
+    symbol: 'restrooms',
+    minZoom: 12,
+    maxZoom: 22,
+    priority: 3
+  }, {
+    type: 'Drinking Water',
+    symbol: 'drinking-water',
+    minZoom: 16,
+    maxZoom: 22,
+    priority: 4
+  }, {
+    type: 'Food Service',
+    symbol: 'food-service',
+    minZoom: 16,
+    maxZoom: 22,
+    priority: 4
+  }, {
+    type: 'Information',
+    symbol: 'information',
+    minZoom: 16,
+    maxZoom: 22,
+    priority: 4
+  }, {
+    type: 'Interpretive Exhibit',
+    symbol: 'interpretive-exhibit',
+    minZoom: 16,
+    maxZoom: 22,
+    priority: 4
+  }, {
+    type: 'Parking',
+    symbol: 'parking',
+    minZoom: 16,
+    maxZoom: 22,
+    priority: 4
+  }, {
+    type: 'Playground',
+    symbol: 'playground',
+    minZoom: 16,
+    maxZoom: 22,
+    priority: 4
+  }, {
+    type: 'POI',
+    symbol: 'dot',
+    minZoom: 16,
+    maxZoom: 22,
+    priority: 4
+  }, {
+    type: 'Sanitary Disposal Station',
+    symbol: 'sanitary-disposal-station',
+    minZoom: 16,
+    maxZoom: 22,
+    priority: 4
+  }, {
+    type: 'Showers',
+    symbol: 'showers',
+    minZoom: 16,
+    maxZoom: 22,
+    priority: 4
+  }, {
+    type: null,
+    symbol: 'letter-x',
+    minZoom: 16,
+    maxZoom: 22,
+    priority: 4
+  }, {
+    type: '',
+    symbol: 'letter-x',
+    minZoom: 16,
+    maxZoom: 22,
+    priority: 4
+  }],
   includes: [
     require('../mixin/geojson')
   ],
   options: {
     environment: 'production',
-    searchable: false,
-    formatPopups: true
+    formatPopups: true,
+    searchable: false
   },
   initialize: function (options) {
     var me;
@@ -35,7 +143,11 @@ var OuterSpatialLayer = L.GeoJSON.extend({
       console.error('The "organizationId" property is required for the OuterSpatial preset.');
     }
 
-    type = singularTypes[this.options.locationType];
+    type = this._singularType = singularTypes[this.options.locationType];
+
+    if (type === 'Point of Interest' || type === 'Trailhead' || type === 'Campground') {
+      this.options.prioritization = true;
+    }
 
     if (this.options.searchable) {
       options.search = function (value) {
@@ -257,6 +369,7 @@ var OuterSpatialLayer = L.GeoJSON.extend({
         me.errorFired = obj;
       },
       success: function (response) {
+        var config;
         var obj;
 
         if (response && response.responseText) {
@@ -266,10 +379,66 @@ var OuterSpatialLayer = L.GeoJSON.extend({
             me._collapseFeatureAttributes(geojson.features);
           }
 
-          L.GeoJSON.prototype.initialize.call(me, geojson, me.options);
+          if (me.options.locationType === 'campgrounds' || me.options.locationType === 'trailheads') {
+            config = (function () {
+              var c;
+
+              for (var j = 0; j < me._include.length; j++) {
+                if (me._include[j].type === type) {
+                  c = me._include[j];
+                  break;
+                }
+              }
+
+              if (c) {
+                return c;
+              }
+            })();
+            L.extend(me.options, {
+              zIndexOffset: config.priority * -1000,
+              styles: {
+                point: {
+                  'marker-library': 'outerspatialsymbollibrary',
+                  'marker-symbol': config.symbol + '-white'
+                }
+              }
+            });
+            L.GeoJSON.prototype.initialize.call(me, geojson, me.options);
+          } else if (me.options.locationType === 'points_of_interest') {
+            L.GeoJSON.prototype.initialize.call(me, geojson, me.options);
+
+            me.getLayers().forEach(function (layer) {
+              config = (function () {
+                var c;
+
+                for (var i = 0; i < me._include.length; i++) {
+                  if (me._include[i].type === layer.feature.properties.point_type) {
+                    c = me._include[i];
+                    break;
+                  }
+                }
+
+                if (c) {
+                  return c;
+                }
+              })();
+              layer.setZIndexOffset(config.priority * -1000);
+              var icon = L.outerspatial.icon.outerspatialsymbollibrary({
+                'marker-symbol': config.symbol + '-white'
+              });
+              layer.setIcon(icon);
+            });
+          } else {
+            L.GeoJSON.prototype.initialize.call(me, geojson, me.options);
+          }
+
           me.fire('ready');
           me._loaded = true;
           me.readyFired = true;
+
+          if (me.options.prioritization) {
+            me._update();
+          }
         } else {
           obj = {
             message: 'There was an error loading the data from OuterSpatial.'
@@ -297,6 +466,17 @@ var OuterSpatialLayer = L.GeoJSON.extend({
         })
         .join(' ');
     }
+  },
+  onAdd: function () {
+    var me = this;
+
+    if (me.options.prioritization) {
+      me._map.on('moveend', function () {
+        me._update();
+      });
+    }
+
+    L.GeoJSON.prototype.onAdd.call(this, this._map);
   },
   _collapseFeatureAttributes: function (features) {
     features.forEach(function (feature) {
@@ -336,6 +516,113 @@ var OuterSpatialLayer = L.GeoJSON.extend({
         });
       }
     });
+  },
+  _update: function () {
+    var me = this;
+    var active = [];
+    var bounds = me._map.getBounds().pad(0.1);
+    var layers = me.getLayers();
+    var config;
+    var i;
+    var marker;
+    var removedLayersClone;
+
+    if (!me._removedLayers) {
+      me._removedLayers = [];
+    }
+
+    for (i = 0; i < me._include.length; i++) {
+      config = me._include[i];
+
+      if (me._map.getZoom() >= config.minZoom) {
+        active.push(config.type);
+      }
+    }
+
+    i = layers.length;
+
+    while (i--) {
+      var pointType;
+      marker = layers[i];
+
+      if (marker.feature.properties.point_type !== undefined) {
+        pointType = marker.feature.properties.point_type;
+      } else {
+        pointType = me._singularType;
+      }
+
+      if (active.indexOf(pointType) === -1 || !bounds.contains(marker.getLatLng())) {
+        me._removedLayers.push(marker);
+        marker.deselectLayer();
+        me.removeLayer(marker);
+      }
+    }
+
+    removedLayersClone = me._removedLayers.slice(0);
+
+    for (var j = 0; j < removedLayersClone.length; j++) {
+      var type;
+      var index;
+
+      marker = removedLayersClone[j];
+
+      if (marker.feature.properties.point_type !== undefined) {
+        type = marker.feature.properties.point_type;
+      } else {
+        type = me._singularType;
+      }
+
+      if (active.indexOf(type) > -1) {
+        if (bounds.contains(marker.getLatLng())) {
+          var factor;
+
+          config = (function () {
+            var c;
+
+            for (var j = 0; j < me._include.length; j++) {
+              if (me._include[j].type === type) {
+                c = me._include[j];
+                break;
+              }
+            }
+
+            if (c) {
+              return c;
+            }
+          })();
+          factor = config.minZoomFactor;
+
+          if (typeof factor === 'number') {
+            var minZoom = config.minZoom;
+            var zoom = 16;
+
+            if (typeof minZoom === 'number' && ((minZoom + factor) < 16)) {
+              zoom = minZoom + factor;
+            }
+
+            if (me._map.getZoom() >= zoom) {
+              me.addLayer(marker);
+              index = me._removedLayers.indexOf(marker);
+
+              if (index > -1) {
+                me._removedLayers.splice(index, 1);
+              }
+            } else if (me.hasLayer(marker)) {
+              me._removedLayers.push(marker);
+              marker.deselectLayer();
+              me.removeLayer(marker);
+            }
+          } else if (!me.hasLayer(marker)) {
+            me.addLayer(marker);
+            index = me._removedLayers.indexOf(marker);
+
+            if (index > -1) {
+              me._removedLayers.splice(index, 1);
+            }
+          }
+        }
+      }
+    }
   }
 });
 
