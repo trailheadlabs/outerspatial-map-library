@@ -230,42 +230,41 @@ module.exports = {
 
           if (!map) {
             map = layer._map;
-            detectAvailablePopupSpace = map.options.detectAvailablePopupSpace;
           }
 
           map.setSelectedLayer(layer);
+          detectAvailablePopupSpace = map.options.detectAvailablePopupSpace;
 
           if (map._controllingInteractivity === 'map') {
             clicks = 0;
 
             setTimeout(function () {
               if (!clicks) {
-                if (layer._popup) {
-                  layer.openPopup();
-                } else {
-                  var popup = L.outerspatial.popup({
-                    maxHeight: (detectAvailablePopupSpace ? util._getAvailableVerticalSpace(map) : undefined),
-                    maxWidth: (detectAvailablePopupSpace ? (util._getAvailableHorizontalSpace(map) < 300 ? util._getAvailableHorizontalSpace(map) : 300) : 300)
-                  });
-                  var properties = feature.properties;
-                  var html = popup._resultToHtml(properties, config.popup, null, null, map.options.popup);
+                var popupWidth = (detectAvailablePopupSpace ? (util._getAvailableHorizontalSpace(map) < 300 ? util._getAvailableHorizontalSpace(map) : 300) : 300);
+                var popup = L.outerspatial.popup({
+                  maxHeight: (detectAvailablePopupSpace ? util._getAvailableVerticalSpace(map) : undefined),
+                  maxWidth: popupWidth,
+                  minWidth: popupWidth
+                });
+                var properties = feature.properties;
+                var html = popup._resultToHtml(properties, config.popup, null, null, map.options.popup);
 
-                  if (html) {
-                    if (typeof html === 'string') {
-                      html = util.unescapeHtml(html);
-                    }
+                if (html) {
+                  if (typeof html === 'string') {
+                    html = util.unescapeHtml(html);
+                  }
 
-                    if (feature.geometry.type === 'Point') {
-                      popup.setContent(html);
-                      layer
-                        .bindPopup(popup)
-                        .openPopup();
-                    } else {
-                      popup
-                        .setContent(html)
-                        .setLatLng(e.latlng.wrap())
-                        .openOn(layer._map);
-                    }
+                  if (feature.geometry.type === 'Point') {
+                    popup.setContent(html);
+                    layer
+                      .bindPopup(popup)
+                      .openPopup()
+                      .unbindPopup(popup);
+                  } else {
+                    popup
+                      .setContent(html)
+                      .setLatLng(e.latlng.wrap())
+                      .openOn(layer._map);
                   }
                 }
               }

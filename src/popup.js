@@ -9,12 +9,12 @@ var Popup = L.Popup.extend({
   options: {
     autoPanPadding: null,
     autoPanPaddingBottomRight: [
-      60,
-      90
+      70,
+      70
     ],
     autoPanPaddingTopLeft: [
-      60,
-      160
+      70,
+      70
     ],
     offset: [
       0,

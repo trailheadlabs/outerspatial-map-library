@@ -163,10 +163,16 @@ module.exports = {
     }
   },
   _getAvailableHorizontalSpace: function (map) {
-    return map.getContainer().clientWidth - 120;
+    return map.getContainer().clientWidth - 155;
   },
   _getAvailableVerticalSpace: function (map) {
-    return map.getContainer().clientHeight - 300;
+    var availableVerticalSpace = map.getContainer().clientHeight - 155;
+
+    if (availableVerticalSpace > 650) {
+      return 650;
+    } else {
+      return availableVerticalSpace;
+    }
   },
   _lazyLoader: require('./lazyloader.js'),
   _parseLocalUrl: function (url) {
