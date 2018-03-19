@@ -63,14 +63,14 @@ var OverviewControl = L.Control.extend({
     this._miniMap = this.L = new L.Map(this._container, {
       attributionControl: false,
       autoToggleDisplay: this.options.autoToggleDisplay,
-      boxZoom: !this.options.zoomLevelFixed,
+      boxZoom: !this.options.zoomLevelFixed ? map.options.boxZoom : false,
       crs: map.options.crs,
-      doubleClickZoom: !this.options.zoomLevelFixed,
+      doubleClickZoom: !this.options.zoomLevelFixed ? map.options.doubleClickZoom : false,
       homeControl: false,
       keyboard: false,
-      scrollWheelZoom: !this.options.zoomLevelFixed,
+      scrollWheelZoom: !this.options.zoomLevelFixed ? map.options.scrollWheelZoom : false,
       smallzoomControl: false,
-      touchZoom: !this.options.zoomLevelFixed,
+      touchZoom: !this.options.zoomLevelFixed ? map.options.touchZoom : false,
       zoomAnimation: this.options.zoomAnimation,
       zoomControl: false
     });
