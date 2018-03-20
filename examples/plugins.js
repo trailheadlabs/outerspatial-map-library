@@ -42,7 +42,7 @@ window.OuterSpatial = {
     url: 'https://nps-yell.cartodb.com/api/v2/sql?q=SELECT * FROM roads&format=geojson'
   }],
   plugins: [{
-    js: '{{ path }}/plugins/Leaflet.GeometryUtil/0.8.0/plugin.min.js'
+    js: '{{ path }}/plugins/Leaflet.GeometryUtil/0.8.1/plugin.min.js'
   }, {
     js: '{{ path }}/plugins/Leaflet.Snap/0.4.0/plugin.min.js'
   }],
