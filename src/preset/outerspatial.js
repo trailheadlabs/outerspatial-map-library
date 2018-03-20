@@ -3,6 +3,7 @@
 'use strict';
 
 var reqwest = require('reqwest');
+var color = require('color');
 
 var OuterSpatialLayer = L.GeoJSON.extend({
   _include: [{
@@ -394,13 +395,15 @@ var OuterSpatialLayer = L.GeoJSON.extend({
                 return c;
               }
             })();
+            var hasStyle = me.options.styles && me.options.styles.point;
+
             L.extend(me.options, {
               zIndexOffset: config.priority * -1000,
               styles: {
-                point: {
+                point: Object.assign({
                   'marker-library': 'outerspatialsymbollibrary',
-                  'marker-symbol': config.symbol + '-white'
-                }
+                  'marker-symbol': config.symbol + (hasStyle && color(me.options.styles.point['marker-color']).luminosity() > 0.5 ? '-black' : '-white')
+                }, hasStyle ? me.options.styles.point : {})
               }
             });
             L.GeoJSON.prototype.initialize.call(me, geojson, me.options);
@@ -423,9 +426,11 @@ var OuterSpatialLayer = L.GeoJSON.extend({
                 }
               })();
               layer.setZIndexOffset(config.priority * -1000);
-              var icon = L.outerspatial.icon.outerspatialsymbollibrary({
-                'marker-symbol': config.symbol + '-white'
-              });
+              var hasStyle = layer.options.styles && layer.options.styles.point;
+              var icon = L.outerspatial.icon.outerspatialsymbollibrary(Object.assign({
+                'marker-library': 'outerspatialsymbollibrary',
+                'marker-symbol': config.symbol + (hasStyle && color(layer.options.styles.point['marker-color']).luminosity() > 0.5 ? '-black' : '-white')
+              }, hasStyle ? layer.options.styles.point : {}));
               layer.setIcon(icon);
             });
           } else {

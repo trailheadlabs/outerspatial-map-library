@@ -6,6 +6,7 @@
 var colorPresets = require('../preset/colors.json');
 var topojson = require('../util/topojson');
 var util = require('../util/util');
+var color = require('color');
 
 module.exports = {
   _types: {
@@ -158,7 +159,7 @@ module.exports = {
           var layer = e.target;
           var tooltipConfig = config.tooltip;
 
-          if (!layer._map._isCurrentlySelected(layer)) {
+          if (!layer.isSelected) {
             layer.selectLayer();
           }
 
@@ -195,12 +196,30 @@ module.exports = {
               delete this._circle;
             }
           }
+
+          this.isSelected = false;
         };
 
         layer.selectLayer = function () {
-          if (!this._map._isCurrentlySelected(this)) {
+          if (!this._map._isCurrentlySelected(this) && !this.isSelected) {
             if (this.feature.geometry.type !== 'Point') {
-              this.setStyle({color: 'yellow'});
+              var options = this.feature.geometry.type === 'GeometryCollection' ? this.getLayers()[0].options : this.options;
+              var selectedColor = color(options.color);
+
+              if (selectedColor.luminosity() === 0 || selectedColor.luminosity() === 1) {
+                selectedColor = color('grey');
+              } else if (selectedColor.isDark()) {
+                selectedColor = selectedColor.whiten(0.5);
+              } else {
+                selectedColor = selectedColor.blacken(0.5);
+              }
+
+              this.setStyle({
+                stroke: true,
+                opacity: 1,
+                color: selectedColor.hex(),
+                weight: Number(options.weight) + 3
+              });
             } else {
               if (!this._circle) {
                 this._circle = L.circleMarker(layer.getLatLng(), {radius: 10, color: 'yellow', fillColor: 'yellow', fillOpacity: 0.2});
@@ -208,6 +227,8 @@ module.exports = {
 
               this._circle.addTo(this._map);
             }
+
+            this.isSelected = true;
           }
         };
 
