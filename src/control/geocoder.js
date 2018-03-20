@@ -49,6 +49,11 @@ var GeocoderControl = L.Control.extend({
           me._resultsReady(this.value, me._results);
         }
       })
+      .on(this._input, 'blur', function () {
+        setTimeout(function () {
+          me._clearResults();
+        }, 500);
+      })
       .on(this._input, 'mousewheel', stopPropagation)
       .on(this._ul, 'mousewheel', stopPropagation);
 
@@ -195,10 +200,7 @@ var GeocoderControl = L.Control.extend({
     }
 
     me._map.setSelectedLayer(me._results[id].layer);
-
-    me._ul.style.display = 'none';
     me._map.options.div.focus();
-    this._container.reset();
   },
   _hideLoading: function () {
     L.DomEvent.on(this._button, 'click', this._geocodeRequest, this);
