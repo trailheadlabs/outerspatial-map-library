@@ -124,6 +124,8 @@ MapExt = L.Map.extend({
     var mapWrapper = L.DomUtil.create('div', 'outerspatial-map-wrapper');
     var me = this;
     var modules = L.DomUtil.create('div', 'outerspatial-modules');
+    var dockedPopupWrapper = L.DomUtil.create('div', 'outerspatial-docked-popup');
+    var dockedPopupClose = L.DomUtil.create('a', 'outerspatial-docked-popup leaflet-popup-close-button', dockedPopupWrapper);
     var outerspatial = L.DomUtil.create('div', 'outerspatial' + ((L.Browser.ie6 || L.Browser.ie7) ? ' outerspatial-oldie' : '') + (L.Browser.retina ? ' outerspatial-retina' : ''));
     var toolbar = L.DomUtil.create('div', 'outerspatial-toolbar');
     var toolbarLeft = L.DomUtil.create('ul', 'left');
@@ -134,6 +136,7 @@ MapExt = L.Map.extend({
     L.Util.setOptions(this, options);
     options.div.insertBefore(outerspatial, options.div.hasChildNodes() ? options.div.childNodes[0] : null);
     outerspatial.appendChild(modules);
+    outerspatial.appendChild(dockedPopupWrapper);
     outerspatial.appendChild(container);
     toolbar.appendChild(toolbarLeft);
     toolbar.appendChild(toolbarRight);
@@ -149,6 +152,11 @@ MapExt = L.Map.extend({
     me._defaultCursor = me.getContainer().style.cursor;
     me._frame = null;
     me._selectedLayer = null;
+    L.DomUtil.create('div', 'outerspatial-docked-popup-content leaflet-popup-content', dockedPopupWrapper);
+    dockedPopupClose.innerHTML = 'x';
+    dockedPopupClose.addEventListener('click', function () {
+      me.closeDockedPopup();
+    }, false);
 
     if ((window.self !== window.top) && document.referrer !== '') {
       me._frame = window.frameElement;
@@ -304,6 +312,7 @@ MapExt = L.Map.extend({
     }
 
     me._initializeModules();
+    me._initializeDockedPopup();
     me._setupPopup();
     me._setupTooltip();
 
@@ -336,6 +345,11 @@ MapExt = L.Map.extend({
   },
   _createMapboxLayer: function (config) {
     return L.outerspatial.layer[config.type][config.styled === true ? 'styled' : 'tiled'](config);
+  },
+  _initializeDockedPopup: function () {
+    this._divWrapper = this._container.parentNode.parentNode;
+    this._divDockedPopup = util.getChildElementsByClassName(this._divWrapper.parentNode.parentNode, 'outerspatial-docked-popup')[0];
+    this._divDockedPopupContent = util.getChildElementsByClassName(this._divWrapper.parentNode.parentNode, 'outerspatial-docked-popup-content')[0];
   },
   _initializeModules: function () {
     if (this.options && this.options.modules && L.Util.isArray(this.options.modules) && this.options.modules.length) {
@@ -942,6 +956,28 @@ MapExt = L.Map.extend({
     }
 
     // TODO: Fire module 'show' event.
+  },
+  setDockedPopupContent: function (html) {
+    if (this.isDockedPopupOpen) {
+      this._divDockedPopupContent.innerHTML = '';
+    }
+
+    this._divDockedPopupContent.appendChild(html);
+    this._divDockedPopupContent.scrollTop = 0;
+  },
+  openDockedPopup: function () {
+    this._divDockedPopup.style.left = (util.getOuterDimensions(this._divWrapper).width / 2 - 150) + 'px';
+    this._divDockedPopup.style.bottom = 0;
+    this.isDockedPopupOpen = true;
+  },
+  closeDockedPopup: function () {
+    var map = this;
+    this._divDockedPopup.style.bottom = '-361px';
+    this.isDockedPopupOpen = false;
+    setTimeout(function () {
+      map._divDockedPopupContent.scrollTop = 0;
+      map._divDockedPopupContent.innerHTML = '';
+    }, 300);
   },
   showModules: function () {
     var buttons = this._divModuleButtons.childNodes;

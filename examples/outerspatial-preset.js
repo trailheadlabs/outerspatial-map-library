@@ -13,6 +13,7 @@ var OuterSpatial = {
     locationType: 'points_of_interest',
     organizationId: 6372,
     preset: 'outerspatial',
+    dockedPopup: true,
     searchable: true,
     popup: {
       actions: [{
@@ -22,20 +23,24 @@ var OuterSpatial = {
   }, {
     locationType: 'campgrounds',
     organizationId: 6372,
+    dockedPopup: true,
     preset: 'outerspatial',
     searchable: true
   }, {
     locationType: 'trailheads',
     organizationId: 6372,
+    dockedPopup: true,
     preset: 'outerspatial',
     searchable: true
   }, {
     locationType: 'trails',
     organizationId: 6372,
+    dockedPopup: true,
     preset: 'outerspatial',
     searchable: true
   }, {
     locationType: 'areas',
+    dockedPopup: true,
     organizationId: 6372,
     preset: 'outerspatial',
     searchable: true

@@ -275,17 +275,22 @@ module.exports = {
                     html = util.unescapeHtml(html);
                   }
 
-                  if (feature.geometry.type === 'Point') {
-                    popup.setContent(html);
-                    layer
-                      .bindPopup(popup)
-                      .openPopup()
-                      .unbindPopup(popup);
+                  if (config.dockedPopup) {
+                    map.setDockedPopupContent(html);
+                    map.openDockedPopup();
                   } else {
-                    popup
-                      .setContent(html)
-                      .setLatLng(e.latlng.wrap())
-                      .openOn(layer._map);
+                    if (feature.geometry.type === 'Point') {
+                      popup.setContent(html);
+                      layer
+                        .bindPopup(popup)
+                        .openPopup()
+                        .unbindPopup(popup);
+                    } else {
+                      popup
+                        .setContent(html)
+                        .setLatLng(e.latlng.wrap())
+                        .openOn(layer._map);
+                    }
                   }
                 }
               }

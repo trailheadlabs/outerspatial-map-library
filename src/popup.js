@@ -286,6 +286,7 @@ var Popup = L.Popup.extend({
           responsiveContainer = L.DomUtil.create('div', 'responsive-container', div);
           image = L.DomUtil.create('img', undefined, responsiveContainer);
           image.src = obj.url;
+          image.draggable = false;
 
           if (obj.caption !== '') {
             image.alt = obj.caption;
