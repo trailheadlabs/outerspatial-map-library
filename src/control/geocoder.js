@@ -188,19 +188,38 @@ var GeocoderControl = L.Control.extend({
   _handleSelect: function (li) {
     var id = li.id;
     var me = this;
+    var map = me._map;
+    var properties = me._results[id].layer.feature.properties;
+    var html = L.outerspatial.popup()._resultToHtml(properties, me._results[id].layer.options.popup, null, null, map.options.popup);
+
+    if (typeof html === 'string') {
+      html = util.unescapeHtml(html);
+    }
 
     this._clearResults();
     this._isDirty = false;
     this._input.setAttribute('aria-activedescendant', id);
 
     if (me._results[id].latLng) {
-      me._map.setView(me._results[id].latLng, 17);
+      var targetLatLng = me._results[id].latLng;
+
+      if (map.getContainer().offsetHeight < 1000) {
+        var targetPoint = map.project(targetLatLng, 17).add([0, 150]);
+        targetLatLng = map.unproject(targetPoint, 17);
+      }
+
+      map.setView(targetLatLng, 17);
     } else {
-      me._map.fitBounds(me._results[id].bounds);
+      map.fitBounds(me._results[id].bounds, {
+        paddingTopLeft: [70, 70],
+        paddingBottomRight: [70, 370]
+      });
     }
 
-    me._map.setSelectedLayer(me._results[id].layer);
-    me._map.options.div.focus();
+    map.setSelectedLayer(me._results[id].layer);
+    map.setDockedPopupContent(html);
+    map.openDockedPopup();
+    map.options.div.focus();
   },
   _hideLoading: function () {
     L.DomEvent.on(this._button, 'click', this._geocodeRequest, this);
