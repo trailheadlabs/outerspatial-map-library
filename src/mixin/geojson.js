@@ -261,24 +261,25 @@ module.exports = {
 
             setTimeout(function () {
               if (!clicks) {
-                var popupWidth = (detectAvailablePopupSpace ? (util._getAvailableHorizontalSpace(map) < 300 ? util._getAvailableHorizontalSpace(map) : 300) : 300);
-                var popup = L.outerspatial.popup({
-                  maxHeight: (detectAvailablePopupSpace ? util._getAvailableVerticalSpace(map) : undefined),
-                  maxWidth: popupWidth,
-                  minWidth: popupWidth
-                });
                 var properties = feature.properties;
-                var html = popup._resultToHtml(properties, config.popup, null, null, map.options.popup);
+                var html = L.outerspatial.popup()._resultToHtml(properties, config.popup, null, null, map.options.popup);
 
-                if (html) {
-                  if (typeof html === 'string') {
-                    html = util.unescapeHtml(html);
-                  }
+                if (typeof html === 'string') {
+                  html = util.unescapeHtml(html);
+                }
 
-                  if (config.dockedPopup) {
-                    map.setDockedPopupContent(html);
-                    map.openDockedPopup();
-                  } else {
+                if (config.dockedPopup) {
+                  map.setDockedPopupContent(html);
+                  map.openDockedPopup();
+                } else {
+                  var popupWidth = (detectAvailablePopupSpace ? (util._getAvailableHorizontalSpace(map) < 300 ? util._getAvailableHorizontalSpace(map) : 300) : 300);
+                  var popup = L.outerspatial.popup({
+                    maxHeight: (detectAvailablePopupSpace ? util._getAvailableVerticalSpace(map) : undefined),
+                    maxWidth: popupWidth,
+                    minWidth: popupWidth
+                  });
+
+                  if (html) {
                     if (feature.geometry.type === 'Point') {
                       popup.setContent(html);
                       layer
