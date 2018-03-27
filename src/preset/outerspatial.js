@@ -157,9 +157,13 @@ var OuterSpatialLayer = L.GeoJSON.extend({
         var results = [];
 
         if (this.L.options.cluster) {
-          layers = this.L.L._layers;
+          layers = this.L.L.getLayers();
         } else {
-          layers = this.L._layers;
+          layers = this.L.getLayers();
+        }
+
+        if (me._removedLayers) {
+          layers = layers.concat(me._removedLayers);
         }
 
         for (var key in layers) {
