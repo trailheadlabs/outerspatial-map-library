@@ -770,6 +770,12 @@
     border-bottom: none;
     padding-bottom: 0;
   }
+  .outerspatial .leaflet-popup-content .description section .url {
+    color: #41a7d0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
 .outerspatial .leaflet-popup-scrolled {
   border-bottom: none;
   border-top: none;

@@ -347,7 +347,7 @@ var OuterSpatialLayer = L.GeoJSON.extend({
           }
 
           if (website && website !== '' && website !== null) {
-            content = content + '<section><h5>Website</h5><a href="' + properties.website + '" target="_blank">' + properties.website + '</section>';
+            content = content + '<section><h5>Website</h5><div class="url"><a href="' + properties.website + '" target="_blank">' + properties.website + '</div></section>';
           }
 
           if (content === '') {
