@@ -201,7 +201,9 @@ module.exports = {
         };
 
         layer.selectLayer = function () {
-          if (!this._map._isCurrentlySelected(this) && !this.isSelected) {
+          if (this._map._isCurrentlySelected(this)) {
+            this._map.clearSelectedLayer();
+          } else if (!this.isSelected) {
             if (this.feature.geometry.type !== 'Point') {
               var options = this.feature.geometry.type === 'GeometryCollection' ? this.getLayers()[0].options : this.options;
               var selectedColor = color(options.color);
@@ -254,51 +256,57 @@ module.exports = {
           }
 
           L.DomEvent.stop(e);
-          map.setSelectedLayer(layer);
-          detectAvailablePopupSpace = map.options.detectAvailablePopupSpace;
+          if (map._isCurrentlySelected(layer)) {
+            if (map.isDockedPopupOpen) {
+              map.closeDockedPopup();
+            }
+          } else {
+            map.setSelectedLayer(layer);
+            detectAvailablePopupSpace = map.options.detectAvailablePopupSpace;
 
-          if (map._controllingInteractivity === 'map') {
-            clicks = 0;
+            if (map._controllingInteractivity === 'map') {
+              clicks = 0;
 
-            setTimeout(function () {
-              if (!clicks) {
-                var properties = feature.properties;
-                var html = L.outerspatial.popup()._resultToHtml(properties, config.popup, null, null, map.options.popup);
+              setTimeout(function () {
+                if (!clicks) {
+                  var properties = feature.properties;
+                  var html = L.outerspatial.popup()._resultToHtml(properties, config.popup, null, null, map.options.popup);
 
-                if (typeof html === 'string') {
-                  html = util.unescapeHtml(html);
-                }
+                  if (typeof html === 'string') {
+                    html = util.unescapeHtml(html);
+                  }
 
-                if (config.dockedPopup) {
-                  map.setDockedPopupContent(html);
-                  map.openDockedPopup();
-                } else {
-                  var popupWidth = (detectAvailablePopupSpace ? (util._getAvailableHorizontalSpace(map) < 300 ? util._getAvailableHorizontalSpace(map) : 300) : 300);
-                  var popup = L.outerspatial.popup({
-                    maxHeight: (detectAvailablePopupSpace ? util._getAvailableVerticalSpace(map) : undefined),
-                    maxWidth: popupWidth,
-                    minWidth: popupWidth
-                  });
+                  if (config.dockedPopup) {
+                    map.setDockedPopupContent(html);
+                    map.openDockedPopup();
+                  } else {
+                    var popupWidth = (detectAvailablePopupSpace ? (util._getAvailableHorizontalSpace(map) < 300 ? util._getAvailableHorizontalSpace(map) : 300) : 300);
+                    var popup = L.outerspatial.popup({
+                      maxHeight: (detectAvailablePopupSpace ? util._getAvailableVerticalSpace(map) : undefined),
+                      maxWidth: popupWidth,
+                      minWidth: popupWidth
+                    });
 
-                  if (html) {
-                    if (feature.geometry.type === 'Point') {
-                      popup.setContent(html);
-                      layer
-                        .bindPopup(popup)
-                        .openPopup()
-                        .unbindPopup(popup);
-                    } else {
-                      popup
-                        .setContent(html)
-                        .setLatLng(e.latlng.wrap())
-                        .openOn(layer._map);
+                    if (html) {
+                      if (feature.geometry.type === 'Point') {
+                        popup.setContent(html);
+                        layer
+                          .bindPopup(popup)
+                          .openPopup()
+                          .unbindPopup(popup);
+                      } else {
+                        popup
+                          .setContent(html)
+                          .setLatLng(e.latlng.wrap())
+                          .openOn(layer._map);
+                      }
                     }
                   }
                 }
-              }
-            }, 200);
-          } else {
-            map.fireEvent('click', e);
+              }, 200);
+            } else {
+              map.fireEvent('click', e);
+            }
           }
         });
         layer.on('dblclick', function (e) {
