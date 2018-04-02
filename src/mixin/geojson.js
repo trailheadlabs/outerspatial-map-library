@@ -253,6 +253,7 @@ module.exports = {
             map = layer._map;
           }
 
+          L.DomEvent.stop(e);
           map.setSelectedLayer(layer);
           detectAvailablePopupSpace = map.options.detectAvailablePopupSpace;
 
