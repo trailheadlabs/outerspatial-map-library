@@ -157,9 +157,13 @@ var OuterSpatialLayer = L.GeoJSON.extend({
         var results = [];
 
         if (this.L.options.cluster) {
-          layers = this.L.L._layers;
+          layers = this.L.L.getLayers();
         } else {
-          layers = this.L._layers;
+          layers = this.L.getLayers();
+        }
+
+        if (me._removedLayers) {
+          layers = layers.concat(me._removedLayers);
         }
 
         for (var key in layers) {
@@ -343,7 +347,7 @@ var OuterSpatialLayer = L.GeoJSON.extend({
           }
 
           if (website && website !== '' && website !== null) {
-            content = content + '<section><h5>Website</h5><a href="' + properties.website + '" target="_blank">' + properties.website + '</section>';
+            content = content + '<section><h5>Website</h5><div class="url"><a href="' + properties.website + '" target="_blank">' + properties.website + '</div></section>';
           }
 
           if (content === '') {
