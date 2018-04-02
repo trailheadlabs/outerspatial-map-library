@@ -176,7 +176,7 @@ MapExt = L.Map.extend({
 
     me.on('popupclose', function (e) {
       if (e.target._selectedLayer) {
-        this.clearSelectedLayer();
+        me.clearSelectedLayer();
       }
     });
     me.on('autopanstart', function () {
@@ -567,6 +567,10 @@ MapExt = L.Map.extend({
     });
     me.on('click', function (e) {
       clicks = 0;
+
+      if (me.isDockedPopupOpen) {
+        me.closeDockedPopup();
+      }
 
       if (me._controllingInteractivity === 'map') {
         setTimeout(function () {
@@ -972,6 +976,8 @@ MapExt = L.Map.extend({
   },
   closeDockedPopup: function () {
     var map = this;
+
+    map.clearSelectedLayer();
     this._divDockedPopup.style.bottom = '-361px';
     this.isDockedPopupOpen = false;
     setTimeout(function () {
