@@ -190,7 +190,7 @@ var GeocoderControl = L.Control.extend({
     var me = this;
     var map = me._map;
     var properties = me._results[id].layer.feature.properties;
-    var html = L.outerspatial.popup()._resultToHtml(properties, me._results[id].layer.options.popup, null, null, map.options.popup);
+    var html = L.outerspatial.popup()._resultToHtml(properties, me._results[id].layer.options.popup, null, null, map.options.popup, me._results[id].layer);
 
     if (typeof html === 'string') {
       html = util.unescapeHtml(html);

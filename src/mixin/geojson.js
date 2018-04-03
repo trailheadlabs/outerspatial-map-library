@@ -270,7 +270,7 @@ module.exports = {
               setTimeout(function () {
                 if (!clicks) {
                   var properties = feature.properties;
-                  var html = L.outerspatial.popup()._resultToHtml(properties, config.popup, null, null, map.options.popup);
+                  var html = L.outerspatial.popup()._resultToHtml(properties, config.popup, null, null, map.options.popup, layer);
 
                   if (typeof html === 'string') {
                     html = util.unescapeHtml(html);

@@ -53,7 +53,7 @@ var Popup = L.Popup.extend({
     this.setContent(this._html).update();
     this._html = null;
   },
-  _createAction: function (config, data, div) {
+  _createAction: function (config, data, div, layer) {
     var a = document.createElement('a');
     var li = document.createElement('li');
     var me = this;
@@ -62,7 +62,13 @@ var Popup = L.Popup.extend({
 
     if (config.type && config.type === 'directions') {
       config.handler = function () {
-        var latLng = me.getLatLng();
+        var latLng;
+
+        if (layer) {
+          latLng = layer._latlng;
+        } else {
+          latLng = me.getLatLng();
+        }
         var lat = latLng.lat;
         var lng = latLng.lng;
 
@@ -203,7 +209,7 @@ var Popup = L.Popup.extend({
     this._html = this.getContent();
     this.setContent(this._results[index]).update();
   },
-  _resultToHtml: function (result, layerConfig, resultConfig, addBack, mapConfig) {
+  _resultToHtml: function (result, layerConfig, resultConfig, addBack, mapConfig, layer) {
     var div;
 
     if (mapConfig && typeof mapConfig === 'function') {
@@ -362,7 +368,7 @@ var Popup = L.Popup.extend({
             actions.appendChild(ul);
 
             for (var j = 0; j < obj.length; j++) {
-              ul.appendChild(this._createAction(obj[j], result, actions));
+              ul.appendChild(this._createAction(obj[j], result, actions, layer));
             }
           } else if (typeof obj === 'string') {
             actions.innerHTML = util.unescapeHtml(util.handlebars(obj, result));
