@@ -3,7 +3,6 @@
 'use strict';
 
 var reqwest = require('reqwest');
-var color = require('color');
 
 var OuterSpatialLayer = L.GeoJSON.extend({
   _include: [{
@@ -146,7 +145,7 @@ var OuterSpatialLayer = L.GeoJSON.extend({
 
     type = this._singularType = singularTypes[this.options.locationType];
 
-    if (type === 'Point of Interest' || type === 'Trailhead' || type === 'Campground') {
+    if (type === 'Campground' || type === 'Point of Interest' || type === 'Trailhead') {
       this.options.prioritization = true;
     }
 
@@ -374,9 +373,6 @@ var OuterSpatialLayer = L.GeoJSON.extend({
         me.errorFired = obj;
       },
       success: function (response) {
-        var config;
-        var obj;
-
         if (response && response.responseText) {
           var geojson = JSON.parse(response.responseText);
 
@@ -385,7 +381,7 @@ var OuterSpatialLayer = L.GeoJSON.extend({
           }
 
           if (me.options.locationType === 'campgrounds' || me.options.locationType === 'trailheads') {
-            config = (function () {
+            var config = (function () {
               var c;
 
               for (var j = 0; j < me._include.length; j++) {
@@ -399,21 +395,19 @@ var OuterSpatialLayer = L.GeoJSON.extend({
                 return c;
               }
             })();
-            var hasStyle = me.options.styles && me.options.styles.point;
 
-            L.extend(me.options, {
-              zIndexOffset: config.priority * -1000,
-              styles: {
-                point: Object.assign({
+            if (!me.options.styles) {
+              me.options.styles = {
+                point: {
                   'marker-library': 'outerspatialsymbollibrary',
-                  'marker-symbol': config.symbol + (hasStyle && color(me.options.styles.point['marker-color']).luminosity() > 0.5 ? '-black' : '-white')
-                }, hasStyle ? me.options.styles.point : {})
-              }
-            });
+                  'marker-symbol': config.symbol + '-white'
+                }
+              };
+            }
+
+            me.options.zIndexOffset = config.priority * -1000;
             L.GeoJSON.prototype.initialize.call(me, geojson, me.options);
           } else if (me.options.locationType === 'points_of_interest') {
-            L.GeoJSON.prototype.initialize.call(me, geojson, me.options);
-
             me.getLayers().forEach(function (layer) {
               config = (function () {
                 var c;
@@ -429,14 +423,22 @@ var OuterSpatialLayer = L.GeoJSON.extend({
                   return c;
                 }
               })();
+
+              if (layer.options.styles) {
+                if (typeof layer.options.styles === 'function') {
+                  layer.options.styles = layer.options.styles(layer.feature.properties);
+                }
+              } else {
+                layer.options.styles = {
+                  'marker-library': 'outerspatialsymbollibrary',
+                  'marker-symbol': config.symbol + '-white'
+                };
+              }
+
+              layer.setIcon(L.outerspatial.icon.outerspatialsymbollibrary(layer.options.styles));
               layer.setZIndexOffset(config.priority * -1000);
-              var hasStyle = layer.options.styles && layer.options.styles.point;
-              var icon = L.outerspatial.icon.outerspatialsymbollibrary(Object.assign({
-                'marker-library': 'outerspatialsymbollibrary',
-                'marker-symbol': config.symbol + (hasStyle && color(layer.options.styles.point['marker-color']).luminosity() > 0.5 ? '-black' : '-white')
-              }, hasStyle ? layer.options.styles.point : {}));
-              layer.setIcon(icon);
             });
+            L.GeoJSON.prototype.initialize.call(me, geojson, me.options);
           } else {
             L.GeoJSON.prototype.initialize.call(me, geojson, me.options);
           }
@@ -449,7 +451,7 @@ var OuterSpatialLayer = L.GeoJSON.extend({
             me._update();
           }
         } else {
-          obj = {
+          var obj = {
             message: 'There was an error loading the data from OuterSpatial.'
           };
 
@@ -528,105 +530,109 @@ var OuterSpatialLayer = L.GeoJSON.extend({
   },
   _update: function () {
     var me = this;
-    var active = [];
-    var bounds = me._map.getBounds().pad(0.1);
-    var layers = me.getLayers();
-    var config;
-    var i;
-    var marker;
-    var removedLayersClone;
 
-    if (!me._removedLayers) {
-      me._removedLayers = [];
-    }
+    if (me._map) {
+      var active = [];
+      var bounds = me._map.getBounds().pad(0.1);
+      var layers = me.getLayers();
+      var config;
+      var i;
+      var marker;
+      var removedLayersClone;
 
-    for (i = 0; i < me._include.length; i++) {
-      config = me._include[i];
-
-      if (me._map.getZoom() >= config.minZoom) {
-        active.push(config.type);
-      }
-    }
-
-    i = layers.length;
-
-    while (i--) {
-      var pointType;
-      marker = layers[i];
-
-      if (marker.feature.properties.point_type !== undefined) {
-        pointType = marker.feature.properties.point_type;
-      } else {
-        pointType = me._singularType;
+      if (!me._removedLayers) {
+        me._removedLayers = [];
       }
 
-      if (active.indexOf(pointType) === -1 || !bounds.contains(marker.getLatLng())) {
-        me._removedLayers.push(marker);
-        marker.deselectLayer();
-        me.removeLayer(marker);
-      }
-    }
+      for (i = 0; i < me._include.length; i++) {
+        config = me._include[i];
 
-    removedLayersClone = me._removedLayers.slice(0);
-
-    for (var j = 0; j < removedLayersClone.length; j++) {
-      var type;
-      var index;
-
-      marker = removedLayersClone[j];
-
-      if (marker.feature.properties.point_type !== undefined) {
-        type = marker.feature.properties.point_type;
-      } else {
-        type = me._singularType;
+        if (me._map.getZoom() >= config.minZoom) {
+          active.push(config.type);
+        }
       }
 
-      if (active.indexOf(type) > -1) {
-        if (bounds.contains(marker.getLatLng())) {
-          var factor;
+      i = layers.length;
 
-          config = (function () {
-            var c;
+      while (i--) {
+        var pointType;
 
-            for (var j = 0; j < me._include.length; j++) {
-              if (me._include[j].type === type) {
-                c = me._include[j];
-                break;
+        marker = layers[i];
+
+        if (marker.feature.properties.point_type !== undefined) {
+          pointType = marker.feature.properties.point_type;
+        } else {
+          pointType = me._singularType;
+        }
+
+        if (active.indexOf(pointType) === -1 || !bounds.contains(marker.getLatLng())) {
+          me._removedLayers.push(marker);
+          marker.deselectLayer();
+          me.removeLayer(marker);
+        }
+      }
+
+      removedLayersClone = me._removedLayers.slice(0);
+
+      for (var j = 0; j < removedLayersClone.length; j++) {
+        var type;
+        var index;
+
+        marker = removedLayersClone[j];
+
+        if (marker.feature.properties.point_type !== undefined) {
+          type = marker.feature.properties.point_type;
+        } else {
+          type = me._singularType;
+        }
+
+        if (active.indexOf(type) > -1) {
+          if (bounds.contains(marker.getLatLng())) {
+            var factor;
+
+            config = (function () {
+              var c;
+
+              for (var j = 0; j < me._include.length; j++) {
+                if (me._include[j].type === type) {
+                  c = me._include[j];
+                  break;
+                }
               }
-            }
 
-            if (c) {
-              return c;
-            }
-          })();
-          factor = config.minZoomFactor;
+              if (c) {
+                return c;
+              }
+            })();
+            factor = config.minZoomFactor;
 
-          if (typeof factor === 'number') {
-            var minZoom = config.minZoom;
-            var zoom = 16;
+            if (typeof factor === 'number') {
+              var minZoom = config.minZoom;
+              var zoom = 16;
 
-            if (typeof minZoom === 'number' && ((minZoom + factor) < 16)) {
-              zoom = minZoom + factor;
-            }
+              if (typeof minZoom === 'number' && ((minZoom + factor) < 16)) {
+                zoom = minZoom + factor;
+              }
 
-            if (me._map.getZoom() >= zoom) {
+              if (me._map.getZoom() >= zoom) {
+                me.addLayer(marker);
+                index = me._removedLayers.indexOf(marker);
+
+                if (index > -1) {
+                  me._removedLayers.splice(index, 1);
+                }
+              } else if (me.hasLayer(marker)) {
+                me._removedLayers.push(marker);
+                marker.deselectLayer();
+                me.removeLayer(marker);
+              }
+            } else if (!me.hasLayer(marker)) {
               me.addLayer(marker);
               index = me._removedLayers.indexOf(marker);
 
               if (index > -1) {
                 me._removedLayers.splice(index, 1);
               }
-            } else if (me.hasLayer(marker)) {
-              me._removedLayers.push(marker);
-              marker.deselectLayer();
-              me.removeLayer(marker);
-            }
-          } else if (!me.hasLayer(marker)) {
-            me.addLayer(marker);
-            index = me._removedLayers.indexOf(marker);
-
-            if (index > -1) {
-              me._removedLayers.splice(index, 1);
             }
           }
         }

@@ -175,6 +175,7 @@ var SwitcherControl = L.Control.extend({
   },
   _toggleList: function () {
     var bottomControls = document.getElementsByClassName('leaflet-bottom');
+    var topLeftControls = document.getElementsByClassName('leaflet-top leaflet-left');
     var topRightControls = document.getElementsByClassName('leaflet-top leaflet-right');
     var i;
     var mapHeight = this._map.getContainer().offsetHeight;
@@ -185,29 +186,37 @@ var SwitcherControl = L.Control.extend({
     this._listShadowBox.style.width = mapWidth + 'px';
 
     if (this._list.style.visibility && this._list.style.visibility === 'hidden') {
-      for (i = 0; i < topRightControls.length; i++) {
-        topRightControls[i].style.visibility = 'hidden';
-      }
-
       for (i = 0; i < bottomControls.length; i++) {
         bottomControls[i].style.display = 'none';
       }
 
-      this._listShadowBox.style.visibility = 'visible';
-      this._list.style.visibility = 'visible';
-      this._list.setAttribute('aria-expanded', true);
-    } else {
-      for (i = 0; i < topRightControls.length; i++) {
-        topRightControls[i].style.visibility = 'visible';
+      for (i = 0; i < topLeftControls.length; i++) {
+        topLeftControls[i].style.visibility = 'hidden';
       }
 
+      for (i = 0; i < topRightControls.length; i++) {
+        topRightControls[i].style.visibility = 'hidden';
+      }
+
+      this._list.setAttribute('aria-expanded', true);
+      this._list.style.visibility = 'visible';
+      this._listShadowBox.style.visibility = 'visible';
+    } else {
       for (i = 0; i < bottomControls.length; i++) {
         bottomControls[i].style.display = '';
       }
 
-      this._listShadowBox.style.visibility = 'hidden';
-      this._list.style.visibility = 'hidden';
+      for (i = 0; i < topLeftControls.length; i++) {
+        topLeftControls[i].style.visibility = 'visible';
+      }
+
+      for (i = 0; i < topRightControls.length; i++) {
+        topRightControls[i].style.visibility = 'visible';
+      }
+
       this._list.setAttribute('aria-expanded', false);
+      this._list.style.visibility = 'hidden';
+      this._listShadowBox.style.visibility = 'hidden';
     }
   },
   _update: function () {
