@@ -41,6 +41,7 @@ var Popup = L.Popup.extend({
   setContent: function (content) {
     if (typeof content === 'string') {
       var node = document.createElement('div');
+
       node.innerHTML = content;
       content = node;
     }
@@ -60,7 +61,6 @@ var Popup = L.Popup.extend({
     li.appendChild(a);
 
     if (config.type && config.type === 'directions') {
-      config.text = 'Get Directions';
       config.handler = function () {
         var latLng = me.getLatLng();
         var lat = latLng.lat;
@@ -72,6 +72,7 @@ var Popup = L.Popup.extend({
           window.open('https://maps.google.com/maps?daddr=' + lat + '%2c' + lng, '_blank');
         }
       };
+      config.text = 'Get Directions';
     }
 
     if (config.menu) {

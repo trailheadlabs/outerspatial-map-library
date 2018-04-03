@@ -122,15 +122,15 @@ var OuterSpatialLayer = L.GeoJSON.extend({
     searchable: false
   },
   initialize: function (options) {
-    var me;
     var singularTypes = {
+      areas: 'Area',
+      campgrounds: 'Campground',
       points_of_interest: 'Point of Interest',
       trail_segments: 'Trail Segment',
-      areas: 'Area',
-      trails: 'Trail',
       trailheads: 'Trailhead',
-      campgrounds: 'Campground'
+      trails: 'Trail'
     };
+    var me;
     var type;
 
     L.Util.setOptions(this, this._toLeaflet(options));
@@ -151,9 +151,9 @@ var OuterSpatialLayer = L.GeoJSON.extend({
 
     if (this.options.searchable) {
       options.search = function (value) {
-        var layers;
         var re = new RegExp(value, 'i');
         var results = [];
+        var layers;
 
         if (this.L.options.cluster) {
           layers = this.L.L.getLayers();
@@ -170,23 +170,21 @@ var OuterSpatialLayer = L.GeoJSON.extend({
 
           if (layers.hasOwnProperty(key) && layer.hasOwnProperty('feature')) {
             if (re.test(layer.feature.properties.name)) {
+              var obj = {
+                bounds: null,
+                latLng: null,
+                layer: layer,
+                name: layers[key].feature.properties.name,
+                type: type
+              };
+
               if (layer.feature.geometry.type.toLowerCase() === 'point') {
-                results.push({
-                  bounds: null,
-                  latLng: layer.getLatLng(),
-                  layer: layer,
-                  name: layers[key].feature.properties.name,
-                  type: type
-                });
+                obj.latLng = layer.getLatLng();
               } else {
-                results.push({
-                  bounds: layer.getBounds(),
-                  latLng: null,
-                  layer: layer,
-                  name: layers[key].feature.properties.name,
-                  type: type
-                });
+                obj.bounds = layer.getBounds();
               }
+
+              results.push(obj);
             }
           }
         }
@@ -204,65 +202,22 @@ var OuterSpatialLayer = L.GeoJSON.extend({
         config = {};
       }
 
-      if (!config.title && !config.description) {
-        config.title = function (properties) {
-          var banner = '';
-          var title;
-          var subtitle;
-
-          if (properties['name']) {
-            title = '{{name}}';
-            subtitle = (type === 'Area' || type === 'Trail Segment' ? type : type + (properties.area_id ? ' in ' + properties.area.name : ''));
-          } else {
-            title = type;
-            subtitle = properties.area.name ? properties.area.name : null;
-          }
-
-          if (properties['tag:Status:closed'] === 'yes') {
-            banner = '<img class="banner" width=51 height=20 alt="Closed banner" src="' + window.L.Icon.Default.imagePath + '/outerspatial/closed-indicator-right' + (L.Browser.retina ? '@2x' : '') + '.png"/>';
-          }
-
-          return {
-            title: title,
-            subtitle: subtitle,
-            image: banner
-          };
-        };
-
-        config.image = function (properties) {
-          if (properties.image_attachments && properties.image_attachments.length > 0) {
-            var image = {
-              caption: properties.image_attachments[0].image.caption
-            };
-
-            if (window.innerWidth <= 320) {
-              image.url = properties.image_attachments[0].image.versions.small_square.url;
-            } else {
-              image.url = properties.image_attachments[0].image.versions.medium_square.url;
-            }
-
-            return image;
-          } else {
-            return null;
-          }
-        };
-
+      if (!config.description && !config.title) {
         config.description = function (properties) {
           var accessibilityDescription = properties.accessibility_description;
           var address = properties.address;
           var content = '';
+          var contentBlocks = properties.content_blocks;
           var description = properties.description;
           var length = properties.length;
           var tags = properties.tags;
           var website = properties.website;
-          var contentBlocks = properties.content_blocks;
 
           if (description && description !== '' && description !== null) {
             content = content + '<section>' + description + '</section>';
           }
 
           if (tags) {
-            var tagSections = {};
             var tagCategories = {
               Area: [
                 'Activities',
@@ -278,17 +233,17 @@ var OuterSpatialLayer = L.GeoJSON.extend({
                 'Accessibility',
                 'Status'
               ],
-              Trailhead: [
-                'Accessibility',
-                'Amenities',
-                'Status'
-              ],
               Trail: [
                 'Accessibility',
                 'Allowed Use',
                 'Difficulty',
                 'Status',
                 'Trail Type'
+              ],
+              Trailhead: [
+                'Accessibility',
+                'Amenities',
+                'Status'
               ],
               TrailSegment: [
                 'Accessibility',
@@ -298,9 +253,10 @@ var OuterSpatialLayer = L.GeoJSON.extend({
                 'Trail Type'
               ]
             };
+            var tagSections = {};
 
             tags.forEach(function (tag) {
-              if (tag.value === 'yes' && tag.categories.length > 0) {
+              if (tag.categories.length > 0 && tag.value === 'yes') {
                 tag.categories.forEach(function (category) {
                   if (tagCategories[properties.class_name].indexOf(category.name) > -1) {
                     if (!tagSections.hasOwnProperty(category.name)) {
@@ -317,7 +273,8 @@ var OuterSpatialLayer = L.GeoJSON.extend({
               if (key === 'Status') {
                 continue;
               }
-              content = content + '<section><h5>' + key + '</h5><span style="color: #7da836">' + tagSections[key].sort().join(', ') + '</span></section>';
+
+              content = content + '<section><h5>' + key + '</h5><span style="color:#7da836">' + tagSections[key].sort().join(', ') + '</span></section>';
             }
           }
 
@@ -354,6 +311,47 @@ var OuterSpatialLayer = L.GeoJSON.extend({
           } else {
             return content;
           }
+        };
+        config.image = function (properties) {
+          var imageAttachments = properties.image_attachments;
+
+          if (imageAttachments && imageAttachments.length > 0) {
+            var imageAttachment = imageAttachments[0];
+            var image = {
+              caption: imageAttachment.image.caption
+            };
+
+            if (window.innerWidth <= 320) {
+              image.url = imageAttachment.image.versions.small_square.url;
+            } else {
+              image.url = imageAttachment.image.versions.medium_square.url;
+            }
+
+            return image;
+          } else {
+            return null;
+          }
+        };
+        config.title = function (properties) {
+          var banner = '';
+          var subtitle = (type === 'Area' || type === 'Trail Segment' ? type : type + (properties.area_id ? ' in ' + properties.area.name : ''));
+          var title;
+
+          if (properties['name']) {
+            title = '{{name}}';
+          } else {
+            title = 'Unnamed';
+          }
+
+          if (properties['tag:Status:closed'] === 'yes') {
+            banner = '<img class="banner" width=51 height=20 alt="Closed banner" src="' + window.L.Icon.Default.imagePath + '/outerspatial/closed-indicator-right' + (L.Browser.retina ? '@2x' : '') + '.png"/>';
+          }
+
+          return {
+            image: banner,
+            subtitle: subtitle,
+            title: title
+          };
         };
       }
 
@@ -575,8 +573,8 @@ var OuterSpatialLayer = L.GeoJSON.extend({
       removedLayersClone = me._removedLayers.slice(0);
 
       for (var j = 0; j < removedLayersClone.length; j++) {
-        var type;
         var index;
+        var type;
 
         marker = removedLayersClone[j];
 
