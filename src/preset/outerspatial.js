@@ -175,7 +175,19 @@ var OuterSpatialLayer = L.GeoJSON.extend({
                 latLng: null,
                 layer: layer,
                 name: layers[key].feature.properties.name,
-                type: type
+                type: type + (function () {
+                  if (type === 'Area') {
+                    return '';
+                  } else {
+                    var areaName = layer.feature.properties['area:name'];
+
+                    if (areaName && typeof areaName === 'string' && areaName.length) {
+                      return ' in ' + layer.feature.properties['area:name'];
+                    } else {
+                      return '';
+                    }
+                  }
+                })()
               };
 
               if (layer.feature.geometry.type.toLowerCase() === 'point') {
