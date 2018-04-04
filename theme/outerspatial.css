@@ -87,7 +87,7 @@
 }
 .outerspatial-docked-popup-content {
   width: 300px;
-  max-height: 350px;
+  max-height: 275px;
   overflow-y: auto;
 }
 .outerspatial-docked-popup.show {

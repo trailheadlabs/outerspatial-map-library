@@ -311,7 +311,7 @@ var OuterSpatialLayer = L.GeoJSON.extend({
               // address is not JSON
             }
 
-            content = content + '<section><h5>' + properties.class_name + ' Address</h5>' + address + '</section>';
+            content = content + '<section><h5>Address</h5>' + address + '</section>';
           }
 
           if (website && website !== '' && website !== null) {
