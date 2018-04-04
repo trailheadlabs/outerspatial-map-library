@@ -75,25 +75,25 @@
 
 /* Docked Popup */
 .outerspatial-docked-popup {
-  box-shadow: 0 0 2px rgba(0,0,0,.2);
   background-color: #fff;
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
-  left: 0;
-  position: absolute;
   bottom: -361px;
-  z-index: 2;
+  box-shadow: 0 0 2px rgba(0, 0, 0, .2);
+  left: 50%;
+  margin-left: -140px;
+  position: absolute;
   transition: bottom 300ms;
+  z-index: 2;
 }
 .outerspatial-docked-popup-content {
-  width: 300px;
   max-height: 275px;
   overflow-y: auto;
+  width: 280px;
 }
 .outerspatial-docked-popup.show {
   transform: translateY(100%)
 }
-
 .outerspatial .outerspatial-docked-popup a.leaflet-popup-close-button {
   background: #3bafda;
   border-radius: 90%;
@@ -104,10 +104,11 @@
   padding: 0;
   pointer-events: auto;
   position: absolute;
-  left: 290px;
+  left: 270px;
   text-align: center;
   top: -11px;
   width: 21px;
+  z-index: 999999;
 }
 .outerspatial a.leaflet-popup-close-button:focus,
 .outerspatial a.leaflet-popup-close-button:hover {

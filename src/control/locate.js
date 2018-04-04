@@ -38,7 +38,7 @@ var LocateControl = L.Control.extend({
     setView: true,
     stopFollowingOnDrag: true,
     strings: {
-      outsideMapBoundsMsg: 'You seem to be located outside of the boundaries of the map',
+      outsideMapBoundsMsg: 'You seem to be located outside the boundary of the map.',
       popup: 'You are within {distance} {unit} of this point',
       title: 'Show me where I am'
     }

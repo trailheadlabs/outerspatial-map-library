@@ -125,7 +125,7 @@ MapExt = L.Map.extend({
     var me = this;
     var modules = L.DomUtil.create('div', 'outerspatial-modules');
     var dockedPopupWrapper = L.DomUtil.create('div', 'outerspatial-docked-popup');
-    var dockedPopupClose = L.DomUtil.create('a', 'outerspatial-docked-popup leaflet-popup-close-button', dockedPopupWrapper);
+    var dockedPopupClose = L.DomUtil.create('a', 'leaflet-popup-close-button', dockedPopupWrapper);
     var outerspatial = L.DomUtil.create('div', 'outerspatial' + ((L.Browser.ie6 || L.Browser.ie7) ? ' outerspatial-oldie' : '') + (L.Browser.retina ? ' outerspatial-retina' : ''));
     var toolbar = L.DomUtil.create('div', 'outerspatial-toolbar');
     var toolbarLeft = L.DomUtil.create('ul', 'left');
@@ -892,6 +892,17 @@ MapExt = L.Map.extend({
       this._selectedLayer = null;
     }
   },
+  closeDockedPopup: function () {
+    var map = this;
+
+    map.clearSelectedLayer();
+    this._divDockedPopup.style.bottom = '-361px';
+    this.isDockedPopupOpen = false;
+    setTimeout(function () {
+      map._divDockedPopupContent.scrollTop = 0;
+      map._divDockedPopupContent.innerHTML = '';
+    }, 300);
+  },
   closeModules: function () {
     var buttons = this._divModuleButtons.childNodes;
 
@@ -907,6 +918,11 @@ MapExt = L.Map.extend({
     }
 
     this.invalidateSize();
+  },
+  openDockedPopup: function () {
+    // this._divDockedPopup.style.left = (util.getOuterDimensions(this._divWrapper).width / 2 - 150) + 'px';
+    this._divDockedPopup.style.bottom = 0;
+    this.isDockedPopupOpen = true;
   },
   setSelectedLayer: function (layer) {
     if (!this._isCurrentlySelected(layer)) {
@@ -968,22 +984,6 @@ MapExt = L.Map.extend({
 
     this._divDockedPopupContent.appendChild(html);
     this._divDockedPopupContent.scrollTop = 0;
-  },
-  openDockedPopup: function () {
-    this._divDockedPopup.style.left = (util.getOuterDimensions(this._divWrapper).width / 2 - 150) + 'px';
-    this._divDockedPopup.style.bottom = 0;
-    this.isDockedPopupOpen = true;
-  },
-  closeDockedPopup: function () {
-    var map = this;
-
-    map.clearSelectedLayer();
-    this._divDockedPopup.style.bottom = '-361px';
-    this.isDockedPopupOpen = false;
-    setTimeout(function () {
-      map._divDockedPopupContent.scrollTop = 0;
-      map._divDockedPopupContent.innerHTML = '';
-    }, 300);
   },
   showModules: function () {
     var buttons = this._divModuleButtons.childNodes;

@@ -166,9 +166,25 @@ var GeocoderControl = L.Control.extend({
             var first = result.results[0];
 
             if (first.bounds) {
-              me._map.fitBounds(first.bounds);
+              if (me._map.options.maxBounds) {
+                if (me._map.options.maxBounds.contains(first.bounds)) {
+                  me._map.fitBounds(first.bounds);
+                } else {
+                  me._map.notify.danger('The result was located outside the boundary of the map.');
+                }
+              } else {
+                me._map.fitBounds(first.bounds);
+              }
             } else if (first.latLng) {
-              me._map.setView(first.latLng, 17);
+              if (me._map.options.maxBounds) {
+                if (me._map.options.maxBounds.contains(first.latLng)) {
+                  me._map.setView(first.latLng, 17);
+                } else {
+                  me._map.notify.danger('The result was located outside the boundary of the map.');
+                }
+              } else {
+                me._map.setView(first.latLng, 17);
+              }
             } else {
               me._map.notify.danger('There was an error finding that location. Please try again.');
             }
@@ -246,6 +262,7 @@ var GeocoderControl = L.Control.extend({
 
               if (window.OuterSpatial.config.overlays.constructor === Array) {
                 var overlays = window.OuterSpatial.config.overlays;
+
                 for (var i = 0; i < overlays.length; i++) {
                   if (typeof overlays[i].search === 'function') {
                     me._results = me._results.concat(overlays[i].search(value));
@@ -284,6 +301,7 @@ var GeocoderControl = L.Control.extend({
           } else {
             me._geocodeRequest();
           }
+
           break;
         case 27:
           // Escape
