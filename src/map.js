@@ -583,6 +583,7 @@ MapExt = L.Map.extend({
   },
   _setupTooltip: function () {
     var me = this;
+    var isMobile = L.Browser.mobile;
     var overData = [];
     var tooltip = (me.infoboxControl ? me.infoboxControl : L.outerspatial.tooltip({
       map: me
@@ -704,62 +705,65 @@ MapExt = L.Map.extend({
     }
 
     me._tooltips = [];
-    L.DomEvent.on(util.getChildElementsByClassName(me.getContainer(), 'leaflet-popup-pane')[0], 'mousemove', function (e) {
-      L.DomEvent.stopPropagation(e);
-      tooltip.hide();
-    });
-    me.on('mousemove', function (e) {
-      me._cursorEvent = e;
 
-      if (me._controllingCursor === 'map') {
-        handle();
+    if (!isMobile) {
+      L.DomEvent.on(util.getChildElementsByClassName(me.getContainer(), 'leaflet-popup-pane')[0], 'mousemove', function (e) {
+        L.DomEvent.stopPropagation(e);
+        tooltip.hide();
+      });
+      me.on('mousemove', function (e) {
+        me._cursorEvent = e;
 
-        for (var layerId in me._layers) {
-          var layer = me._layers[layerId];
+        if (me._controllingCursor === 'map') {
+          handle();
 
-          if (typeof layer._handleMousemove === 'function' && layer._hasInteractivity !== false) {
-            layer._handleMousemove(me._cursorEvent.latlng.wrap(), function (result) {
-              if (result.results !== 'loading') {
-                var l = result.layer;
-                var leafletId = l._leaflet_id;
+          for (var layerId in me._layers) {
+            var layer = me._layers[layerId];
 
-                removeOverData(leafletId);
-                removeTooltip(leafletId);
+            if (typeof layer._handleMousemove === 'function' && layer._hasInteractivity !== false) {
+              layer._handleMousemove(me._cursorEvent.latlng.wrap(), function (result) {
+                if (result.results !== 'loading') {
+                  var l = result.layer;
+                  var leafletId = l._leaflet_id;
 
-                if (result.results) {
-                  overData.push(leafletId);
+                  removeOverData(leafletId);
+                  removeTooltip(leafletId);
 
-                  if (l.options && l.options.tooltip) {
-                    for (var i = 0; i < result.results.length; i++) {
-                      var data = result.results[i];
-                      var tip;
+                  if (result.results) {
+                    overData.push(leafletId);
 
-                      if (typeof l.options.tooltip === 'function') {
-                        tip = util.handlebars(l.options.tooltip(data));
-                      } else if (typeof l.options.tooltip === 'string') {
-                        tip = util.unescapeHtml(util.handlebars(l.options.tooltip, data));
-                      }
+                    if (l.options && l.options.tooltip) {
+                      for (var i = 0; i < result.results.length; i++) {
+                        var data = result.results[i];
+                        var tip;
 
-                      if (tip && me._tooltips.indexOf(tip) === -1) {
-                        me._tooltips.push({
-                          html: tip,
-                          layerId: leafletId
-                        });
+                        if (typeof l.options.tooltip === 'function') {
+                          tip = util.handlebars(l.options.tooltip(data));
+                        } else if (typeof l.options.tooltip === 'string') {
+                          tip = util.unescapeHtml(util.handlebars(l.options.tooltip, data));
+                        }
+
+                        if (tip && me._tooltips.indexOf(tip) === -1) {
+                          me._tooltips.push({
+                            html: tip,
+                            layerId: leafletId
+                          });
+                        }
                       }
                     }
                   }
-                }
 
-                handle();
-              }
-            });
+                  handle();
+                }
+              });
+            }
           }
         }
-      }
-    });
-    me.on('mouseout', function () {
-      tooltip.hide();
-    });
+      });
+      me.on('mouseout', function () {
+        tooltip.hide();
+      });
+    }
   },
   _toLeaflet: function (config) {
     if (!config.div) {
