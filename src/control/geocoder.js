@@ -44,6 +44,9 @@ var GeocoderControl = L.Control.extend({
       .on(this._button, 'click', this._geocodeRequest, this)
       .on(this._button, 'mousewheel', stopPropagation)
       .on(this._input, 'focus', function () {
+        if (map.isDockedPopupOpen) {
+          map.closeDockedPopup();
+        }
         this.value = this.value;
         if (me._results) {
           me._resultsReady(this.value, me._results);
@@ -226,10 +229,12 @@ var GeocoderControl = L.Control.extend({
 
       map.setView(targetLatLng, 17);
     } else {
-      map.fitBounds(me._results[id].bounds, {
-        paddingTopLeft: [70, 70],
-        paddingBottomRight: [70, 370]
-      });
+      setTimeout(function () {
+        map.fitBounds(me._results[id].layer.getBounds(), {
+          paddingTopLeft: [70, 100],
+          paddingBottomRight: [70, 370]
+        });
+      }, 300);
     }
 
     map.setSelectedLayer(me._results[id].layer);
@@ -298,8 +303,6 @@ var GeocoderControl = L.Control.extend({
         case 13:
           if (me._selected) {
             me._handleSelect(me._selected);
-          } else {
-            me._geocodeRequest();
           }
 
           break;
