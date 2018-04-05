@@ -901,6 +901,7 @@ MapExt = L.Map.extend({
 
     map.clearSelectedLayer();
     this._divDockedPopup.style.left = '-311px';
+    this._divDockedPopup.style.width = '300px';
     this.isDockedPopupOpen = false;
     setTimeout(function () {
       map._divDockedPopupContent.scrollTop = 0;
@@ -925,6 +926,12 @@ MapExt = L.Map.extend({
   },
   openDockedPopup: function () {
     // this._divDockedPopup.style.left = (util.getOuterDimensions(this._divWrapper).width / 2 - 150) + 'px';
+    var mapWidth = util.getOuterDimensions(this._divWrapper).width;
+
+    if (mapWidth < 300) {
+      this._divDockedPopup.style.width = mapWidth + 'px';
+    }
+
     this._divDockedPopup.style.left = 0;
     this.isDockedPopupOpen = true;
   },
