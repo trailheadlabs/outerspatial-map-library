@@ -131,8 +131,6 @@ var OuterSpatialLayer = L.GeoJSON.extend({
       trails: 'Trail'
     };
     var me;
-    var type;
-
     L.Util.setOptions(this, this._toLeaflet(options));
 
     if (!this.options.locationType) {
@@ -143,9 +141,7 @@ var OuterSpatialLayer = L.GeoJSON.extend({
       console.error('The "organizationId" property is required for the OuterSpatial preset.');
     }
 
-    type = this._singularType = singularTypes[this.options.locationType];
-
-    if (type === 'Campground' || type === 'Point of Interest' || type === 'Trailhead') {
+    if (this.options.locationType === 'campgrounds' || this.options.locationType === 'points_of_interest' || this.options.locationType === 'trailheads') {
       this.options.prioritization = true;
     }
 
@@ -170,7 +166,19 @@ var OuterSpatialLayer = L.GeoJSON.extend({
 
           if (layers.hasOwnProperty(key) && layer.hasOwnProperty('feature')) {
             if (re.test(layer.feature.properties.name)) {
-              var obj = {
+              var className = layers[key].feature.properties.class_name;
+              var obj;
+              var type;
+
+              if (className === 'PointOfInterest') {
+                type = 'Point of Interest';
+              } else if (className === 'TrailSegment') {
+                type = 'Trail Segment';
+              } else {
+                type = className;
+              }
+
+              obj = {
                 bounds: null,
                 latLng: null,
                 layer: layer,
@@ -179,10 +187,10 @@ var OuterSpatialLayer = L.GeoJSON.extend({
                   if (type === 'Area') {
                     return '';
                   } else {
-                    var areaName = layer.feature.properties['area:name'];
+                    var areaName = layer.feature.properties.area ? layer.feature.properties.area.name : undefined;
 
                     if (areaName && typeof areaName === 'string' && areaName.length) {
-                      return ' in ' + layer.feature.properties['area:name'];
+                      return ' in ' + areaName;
                     } else {
                       return '';
                     }
@@ -206,16 +214,16 @@ var OuterSpatialLayer = L.GeoJSON.extend({
     }
 
     if (this.options.formatPopups) {
-      var config;
+      var popupConfig;
 
-      if (this.options.popup) {
-        config = this.options.popup;
+      if (options.popup) {
+        popupConfig = options.popup;
       } else {
-        config = {};
+        popupConfig = {};
       }
 
-      if (!config.description && !config.title) {
-        config.description = function (properties) {
+      if (!popupConfig.description && !popupConfig.title) {
+        popupConfig.description = function (properties) {
           var accessibilityDescription = properties.accessibility_description;
           var address = properties.address;
           var content = '';
@@ -324,7 +332,7 @@ var OuterSpatialLayer = L.GeoJSON.extend({
             return content;
           }
         };
-        config.image = function (properties) {
+        popupConfig.image = function (properties) {
           var imageAttachments = properties.image_attachments;
 
           if (imageAttachments && imageAttachments.length > 0) {
@@ -344,10 +352,22 @@ var OuterSpatialLayer = L.GeoJSON.extend({
             return null;
           }
         };
-        config.title = function (properties) {
+        popupConfig.title = function (properties) {
           var banner = '';
-          var subtitle = (type === 'Area' || type === 'Trail Segment' ? type : type + (properties.area_id ? ' in ' + properties.area.name : ''));
+          var className = properties.class_name;
+          var subtitle;
           var title;
+          var type;
+
+          if (className === 'PointOfInterest') {
+            type = 'Point of Interest';
+          } else if (className === 'TrailSegment') {
+            type = 'Trail Segment';
+          } else {
+            type = className;
+          }
+
+          subtitle = (className === 'Area' || className === 'TrailSegment' ? type : type + (properties.area_id ? ' in ' + properties.area.name : ''));
 
           if (properties['name']) {
             title = '{{name}}';
@@ -367,36 +387,126 @@ var OuterSpatialLayer = L.GeoJSON.extend({
         };
       }
 
-      this.options.popup = config;
-      L.Util.setOptions(this, this._toLeaflet(this.options));
+      options.popup = popupConfig;
     }
 
+    L.Util.setOptions(this, this._toLeaflet(options));
     me = this;
 
-    reqwest({
-      error: function (error) {
+    if (this.options.locationType === 'campgrounds' || this.options.locationType === 'trailheads') {
+      var config = (function () {
+        var c;
+
+        for (var j = 0; j < me._include.length; j++) {
+          if (me._include[j].type === singularTypes[me.options.locationType]) {
+            c = me._include[j];
+            break;
+          }
+        }
+
+        if (c) {
+          return c;
+        }
+      })();
+
+      if (!me.options.styles) {
+        me.options.styles = {
+          point: {
+            'marker-library': 'outerspatialsymbollibrary',
+            'marker-symbol': config.symbol + '-white'
+          }
+        };
+      }
+
+      options.zIndexOffset = config.priority * -1000;
+    }
+
+    if (this.options.locationType === 'primary_points_of_interest') {
+      var campgrounds = fetch(me.options.environment, me.options.organizationId, 'campgrounds');
+      var trailheads = fetch(me.options.environment, me.options.organizationId, 'trailheads');
+      var pointsOfInterest = fetch(me.options.environment, me.options.organizationId, 'points_of_interest').then(function (geojson) {
+        geojson.features = geojson.features.filter(function (feature) {
+          var poiType = feature.properties.point_type;
+          if (poiType === 'Visitor Center' || poiType === 'Entrance') {
+            return true;
+          } else {
+            return false;
+          }
+        });
+        return geojson;
+      });
+
+      Promise.all([campgrounds, trailheads, pointsOfInterest]).then(function (values) {
+        var geojson = {
+          type: 'FeatureCollection',
+          features: []
+        };
+
+        values.forEach(function (value) {
+          geojson.features = geojson.features.concat(value.features);
+        });
+        me._collapseFeatureAttributes(geojson.features);
+        L.GeoJSON.prototype.initialize.call(me, geojson, me.options);
+        me.getLayers().forEach(function (layer) {
+          config = (function () {
+            var c;
+            var type = layer.feature.properties.point_type ? layer.feature.properties.point_type : layer.feature.properties.class_name;
+
+            for (var i = 0; i < me._include.length; i++) {
+              if (me._include[i].type === type) {
+                c = me._include[i];
+                break;
+              }
+            }
+
+            if (c) {
+              return c;
+            }
+          })();
+
+          if (layer.options.styles) {
+            if (typeof layer.options.styles === 'function') {
+              layer.options.styles = layer.options.styles(layer.feature.properties);
+            }
+          } else {
+            layer.options.styles = {
+              'point': {
+                'marker-library': 'outerspatialsymbollibrary',
+                'marker-symbol': config.symbol + '-white'
+              }
+            };
+          }
+
+          layer.setIcon(L.outerspatial.icon.outerspatialsymbollibrary(layer.options.styles.point));
+          layer.setZIndexOffset(config.priority * -1000);
+        });
+        me.fire('ready');
+        me._loaded = true;
+        me.readyFired = true;
+
+        if (me.options.prioritization) {
+          me._update();
+        }
+      }, function (error) {
         var obj = L.extend(error, {
           message: 'There was an error loading the data from OuterSpatial.'
         });
 
         me.fire('error', obj);
         me.errorFired = obj;
-      },
-      success: function (response) {
-        if (response && response.responseText) {
-          var geojson = JSON.parse(response.responseText);
+      });
+    } else {
+      fetch(me.options.environment, me.options.organizationId, me.options.locationType).then(function (geojson) {
+        L.GeoJSON.prototype.initialize.call(me, geojson, me.options);
 
-          if (me.options.formatPopups) {
-            me._collapseFeatureAttributes(geojson.features);
-          }
-
-          if (me.options.locationType === 'campgrounds' || me.options.locationType === 'trailheads') {
-            var config = (function () {
+        if (me.options.locationType === 'points_of_interest') {
+          me.getLayers().forEach(function (layer) {
+            config = (function () {
               var c;
 
-              for (var j = 0; j < me._include.length; j++) {
-                if (me._include[j].type === type) {
-                  c = me._include[j];
+              for (var i = 0; i < me._include.length; i++) {
+                if (me._include[i].type === layer.feature.properties.point_type) {
+                  c = me._include[i];
                   break;
                 }
               }
@@ -406,73 +516,45 @@ var OuterSpatialLayer = L.GeoJSON.extend({
               }
             })();
 
-            if (!me.options.styles) {
-              me.options.styles = {
-                point: {
-                  'marker-library': 'outerspatialsymbollibrary',
-                  'marker-symbol': config.symbol + '-white'
-                }
+            if (layer.options.styles) {
+              if (typeof layer.options.styles === 'function') {
+                layer.options.styles = layer.options.styles(layer.feature.properties);
+              }
+            } else {
+              layer.options.styles = {
+                'marker-library': 'outerspatialsymbollibrary',
+                'marker-symbol': config.symbol + '-white'
               };
             }
 
-            me.options.zIndexOffset = config.priority * -1000;
-            L.GeoJSON.prototype.initialize.call(me, geojson, me.options);
-          } else if (me.options.locationType === 'points_of_interest') {
-            me.getLayers().forEach(function (layer) {
-              config = (function () {
-                var c;
-
-                for (var i = 0; i < me._include.length; i++) {
-                  if (me._include[i].type === layer.feature.properties.point_type) {
-                    c = me._include[i];
-                    break;
-                  }
-                }
-
-                if (c) {
-                  return c;
-                }
-              })();
-
-              if (layer.options.styles) {
-                if (typeof layer.options.styles === 'function') {
-                  layer.options.styles = layer.options.styles(layer.feature.properties);
-                }
-              } else {
-                layer.options.styles = {
-                  'marker-library': 'outerspatialsymbollibrary',
-                  'marker-symbol': config.symbol + '-white'
-                };
-              }
-
-              layer.setIcon(L.outerspatial.icon.outerspatialsymbollibrary(layer.options.styles));
-              layer.setZIndexOffset(config.priority * -1000);
-            });
-            L.GeoJSON.prototype.initialize.call(me, geojson, me.options);
-          } else {
-            L.GeoJSON.prototype.initialize.call(me, geojson, me.options);
-          }
-
-          me.fire('ready');
-          me._loaded = true;
-          me.readyFired = true;
-
-          if (me.options.prioritization) {
-            me._update();
-          }
-        } else {
-          var obj = {
-            message: 'There was an error loading the data from OuterSpatial.'
-          };
-
-          me.fire('error', obj);
-          me.errorFired = obj;
+            layer.setIcon(L.outerspatial.icon.outerspatialsymbollibrary(layer.options.styles));
+            layer.setZIndexOffset(config.priority * -1000);
+          });
         }
 
-        return me;
-      },
-      url: 'https://' + (me.options.environment === 'production' ? '' : 'staging-') + 'cdn.outerspatial.com/static_data/organizations/' + me.options.organizationId + '/api_v2/' + me.options.locationType + '.geojson'
-    });
+        me.fire('ready');
+        me._loaded = true;
+        me.readyFired = true;
+
+        if (me.options.prioritization) {
+          me._update();
+        }
+      }, function (error) {
+        var obj = L.extend(error, {
+          message: 'There was an error loading the data from OuterSpatial.'
+        });
+
+        me.fire('error', obj);
+        me.errorFired = obj;
+      });
+    }
+
+    function fetch (environment, organizationId, locationType) {
+      return reqwest({
+        url: 'https://' + (environment === 'production' ? '' : 'staging-') + 'cdn.outerspatial.com/static_data/organizations/' + organizationId + '/api_v2/' + locationType + '.geojson',
+        type: 'json'
+      });
+    }
 
     function handleTag (key) {
       return key
@@ -488,11 +570,11 @@ var OuterSpatialLayer = L.GeoJSON.extend({
         .join(' ');
     }
   },
-  onAdd: function () {
+  onAdd: function (map) {
     var me = this;
 
-    if (me.options.prioritization) {
-      me._map.on('moveend', function () {
+    if (this.options.prioritization) {
+      map.on('moveend', function () {
         me._update();
       });
     }
@@ -572,7 +654,7 @@ var OuterSpatialLayer = L.GeoJSON.extend({
         if (marker.feature.properties.point_type !== undefined) {
           pointType = marker.feature.properties.point_type;
         } else {
-          pointType = me._singularType;
+          pointType = marker.feature.properties.class_name;
         }
 
         if (active.indexOf(pointType) === -1 || !bounds.contains(marker.getLatLng())) {
@@ -593,7 +675,7 @@ var OuterSpatialLayer = L.GeoJSON.extend({
         if (marker.feature.properties.point_type !== undefined) {
           type = marker.feature.properties.point_type;
         } else {
-          type = me._singularType;
+          type = pointType = marker.feature.properties.class_name;
         }
 
         if (active.indexOf(type) > -1) {

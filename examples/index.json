@@ -241,6 +241,12 @@
 }, {
   "category": "Presets",
   "description": "",
+  "id": "outerspatial-preset-primary-poi",
+  "include": true,
+  "title": "OuterSpatial Preset Primary Points of Interest"
+}, {
+  "category": "Presets",
+  "description": "",
   "id": "outerspatial-preset-clustered",
   "include": true,
   "title": "OuterSpatial Preset (Clustered)"
