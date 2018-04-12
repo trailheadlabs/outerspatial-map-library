@@ -130,7 +130,7 @@ var OuterSpatialLayer = L.GeoJSON.extend({
       trailheads: 'Trailhead',
       trails: 'Trail'
     };
-    var me;
+    var me = this;
     L.Util.setOptions(this, this._toLeaflet(options));
 
     if (!this.options.locationType) {
@@ -390,9 +390,6 @@ var OuterSpatialLayer = L.GeoJSON.extend({
       options.popup = popupConfig;
     }
 
-    L.Util.setOptions(this, this._toLeaflet(options));
-    me = this;
-
     if (this.options.locationType === 'campgrounds' || this.options.locationType === 'trailheads') {
       var config = (function () {
         var c;
@@ -409,8 +406,8 @@ var OuterSpatialLayer = L.GeoJSON.extend({
         }
       })();
 
-      if (!me.options.styles) {
-        me.options.styles = {
+      if (!options.styles) {
+        options.styles = {
           point: {
             'marker-library': 'outerspatialsymbollibrary',
             'marker-symbol': config.symbol + '-white'
@@ -420,6 +417,8 @@ var OuterSpatialLayer = L.GeoJSON.extend({
 
       options.zIndexOffset = config.priority * -1000;
     }
+
+    L.Util.setOptions(this, this._toLeaflet(options));
 
     if (this.options.locationType === 'primary_points_of_interest') {
       var campgrounds = fetch(me.options.environment, me.options.organizationId, 'campgrounds');
@@ -522,12 +521,14 @@ var OuterSpatialLayer = L.GeoJSON.extend({
               }
             } else {
               layer.options.styles = {
-                'marker-library': 'outerspatialsymbollibrary',
-                'marker-symbol': config.symbol + '-white'
+                'point': {
+                  'marker-library': 'outerspatialsymbollibrary',
+                  'marker-symbol': config.symbol + '-white'
+                }
               };
             }
 
-            layer.setIcon(L.outerspatial.icon.outerspatialsymbollibrary(layer.options.styles));
+            layer.setIcon(L.outerspatial.icon.outerspatialsymbollibrary(layer.options.styles.point));
             layer.setZIndexOffset(config.priority * -1000);
           });
         }
