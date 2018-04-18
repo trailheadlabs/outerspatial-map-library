@@ -613,14 +613,14 @@ module.exports = {
           callback(false);
         },
         success: function (response) {
-          if (response && response.success) {
-            callback(response.data);
+          if (response) {
+            callback(response);
           } else {
             callback(false);
           }
         },
         type: 'json' + (supportsCors ? '' : 'p'),
-        url: 'https://outerspatial-utilities.herokuapp.com/proxy/?encoded=true&type=' + type + '&url=' + window.btoa(encodeURIComponent(url))
+        url: url
       });
     }
   },

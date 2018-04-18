@@ -373,13 +373,11 @@ var OuterSpatialLayer = L.GeoJSON.extend({
         me.fire('error', obj);
         me.errorFired = obj;
       },
-      success: function (response) {
+      success: function (geojson) {
         var config;
         var obj;
 
-        if (response && response.responseText) {
-          var geojson = JSON.parse(response.responseText);
-
+        if (geojson) {
           if (me.options.formatPopups) {
             me._collapseFeatureAttributes(geojson.features);
           }
