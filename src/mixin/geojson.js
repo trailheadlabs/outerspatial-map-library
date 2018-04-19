@@ -6,7 +6,6 @@
 var colorPresets = require('../preset/colors.json');
 var topojson = require('../util/topojson');
 var util = require('../util/util');
-var color = require('color');
 
 module.exports = {
   _types: {
@@ -116,6 +115,7 @@ module.exports = {
       var activeTip = null;
       var detectAvailablePopupSpace = false;
 
+      // TODO: Move up
       function createBuffer (layer, latLngs) {
         var polyline;
 
@@ -140,6 +140,7 @@ module.exports = {
 
         return polyline;
       }
+      // TODO: Move up
       function mouseout (e) {
         var target = e.target;
 
@@ -147,6 +148,7 @@ module.exports = {
           target.deselectLayer();
         }
       }
+      // TODO: Move up
       function mouseover (e) {
         var target = e.target;
         var tooltipConfig = config.tooltip;
@@ -213,9 +215,16 @@ module.exports = {
           if (!map._isCurrentlySelected(this) && !this.isSelected) {
             if (this.feature.geometry.type === 'Point') {
               if (!this._circle) {
+                var color = 'yellow';
+
+                // TODO: Also support functions
+                if (layer.options && layer.options.styles && layer.options.styles.point && layer.options.styles.point['marker-color'] && typeof layer.options.styles.point['marker-color'] === 'string') {
+                  color = layer.options.styles.point['marker-color'];
+                }
+
                 this._circle = new L.CircleMarker(layer.getLatLng(), {
-                  color: 'yellow',
-                  fillColor: 'yellow',
+                  color: color,
+                  fillColor: color,
                   fillOpacity: 0.2,
                   radius: 10
                 });
@@ -224,22 +233,15 @@ module.exports = {
               this._circle.addTo(map);
             } else {
               var options = this.feature.geometry.type === 'GeometryCollection' ? this.getLayers()[0].options : this.options;
-              var selectedColor = color(options.color);
-
-              if (selectedColor.luminosity() === 0 || selectedColor.luminosity() === 1) {
-                selectedColor = color('grey');
-              } else if (selectedColor.isDark()) {
-                selectedColor = selectedColor.whiten(0.5);
-              } else {
-                selectedColor = selectedColor.blacken(0.5);
-              }
+              var weight = Number(options.weight);
 
               this.setStyle({
-                color: selectedColor.hex(),
+                color: options.color,
                 opacity: 1,
                 stroke: true,
-                weight: Number(options.weight) + 3
+                weight: weight + (weight * 0.66)
               });
+              this.bringToFront();
             }
 
             this.isSelected = true;

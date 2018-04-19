@@ -25,19 +25,45 @@ var OuterSpatialIcon = L.Icon.extend({
     var size = options['marker-size'] || 'medium';
     var sizes = {
       large: {
-        iconAnchor: [17.5, 49],
-        iconSize: [35, 55],
-        popupAnchor: [2, -45]
+        iconAnchor: [
+          17.5,
+          49
+        ],
+        iconSize: [
+          35,
+          55
+        ],
+        popupAnchor: [
+          2,
+          -45
+        ]
       },
       medium: {
-        iconAnchor: [14, 36],
-        iconSize: [28, 41],
-        popupAnchor: [2, -34]
+        iconAnchor: [
+          14,
+          36
+        ],
+        iconSize: [
+          28,
+          41
+        ],
+        popupAnchor: [
+          2,
+          -34
+        ]
       },
       small: {
-        iconAnchor: [10, 24],
-        iconSize: [20, 30],
-        popupAnchor: [2, -24]
+        iconAnchor: [
+          10,
+          24
+        ],
+        iconSize: [
+          20,
+          30],
+        popupAnchor: [
+          2,
+          -24
+        ]
       }
     };
 
@@ -56,6 +82,7 @@ var OuterSpatialIcon = L.Icon.extend({
       retina: L.Browser.retina ? '@2x' : '',
       size: options['marker-size'].slice(0, 1)
     });
+    divMarker.innerHTML = null;
     divMarker.appendChild(divIcon);
     return divMarker;
   },

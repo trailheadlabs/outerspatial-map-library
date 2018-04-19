@@ -412,11 +412,7 @@ MapExt = L.Map.extend({
     }
   },
   _isCurrentlySelected: function (layer) {
-    if (this._selectedLayer && (this._selectedLayer._leaflet_id === layer._leaflet_id)) {
-      return true;
-    } else {
-      return false;
-    }
+    return this._selectedLayer && (this._selectedLayer._leaflet_id === layer._leaflet_id);
   },
   _setCursor: function (type) {
     this._container.style.cursor = type;

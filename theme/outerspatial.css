@@ -1065,6 +1065,7 @@
     border-top-left-radius: 1px;
     border-top-right-radius: 0;
     box-sizing: border-box;
+    float: left;
     height: 40px;
     outline-offset: -1px;
     text-overflow: ellipsis;
