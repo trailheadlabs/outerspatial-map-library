@@ -73,19 +73,30 @@
   }
 }
 
+/* Modal Backdrop */
+.outerspatial-modal-backdrop {
+  background-image: linear-gradient(90deg, rgba(0,0,0,0) 0%, #000000 100%);
+  bottom: 0;
+  display: none;
+  left: 0;
+  opacity: 0.4;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 999;
+}
+
 /* Docked Popup */
 .outerspatial-docked-popup-content {
   height: 100%;
   overflow-y: auto;
   width: 100%;
 }
-
 .outerspatial-docked-popup-bottom {
   background-color: #fff;
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
 }
-
 .outerspatial-docked-popup-left {
   background-color: #fff;
   left: -324px;
@@ -118,9 +129,9 @@
   background-color: #67cdf6;
 }
 .outerspatial-docked-popup-left a svg {
-  height: 18px;
-  margin-top: 3px;
-  width: 18px;
+  height: 14px;
+  margin-top: 5px;
+  width: 14px;
 }
 
 /* Modules */
@@ -590,6 +601,11 @@
   top: -10px;
   width: 21px;
 }
+  .outerspatial .leaflet-container a.leaflet-popup-close-button svg {
+    height: 11px;
+    margin-left: -1px;
+    width: 11px;
+  }
 .outerspatial .leaflet-container a.leaflet-popup-close-button:focus,
 .outerspatial .leaflet-container a.leaflet-popup-close-button:hover {
   background-color: #67cdf6;
@@ -627,7 +643,7 @@
     padding-left: 15px;
   }
     .outerspatial .leaflet-popup-content .content li {
-      margin-bottom: 6px;
+      margin-bottom: 3px;
     }
   .outerspatial .leaflet-popup-content p {
     margin: 0;
@@ -743,6 +759,7 @@
     .outerspatial .leaflet-popup-content .layer .sublayer {
       clear: both;
       margin-bottom: 8px;
+      padding: 8px 12px;
     }
     .outerspatial .leaflet-popup-content .layer .sublayer:first-child {
       margin-top: -6px;
@@ -777,12 +794,18 @@
     right: 0;
     position: absolute;
   }
+  .outerspatial .leaflet-popup-content .sublayer:first-child {
+    margin-bottom: 0;
+  }
   .outerspatial .leaflet-popup-content .sublayer .title {
     font-size: 18px;
     font-style: italic;
     font-weight: normal;
     line-height: 20px;
-    padding-left: 0;
+    padding: 8px 0;
+  }
+  .outerspatial .leaflet-popup-content .sublayer .content {
+    padding: 8px 0;
   }
   .outerspatial .leaflet-popup-content .responsive-container {
     padding-top: 100%;

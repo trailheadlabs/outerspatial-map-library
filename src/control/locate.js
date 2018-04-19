@@ -4,7 +4,10 @@
 
 var LocateControl = L.Control.extend({
   options: {
-    circlePadding: [0, 0],
+    circlePadding: [
+      0,
+      0
+    ],
     circleStyle: {
       clickable: false,
       color: '#136aec',
@@ -35,6 +38,7 @@ var LocateControl = L.Control.extend({
       context._map.notify.danger(context.options.strings.outsideMapBoundsMsg);
     },
     position: 'topright',
+    requestLocationAccess: false,
     setView: true,
     stopFollowingOnDrag: true,
     strings: {
@@ -55,9 +59,11 @@ var LocateControl = L.Control.extend({
     };
     this._map = map;
     L.extend(this._locateOptions, this.options.locateOptions);
+    /*
     L.extend(this._locateOptions, {
       setView: false
     });
+    */
     L.extend(obj, this.options.markerStyle, this.options.followMarkerStyle);
     this.options.followMarkerStyle = obj;
     obj = {};
@@ -255,7 +261,8 @@ var LocateControl = L.Control.extend({
           '<g class="icon-svg-line">' +
             '<polygon transform="scale(-1,1) translate(-32, 0)" vector-effect="non-scaling-stroke" points="29 10 2 2 10 29 16 16"/>' +
           '</g>' +
-        '</svg>';
+        '</svg>' +
+      '';
     } else if (icon === 'requesting') {
       this._button.innerHTML = '' +
         '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="18" height="18">' +
@@ -264,7 +271,8 @@ var LocateControl = L.Control.extend({
             '<path vector-effect="non-scaling-stroke" d="M60,30c-1.104,0-2,0.896-2,2c0,14.337-11.664,26-26,26c-6.348,0-12.391-2.285-17.135-6.451l6.842-6.842 c0.271-0.271,0.363-0.673,0.238-1.035c-0.126-0.362-0.447-0.62-0.828-0.665l-17-2c-0.306-0.036-0.608,0.07-0.824,0.286 c-0.216,0.217-0.322,0.52-0.286,0.824l2,17c0.045,0.38,0.303,0.702,0.665,0.827C5.779,59.981,5.89,60,6,60 c0.261,0,0.517-0.103,0.707-0.293l5.326-5.326C17.538,59.297,24.587,62,32,62c16.542,0,30-13.458,30-30C62,30.896,61.104,30,60,30z"/>' +
             '<animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 32 32" to="360 32 32" dur="1.0s" repeatCount="indefinite"/>' +
           '</g>' +
-        '</svg>';
+        '</svg>' +
+      '';
     }
   }
 });

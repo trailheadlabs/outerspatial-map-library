@@ -253,13 +253,18 @@ module.exports = {
           L.DomEvent.stop(e);
 
           if (layer._map._isCurrentlySelected(layer)) {
-            if (layer._map.isDockedPopupOpen) {
-              layer._map.closeDockedPopup();
+            if (layer._map._controllingInteractivity === 'map') {
+              clicks = 0;
+
+              setTimeout(function () {
+                if (!clicks) {
+                  if (layer._map.isDockedPopupOpen) {
+                    layer._map.closeDockedPopup();
+                  }
+                }
+              }, 200);
             }
           } else {
-            layer._map.setSelectedLayer(layer);
-            detectAvailablePopupSpace = layer._map.options.detectAvailablePopupSpace;
-
             if (layer._map._controllingInteractivity === 'map') {
               clicks = 0;
 
@@ -267,6 +272,9 @@ module.exports = {
                 if (!clicks) {
                   var properties = feature.properties;
                   var html = L.outerspatial.popup()._resultToHtml(properties, config.popup, null, null, layer._map.options.popup, layer);
+
+                  layer._map.setSelectedLayer(layer);
+                  detectAvailablePopupSpace = layer._map.options.detectAvailablePopupSpace;
 
                   if (typeof html === 'string') {
                     html = util.unescapeHtml(html);
@@ -282,6 +290,8 @@ module.exports = {
                       maxWidth: popupWidth,
                       minWidth: popupWidth
                     });
+
+                    layer._map.closeDockedPopup();
 
                     if (html) {
                       if (feature.geometry.type === 'Point') {

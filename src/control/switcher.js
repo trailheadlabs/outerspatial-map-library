@@ -54,9 +54,8 @@ var SwitcherControl = L.Control.extend({
 
     L.DomEvent.disableClickPropagation(container);
     L.DomEvent.disableScrollPropagation(container);
-    this._listShadowBox = L.DomUtil.create('div', 'list-shadow', container);
+    this._listShadowBox = L.DomUtil.create('div', 'outerspatial-modal-backdrop', this._map.getContainer());
     this._list = L.DomUtil.create('div', 'list-container', container);
-    this._listShadowBox.style.visibility = 'hidden';
     this._list.style.visibility = 'hidden';
     this._list.setAttribute('id', 'basemap_listbox');
     this._list.setAttribute('role', 'listbox');
@@ -178,12 +177,8 @@ var SwitcherControl = L.Control.extend({
     var topLeftControls = document.getElementsByClassName('leaflet-top leaflet-left');
     var topRightControls = document.getElementsByClassName('leaflet-top leaflet-right');
     var i;
-    var mapHeight = this._map.getContainer().offsetHeight;
-    var mapWidth = this._map.getContainer().offsetWidth;
 
-    this._list.style.height = mapHeight + 'px';
-    this._listShadowBox.style.height = mapHeight + 'px';
-    this._listShadowBox.style.width = mapWidth + 'px';
+    this._list.style.height = this._map.getContainer().offsetHeight + 'px';
 
     if (this._list.style.visibility && this._list.style.visibility === 'hidden') {
       for (i = 0; i < bottomControls.length; i++) {
@@ -200,7 +195,7 @@ var SwitcherControl = L.Control.extend({
 
       this._list.setAttribute('aria-expanded', true);
       this._list.style.visibility = 'visible';
-      this._listShadowBox.style.visibility = 'visible';
+      this._listShadowBox.style.display = 'block';
     } else {
       for (i = 0; i < bottomControls.length; i++) {
         bottomControls[i].style.display = '';
@@ -216,7 +211,7 @@ var SwitcherControl = L.Control.extend({
 
       this._list.setAttribute('aria-expanded', false);
       this._list.style.visibility = 'hidden';
-      this._listShadowBox.style.visibility = 'hidden';
+      this._listShadowBox.style.display = 'none';
     }
   },
   _update: function () {
