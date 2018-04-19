@@ -208,8 +208,11 @@ var GeocoderControl = L.Control.extend({
     var id = li.id;
     var me = this;
     var map = me._map;
-    var properties = me._results[id].layer.feature.properties;
-    var html = L.outerspatial.popup()._resultToHtml(properties, me._results[id].layer.options.popup, null, null, map.options.popup, me._results[id].layer);
+    var latLng = me._results[id].latLng;
+    var layer = me._results[id].layer;
+    var properties = layer.feature.properties;
+    var html = L.outerspatial.popup()._resultToHtml(properties, layer.options.popup, null, null, map.options.popup, layer);
+    var usesDockedPopup = layer.options.dockedPopup;
 
     if (typeof html === 'string') {
       html = util.unescapeHtml(html);
@@ -219,27 +222,46 @@ var GeocoderControl = L.Control.extend({
     this._isDirty = false;
     this._input.setAttribute('aria-activedescendant', id);
 
-    if (me._results[id].latLng) {
-      var targetLatLng = me._results[id].latLng;
+    if (latLng) {
+      if (usesDockedPopup) {
+        setTimeout(function () {
+          var project = map.project(latLng, 17).add([
+            -150,
+            0
+          ]);
+          var unproject = map.unproject(project, 17);
 
-      if (map.getContainer().offsetHeight < 1000) {
-        var targetPoint = map.project(targetLatLng, 17).add([0, 150]);
-        targetLatLng = map.unproject(targetPoint, 17);
+          map.setView(unproject, 17);
+        }, 300);
+      } else {
+        map.setView(latLng, 17);
       }
-
-      map.setView(targetLatLng, 17);
     } else {
-      setTimeout(function () {
-        map.fitBounds(me._results[id].layer.getBounds(), {
-          paddingTopLeft: [70, 100],
-          paddingBottomRight: [70, 370]
-        });
-      }, 300);
+      if (usesDockedPopup) {
+        setTimeout(function () {
+          map.fitBounds(layer.getBounds(), {
+            paddingTopLeft: [
+              300,
+              0
+            ],
+            paddingBottomRight: [
+              0,
+              0
+            ]
+          });
+        }, 300);
+      } else {
+        map.fitBounds(layer.getBounds());
+      }
     }
 
-    map.setSelectedLayer(me._results[id].layer);
-    map.setDockedPopupContent(html);
-    map.openDockedPopup();
+    map.setSelectedLayer(layer);
+
+    if (usesDockedPopup) {
+      map.setDockedPopupContent(html);
+      map.openDockedPopup();
+    }
+
     map.options.div.focus();
   },
   _hideLoading: function () {

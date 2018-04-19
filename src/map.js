@@ -120,12 +120,12 @@ MapExt = L.Map.extend({
   initialize: function (options) {
     var baseLayerSet = false;
     var container = L.DomUtil.create('div', 'outerspatial-container');
+    var dockedPopup = L.DomUtil.create('div', 'outerspatial-docked-popup-left');
+    var dockedPopupClose = L.DomUtil.create('a', 'outerspatial-docked-popup-left-close-button', dockedPopup);
     var map = L.DomUtil.create('div', 'outerspatial-map');
     var mapWrapper = L.DomUtil.create('div', 'outerspatial-map-wrapper');
     var me = this;
     var modules = L.DomUtil.create('div', 'outerspatial-modules');
-    var dockedPopupWrapper = L.DomUtil.create('div', 'outerspatial-docked-popup');
-    var dockedPopupClose = L.DomUtil.create('a', 'leaflet-popup-close-button', dockedPopupWrapper);
     var outerspatial = L.DomUtil.create('div', 'outerspatial' + ((L.Browser.ie6 || L.Browser.ie7) ? ' outerspatial-oldie' : '') + (L.Browser.retina ? ' outerspatial-retina' : ''));
     var toolbar = L.DomUtil.create('div', 'outerspatial-toolbar');
     var toolbarLeft = L.DomUtil.create('ul', 'left');
@@ -136,7 +136,7 @@ MapExt = L.Map.extend({
     L.Util.setOptions(this, options);
     options.div.insertBefore(outerspatial, options.div.hasChildNodes() ? options.div.childNodes[0] : null);
     outerspatial.appendChild(modules);
-    outerspatial.appendChild(dockedPopupWrapper);
+    outerspatial.appendChild(dockedPopup);
     outerspatial.appendChild(container);
     toolbar.appendChild(toolbarLeft);
     toolbar.appendChild(toolbarRight);
@@ -152,35 +152,25 @@ MapExt = L.Map.extend({
     me._defaultCursor = me.getContainer().style.cursor;
     me._frame = null;
     me._selectedLayer = null;
-    L.DomUtil.create('div', 'outerspatial-docked-popup-content leaflet-popup-content', dockedPopupWrapper);
-    dockedPopupClose.innerHTML = 'x';
+    L.DomUtil.create('div', 'outerspatial-docked-popup-content leaflet-popup-content', dockedPopup);
+    dockedPopupClose.innerHTML = '' +
+      '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18">' +
+        '<g class="nc-icon-wrapper" fill="#ffffff">' +
+          '<path fill="#ffffff" d="M19.7,4.3c-0.4-0.4-1-0.4-1.4,0L12,10.6L5.7,4.3c-0.4-0.4-1-0.4-1.4,0s-0.4,1,0,1.4l6.3,6.3l-6.3,6.3 c-0.4,0.4-0.4,1,0,1.4C4.5,19.9,4.7,20,5,20s0.5-0.1,0.7-0.3l6.3-6.3l6.3,6.3c0.2,0.2,0.5,0.3,0.7,0.3s0.5-0.1,0.7-0.3 c0.4-0.4,0.4-1,0-1.4L13.4,12l6.3-6.3C20.1,5.3,20.1,4.7,19.7,4.3z"></path>' +
+        '</g>' +
+      '</svg>' +
+    '';
     dockedPopupClose.addEventListener('click', function () {
       me.closeDockedPopup();
     }, false);
 
-    if ((window.self !== window.top) && document.referrer !== '') {
-      me._frame = window.frameElement;
-
-      if (me.options.meta && me.options.meta.title) {
-        var outerspatialContainer = container.parentNode.parentNode;
-        var titleContainer = L.DomUtil.create('li', 'title');
-        var title = L.DomUtil.create('h1', 'title');
-
-        titleContainer.appendChild(title);
-        toolbar.childNodes[0].appendChild(titleContainer);
-        title.innerHTML = me.options.meta.title;
-        toolbar.style.display = 'block';
-        util.getChildElementsByClassName(outerspatialContainer, 'outerspatial-map-wrapper')[0].style.top = '40px';
-      }
-    }
-
+    me.on('autopanstart', function () {
+      me._setCursor('');
+    });
     me.on('popupclose', function (e) {
       if (e.target._selectedLayer) {
         me.clearSelectedLayer();
       }
-    });
-    me.on('autopanstart', function () {
-      me._setCursor('');
     });
     me.notify = humane.create({
       baseCls: 'humane-bootstrap',
@@ -312,7 +302,7 @@ MapExt = L.Map.extend({
     }
 
     me._initializeModules();
-    me._initializeDockedPopup();
+    me._setupDockedPopup();
     me._setupPopup();
     me._setupTooltip();
 
@@ -345,11 +335,6 @@ MapExt = L.Map.extend({
   },
   _createMapboxLayer: function (config) {
     return L.outerspatial.layer[config.type][config.styled === true ? 'styled' : 'tiled'](config);
-  },
-  _initializeDockedPopup: function () {
-    this._divWrapper = this._container.parentNode.parentNode;
-    this._divDockedPopup = util.getChildElementsByClassName(this._divWrapper.parentNode.parentNode, 'outerspatial-docked-popup')[0];
-    this._divDockedPopupContent = util.getChildElementsByClassName(this._divWrapper.parentNode.parentNode, 'outerspatial-docked-popup-content')[0];
   },
   _initializeModules: function () {
     if (this.options && this.options.modules && L.Util.isArray(this.options.modules) && this.options.modules.length) {
@@ -435,6 +420,11 @@ MapExt = L.Map.extend({
   },
   _setCursor: function (type) {
     this._container.style.cursor = type;
+  },
+  _setupDockedPopup: function () {
+    this._divWrapper = this._container.parentNode.parentNode;
+    this._divDockedPopup = util.getChildElementsByClassName(this._divWrapper.parentNode.parentNode, 'outerspatial-docked-popup-left')[0];
+    this._divDockedPopupContent = util.getChildElementsByClassName(this._divWrapper.parentNode.parentNode, 'outerspatial-docked-popup-content')[0];
   },
   _setupPopup: function () {
     var clicks = 0;
@@ -900,8 +890,7 @@ MapExt = L.Map.extend({
     var map = this;
 
     map.clearSelectedLayer();
-    this._divDockedPopup.style.left = '-311px';
-    this._divDockedPopup.style.width = '300px';
+    this._divDockedPopup.style.left = '-324px';
     this.isDockedPopupOpen = false;
     setTimeout(function () {
       map._divDockedPopupContent.scrollTop = 0;
@@ -925,11 +914,10 @@ MapExt = L.Map.extend({
     this.invalidateSize();
   },
   openDockedPopup: function () {
-    // this._divDockedPopup.style.left = (util.getOuterDimensions(this._divWrapper).width / 2 - 150) + 'px';
     var mapWidth = util.getOuterDimensions(this._divWrapper).width;
 
-    if (mapWidth < 300) {
-      this._divDockedPopup.style.width = mapWidth + 'px';
+    if (mapWidth < 340) {
+      this._divDockedPopup.style.width = (mapWidth - 40) + 'px';
     }
 
     this._divDockedPopup.style.left = 0;

@@ -115,96 +115,114 @@ module.exports = {
     if (typeof config.clickable === 'undefined' || config.clickable === true) {
       var activeTip = null;
       var detectAvailablePopupSpace = false;
-      var map = null;
 
+      function createBuffer (layer, latLngs) {
+        var polyline;
+
+        if (latLngs === undefined) {
+          latLngs = layer.getLatLngs();
+        }
+
+        polyline = new L.Polyline(latLngs, {
+          opacity: 0,
+          pane: me.options.pane,
+          weight: 15
+        });
+        polyline.on('click', function (e) {
+          layer.fire('click', e);
+        });
+        polyline.on('mouseover', function (e) {
+          layer.fire('mouseover', e);
+        });
+        polyline.on('mouseout', function (e) {
+          layer.fire('mouseout', e);
+        });
+
+        return polyline;
+      }
+      function mouseout (e) {
+        var target = e.target;
+
+        if (!target._map._isCurrentlySelected(target)) {
+          target.deselectLayer();
+        }
+      }
+      function mouseover (e) {
+        var target = e.target;
+        var tooltipConfig = config.tooltip;
+
+        if (!target.isSelected) {
+          target.selectLayer();
+        }
+
+        if (tooltipConfig) {
+          var properties = target.feature.properties;
+          var tip;
+
+          if (typeof tooltipConfig === 'function') {
+            tip = tooltipConfig(properties);
+          } else if (typeof tooltipConfig === 'string') {
+            tip = util.handlebars(tooltipConfig, properties);
+          }
+
+          if (tip) {
+            target = e.target;
+
+            var obj = {
+              html: tip,
+              layerId: target._leaflet_id
+            };
+
+            target._map._tooltips.push(obj);
+            activeTip = obj;
+          }
+        }
+      }
+
+      // TODO: Needs a lot of clean up.
       // TODO: If typeof config.onEachFeature === 'function', save it and call it.
       config.onEachFeature = function (feature, layer) {
         var clicks = 0;
         var geometry = layer.feature.geometry;
 
-        function createBuffer (layer, latLngs) {
-          var polyline;
-
-          if (latLngs === undefined) {
-            latLngs = layer.getLatLngs();
-          }
-
-          polyline = L.polyline(latLngs, {
-            opacity: 0,
-            pane: me.options.pane,
-            weight: 15
-          });
-          polyline.on('click', function (e) {
-            layer.fire('click', e);
-          });
-          polyline.on('mouseover', function (e) {
-            layer.fire('mouseover', e);
-          });
-          polyline.on('mouseout', function (e) {
-            layer.fire('mouseout', e);
-          });
-
-          return polyline;
-        }
-
-        function mouseout (e) {
-          var layer = e.target;
-
-          if (!layer._map._isCurrentlySelected(layer)) {
-            layer.deselectLayer();
-          }
-        }
-
-        function mouseover (e) {
-          var layer = e.target;
-          var tooltipConfig = config.tooltip;
-
-          if (!layer.isSelected) {
-            layer.selectLayer();
-          }
-
-          if (tooltipConfig) {
-            var properties = feature.properties;
-            var tip;
-
-            if (typeof tooltipConfig === 'function') {
-              tip = tooltipConfig(properties);
-            } else if (typeof tooltipConfig === 'string') {
-              tip = util.handlebars(tooltipConfig, properties);
-            }
-
-            if (tip) {
-              var target = e.target;
-              var obj = {
-                html: tip,
-                layerId: target._leaflet_id
-              };
-
-              target._map._tooltips.push(obj);
-              activeTip = obj;
-            }
-          }
-        }
-
-        layer.overlay = me;
         layer.deselectLayer = function () {
-          if (layer.feature.geometry.type !== 'Point') {
-            this.overlay.resetStyle(this);
-          } else {
+          var map = me._map;
+
+          if (!map) {
+            map = layer._map;
+          }
+
+          if (geometry.type === 'Point') {
             if (this._circle) {
-              this._circle.removeFrom(this._map);
+              this._circle.removeFrom(map);
               delete this._circle;
             }
+          } else {
+            me.resetStyle(this);
           }
 
           this.isSelected = false;
         };
-
         layer.selectLayer = function () {
-          if (this._map._isCurrentlySelected(this)) {
-            this._map.clearSelectedLayer();
-          } else if (!this.isSelected) {
-            if (this.feature.geometry.type !== 'Point') {
+          var map = me._map;
+
+          if (!map) {
+            map = layer._map;
+          }
+
+          if (!map._isCurrentlySelected(this) && !this.isSelected) {
+            if (this.feature.geometry.type === 'Point') {
+              if (!this._circle) {
+                this._circle = new L.CircleMarker(layer.getLatLng(), {
+                  color: 'yellow',
+                  fillColor: 'yellow',
+                  fillOpacity: 0.2,
+                  radius: 10
+                });
+              }
+
+              this._circle.addTo(map);
+            } else {
               var options = this.feature.geometry.type === 'GeometryCollection' ? this.getLayers()[0].options : this.options;
               var selectedColor = color(options.color);
 
@@ -217,72 +235,48 @@ module.exports = {
               }
 
               this.setStyle({
-                stroke: true,
-                opacity: 1,
                 color: selectedColor.hex(),
+                opacity: 1,
+                stroke: true,
                 weight: Number(options.weight) + 3
               });
-            } else {
-              if (!this._circle) {
-                this._circle = L.circleMarker(layer.getLatLng(), {radius: 10, color: 'yellow', fillColor: 'yellow', fillOpacity: 0.2});
-              }
-
-              this._circle.addTo(this._map);
             }
 
             this.isSelected = true;
           }
         };
-
-        if (layer.feature.geometry.type === 'Point') {
-          layer.on('movestart', function (e) {
-            this.deselectLayer();
-            this.off('mouseover', mouseover);
-            this.off('mouseout', mouseout);
-          });
-          layer.on('moveend', function (e) {
-            this.on('mouseover', mouseover);
-            this.on('mouseout', mouseout);
-          });
-        }
-
-        layer.on('mouseover', mouseover);
-        layer.on('mouseout', mouseout);
         layer.on('click', function (e) {
           var layer = e.target;
 
-          if (!map) {
-            map = layer._map;
-          }
-
           L.DomEvent.stop(e);
-          if (map._isCurrentlySelected(layer)) {
-            if (map.isDockedPopupOpen) {
-              map.closeDockedPopup();
+
+          if (layer._map._isCurrentlySelected(layer)) {
+            if (layer._map.isDockedPopupOpen) {
+              layer._map.closeDockedPopup();
             }
           } else {
-            map.setSelectedLayer(layer);
-            detectAvailablePopupSpace = map.options.detectAvailablePopupSpace;
+            layer._map.setSelectedLayer(layer);
+            detectAvailablePopupSpace = layer._map.options.detectAvailablePopupSpace;
 
-            if (map._controllingInteractivity === 'map') {
+            if (layer._map._controllingInteractivity === 'map') {
               clicks = 0;
 
               setTimeout(function () {
                 if (!clicks) {
                   var properties = feature.properties;
-                  var html = L.outerspatial.popup()._resultToHtml(properties, config.popup, null, null, map.options.popup, layer);
+                  var html = L.outerspatial.popup()._resultToHtml(properties, config.popup, null, null, layer._map.options.popup, layer);
 
                   if (typeof html === 'string') {
                     html = util.unescapeHtml(html);
                   }
 
                   if (config.dockedPopup) {
-                    map.setDockedPopupContent(html);
-                    map.openDockedPopup();
+                    layer._map.setDockedPopupContent(html);
+                    layer._map.openDockedPopup();
                   } else {
-                    var popupWidth = (detectAvailablePopupSpace ? (util._getAvailableHorizontalSpace(map) < 300 ? util._getAvailableHorizontalSpace(map) : 300) : 300);
+                    var popupWidth = (detectAvailablePopupSpace ? (util._getAvailableHorizontalSpace(layer._map) < 300 ? util._getAvailableHorizontalSpace(layer._map) : 300) : 300);
                     var popup = L.outerspatial.popup({
-                      maxHeight: (detectAvailablePopupSpace ? util._getAvailableVerticalSpace(map) : undefined),
+                      maxHeight: (detectAvailablePopupSpace ? util._getAvailableVerticalSpace(layer._map) : undefined),
                       maxWidth: popupWidth,
                       minWidth: popupWidth
                     });
@@ -305,7 +299,7 @@ module.exports = {
                 }
               }, 200);
             } else {
-              map.fireEvent('click', e);
+              layer._map.fireEvent('click', e);
             }
           }
         });
@@ -335,8 +329,22 @@ module.exports = {
             activeTip = null;
           }
         });
+        layer.on('mouseout', mouseout);
+        layer.on('mouseover', mouseover);
 
-        if (geometry.type === 'MultiLineString' || geometry.type === 'LineString' || geometry.type === 'GeometryCollection') {
+        if (geometry.type === 'Point') {
+          layer.on('moveend', function (e) {
+            this.on('mouseover', mouseover);
+            this.on('mouseout', mouseout);
+          });
+          layer.on('movestart', function (e) {
+            this.deselectLayer();
+            this.off('mouseover', mouseover);
+            this.off('mouseout', mouseout);
+          });
+        }
+
+        if (geometry.type === 'GeometryCollection' || geometry.type === 'LineString' || geometry.type === 'MultiLineString') {
           if (geometry.geometries) {
             geometry.geometries.forEach(function (geometry) {
               if (geometry.type === 'MultiLineString') {
