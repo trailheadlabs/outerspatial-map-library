@@ -217,6 +217,7 @@ module.exports = {
               if (!this._circle) {
                 var color = 'yellow';
 
+                // TODO: Markers that use old popups aren't displaying a selected circle
                 // TODO: Also support functions
                 if (layer.options && layer.options.styles && layer.options.styles.point && layer.options.styles.point['marker-color'] && typeof layer.options.styles.point['marker-color'] === 'string') {
                   color = layer.options.styles.point['marker-color'];

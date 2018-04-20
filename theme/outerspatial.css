@@ -303,6 +303,20 @@
       outline-offset: -3px;
     }
 
+/* Location Access Dialog */
+.outerspatial-location-access-dialog {
+  background-color: #7da836;
+  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.3);
+  color: #fff;
+  padding: 16px;
+}
+  .outerspatial-location-access-dialog button {
+    background-color: #fff;
+    color: #7da836;
+    padding: 16px;
+    text-transform: uppercase;
+  }
+
 /* Buttons and Forms */
 .outerspatial button,
 .outerspatial input {

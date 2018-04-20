@@ -2,6 +2,16 @@
 
 'use strict';
 
+/*
+_createAndAddLocationAccessRequestDialog: function () {
+  var div = document.createElement('div');
+
+  div.className = 'outerspatial-location-access-dialog';
+
+  this._map.getContainer().appendChild(div);
+},
+*/
+
 var geocode = require('../util/geocode');
 var util = require('../util/util');
 var GeocoderControl = L.Control.extend({
