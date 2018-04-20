@@ -5,23 +5,17 @@
 var LocateControl = L.Control.extend({
   options: {
     position: 'topright',
-    requestLocationAccessOnAdd: false,
+    // requestLocationAccessOnAdd: false,
     setViewToLocationOnAdd: false
   },
   initialize: function (options) {
-    for (var i in options) {
-      if (typeof this.options[i] === 'object') {
-        L.extend(this.options[i], options[i]);
-      } else {
-        this.options[i] = options[i];
-      }
-    }
+    L.Util.setOptions(this, options);
+
+    return this;
   },
   onAdd: function (map) {
     var container = L.DomUtil.create('div', 'leaflet-bar leaflet-bar-single leaflet-control');
     var me = this;
-
-    this.options.requestLocationAccessOnAdd = true;
 
     this._button = L.DomUtil.create('button', undefined, container);
     this._button.setAttribute('alt', 'Show me where I am');
@@ -69,6 +63,8 @@ var LocateControl = L.Control.extend({
       })
       .on('locationfound', function (e) {
         var latLng = e.latlng;
+
+        console.log(e);
 
         me._drawAndPositionCircle(latLng, e.accuracy);
         me._setIcon('default');

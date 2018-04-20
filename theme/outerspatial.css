@@ -1165,21 +1165,46 @@
 }
 
 /* Legend Control */
-.outerspatial .leaflet-control-legend {
-  background-color: #f2f2f2;
-  background-color: rgba(242, 242, 242, .8);
-  padding: 10px;
+.outerspatial-control-legend {
+  background-color: #fff;
+  border-top: 1px solid #d8d8d8;
+  box-shadow: 2px 2px 4px -2px rgba(0,0,0,.3), -2px 2px 4px -2px rgba(0,0,0,.3);
+  box-sizing: border-box;
+  padding: 5px;
+  width: 280px;
 }
-  .outerspatial .leaflet-control-legend h3 {
-    margin: 0 0 8px 0;
+.outerspatial-control-legend .title {
+  margin-bottom: 10px;
+  text-align: center;
+}
+.outerspatial-control-legend button {
+  background-color: #fff;
+  border: 1px solid #7da836;
+  border-radius: 3px;
+  box-sizing: border-box !important;
+  color: #7da836;
+  float: right;
+  font-size: 12px !important;
+  line-height: 14px !important;
+  margin-top: 2px;
+  padding: 5px;
+  width: 53.53px;
+}
+  .outerspatial-control-legend button:hover {
+    background-color: #7da836;
+    color: #fff;
   }
-  .outerspatial .leaflet-control-legend ul {
-    margin: 0;
-    padding-left: 0;
-  }
-    .outerspatial .leaflet-control-legend ul li {
-      list-style-type: none;
-    }
+.outerspatial-control-legend-content {
+  background-color: #fff;
+  bottom: 0;
+  display: none;
+  padding: 10px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 252px;
+  z-index: 9991;
+}
 
 /* Measure Control */
 .outerspatial-control-measure ul {
@@ -1349,13 +1374,6 @@
   max-width: 205px;
   padding-right: 12px;
 }
-.outerspatial-control-switcher .list-shadow {
-  background-image: linear-gradient(90deg, rgba(0,0,0,0) 0%, #000000 100%);
-  opacity: 0.4;
-  position: absolute;
-  right: -16px;
-  top: -16px;
-}
 .outerspatial-control-switcher button {
   background-color: #fff;
   border: 1px solid #7da836;
@@ -1370,17 +1388,19 @@
   background-color: #7da836;
   color: #fff;
 }
-.outerspatial-control-switcher .list-container {
+.outerspatial-control-switcher-list-container {
+  bottom: 0;
   box-sizing: border-box;
   color: #6c6d70;
   overflow-x: hidden;
   overflow-y: auto;
   padding: 20px;
   position: absolute;
-  right: -16px;
-  top: -16px;
+  right: 0;
+  top: 0;
+  z-index: 9991;
 }
-  .outerspatial-control-switcher section {
+  .outerspatial-control-switcher-list-container section {
     border-radius: 2px;
     box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.3);
     cursor: pointer;
@@ -1388,36 +1408,36 @@
     margin-bottom: 12px;
     width: 232px;
   }
-    .outerspatial-control-switcher section.selected {
+    .outerspatial-control-switcher-list-container section.selected {
       box-shadow: 0 0 4px 3px #7da836;
     }
-    .outerspatial-control-switcher section:hover {
+    .outerspatial-control-switcher-list-container section:hover {
       box-shadow: 0 0 4px 3px #7da836;
     }
-    .outerspatial-control-switcher section:last-child {
+    .outerspatial-control-switcher-list-container section:last-child {
       margin-bottom: 0;
     }
-    .outerspatial-control-switcher section .baselayer-image-container {
+    .outerspatial-control-switcher-list-container section .baselayer-image-container {
       border-radius: 2px 2px 0 0;
       height: 103px;
       overflow: hidden;
       pointer-events: none;
       width: 100%;
     }
-    .outerspatial-control-switcher section .baselayer-image {
+    .outerspatial-control-switcher-list-container section .baselayer-image {
       border-radius: 2px 2px 0 0;
       bottom: 90px;
       pointer-events: none;
       position: relative;
       width: 232px;
     }
-    .outerspatial-control-switcher section .baselayer-name {
+    .outerspatial-control-switcher-list-container section .baselayer-name {
       background-color: #fff;
       font-weight: bold;
       padding: 8px 12px 0;
       pointer-events: none;
     }
-    .outerspatial-control-switcher section .baselayer-description {
+    .outerspatial-control-switcher-list-container section .baselayer-description {
       background-color: #fff;
       border-radius: 0 0 2px 2px;
       font-size: 12px;

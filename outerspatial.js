@@ -9,6 +9,7 @@ L.outerspatial = module.exports = {
   // Preserve order of controls because it affects the display hierarchy.
   control: {
     switcher: require('./src/control/switcher'),
+    legend: require('./src/control/legend'),
     geocoder: require('./src/control/geocoder'),
     download: require('./src/control/download'),
     home: require('./src/control/home'),
@@ -19,7 +20,6 @@ L.outerspatial = module.exports = {
     fullscreen: require('./src/control/fullscreen'),
     hash: require('./src/control/hash'),
     infobox: require('./src/control/infobox'),
-    legend: require('./src/control/legend'),
     overview: require('./src/control/overview'),
     print: require('./src/control/print'),
     scale: require('./src/control/scale'),

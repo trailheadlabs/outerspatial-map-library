@@ -336,6 +336,24 @@ MapExt = L.Map.extend({
   _createMapboxLayer: function (config) {
     return L.outerspatial.layer[config.type][config.styled === true ? 'styled' : 'tiled'](config);
   },
+  _hideAllControls: function () {
+    var bottomControls = document.getElementsByClassName('leaflet-bottom');
+    var topLeftControls = document.getElementsByClassName('leaflet-top leaflet-left');
+    var topRightControls = document.getElementsByClassName('leaflet-top leaflet-right');
+    var i;
+
+    for (i = 0; i < bottomControls.length; i++) {
+      bottomControls[i].style.display = 'none';
+    }
+
+    for (i = 0; i < topLeftControls.length; i++) {
+      topLeftControls[i].style.display = 'none';
+    }
+
+    for (i = 0; i < topRightControls.length; i++) {
+      topRightControls[i].style.display = 'none';
+    }
+  },
   _initializeModules: function () {
     if (this.options && this.options.modules && L.Util.isArray(this.options.modules) && this.options.modules.length) {
       var initialize = null;
@@ -749,6 +767,24 @@ MapExt = L.Map.extend({
       me.on('mouseout', function () {
         tooltip.hide();
       });
+    }
+  },
+  _showAllControls: function () {
+    var bottomControls = document.getElementsByClassName('leaflet-bottom');
+    var topLeftControls = document.getElementsByClassName('leaflet-top leaflet-left');
+    var topRightControls = document.getElementsByClassName('leaflet-top leaflet-right');
+    var i;
+
+    for (i = 0; i < bottomControls.length; i++) {
+      bottomControls[i].style.display = 'block';
+    }
+
+    for (i = 0; i < topLeftControls.length; i++) {
+      topLeftControls[i].style.display = 'block';
+    }
+
+    for (i = 0; i < topRightControls.length; i++) {
+      topRightControls[i].style.display = 'block';
     }
   },
   _toLeaflet: function (config) {

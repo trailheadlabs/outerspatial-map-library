@@ -34,6 +34,7 @@ var GeocoderControl = L.Control.extend({
   },
   initialize: function (options) {
     L.Util.setOptions(this, options);
+
     return this;
   },
   onAdd: function (map) {
