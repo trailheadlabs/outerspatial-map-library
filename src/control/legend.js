@@ -13,8 +13,6 @@ var LegendControl = L.Control.extend({
     return this;
   },
   onAdd: function (map) {
-    console.log(this.options);
-
     this._container = L.DomUtil.create('div', 'outerspatial-control-legend', null);
     this._titleDiv = L.DomUtil.create('div', null, this._container);
     this._button = L.DomUtil.create('button', null, this._container);
@@ -96,8 +94,6 @@ L.Map.addInitHook(function () {
     if (typeof this.options.legendControl === 'object') {
       options = this.options.legendControl;
     }
-
-    console.log(options);
 
     this.legendControl = L.outerspatial.control.legend(options).addTo(this);
   }
