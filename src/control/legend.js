@@ -13,6 +13,8 @@ var LegendControl = L.Control.extend({
     return this;
   },
   onAdd: function (map) {
+    var me = this;
+
     this._container = L.DomUtil.create('div', 'outerspatial-control-legend', null);
     this._titleDiv = L.DomUtil.create('div', null, this._container);
     this._button = L.DomUtil.create('button', null, this._container);
@@ -57,9 +59,9 @@ var LegendControl = L.Control.extend({
     };
     map.on('resize', function (e) {
       if (e.newSize.x > 598) {
-        this.expand();
+        me._expand();
       } else {
-        this.collapse();
+        me._collapse();
       }
     }, this);
     L.DomEvent.addListener(modalBackdrop, 'click', function () {
