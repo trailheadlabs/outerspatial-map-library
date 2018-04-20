@@ -41,7 +41,7 @@ var LegendControl = L.Control.extend({
     L.DomEvent.disableScrollPropagation(modalBackdrop);
 
     if (map.getContainer().offsetWidth < 600) {
-      this.collapse();
+      this._collapse();
     }
 
     legendContent.innerHTML = this.options.html;
