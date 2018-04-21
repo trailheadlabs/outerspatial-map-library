@@ -1198,6 +1198,7 @@
   background-color: #fff;
   bottom: 0;
   display: none;
+  overflow: auto;
   padding: 10px;
   position: absolute;
   right: 0;
