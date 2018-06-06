@@ -1070,6 +1070,71 @@
   cursor: pointer;
 }
 
+/* Filter Control */
+.outerspatial .leaflet-control-filter {
+  background-color: #fff;
+  border-radius: 1px;
+  font-size: 14px;
+  z-index: 8;
+}
+  .outerspatial .leaflet-control-filter div:first-child {
+    border-right: solid 1px #d8d8d8;
+    box-sizing: border-box;
+    color: #73bd3d;
+    float: left;
+    height: 40px;
+    line-height: 40px;
+    padding: 0 10px;
+    text-align: center;
+    width: 57px;
+  }
+  .outerspatial .leaflet-control-filter div:last-child {
+    float: right;
+    height: 40px;
+    overflow: hidden;
+    position: relative;
+    width: 183px;
+  }
+    .outerspatial .leaflet-control-filter div:last-child button {
+      border: none;
+      border-right: solid 1px #d8d8d8;
+      box-sizing: border-box;
+      height: 100%;
+      padding: 0;
+      width: 45.75px;
+    }
+      .outerspatial .leaflet-control-filter div:last-child button.more {
+        bottom: 0;
+        position: absolute;
+        top: 0;
+        width: 22.875px !important;
+      }
+        .outerspatial .leaflet-control-filter div:last-child button.more:hover {
+          background-color: #9b9b9b;
+          border-right: solid 1px #9b9b9b;
+        }
+        .outerspatial .leaflet-control-filter div:last-child button.more-previous {
+          left: 0;
+        }
+        .outerspatial .leaflet-control-filter div:last-child button.more-next {
+          right: 0;
+        }
+    .outerspatial .leaflet-control-filter div:last-child ul {
+      height: 40px;
+      list-style-type: none;
+      margin: 0 22.875px;
+      padding: 0;
+    }
+      .outerspatial .leaflet-control-filter div:last-child ul li {
+        cursor: pointer;
+        float: left;
+        height: 40px;
+        text-align: center;
+      }
+        .outerspatial .leaflet-control-filter div:last-child ul li button:hover {
+          background-color: #9aca41;
+        }
+
 /* Geocoder Control */
 .outerspatial .leaflet-control-geocoder {
   border-radius: 1px;
@@ -1080,16 +1145,16 @@
   .outerspatial .leaflet-control-geocoder button:hover {
     background-clip: padding-box;
     border: none;
-    border-left: 1px solid #d8d8d8;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 1px;
+    border-right: 1px solid #d8d8d8;
     border-top-left-radius: 0;
     border-top-right-radius: 1px;
     box-sizing: border-box;
     float: right;
     height: 40px;
     outline-offset: -1px;
-    width: 40px;
+    width: 45.75px;
   }
   .outerspatial .leaflet-control-geocoder button:focus {
     position: relative;
@@ -1099,6 +1164,7 @@
     border: none;
     border-bottom-left-radius: 1px;
     border-bottom-right-radius: 0;
+    border-right: solid 1px #d8d8d8;
     border-top-left-radius: 1px;
     border-top-right-radius: 0;
     box-sizing: border-box;
@@ -1107,7 +1173,7 @@
     outline-offset: -1px;
     text-overflow: ellipsis;
     white-space: nowrap;
-    width: 200px;
+    width: 194.25px;
   }
   .outerspatial .leaflet-control-geocoder input:focus {
     position: relative;

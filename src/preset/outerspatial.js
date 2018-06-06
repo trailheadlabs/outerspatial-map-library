@@ -6,122 +6,125 @@ var reqwest = require('reqwest');
 
 var OuterSpatialLayer = L.GeoJSON.extend({
   _include: [{
-    type: 'Visitor Center',
-    symbol: 'visitor-center',
-    minZoom: 4,
-    minZoomFactor: 0,
     maxZoom: 22,
-    priority: 1
-  }, {
-    type: 'Entrance',
-    symbol: 'entrance-station',
-    minZoom: 4,
+    minZoom: 7,
     minZoomFactor: 0,
-    maxZoom: 22,
-    priority: 1
-  }, {
-    type: 'Campground',
+    priority: 2,
     symbol: 'campground',
-    minZoom: 7,
-    minZoomFactor: 0,
-    maxZoom: 22,
-    priority: 2
+    type: 'Campground'
   }, {
-    type: 'Trailhead',
-    symbol: 'trailhead',
-    minZoom: 7,
-    minZoomFactor: 0,
     maxZoom: 22,
-    priority: 3
-  }, {
-    type: 'Store',
-    symbol: 'store',
     minZoom: 14,
-    minZoomFactor: 0,
-    maxZoom: 22,
-    priority: 3
-  }, {
-    type: 'Restrooms',
-    symbol: 'restrooms',
-    minZoom: 14,
-    maxZoom: 22,
-    priority: 3
-  }, {
-    type: 'Drinking Water',
+    priority: 4,
     symbol: 'drinking-water',
-    minZoom: 14,
-    maxZoom: 22,
-    priority: 4
+    type: 'Drinking Water'
   }, {
-    type: 'Food Service',
+    maxZoom: 22,
+    minZoom: 4,
+    minZoomFactor: 0,
+    priority: 1,
+    symbol: 'entrance-station',
+    type: 'Entrance'
+  }, {
+    maxZoom: 22,
+    minZoom: 14,
+    priority: 4,
     symbol: 'food-service',
-    minZoom: 14,
-    maxZoom: 22,
-    priority: 4
+    type: 'Food Service'
   }, {
-    type: 'Information',
+    maxZoom: 22,
+    minZoom: 14,
+    priority: 4,
     symbol: 'information',
-    minZoom: 14,
-    maxZoom: 22,
-    priority: 4
+    type: 'Information'
   }, {
-    type: 'Interpretive Exhibit',
+    maxZoom: 22,
+    minZoom: 14,
+    priority: 4,
     symbol: 'interpretive-exhibit',
-    minZoom: 14,
-    maxZoom: 22,
-    priority: 4
+    type: 'Interpretive Exhibit'
   }, {
-    type: 'Parking',
+    maxZoom: 22,
+    minZoom: 14,
+    priority: 4,
+    symbol: 'letter-x',
+    type: null
+  }, {
+    maxZoom: 22,
+    minZoom: 14,
+    priority: 4,
+    symbol: 'letter-x',
+    type: ''
+  }, {
+    maxZoom: 22,
+    minZoom: 14,
+    priority: 4,
     symbol: 'parking',
-    minZoom: 14,
-    maxZoom: 22,
-    priority: 4
+    type: 'Parking'
   }, {
-    type: 'Playground',
+    maxZoom: 22,
+    minZoom: 14,
+    priority: 4,
     symbol: 'playground',
-    minZoom: 14,
-    maxZoom: 22,
-    priority: 4
+    type: 'Playground'
   }, {
-    type: 'POI',
+    maxZoom: 22,
+    minZoom: 14,
+    priority: 4,
     symbol: 'dot',
-    minZoom: 14,
-    maxZoom: 22,
-    priority: 4
+    type: 'POI'
   }, {
-    type: 'Sanitary Disposal Station',
+    maxZoom: 22,
+    minZoom: 14,
+    priority: 3,
+    symbol: 'restrooms',
+    type: 'Restrooms'
+  }, {
+    maxZoom: 22,
+    minZoom: 14,
+    priority: 4,
     symbol: 'sanitary-disposal-station',
-    minZoom: 14,
-    maxZoom: 22,
-    priority: 4
+    type: 'Sanitary Disposal Station'
   }, {
-    type: 'Showers',
+    maxZoom: 22,
+    minZoom: 14,
+    priority: 4,
     symbol: 'showers',
-    minZoom: 14,
-    maxZoom: 22,
-    priority: 4
+    type: 'Showers'
   }, {
-    type: null,
-    symbol: 'letter-x',
-    minZoom: 14,
     maxZoom: 22,
-    priority: 4
+    minZoom: 14,
+    minZoomFactor: 0,
+    priority: 3,
+    symbol: 'store',
+    type: 'Store'
   }, {
-    type: '',
-    symbol: 'letter-x',
-    minZoom: 14,
     maxZoom: 22,
-    priority: 4
+    minZoom: 7,
+    minZoomFactor: 0,
+    priority: 3,
+    symbol: 'trailhead',
+    type: 'Trailhead'
+  }, {
+    maxZoom: 22,
+    minZoom: 4,
+    minZoomFactor: 0,
+    priority: 1,
+    symbol: 'visitor-center',
+    type: 'Visitor Center'
+
+    // Add trails
   }],
   includes: [
     require('../mixin/geojson')
   ],
   options: {
     environment: 'production',
-    formatPopups: true,
-    searchable: false
+    formatPopups: true, // TODO: Just check for "popups" config property
+    searchable: true
   },
   initialize: function (options) {
+    var me = this;
     var singularTypes = {
       areas: 'Area',
       campgrounds: 'Campground',
@@ -130,7 +133,27 @@ var OuterSpatialLayer = L.GeoJSON.extend({
       trailheads: 'Trailhead',
       trails: 'Trail'
     };
-    var me = this;
+
+    function fetch (environment, organizationId, locationType) {
+      return reqwest({
+        type: 'json',
+        url: 'https://' + (environment === 'production' ? '' : 'staging-') + 'cdn.outerspatial.com/static_data/organizations/' + organizationId + '/api_v2/' + locationType + '.geojson'
+      });
+    }
+    function handleTag (key) {
+      return key
+        .toLowerCase()
+        .split('_')
+        .map(function (word) {
+          if (word === 'rv') {
+            return word.toUpperCase();
+          } else {
+            return word[0].toUpperCase() + word.substr(1);
+          }
+        })
+        .join(' ');
+    }
+
     L.Util.setOptions(this, this._toLeaflet(options));
 
     if (!this.options.locationType) {
@@ -141,8 +164,211 @@ var OuterSpatialLayer = L.GeoJSON.extend({
       console.error('The "organizationId" property is required for the OuterSpatial preset.');
     }
 
+    if (this.options.formatPopups) {
+      var popupConfig = {};
+
+      if (options.popup) {
+        popupConfig = options.popup;
+      }
+
+      if (!popupConfig.description && !popupConfig.title) {
+        popupConfig.description = function (properties) {
+          var accessibilityDescription = properties.accessibility_description;
+          var address = properties.address;
+          var content = '';
+          var contentBlocks = properties.content_blocks;
+          var description = properties.description;
+          var length = properties.length;
+          var tags = properties.tags;
+          var website = properties.website;
+
+          if (description && description !== null && description !== '') {
+            content = content + '<section>' + description + '</section>';
+          }
+
+          if (tags) {
+            var tagCategories = {
+              Area: [
+                'Activities',
+                'Good For',
+                'Status'
+              ],
+              Campground: [
+                'Accessibility',
+                'Amenities',
+                'Status'
+              ],
+              PointOfInterest: [
+                'Accessibility',
+                'Status'
+              ],
+              Trail: [
+                'Accessibility',
+                'Allowed Use',
+                'Difficulty',
+                'Status',
+                'Trail Type'
+              ],
+              Trailhead: [
+                'Accessibility',
+                'Amenities',
+                'Status'
+              ],
+              TrailSegment: [
+                'Accessibility',
+                'Allowed Use',
+                'Difficulty',
+                'Status',
+                'Trail Type'
+              ]
+            };
+            var tagSections = {};
+
+            tags.forEach(function (tag) {
+              if (tag.categories.length > 0 && tag.value === 'yes') {
+                tag.categories.forEach(function (category) {
+                  if (tagCategories[properties.class_name].indexOf(category.name) > -1) {
+                    if (!tagSections.hasOwnProperty(category.name)) {
+                      tagSections[category.name] = [];
+                    }
+
+                    tagSections[category.name].push(handleTag(tag.key));
+                  }
+                });
+              }
+            });
+
+            for (var key in tagSections) {
+              if (key === 'Status') {
+                continue;
+              }
+
+              content = content + '<section><h5>' + key + '</h5><span style="color:#7da836;">' + tagSections[key].sort().join(', ') + '</span></section>';
+            }
+          }
+
+          if (accessibilityDescription && accessibilityDescription !== null && accessibilityDescription !== '') {
+            content = content + '<section><h5>Accessibility Description</h5>' + accessibilityDescription + '</section>';
+          }
+
+          if (contentBlocks) {
+            contentBlocks.forEach(function (contentBlock) {
+              content = content + '<section><h5>' + contentBlock.title + '</h5>' + contentBlock.body + '</section>';
+            });
+          }
+
+          if (length && length !== null && length !== '') {
+            content = content + '<section><h5>Length</h5>' + (length / 1609.34).toFixed(1) + ' mi</section>';
+          }
+
+          if (address && address !== null && address !== '') {
+            try {
+              address = JSON.parse(address).label;
+            } catch (e) {
+              // Address is not JSON
+            }
+
+            content = content + '<section><h5>Address</h5>' + address + '</section>';
+          }
+
+          if (website && website !== null && website !== '') {
+            content = content + '<section><h5>Website</h5><div class="url"><a href="' + properties.website + '" target="_blank">' + properties.website + '</div></section>';
+          }
+
+          if (content === '') {
+            return null;
+          } else {
+            return content;
+          }
+        };
+        popupConfig.image = function (properties) {
+          var imageAttachments = properties.image_attachments;
+
+          if (imageAttachments && imageAttachments.length > 0) {
+            var imageAttachment = imageAttachments[0];
+            var image = {
+              caption: imageAttachment.image.caption
+            };
+
+            if (window.innerWidth <= 320) {
+              image.url = imageAttachment.image.versions.small_square.url;
+            } else {
+              image.url = imageAttachment.image.versions.medium_square.url;
+            }
+
+            return image;
+          } else {
+            return null;
+          }
+        };
+        popupConfig.title = function (properties) {
+          var banner = '';
+          var className = properties.class_name;
+          var subtitle;
+          var title;
+          var type;
+
+          if (className === 'PointOfInterest') {
+            type = 'Point of Interest';
+          } else if (className === 'TrailSegment') {
+            type = 'Trail Segment';
+          } else {
+            type = className;
+          }
+
+          subtitle = (className === 'Area' || className === 'TrailSegment' ? type : type + (properties.area_id ? ' in ' + properties.area.name : ''));
+
+          if (properties['name']) {
+            title = '{{name}}';
+          } else {
+            title = 'Unnamed';
+          }
+
+          if (properties['tag:Status:closed'] === 'yes') {
+            banner = '<img class="banner" width=51 height=20 alt="Closed banner" src="' + window.L.Icon.Default.imagePath + '/outerspatial/closed-indicator-right' + (L.Browser.retina ? '@2x' : '') + '.png"/>';
+          }
+
+          return {
+            image: banner,
+            subtitle: subtitle,
+            title: title
+          };
+        };
+      }
+
+      options.popup = popupConfig;
+    }
+
     if (this.options.locationType === 'campgrounds' || this.options.locationType === 'points_of_interest' || this.options.locationType === 'trailheads') {
       this.options.prioritization = true;
+
+      if (this.options.locationType === 'campgrounds' || this.options.locationType === 'trailheads') {
+        var config = (function () {
+          var c;
+
+          for (var j = 0; j < me._include.length; j++) {
+            if (me._include[j].type === singularTypes[me.options.locationType]) {
+              c = me._include[j];
+              break;
+            }
+          }
+
+          if (c) {
+            return c;
+          }
+        })();
+
+        if (!options.styles) {
+          options.styles = {
+            point: {
+              'marker-library': 'outerspatialsymbollibrary',
+              'marker-symbol': config.symbol + '-white'
+            }
+          };
+        }
+
+        options.zIndexOffset = config.priority * -1000;
+      }
     }
 
     if (this.options.searchable) {
@@ -213,232 +439,29 @@ var OuterSpatialLayer = L.GeoJSON.extend({
       };
     }
 
-    if (this.options.formatPopups) {
-      var popupConfig;
-
-      if (options.popup) {
-        popupConfig = options.popup;
-      } else {
-        popupConfig = {};
-      }
-
-      if (!popupConfig.description && !popupConfig.title) {
-        popupConfig.description = function (properties) {
-          var accessibilityDescription = properties.accessibility_description;
-          var address = properties.address;
-          var content = '';
-          var contentBlocks = properties.content_blocks;
-          var description = properties.description;
-          var length = properties.length;
-          var tags = properties.tags;
-          var website = properties.website;
-
-          if (description && description !== '' && description !== null) {
-            content = content + '<section>' + description + '</section>';
-          }
-
-          if (tags) {
-            var tagCategories = {
-              Area: [
-                'Activities',
-                'Good For',
-                'Status'
-              ],
-              Campground: [
-                'Accessibility',
-                'Amenities',
-                'Status'
-              ],
-              PointOfInterest: [
-                'Accessibility',
-                'Status'
-              ],
-              Trail: [
-                'Accessibility',
-                'Allowed Use',
-                'Difficulty',
-                'Status',
-                'Trail Type'
-              ],
-              Trailhead: [
-                'Accessibility',
-                'Amenities',
-                'Status'
-              ],
-              TrailSegment: [
-                'Accessibility',
-                'Allowed Use',
-                'Difficulty',
-                'Status',
-                'Trail Type'
-              ]
-            };
-            var tagSections = {};
-
-            tags.forEach(function (tag) {
-              if (tag.categories.length > 0 && tag.value === 'yes') {
-                tag.categories.forEach(function (category) {
-                  if (tagCategories[properties.class_name].indexOf(category.name) > -1) {
-                    if (!tagSections.hasOwnProperty(category.name)) {
-                      tagSections[category.name] = [];
-                    }
-
-                    tagSections[category.name].push(handleTag(tag.key));
-                  }
-                });
-              }
-            });
-
-            for (var key in tagSections) {
-              if (key === 'Status') {
-                continue;
-              }
-
-              content = content + '<section><h5>' + key + '</h5><span style="color:#7da836">' + tagSections[key].sort().join(', ') + '</span></section>';
-            }
-          }
-
-          if (accessibilityDescription && accessibilityDescription !== '' && accessibilityDescription !== null) {
-            content = content + '<section><h5>Accessibility Description</h5>' + accessibilityDescription + '</section>';
-          }
-
-          if (contentBlocks) {
-            contentBlocks.forEach(function (contentBlock) {
-              content = content + '<section><h5>' + contentBlock.title + '</h5>' + contentBlock.body + '</section>';
-            });
-          }
-
-          if (length && length !== '' && length !== null) {
-            content = content + '<section><h5>Length</h5>' + (length / 1609.34).toFixed(1) + ' mi</section>';
-          }
-
-          if (address && address !== '' && address !== null) {
-            try {
-              address = JSON.parse(address).label;
-            } catch (e) {
-              // address is not JSON
-            }
-
-            content = content + '<section><h5>Address</h5>' + address + '</section>';
-          }
-
-          if (website && website !== '' && website !== null) {
-            content = content + '<section><h5>Website</h5><div class="url"><a href="' + properties.website + '" target="_blank">' + properties.website + '</div></section>';
-          }
-
-          if (content === '') {
-            return null;
-          } else {
-            return content;
-          }
-        };
-        popupConfig.image = function (properties) {
-          var imageAttachments = properties.image_attachments;
-
-          if (imageAttachments && imageAttachments.length > 0) {
-            var imageAttachment = imageAttachments[0];
-            var image = {
-              caption: imageAttachment.image.caption
-            };
-
-            if (window.innerWidth <= 320) {
-              image.url = imageAttachment.image.versions.small_square.url;
-            } else {
-              image.url = imageAttachment.image.versions.medium_square.url;
-            }
-
-            return image;
-          } else {
-            return null;
-          }
-        };
-        popupConfig.title = function (properties) {
-          var banner = '';
-          var className = properties.class_name;
-          var subtitle;
-          var title;
-          var type;
-
-          if (className === 'PointOfInterest') {
-            type = 'Point of Interest';
-          } else if (className === 'TrailSegment') {
-            type = 'Trail Segment';
-          } else {
-            type = className;
-          }
-
-          subtitle = (className === 'Area' || className === 'TrailSegment' ? type : type + (properties.area_id ? ' in ' + properties.area.name : ''));
-
-          if (properties['name']) {
-            title = '{{name}}';
-          } else {
-            title = 'Unnamed';
-          }
-
-          if (properties['tag:Status:closed'] === 'yes') {
-            banner = '<img class="banner" width=51 height=20 alt="Closed banner" src="' + window.L.Icon.Default.imagePath + '/outerspatial/closed-indicator-right' + (L.Browser.retina ? '@2x' : '') + '.png"/>';
-          }
-
-          return {
-            image: banner,
-            subtitle: subtitle,
-            title: title
-          };
-        };
-      }
-
-      options.popup = popupConfig;
-    }
-
-    if (this.options.locationType === 'campgrounds' || this.options.locationType === 'trailheads') {
-      var config = (function () {
-        var c;
-
-        for (var j = 0; j < me._include.length; j++) {
-          if (me._include[j].type === singularTypes[me.options.locationType]) {
-            c = me._include[j];
-            break;
-          }
-        }
-
-        if (c) {
-          return c;
-        }
-      })();
-
-      if (!options.styles) {
-        options.styles = {
-          point: {
-            'marker-library': 'outerspatialsymbollibrary',
-            'marker-symbol': config.symbol + '-white'
-          }
-        };
-      }
-
-      options.zIndexOffset = config.priority * -1000;
-    }
-
     L.Util.setOptions(this, this._toLeaflet(options));
 
     if (this.options.locationType === 'primary_points_of_interest') {
       var campgrounds = fetch(me.options.environment, me.options.organizationId, 'campgrounds');
-      var trailheads = fetch(me.options.environment, me.options.organizationId, 'trailheads');
       var pointsOfInterest = fetch(me.options.environment, me.options.organizationId, 'points_of_interest').then(function (geojson) {
         geojson.features = geojson.features.filter(function (feature) {
           var poiType = feature.properties.point_type;
-          if (poiType === 'Visitor Center' || poiType === 'Entrance') {
-            return true;
-          } else {
-            return false;
-          }
+
+          return (poiType === 'Entrance' || poiType === 'Visitor Center');
         });
+
         return geojson;
       });
+      var trailheads = fetch(me.options.environment, me.options.organizationId, 'trailheads');
 
-      Promise.all([campgrounds, trailheads, pointsOfInterest]).then(function (values) {
+      Promise.all([
+        campgrounds,
+        pointsOfInterest,
+        trailheads
+      ]).then(function (values) {
         var geojson = {
-          type: 'FeatureCollection',
-          features: []
+          features: [],
+          type: 'FeatureCollection'
         };
 
         values.forEach(function (value) {
@@ -448,8 +471,8 @@ var OuterSpatialLayer = L.GeoJSON.extend({
         L.GeoJSON.prototype.initialize.call(me, geojson, me.options);
         me.getLayers().forEach(function (layer) {
           config = (function () {
-            var c;
             var type = layer.feature.properties.point_type ? layer.feature.properties.point_type : layer.feature.properties.class_name;
+            var c;
 
             for (var i = 0; i < me._include.length; i++) {
               if (me._include[i].type === type) {
@@ -549,27 +572,6 @@ var OuterSpatialLayer = L.GeoJSON.extend({
         me.errorFired = obj;
       });
     }
-
-    function fetch (environment, organizationId, locationType) {
-      return reqwest({
-        url: 'https://' + (environment === 'production' ? '' : 'staging-') + 'cdn.outerspatial.com/static_data/organizations/' + organizationId + '/api_v2/' + locationType + '.geojson',
-        type: 'json'
-      });
-    }
-
-    function handleTag (key) {
-      return key
-        .toLowerCase()
-        .split('_')
-        .map(function (word) {
-          if (word === 'rv') {
-            return word.toUpperCase();
-          } else {
-            return word[0].toUpperCase() + word.substr(1);
-          }
-        })
-        .join(' ');
-    }
   },
   onAdd: function (map) {
     var me = this;
@@ -585,8 +587,8 @@ var OuterSpatialLayer = L.GeoJSON.extend({
   _collapseFeatureAttributes: function (features) {
     features.forEach(function (feature) {
       var area = feature.properties.area;
-      var tags = feature.properties.tags;
       var contentBlocks = feature.properties.content_blocks;
+      var tags = feature.properties.tags;
 
       if (area !== null) {
         for (var prop in area) {
@@ -666,6 +668,11 @@ var OuterSpatialLayer = L.GeoJSON.extend({
       }
 
       removedLayersClone = me._removedLayers.slice(0);
+
+
+
+
+
 
       for (var j = 0; j < removedLayersClone.length; j++) {
         var index;

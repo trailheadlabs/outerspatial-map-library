@@ -64,8 +64,6 @@ var LocateControl = L.Control.extend({
       .on('locationfound', function (e) {
         var latLng = e.latlng;
 
-        console.log(e);
-
         me._drawAndPositionCircle(latLng, e.accuracy);
         me._setIcon('default');
 
@@ -80,18 +78,18 @@ var LocateControl = L.Control.extend({
               me._setViewToInitialLocation = false;
             }
 
-            if (map.getBounds().contains(latLng)) {
-              if (map.getZoom() === 17) {
-                map.panTo(latLng);
+            // Give the map time to do an initial load with the hash control
+            setTimeout(function () {
+              if (map.getBounds().contains(latLng)) {
+                if (map.getZoom() === 17) {
+                  map.panTo(latLng);
+                } else {
+                  map.flyTo(latLng, 17);
+                }
               } else {
-                // TODO: Figure out a way to hook up to a callback after the flyTo
-                // me._layer.remove();
                 map.flyTo(latLng, 17);
-                // me._layer.addTo(map);
               }
-            } else {
-              map.flyTo(latLng, 17);
-            }
+            }, 300);
           }
         }
       });

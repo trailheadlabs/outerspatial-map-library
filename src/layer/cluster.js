@@ -19,7 +19,7 @@ var ClusterLayer = L.MarkerClusterGroup.extend({
       options.cluster = {};
     }
 
-    options.cluster.iconCreateFunction = new me.IconCreateFunction(options.cluster.clusterIcon);
+    options.cluster.iconCreateFunction = new this.IconCreateFunction(options.cluster.clusterIcon);
     L.Util.setOptions(this, options.cluster);
     options.clustered = options.cluster.iconCreateFunction('getInfo');
     delete options.cluster;
@@ -172,7 +172,7 @@ var ClusterLayer = L.MarkerClusterGroup.extend({
         span: {
           color: 'rgb(' + hexToArray(style.fontColor)[0] + ', ' + hexToArray(style.fontColor)[1] + ', ' + hexToArray(style.fontColor)[2] + ')',
           display: 'block',
-          font: '12px Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif',
+          font: '12px Karla,"Helvetica Neue",helvetica,arial,sans-serif',
           'line-height': style.size + 'px'
         }
       };
@@ -265,6 +265,7 @@ var ClusterLayer = L.MarkerClusterGroup.extend({
           newColor[1] = Math.floor(parseInt(newColor[1], 10) + (255 * (1 - parseFloat(newColor[4], 10))));
           newColor[2] = Math.floor(parseInt(newColor[2], 10) + (255 * (1 - parseFloat(newColor[4], 10))));
           newColor[3] = Math.floor(parseInt(newColor[3], 10) + (255 * (1 - parseFloat(newColor[4], 10))));
+
           if (newColor[1] > 255) {
             newColor[1] = 255;
           }

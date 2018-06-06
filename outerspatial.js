@@ -11,6 +11,7 @@ L.outerspatial = module.exports = {
     switcher: require('./src/control/switcher'),
     legend: require('./src/control/legend'),
     geocoder: require('./src/control/geocoder'),
+    filter: require('./src/control/filter'),
     download: require('./src/control/download'),
     home: require('./src/control/home'),
     smallzoom: require('./src/control/smallzoom'),
