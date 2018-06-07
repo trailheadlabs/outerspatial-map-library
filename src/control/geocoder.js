@@ -17,7 +17,7 @@ var util = require('../util/util');
 var GeocoderControl = L.Control.extend({
   options: {
     position: 'topleft',
-    provider: 'esri'
+    provider: 'mapbox'
   },
   statics: {
     ATTRIBUTIONS: {
