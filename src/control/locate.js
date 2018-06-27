@@ -18,11 +18,12 @@ var LocateControl = L.Control.extend({
     var me = this;
 
     this._button = L.DomUtil.create('button', undefined, container);
-    this._button.setAttribute('alt', 'Show me where I am');
     this._layer = new L.LayerGroup().addTo(map);
     this._map = map;
-    this._setIcon('default');
     this._tracking = false;
+
+    this._button.setAttribute('alt', 'Show my location on the map');
+    this._setIcon('default');
     L.DomEvent
       .on(this._button, 'click', function (e) {
         L.DomEvent.stopPropagation(e);
@@ -44,11 +45,12 @@ var LocateControl = L.Control.extend({
     map
       .on('dragstart', function (e) {
         if (me._active) {
+          me._setViewToInitialLocation = false;
+          me._tracking = false;
+
           L.DomUtil.removeClass(me._button, 'pressed');
           me._setIcon('default');
-          me._setViewToInitialLocation = false;
           me._stopLocate();
-          me._tracking = false;
         }
       })
       .on('locationerror', function (e) {
@@ -69,7 +71,11 @@ var LocateControl = L.Control.extend({
 
         if (map.options.maxBounds && !map.options.maxBounds.contains(latLng)) {
           L.DomUtil.removeClass(me._button, 'pressed');
-          map.notify.danger('You seem to be located outside the boundary of the map.');
+
+          if (!me._suppressFirstOutOfBoundsErrorMessage) {
+            map.notify.danger('Sorry, but you seem to be located outside the boundary of the map.');
+          }
+
           me._stopLocate();
         } else {
           if (me._tracking || me._setViewToInitialLocation) {
@@ -92,6 +98,8 @@ var LocateControl = L.Control.extend({
             }, 300);
           }
         }
+
+        me._suppressFirstOutOfBoundsErrorMessage = false;
       });
 
     if (navigator.permissions) {
@@ -101,12 +109,15 @@ var LocateControl = L.Control.extend({
         .then(function (result) {
           if (result && result.state === 'granted') {
             me._hasPermission = true;
+
             me._startLocate();
 
             if (me.options.setViewToLocationOnAdd) {
               L.DomUtil.addClass(me._button, 'pressed');
               me._setIcon('requesting');
               me._setViewToInitialLocation = true;
+              // Don't show "out of bounds" error message the first time if map checks for location on load
+              me._suppressFirstOutOfBoundsErrorMessage = true;
             }
           } else {
             me._hasPermission = false;

@@ -2,15 +2,7 @@
 
 'use strict';
 
-/*
-_createAndAddLocationAccessRequestDialog: function () {
-  var div = document.createElement('div');
-
-  div.className = 'outerspatial-location-access-dialog';
-
-  this._map.getContainer().appendChild(div);
-},
-*/
+// TODO: Request access to user's location and use it to present results
 
 var geocode = require('../util/geocode');
 var util = require('../util/util');
@@ -284,53 +276,6 @@ var GeocoderControl = L.Control.extend({
   _initalizeIndex: function () {
     var me = this;
 
-    L.DomEvent.on(me._input, 'keyup', me._debounce(function (e) {
-      var value = this.value;
-
-      if (value) {
-        var keyCode = e.keyCode;
-
-        if (keyCode !== 13 && keyCode !== 27 && keyCode !== 38 && keyCode !== 40) {
-          if (value !== me._oldValue) {
-            me._isDirty = true;
-            me._oldValue = value;
-
-            if (value.length) {
-              me._results = [];
-
-              if (window.OuterSpatial.config.overlays.constructor === Array) {
-                var overlays = window.OuterSpatial.config.overlays;
-
-                for (var i = 0; i < overlays.length; i++) {
-                  if (typeof overlays[i].search === 'function') {
-                    me._results = me._results.concat(overlays[i].search(value));
-                  }
-                }
-              }
-
-              me._results.sort(function (a, b) {
-                var resultA = a.name.toUpperCase();
-                var resultB = b.name.toUpperCase();
-
-                if (resultA < resultB) {
-                  return -1;
-                }
-
-                if (resultA > resultB) {
-                  return 1;
-                }
-
-                return 0;
-              });
-              me._resultsReady(value, me._results);
-            }
-          }
-        }
-      } else {
-        me._clearResults();
-      }
-    }, 250));
-
     L.DomEvent.on(me._input, 'keydown', function (e) {
       switch (e.keyCode) {
         case 13:
@@ -381,6 +326,53 @@ var GeocoderControl = L.Control.extend({
           break;
       }
     });
+    L.DomEvent.on(me._input, 'keyup', me._debounce(function (e) {
+      var value = this.value;
+
+      if (value) {
+        var keyCode = e.keyCode;
+
+        if (keyCode !== 13 && keyCode !== 27 && keyCode !== 38 && keyCode !== 40) {
+          if (value !== me._oldValue) {
+            me._isDirty = true;
+            me._oldValue = value;
+
+            if (value.length) {
+              var overlays = window.OuterSpatial.config.overlays;
+
+              me._results = [];
+
+              if (Array.isArray(overlays)) {
+                for (var i = 0; i < overlays.length; i++) {
+                  if (typeof overlays[i].search === 'function') {
+                    me._results = me._results.concat(overlays[i].search(value));
+                  }
+                }
+              }
+
+              me._results.sort(function (a, b) {
+                var aName = a.name.toUpperCase();
+                var bName = b.name.toUpperCase();
+
+                if (aName < bName) {
+                  return -1;
+                } else if (aName > bName) {
+                  return 1;
+                } else {
+                  return 0;
+                }
+              });
+
+              console.log(me._results);
+
+              me._resultsReady(value, me._results);
+            }
+          }
+        }
+      } else {
+        me._clearResults();
+      }
+    }, 250));
   },
   _resultsReady: function (value, results) {
     var me = this;

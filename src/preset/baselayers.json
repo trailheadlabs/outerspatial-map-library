@@ -1,12 +1,32 @@
 {
   "outerspatial": {
+    "landscape": {
+      "attribution": "&copy; <a href='https://www.mapbox.com/about/maps/' target='_blank'>Mapbox</a> &copy; <a href='https://www.openstreetmap.org/copyright' target='_blank'>OpenStreetMap</a> contributors",
+      "icon":"topo",
+      "id": "trailheadlabs.cjevt1tj61qqy2rpgknasxjqi",
+      "maxZoom": 22,
+      "minZoom": 0,
+      "name": "OuterSpatial Landscape",
+      "styled": true,
+      "type": "mapbox"
+    },
     "outdoors": {
       "attribution": "&copy; <a href='https://www.mapbox.com/about/maps/' target='_blank'>Mapbox</a> &copy; <a href='https://www.openstreetmap.org/copyright' target='_blank'>OpenStreetMap</a> contributors",
       "icon": "topo",
       "id": "trailheadlabs.cj5wmcjku2mls2stllpydix9b",
-      "maxZoom": 18,
-      "minZoom": 0.5,
+      "maxZoom": 22,
+      "minZoom": 0,
       "name": "OuterSpatial Outdoors",
+      "styled": true,
+      "type": "mapbox"
+    },
+    "satellite": {
+      "attribution": "&copy; <a href='https://www.mapbox.com/about/maps/' target='_blank'>Mapbox</a> &copy; <a href='https://www.openstreetmap.org/copyright' target='_blank'>OpenStreetMap</a> contributors",
+      "icon": "aerial",
+      "id": "trailheadlabs.cjhezcype0ihq2rl71l9rp47j",
+      "maxZoom": 22,
+      "minZoom": 0,
+      "name": "OuterSpatial Satellite",
       "styled": true,
       "type": "mapbox"
     }

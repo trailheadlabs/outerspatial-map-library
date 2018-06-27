@@ -1109,9 +1109,18 @@
         top: 0;
         width: 22.875px !important;
       }
+        .outerspatial .leaflet-control-filter div:last-child button.more:disabled {
+          background-color: #6c757d !important;
+          border-right: solid 1px #6c757d !important;
+        }
         .outerspatial .leaflet-control-filter div:last-child button.more:hover {
+          /*
           background-color: #9b9b9b;
           border-right: solid 1px #9b9b9b;
+          */
+
+          background-color: #9aca41;
+          border-right: solid 1px #9aca41;
         }
         .outerspatial .leaflet-control-filter div:last-child button.more-previous {
           left: 0;
@@ -1530,18 +1539,21 @@
 .outerspatial .humane,
 .outerspatial .humane-bootstrap {
   background-color: #fff;
-  border: 1px solid transparent;
+  border-bottom: 1px solid #000;
+  border-right: 1px solid #000;
+  border-top: 1px solid #000;
+  border-bottom-right-radius: 2px;
+  border-top-right-radius: 2px;
   box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.3);
   display: table;
   font-size: 14px;
-  left: 100px;
-  margin-left: -100px;
+  max-width: 223px;
   opacity: 0;
-  padding: 10px;
+  padding: 18px 16px;
   text-align: left;
-  top: 5%;
-  transform: translateX(-100px);
-  width: 178px;
+  top: 16px;
+  transform: translateX(-100%);
+  width: auto;
 }
 .outerspatial .humane p, .outerspatial .humane-bootstrap p,
 .outerspatial .humane ul,
@@ -1554,8 +1566,8 @@
 }
 .outerspatial .humane.humane-bootstrap-success,
 .outerspatial .humane-bootstrap.humane-bootstrap-success {
-  background-color: #dff0d8;
-  border-color: #d6e9c6;
+  background-color: #e0f2c2;
+  border-color: #5e793a;
   color: #468847;
 }
 .outerspatial .humane.humane-bootstrap-info,

@@ -19,13 +19,14 @@ var FilterControl = L.Control.extend({
 
     if (filters && filters.length) {
       var actionsDiv = L.DomUtil.create('div');
-      // var me = this;
+      var me = this;
       var labelDiv = L.DomUtil.create('div');
       var lis = '';
       var ul = L.DomUtil.create('ul');
 
       labelDiv.innerHTML = 'Filter:';
 
+      // Add previous and next buttons, if needed
       if (filters.length > 3) {
         this._nextButton = L.DomUtil.create('button', 'more more-next');
         this._nextButton.innerHTML = '' +
@@ -48,10 +49,10 @@ var FilterControl = L.Control.extend({
 
           ul.children[firstHiddenButtonIndex + 1].style.display = 'none';
 
-          // me._previousButton // Remove disabled class
+          me._previousButton.removeAttribute('disabled');
 
           if (countVisibleButtons === 5) {
-            // me._nextButton; // Add disabled class
+            me._nextButton.setAttribute('disabled', true);
           }
         };
         this._previousButton = L.DomUtil.create('button', 'more more-previous');
@@ -71,13 +72,14 @@ var FilterControl = L.Control.extend({
 
           if (firstHiddenButtonIndex > -1) {
             ul.children[firstHiddenButtonIndex].style.display = 'block';
-            // me._nextButton // Remove disabled class
+            me._nextButton.removeAttribute('disabled');
 
-            if (firstHiddenButtonIndex === 1) {
-              // me._previousButton // Add disabled class
+            if (firstHiddenButtonIndex === 0) {
+              me._previousButton.setAttribute('disabled', true);
             }
           }
         };
+        this._previousButton.setAttribute('disabled', true);
 
         actionsDiv.appendChild(this._previousButton);
         actionsDiv.appendChild(this._nextButton);
@@ -87,18 +89,31 @@ var FilterControl = L.Control.extend({
       this._container.appendChild(labelDiv);
       this._container.appendChild(actionsDiv);
 
-      filters.forEach(function (filter) {
+      for (var j = 0; j < filters.length; j++) {
+        var filter = filters[j];
+
         lis += '' +
           '<li>' +
-            '<button>' +
+            '<button data-index="' + j + '">' +
               '<image src="data:image/svg+xml;base64,' + window.btoa(filter.svg) + '" title="' + filter.title + '"></image>' +
             '</button>' +
           '</li>' +
         '';
-      });
+      }
 
       ul.innerHTML = lis;
       ul.style.width = filters.length * 45.75 + 'px';
+
+      // Hook up button click handlers
+      for (var k = 0; k < ul.children.length; k++) {
+        L.DomEvent.on(ul.children[k].children[0], 'click', function () {
+          var fn = filters[this.getAttribute('data-index')].fn;
+
+          if (typeof fn === 'function') {
+            fn();
+          }
+        }, ul.children[k].children[0]);
+      }
 
       L.DomEvent.disableClickPropagation(this._container);
       L.DomEvent.disableScrollPropagation(this._container);
