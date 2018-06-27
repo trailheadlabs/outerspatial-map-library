@@ -5,6 +5,5 @@ jobs:
       - image: circleci/node:4.8.2
     steps:
       - checkout
-      - run: npm install -g grunt-cli
       - run: npm install
       - run: grunt build

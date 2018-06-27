@@ -28,6 +28,7 @@
     "grunt-aws": "^0.6.2",
     "grunt-banner": "0.6.0",
     "grunt-browserify": "^5.2.0",
+    "grunt-cli": "^1.2.0",
     "grunt-contrib-clean": "^1.1.0",
     "grunt-contrib-compress": "^1.4.3",
     "grunt-contrib-concat": "^1.0.0",
