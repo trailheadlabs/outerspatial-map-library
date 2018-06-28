@@ -1,7 +1,7 @@
 /* global L */
 /* jshint camelcase: false */
 
-'use strict';
+// 'use strict';
 
 var colorPresets = require('../preset/colors.json');
 var topojson = require('../util/topojson');
