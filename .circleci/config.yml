@@ -5,6 +5,5 @@ jobs:
       - image: digitallyseamless/nodejs-bower-grunt:latest
     steps:
       - checkout
-      - run: npm install grunt-cli
       - run: npm install
       - run: grunt build
