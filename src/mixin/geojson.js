@@ -215,9 +215,8 @@ module.exports = {
           if (!map._isCurrentlySelected(this) && !this.isSelected) {
             if (this.feature.geometry.type === 'Point') {
               if (!this._circle) {
-                var color = 'yellow';
+                var color = 'black';
 
-                // TODO: Markers that use old popups aren't displaying a selected circle
                 // TODO: Also support functions
                 if (layer.options && layer.options.styles && layer.options.styles.point && layer.options.styles.point['marker-color'] && typeof layer.options.styles.point['marker-color'] === 'string') {
                   color = layer.options.styles.point['marker-color'];
@@ -281,7 +280,8 @@ module.exports = {
                     html = util.unescapeHtml(html);
                   }
 
-                  if (config.dockedPopup) {
+                  if (layer._map.options.dockedPopups === true) {
+                    layer._map._divDockedPopupContent.innerHTML = '';
                     layer._map.setDockedPopupContent(html);
                     layer._map.openDockedPopup();
                   } else {
@@ -291,8 +291,6 @@ module.exports = {
                       maxWidth: popupWidth,
                       minWidth: popupWidth
                     });
-
-                    layer._map.closeDockedPopup();
 
                     if (html) {
                       if (feature.geometry.type === 'Point') {
@@ -346,15 +344,16 @@ module.exports = {
         layer.on('mouseover', mouseover);
 
         if (geometry.type === 'Point') {
-          layer.on('moveend', function (e) {
-            this.on('mouseover', mouseover);
-            this.on('mouseout', mouseout);
-          });
-          layer.on('movestart', function (e) {
-            this.deselectLayer();
-            this.off('mouseover', mouseover);
-            this.off('mouseout', mouseout);
-          });
+          layer
+            .on('moveend', function (e) {
+              this.on('mouseover', mouseover);
+              this.on('mouseout', mouseout);
+            })
+            .on('movestart', function (e) {
+              this.deselectLayer();
+              this.off('mouseover', mouseover);
+              this.off('mouseout', mouseout);
+            });
         }
 
         if (geometry.type === 'GeometryCollection' || geometry.type === 'LineString' || geometry.type === 'MultiLineString') {

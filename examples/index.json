@@ -63,6 +63,12 @@
 }, {
   "category": "Examples",
   "description": "",
+  "id": "popups-docked",
+  "include": true,
+  "title": "Configuring Popups (Docked)"
+}, {
+  "category": "Examples",
+  "description": "",
   "id": "tooltips",
   "include": true,
   "title": "Configuring Tooltips"
@@ -241,21 +247,21 @@
 }, {
   "category": "Presets",
   "description": "",
-  "id": "outerspatial-preset-primary-poi",
-  "include": true,
-  "title": "OuterSpatial Preset Primary Points of Interest"
-}, {
-  "category": "Presets",
-  "description": "",
   "id": "outerspatial-preset-clustered",
   "include": true,
   "title": "OuterSpatial Preset (Clustered)"
 }, {
   "category": "Presets",
   "description": "",
+  "id": "outerspatial-preset-primary-poi",
+  "include": true,
+  "title": "OuterSpatial Preset (Primary Points of Interest)"
+}, {
+  "category": "Presets",
+  "description": "",
   "id": "places-pois-preset",
   "include": true,
-  "title": "Places Points of Interest Preset"
+  "title": "Places Preset (Points of Interest)"
 }, {
   "category": "Controls",
   "description": "",

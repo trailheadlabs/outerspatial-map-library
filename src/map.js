@@ -544,15 +544,20 @@ MapExt = L.Map.extend({
                 }
               }
 
-              if (actual.length && !me._popup) {
-                var popup = L.outerspatial.popup({
-                  maxHeight: (detectAvailablePopupSpace ? util._getAvailableVerticalSpace(me) : undefined),
-                  maxWidth: (detectAvailablePopupSpace ? (util._getAvailableHorizontalSpace(me) < 300 ? util._getAvailableHorizontalSpace(me) : 300) : 300)
-                });
+              if (actual.length) {
+                var html = L.outerspatial.popup()._handleResults(actual, me.options.popup);
 
-                popup
-                  .setContent(popup._handleResults(actual, me.options.popup))
-                  .setLatLng(latLng).openOn(me);
+                if (me.options.dockedPopups === true) {
+                  me.setDockedPopupContent(html);
+                  me.openDockedPopup();
+                } else if (!me._popup) {
+                  L.outerspatial.popup({
+                    maxHeight: (detectAvailablePopupSpace ? util._getAvailableVerticalSpace(me) : undefined),
+                    maxWidth: (detectAvailablePopupSpace ? (util._getAvailableHorizontalSpace(me) < 300 ? util._getAvailableHorizontalSpace(me) : 300) : 300)
+                  })
+                    .setContent(html)
+                    .setLatLng(latLng).openOn(me);
+                }
               }
             }
           }
@@ -924,10 +929,8 @@ MapExt = L.Map.extend({
     map.clearSelectedLayer();
     this._divDockedPopup.style.left = '-324px';
     this.isDockedPopupOpen = false;
-    setTimeout(function () {
-      map._divDockedPopupContent.scrollTop = 0;
-      map._divDockedPopupContent.innerHTML = '';
-    }, 300);
+    map._divDockedPopupContent.scrollTop = 0;
+    map._divDockedPopupContent.innerHTML = '';
   },
   closeModules: function () {
     var buttons = this._divModuleButtons.childNodes;
@@ -954,6 +957,10 @@ MapExt = L.Map.extend({
 
     this._divDockedPopup.style.left = 0;
     this.isDockedPopupOpen = true;
+  },
+  setDockedPopupContent: function (html) {
+    this._divDockedPopupContent.appendChild(html);
+    this._divDockedPopupContent.scrollTop = 0;
   },
   setSelectedLayer: function (layer) {
     if (!this._isCurrentlySelected(layer)) {
@@ -1007,14 +1014,6 @@ MapExt = L.Map.extend({
     }
 
     // TODO: Fire module 'show' event.
-  },
-  setDockedPopupContent: function (html) {
-    if (this.isDockedPopupOpen) {
-      this._divDockedPopupContent.innerHTML = '';
-    }
-
-    this._divDockedPopupContent.appendChild(html);
-    this._divDockedPopupContent.scrollTop = 0;
   },
   showModules: function () {
     var buttons = this._divModuleButtons.childNodes;

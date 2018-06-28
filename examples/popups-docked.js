@@ -4,10 +4,12 @@ window.OuterSpatial = {
     lng: -116.7187
   },
   div: 'map',
+  dockedPopups: true,
   overlays: [{
     attribution: 'Land Resources Division',
     popup: {
       description: '<p>The alpha code is {{Code}}.</p>',
+      docked: true,
       title: '{{Name}}'
     },
     styles: {
