@@ -85,7 +85,7 @@ require('./popup.js');
         this._container.innerHTML = '';
         span = document.createElement('span');
         this._container.appendChild(span);
-        span.innerHTML = prefixAndAttribs.join(' | ');
+        span.innerHTML = 'keyboard: ' + me.options.keyboard + ' | ' + prefixAndAttribs.join(' | ');
 
         if (typeof me._updateImproveLinks === 'function') {
           me._updateImproveLinks();
@@ -108,6 +108,7 @@ require('./popup.js');
     weight: style.weight
   });
 })();
+
 MapExt = L.Map.extend({
   options: {
     bounceAtZoomLimits: false,
