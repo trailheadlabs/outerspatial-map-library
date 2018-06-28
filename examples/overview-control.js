@@ -1,7 +1,7 @@
 window.OuterSpatial = {
   div: 'map',
   overviewControl: {
-    layer: 'mapbox-outdoors'
+    layer: 'outerspatial-landscape'
   }
 };
 

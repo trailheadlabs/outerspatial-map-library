@@ -833,7 +833,7 @@ MapExt = L.Map.extend({
         if (visible) {
           return config.baseLayers;
         } else {
-          var active = util.clone(baselayerPresets.mapbox.outdoors);
+          var active = util.clone(baselayerPresets.outerspatial.landscape);
           active.visible = true;
           active.zIndex = 0;
           return [

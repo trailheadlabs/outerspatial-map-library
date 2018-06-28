@@ -56,7 +56,7 @@ _Arguments_:
 The first, and only, argument is required. It must be a config object comprised of the following required and optional properties:
 
 * (Required) `div` (Object or String): Either a reference to an HTML element or the id of an HTML element to render the map into.
-* (Optional) `baseLayers` (Array): An array of baseLayer configuration objects AND/OR [baseLayer preset](#baseLayer-presets) strings. Defaults to `['mapbox-outdoors']`.
+* (Optional) `baseLayers` (Array): An array of baseLayer configuration objects AND/OR [baseLayer preset](#baseLayer-presets) strings. Defaults to `['outerspatial-landscape']`.
 * (Optional) `description` (String): A description for the map. Used by some templates.
 * (Optional) `detectAvailablePopupSpace` (Boolean): Defaults to `false`. If `true`, OuterSpatial Map Library will detect the height and width available in your map and set the `maxHeight` and `maxWidth` properties of the map's popups automatically.
 * (Optional) `editControl` (Boolean or Object): Defaults to `undefined`.
@@ -1543,6 +1543,10 @@ The following baseLayer preset strings are supported:
    * `mapbox-terrain`
 * OpenStreetMap
    * `openstreetmap`
+* OuterSpatial
+   * `landscape`
+   * `outdoors`
+   * `satellite`
 * Stamen
    * `stamen-terrain`
    * `stamen-toner`

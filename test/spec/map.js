@@ -65,7 +65,7 @@ describe('L.outerspatial.map', function () {
     it('switches preset layers in when specified in the baseLayers property', function () {
       var map = L.outerspatial.map({
         baseLayers: [
-          'mapbox-outdoors'
+          'outerspatial-landscape'
         ],
         div: element
       });
