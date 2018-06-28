@@ -85,7 +85,7 @@ require('./popup.js');
         this._container.innerHTML = '';
         span = document.createElement('span');
         this._container.appendChild(span);
-        span.innerHTML = 'keyboard: ' + me.options.keyboard + ' | ' + prefixAndAttribs.join(' | ');
+        span.innerHTML = prefixAndAttribs.join(' | ');
 
         if (typeof me._updateImproveLinks === 'function') {
           me._updateImproveLinks();
