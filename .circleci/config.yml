@@ -7,3 +7,4 @@ jobs:
       - checkout
       - run: npm install
       - run: grunt build
+      - run: grunt test
