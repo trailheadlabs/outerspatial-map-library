@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/node:4.8.2
+      - image: digitallyseamless/nodejs-bower-grunt:latest
     steps:
       - checkout
       - run: npm install grunt-cli
