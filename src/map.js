@@ -112,6 +112,7 @@ MapExt = L.Map.extend({
   options: {
     bounceAtZoomLimits: false,
     detectAvailablePopupSpace: true,
+    keyboard: !(/Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(navigator.userAgent)),
     wheelPxPerZoomLevel: 120,
     worldCopyJump: true,
     zoomDelta: 0.5,

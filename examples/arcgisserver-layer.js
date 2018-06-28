@@ -7,6 +7,7 @@ window.OuterSpatial = {
     type: 'arcgisserver',
     url: 'https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer'
   }],
+  dockedPopups: true,
   overlays: [{
     attribution: 'Great Smoky Mountains National Park',
     name: 'Restrooms',
