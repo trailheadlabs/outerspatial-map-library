@@ -1,7 +1,7 @@
 var OuterSpatial = {
   baseLayers: [
-    'outerspatial-outdoors',
-    'mapbox-satellite'
+    'outerspatial-landscape',
+    'outerspatial-satellite'
   ],
   center: {
     lat: 35.65,

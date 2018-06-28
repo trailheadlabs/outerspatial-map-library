@@ -1,7 +1,7 @@
 window.OuterSpatial = {
   baseLayers: [
-    'outerspatial-outdoors',
-    'mapbox-satellite'
+    'outerspatial-landscape',
+    'outerspatial-satellite'
   ],
   div: 'map',
   legendControl: {
