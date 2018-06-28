@@ -268,7 +268,7 @@ var OuterSpatialLayer = L.GeoJSON.extend({
               // Address is not JSON
             }
 
-            content = content + '<section><h5>Address</h5>' + address + '</section>';
+            content = content + '<section><h5>Address</h5><div class="url"><a href="https://maps.google.com/maps?daddr=' + address + '" target="_blank">' + address + '</a></div></section>';
           }
 
           if (website && website !== null && website !== '') {
