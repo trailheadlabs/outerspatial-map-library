@@ -36,11 +36,11 @@ You must have [node.js](https://nodejs.org/) installed to run the build. After i
 
     git clone https://github.com/trailheadlabs/outerspatial-map-library
     cd outerspatial-map-library
-    npm install
+    yarn install
 
 Install the [Grunt](http://gruntjs.com/) command line tool (do this once as an admin user after installing node.js):
 
-    npm install -g grunt-cli
+    yarn global add grunt-cli
 
 Copy keys.sample.json to a file called keys.json, then modify keys.json, adding your own API keys:
 
