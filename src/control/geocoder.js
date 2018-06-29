@@ -363,8 +363,6 @@ var GeocoderControl = L.Control.extend({
                 }
               });
 
-              console.log(me._results);
-
               me._resultsReady(value, me._results);
             }
           }
