@@ -531,22 +531,10 @@ var OuterSpatialLayer = L.GeoJSON.extend({
 
         me.fire('error', obj);
         me.errorFired = obj;
-<<<<<<< HEAD
-      },
-      success: function (geojson) {
-        var config;
-        var obj;
-
-        if (geojson) {
-          if (me.options.formatPopups) {
-            me._collapseFeatureAttributes(geojson.features);
-          }
-=======
       });
     } else {
       fetch(me.options.environment, me.options.organizationId, me.options.locationType).then(function (geojson) {
         L.GeoJSON.prototype.initialize.call(me, geojson, me.options);
->>>>>>> docked-popups
 
         if (me.options.locationType === 'points_of_interest') {
           me.getLayers().forEach(function (layer) {
