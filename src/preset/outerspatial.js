@@ -113,7 +113,7 @@ var OuterSpatialLayer = L.GeoJSON.extend({
     symbol: 'visitor-center',
     type: 'Visitor Center'
 
-    // Add trails
+    // TODO: Add trails
   }],
   includes: [
     require('../mixin/geojson')
@@ -362,7 +362,13 @@ var OuterSpatialLayer = L.GeoJSON.extend({
           options.styles = {
             point: {
               'marker-library': 'outerspatialsymbollibrary',
-              'marker-symbol': config.symbol + '-white'
+              'marker-symbol': (function () {
+                if (config && config.symbol) {
+                  return config.symbol + '-white';
+                } else {
+                  return undefined;
+                }
+              })()
             }
           };
         }
@@ -492,15 +498,24 @@ var OuterSpatialLayer = L.GeoJSON.extend({
             }
           } else {
             layer.options.styles = {
-              'point': {
+              point: {
                 'marker-library': 'outerspatialsymbollibrary',
-                'marker-symbol': config.symbol + '-white'
+                'marker-symbol': (function () {
+                  if (config && config.symbol) {
+                    return config.symbol + '-white';
+                  } else {
+                    return undefined;
+                  }
+                })()
               }
             };
           }
 
           layer.setIcon(L.outerspatial.icon.outerspatialsymbollibrary(layer.options.styles.point));
-          layer.setZIndexOffset(config.priority * -1000);
+
+          if (config) {
+            layer.setZIndexOffset(config.priority * -1000);
+          }
         });
         me.fire('ready');
         me._loaded = true;
@@ -544,15 +559,24 @@ var OuterSpatialLayer = L.GeoJSON.extend({
               }
             } else {
               layer.options.styles = {
-                'point': {
+                point: {
                   'marker-library': 'outerspatialsymbollibrary',
-                  'marker-symbol': config.symbol + '-white'
+                  'marker-symbol': (function () {
+                    if (config && config.symbol) {
+                      return config.symbol + '-white';
+                    } else {
+                      return undefined;
+                    }
+                  })()
                 }
               };
             }
 
             layer.setIcon(L.outerspatial.icon.outerspatialsymbollibrary(layer.options.styles.point));
-            layer.setZIndexOffset(config.priority * -1000);
+
+            if (config) {
+              layer.setZIndexOffset(config.priority * -1000);
+            }
           });
         }
 
