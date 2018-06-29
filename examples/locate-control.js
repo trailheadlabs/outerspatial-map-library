@@ -1,6 +1,8 @@
 window.OuterSpatial = {
   div: 'map',
-  locateControl: true
+  locateControl: {
+    setViewToLocationOnAdd: true
+  }
 };
 
 (function () {

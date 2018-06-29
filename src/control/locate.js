@@ -5,7 +5,6 @@
 var LocateControl = L.Control.extend({
   options: {
     position: 'topright',
-    // requestLocationAccessOnAdd: false,
     setViewToLocationOnAdd: false
   },
   initialize: function (options) {
@@ -18,6 +17,7 @@ var LocateControl = L.Control.extend({
     var me = this;
 
     this._button = L.DomUtil.create('button', undefined, container);
+    this._hasPermission = false;
     this._layer = new L.LayerGroup().addTo(map);
     this._map = map;
     this._tracking = false;
@@ -120,12 +120,17 @@ var LocateControl = L.Control.extend({
               me._suppressFirstOutOfBoundsErrorMessage = true;
             }
           } else {
-            me._hasPermission = false;
+            if (me.options.setViewToLocationOnAdd) {
+              me._startLocate();
+              L.DomUtil.addClass(me._button, 'pressed');
+              me._setIcon('requesting');
+              me._setViewToInitialLocation = true;
+              // Don't show "out of bounds" error message the first time if map checks for location on load
+              me._suppressFirstOutOfBoundsErrorMessage = true;
+            }
           }
         })
         .catch(function () {});
-    } else {
-      me._hasPermission = false;
     }
 
     return container;
