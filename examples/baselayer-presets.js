@@ -1,4 +1,4 @@
-window.OuterSpatial =  {
+window.OuterSpatial = {
   baseLayers: [
     'outerspatial-landscape',
     'outerspatial-satellite',

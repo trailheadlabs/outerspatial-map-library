@@ -693,11 +693,6 @@ var OuterSpatialLayer = L.GeoJSON.extend({
 
       removedLayersClone = me._removedLayers.slice(0);
 
-
-
-
-
-
       for (var j = 0; j < removedLayersClone.length; j++) {
         var index;
         var type;

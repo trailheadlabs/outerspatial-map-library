@@ -132,14 +132,6 @@
   "title": "Fullscreen Control"
 }, {
   "category": "Controls",
-  "css": true,
-  "description": "",
-  "html": true,
-  "id": "fullscreen-control-iframe",
-  "include": true,
-  "title": "Fullscreen Control (Iframe)"
-}, {
-  "category": "Controls",
   "description": "",
   "id": "geocoder-control",
   "include": true,
