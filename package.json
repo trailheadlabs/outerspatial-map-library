@@ -53,12 +53,7 @@
     "uglify-js": "^3.0.0",
     "xhr2": "^0.1.2"
   },
-  "peerDependencies": {
-    "estraverse": "*"
-  },
-  "scripts": {
-    "test": "grunt test"
-  },
+  "devBasePath": "http://localhost:9876",
   "homepage": "https://github.com/trailheadlabs/outerspatial-map-library",
   "keywords": [
     "ArcGIS Server",
@@ -91,9 +86,15 @@
   ],
   "main": "main.js",
   "name": "outerspatial-map-library",
+  "peerDependencies": {
+    "estraverse": "*"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/trailheadlabs/outerspatial-map-library.git"
+  },
+  "scripts": {
+    "test": "grunt test"
   },
   "version": "7.1.14"
 }

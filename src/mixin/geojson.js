@@ -247,6 +247,7 @@ module.exports = {
             this.isSelected = true;
           }
         };
+
         layer.on('click', function (e) {
           var layer = e.target;
 
@@ -305,6 +306,8 @@ module.exports = {
                           .setLatLng(e.latlng.wrap())
                           .openOn(layer._map);
                       }
+
+                      layer._popup = popup;
                     }
                   }
                 }
@@ -342,6 +345,35 @@ module.exports = {
         });
         layer.on('mouseout', mouseout);
         layer.on('mouseover', mouseover);
+        layer.on('remove', function (e) {
+          if (this.isSelected) {
+            var map = me._map;
+
+            if (!map) {
+              map = layer._map;
+            }
+
+            if (this._circle) {
+              this._circle.removeFrom(map);
+              delete this._circle;
+            }
+
+            if (layer._popup) {
+              console.log('here');
+              layer._popup.remove();
+            } else if (layer._map.options.dockedPopups === true) {
+              layer._map.closeDockedPopup();
+            }
+
+            // TODO: Also handle docked popup
+
+            // console.log(typeof layer._popup);
+            // console.log(typeof this._popup);
+            // console.log(typeof e.target._popup);
+
+            // e.target._popup.remove();
+          }
+        });
 
         if (geometry.type === 'Point') {
           layer

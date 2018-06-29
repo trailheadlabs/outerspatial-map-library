@@ -1,4 +1,3 @@
-/* INFO: In leaflet.markercluster, in src/MarkerCluster.js, add "keyboard: false" to line 4. */
 /* global L */
 
 'use strict';
@@ -90,38 +89,36 @@ var ClusterLayer = L.MarkerClusterGroup.extend({
       maxNodes: 9,
       name: 'small',
       outerRing: 22,
-      size: 20
+      size: 23
     }, {
       color: '#000',
       fontColor: '#fff',
       maxNodes: 99,
       name: 'medium',
       outerRing: 24,
-      size: 35
+      size: 30
     }, {
       color: '#000',
       fontColor: '#fff',
       maxNodes: Infinity,
       name: 'large',
-      outerRing: 24,
-      size: 50
+      outerRing: 26,
+      size: 37
     }];
 
     function addStyles () {
       var head = document.head || document.getElementsByTagName('head')[0];
       var style = document.createElement('style');
-      var text = '';
+      var text = '' +
+        '.leaflet-cluster-anim .leaflet-marker-icon, .leaflet-cluster-anim .leaflet-marker-shadow {' +
+          'transition: transform 0.2s ease-out, opacity 0.2s ease-in;' +
+        '}' +
+      '';
 
       style.type = 'text/css';
-      text += '.leaflet-cluster-anim .leaflet-marker-icon, .leaflet-cluster-anim .leaflet-marker-shadow {';
-      text += '-webkit-transition: -webkit-transform 0.2s ease-out, opacity 0.2s ease-in;';
-      text += '-moz-transition: -moz-transform 0.2s ease-out, opacity 0.2s ease-in;';
-      text += '-o-transition: -o-transform 0.2s ease-out, opacity 0.2s ease-in;';
-      text += 'transition: transform 0.2s ease-out, opacity 0.2s ease-in;';
-      text += '}';
 
       for (var i = 0; i < defaultSettings.length; i++) {
-        var currStyle = createStyle(defaultSettings[i]);
+        var currStyle = settings ? createOldStyle(defaultSettings[i]) : createNewStyle(defaultSettings[i]);
 
         for (var styleType in currStyle) {
           text += '.' + 'marker-cluster-custom-' + defaultSettings[i].maxNodes.toString() + ' ' + (styleType === 'main' ? '' : styleType) + ' {' + currStyle[styleType] + '}\n';
@@ -153,48 +150,60 @@ var ClusterLayer = L.MarkerClusterGroup.extend({
         return false;
       }
     }
-    function createStyle (style) {
+    function cssStyle (fields) {
+      var returnValue = [];
+
+      for (var field in fields) {
+        returnValue.push(field + ': ' + fields[field] + '; ');
+      }
+
+      return returnValue.join('');
+    }
+    function createNewStyle (style) {
       var styles = {
         main: {
-          'background-clip': 'padding-box',
-          background: supportsRgba('rgba(' + hexToArray(style.color)[0] + ', ' + hexToArray(style.color)[1] + ', ' + hexToArray(style.color)[2] + ', 0.4)'),
-          'border-radius': ((style.size + style.outerRing) * 0.5) + 'px'
+          'background-image': 'url("' + window.L.Icon.Default.imagePath + '/clusters/unrounded-triple.png")',
+          'background-repeat': 'no-repeat',
+          'background-size': 'contain'
         },
         div: {
-          background: supportsRgba('rgba(' + hexToArray(style.color)[0] + ', ' + hexToArray(style.color)[1] + ', ' + hexToArray(style.color)[2] + ', 0.9)'),
-          'border-radius': (style.size / 2) + 'px',
-          height: style.size + 'px',
-          'margin-left': (style.outerRing / 2) + 'px',
-          'margin-top': (style.outerRing / 2) + 'px',
+          'height': style.size + 'px',
           'text-align': 'center',
-          width: style.size + 'px'
+          'width': style.size + 'px'
         },
         span: {
-          color: 'rgb(' + hexToArray(style.fontColor)[0] + ', ' + hexToArray(style.fontColor)[1] + ', ' + hexToArray(style.fontColor)[2] + ')',
-          display: 'block',
-          font: '12px Karla,"Helvetica Neue",helvetica,arial,sans-serif',
+          'color': '#fff',
+          'display': 'block',
+          'font': '14px "PT Sans Narrow","Helvetica Neue",helvetica,arial,sans-serif',
           'line-height': style.size + 'px'
         }
       };
 
-      function cssStyle (fields) {
-        var returnValue = [];
-
-        for (var field in fields) {
-          returnValue.push(field + ': ' + fields[field] + '; ');
+      return styleLoop(styles, cssStyle);
+    }
+    function createOldStyle (style) {
+      var styles = {
+        main: {
+          'background-clip': 'padding-box',
+          'background': supportsRgba('rgba(' + hexToArray(style.color)[0] + ', ' + hexToArray(style.color)[1] + ', ' + hexToArray(style.color)[2] + ', 0.4)'),
+          'border-radius': ((style.size + style.outerRing) * 0.5) + 'px'
+        },
+        div: {
+          'background': supportsRgba('rgba(' + hexToArray(style.color)[0] + ', ' + hexToArray(style.color)[1] + ', ' + hexToArray(style.color)[2] + ', 0.9)'),
+          'border-radius': (style.size / 2) + 'px',
+          'height': style.size + 'px',
+          'margin-left': (style.outerRing / 2) + 'px',
+          'margin-top': (style.outerRing / 2) + 'px',
+          'text-align': 'center',
+          'width': style.size + 'px'
+        },
+        span: {
+          'color': 'rgb(' + hexToArray(style.fontColor)[0] + ', ' + hexToArray(style.fontColor)[1] + ', ' + hexToArray(style.fontColor)[2] + ')',
+          'display': 'block',
+          'font': '14px "PT Sans Narrow","Helvetica Neue",helvetica,arial,sans-serif',
+          'line-height': style.size + 'px'
         }
-
-        return returnValue.join('');
-      }
-      function styleLoop (fields, process) {
-        var returnValue = {};
-
-        for (var field in fields) {
-          returnValue[field] = process(fields[field]);
-        }
-
-        return returnValue;
-      }
+      };
 
       return styleLoop(styles, cssStyle);
     }
@@ -204,14 +213,15 @@ var ClusterLayer = L.MarkerClusterGroup.extend({
       }
 
       var childCount = cluster.getChildCount();
-      var className, size;
+      var className;
+      var size;
 
       for (var i = 0; i < defaultSettings.length; i++) {
         var defaultSetting = defaultSettings[i];
 
         if (childCount <= defaultSetting.maxNodes) {
           className = 'marker-cluster-custom-' + defaultSetting.maxNodes.toString();
-          size = defaultSetting.size + defaultSetting.outerRing;
+          size = defaultSetting.size + (settings ? defaultSetting.outerRing : 0);
           break;
         }
       }
@@ -239,6 +249,15 @@ var ClusterLayer = L.MarkerClusterGroup.extend({
             parseInt(hexValue.substr(4, 2), 16)
           ];
         }
+      }
+
+      return returnValue;
+    }
+    function styleLoop (fields, process) {
+      var returnValue = {};
+
+      for (var field in fields) {
+        returnValue[field] = process(fields[field]);
       }
 
       return returnValue;

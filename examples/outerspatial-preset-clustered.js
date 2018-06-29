@@ -8,22 +8,14 @@ window.OuterSpatial = {
     lng: -122.49
   },
   div: 'map',
+  dockedPopups: true,
   geocoderControl: true,
   overlays: [{
-    'locationType': 'trailheads',
-    'organizationId': 6029,
-    'preset': 'outerspatial',
-    'cluster': true,
-    'searchable': true,
-    'name': 'City of Portland Parks and Recreation Trailheads',
-    'styles': {
-      'point': {
-        'marker-library': 'outerspatialsymbollibrary',
-        'marker-symbol': 'trailhead-white',
-        'marker-color': '#32557d',
-        'marker-size': 'medium'
-      }
-    }
+    cluster: true,
+    locationType: 'trailheads',
+    name: 'City of Portland Parks and Recreation Trailheads',
+    organizationId: 6029,
+    preset: 'outerspatial'
   }],
   zoom: 11
 };
