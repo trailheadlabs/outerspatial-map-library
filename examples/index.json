@@ -63,6 +63,12 @@
 }, {
   "category": "Examples",
   "description": "",
+  "id": "popups-docked",
+  "include": true,
+  "title": "Configuring Popups (Docked)"
+}, {
+  "category": "Examples",
+  "description": "",
   "id": "tooltips",
   "include": true,
   "title": "Configuring Tooltips"
@@ -124,14 +130,6 @@
   "id": "fullscreen-control",
   "include": true,
   "title": "Fullscreen Control"
-}, {
-  "category": "Controls",
-  "css": true,
-  "description": "",
-  "html": true,
-  "id": "fullscreen-control-iframe",
-  "include": true,
-  "title": "Fullscreen Control (Iframe)"
 }, {
   "category": "Controls",
   "description": "",
@@ -247,9 +245,15 @@
 }, {
   "category": "Presets",
   "description": "",
+  "id": "outerspatial-preset-primary-poi",
+  "include": true,
+  "title": "OuterSpatial Preset (Primary Points of Interest)"
+}, {
+  "category": "Presets",
+  "description": "",
   "id": "places-pois-preset",
   "include": true,
-  "title": "Places Points of Interest Preset"
+  "title": "Places Preset (Points of Interest)"
 }, {
   "category": "Controls",
   "description": "",

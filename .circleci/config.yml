@@ -1,0 +1,10 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: digitallyseamless/nodejs-bower-grunt:latest
+    steps:
+      - checkout
+      - run: npm install
+      - run: grunt build
+      - run: grunt test

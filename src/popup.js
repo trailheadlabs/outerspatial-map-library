@@ -26,14 +26,30 @@ var Popup = L.Popup.extend({
   _results: [],
   initialize: function (options) {
     L.Util.setOptions(this, options);
+
     L.Popup.prototype.initialize.call(this, this.options);
   },
   onAdd: function (map) {
+    var me = this;
+    var interval = setInterval(function () {
+      if (me._closeButton) {
+        clearInterval(interval);
+        me._closeButton.innerHTML = '' +
+          '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">' +
+            '<g class="nc-icon-wrapper" fill="#ffffff">' +
+              '<path fill="#ffffff" d="M19.7,4.3c-0.4-0.4-1-0.4-1.4,0L12,10.6L5.7,4.3c-0.4-0.4-1-0.4-1.4,0s-0.4,1,0,1.4l6.3,6.3l-6.3,6.3 c-0.4,0.4-0.4,1,0,1.4C4.5,19.9,4.7,20,5,20s0.5-0.1,0.7-0.3l6.3-6.3l6.3,6.3c0.2,0.2,0.5,0.3,0.7,0.3s0.5-0.1,0.7-0.3 c0.4-0.4,0.4-1,0-1.4L13.4,12l6.3-6.3C20.1,5.3,20.1,4.7,19.7,4.3z"></path>' +
+            '</g>' +
+          '</svg>' +
+        '';
+      }
+    }, 0);
+
     if (window.addEventListener) {
       this._content.addEventListener('DOMMouseScroll', this._handleMouseWheel, false);
     }
 
     this._content.onmousewheel = this._handleMouseWheel;
+
     L.Popup.prototype.onAdd.apply(this, [
       map
     ]);
@@ -41,6 +57,7 @@ var Popup = L.Popup.extend({
   setContent: function (content) {
     if (typeof content === 'string') {
       var node = document.createElement('div');
+
       node.innerHTML = content;
       content = node;
     }
@@ -52,7 +69,7 @@ var Popup = L.Popup.extend({
     this.setContent(this._html).update();
     this._html = null;
   },
-  _createAction: function (config, data, div) {
+  _createAction: function (config, data, div, layer) {
     var a = document.createElement('a');
     var li = document.createElement('li');
     var me = this;
@@ -60,9 +77,14 @@ var Popup = L.Popup.extend({
     li.appendChild(a);
 
     if (config.type && config.type === 'directions') {
-      config.text = 'Get Directions';
       config.handler = function () {
-        var latLng = me.getLatLng();
+        var latLng;
+
+        if (layer) {
+          latLng = layer._latlng;
+        } else {
+          latLng = me.getLatLng();
+        }
         var lat = latLng.lat;
         var lng = latLng.lng;
 
@@ -72,6 +94,7 @@ var Popup = L.Popup.extend({
           window.open('https://maps.google.com/maps?daddr=' + lat + '%2c' + lng, '_blank');
         }
       };
+      config.text = 'Get Directions';
     }
 
     if (config.menu) {
@@ -202,7 +225,7 @@ var Popup = L.Popup.extend({
     this._html = this.getContent();
     this.setContent(this._results[index]).update();
   },
-  _resultToHtml: function (result, layerConfig, resultConfig, addBack, mapConfig) {
+  _resultToHtml: function (result, layerConfig, resultConfig, addBack, mapConfig, layer) {
     var div;
 
     if (mapConfig && typeof mapConfig === 'function') {
@@ -286,6 +309,7 @@ var Popup = L.Popup.extend({
           responsiveContainer = L.DomUtil.create('div', 'responsive-container', div);
           image = L.DomUtil.create('img', undefined, responsiveContainer);
           image.src = obj.url;
+          image.draggable = false;
 
           if (obj.caption !== '') {
             image.alt = obj.caption;
@@ -360,7 +384,7 @@ var Popup = L.Popup.extend({
             actions.appendChild(ul);
 
             for (var j = 0; j < obj.length; j++) {
-              ul.appendChild(this._createAction(obj[j], result, actions));
+              ul.appendChild(this._createAction(obj[j], result, actions, layer));
             }
           } else if (typeof obj === 'string') {
             actions.innerHTML = util.unescapeHtml(util.handlebars(obj, result));

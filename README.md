@@ -32,15 +32,15 @@ OuterSpatial Map Library supports connecting to a number of services that requir
 
 ## Building
 
-You must have [node.js](https://nodejs.org/) installed to run the build. After installing node.js:
+You must have [node.js](https://nodejs.org/) and [Yarn](https://yarnpkg.com/) installed to run the build. After installing node.js:
 
     git clone https://github.com/trailheadlabs/outerspatial-map-library
     cd outerspatial-map-library
-    npm install
+    yarn install
 
 Install the [Grunt](http://gruntjs.com/) command line tool (do this once as an admin user after installing node.js):
 
-    npm install -g grunt-cli
+    yarn global add grunt-cli
 
 Copy keys.sample.json to a file called keys.json, then modify keys.json, adding your own API keys:
 
@@ -66,7 +66,7 @@ OuterSpatial Map Library uses the [Mocha](https://mochajs.org) JavaScript test f
 
 OR
 
-    npm test
+    yarn test
 
 We are working to expand test coverage for the library.
 

@@ -1,7 +1,17 @@
 window.OuterSpatial = {
+  baseLayers: [
+    'outerspatial-landscape',
+    'outerspatial-satellite'
+  ],
   div: 'map',
   legendControl: {
-    html: '<h3>Legend</h3><ul><li>Item 1</li><li>Item 2</li></ul>'
+    html: '' +
+      '<h3>Legend</h3>' +
+      '<ul>' +
+        '<li>Item 1</li>' +
+        '<li>Item 2</li>' +
+      '</ul>' +
+    ''
   }
 };
 

@@ -20,7 +20,8 @@ var HomeControl = L.Control.extend({
           '<polyline vector-effect="non-scaling-stroke" points="26 16 26 30 19 30 19 22 13 22 13 30 6 30 6 16"/>' +
           '<polyline vector-effect="non-scaling-stroke" points="1 15 16 2 31 15"/>' +
         '</g>' +
-      '</svg>';
+      '</svg>' +
+    '';
     button.setAttribute('alt', 'Pan/zoom to initial extent');
     L.DomEvent
       .disableClickPropagation(button)
@@ -39,6 +40,7 @@ var HomeControl = L.Control.extend({
       map.setView(options.center, options.zoom);
     }
 
+    map.closeDockedPopup();
     map.closePopup();
   }
 });

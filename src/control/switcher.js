@@ -13,14 +13,61 @@ var SwitcherControl = L.Control.extend({
   },
   initialize: function (baseLayers) {
     this._baseLayers = baseLayers;
+
+    return this;
+  },
+  onAdd: function (map) {
+    var container = this._container = L.DomUtil.create('div', 'outerspatial-control-switcher');
+    var me = this;
+    var title;
+
+    this._activeContainer = L.DomUtil.create('div', 'current-baselayer', container);
+    this._activeText = L.DomUtil.create('div', 'baselayer-name', this._activeContainer);
+    this._button = L.DomUtil.create('button', undefined, container);
+    this._button.innerHTML = 'Change';
+    this._button.setAttribute('aria-expanded', false);
+    this._button.setAttribute('aria-haspopup', true);
+    this._button.setAttribute('aria-label', 'Switch base maps');
+    this._button.setAttribute('aria-owns', 'basemap_listbox');
+    this._button.setAttribute('role', 'combobox');
+    this._listContainer = L.DomUtil.create('div', 'outerspatial-control-switcher-list-container', map.getContainer());
+    this._listContainer.setAttribute('id', 'basemap_listbox');
+    this._listContainer.setAttribute('role', 'listbox');
+    this._listContainer.style.display = 'none';
+    this._modalBackdrop = L.DomUtil.create('div', 'outerspatial-modal-backdrop', this._map.getContainer());
+    title = L.DomUtil.create('div', 'title', this._activeContainer);
+    title.innerHTML = 'BASEMAP';
+    L.DomEvent.addListener(this._button, 'click', this._toggleList, this);
+    L.DomEvent.addListener(this._modalBackdrop, 'click', this._toggleList, this);
+    L.DomEvent.disableClickPropagation(container);
+    L.DomEvent.disableClickPropagation(this._listContainer);
+    L.DomEvent.disableClickPropagation(this._modalBackdrop);
+    L.DomEvent.disableScrollPropagation(container);
+    L.DomEvent.disableScrollPropagation(this._listContainer);
+    L.DomEvent.disableScrollPropagation(this._modalBackdrop);
+
+    if (map.getContainer().clientWidth < 600) {
+      this.collapse();
+    }
+
+    map.on('resize', function (e) {
+      if (e.newSize.x > 598) {
+        me.expand();
+      } else {
+        me.collapse();
+      }
+    });
+    this._update();
+
+    return container;
   },
   _addSection: function (baseLayer) {
+    var section = L.DomUtil.create('section', (baseLayer.visible ? 'selected' : null));
     var description;
     var img;
     var imgFileName;
     var imgContainer;
     var name;
-    var section = L.DomUtil.create('section', (baseLayer.visible ? 'selected' : null));
 
     baseLayer.name.split(' ').forEach(function (word, index) {
       if (index === 0) {
@@ -46,37 +93,7 @@ var SwitcherControl = L.Control.extend({
     description = L.DomUtil.create('div', 'baselayer-description', section);
     description.innerHTML = baseLayer.description ? baseLayer.description : '';
     section.layerId = L.stamp(baseLayer);
-    this._list.appendChild(section);
-  },
-  _initLayout: function () {
-    var container = this._container = L.DomUtil.create('div', 'outerspatial-control-switcher');
-    var title;
-
-    L.DomEvent.disableClickPropagation(container);
-    L.DomEvent.disableScrollPropagation(container);
-    this._listShadowBox = L.DomUtil.create('div', 'list-shadow', container);
-    this._list = L.DomUtil.create('div', 'list-container', container);
-    this._listShadowBox.style.visibility = 'hidden';
-    this._list.style.visibility = 'hidden';
-    this._list.setAttribute('id', 'basemap_listbox');
-    this._list.setAttribute('role', 'listbox');
-    this._activeContainer = L.DomUtil.create('div', 'current-baselayer', container);
-    title = L.DomUtil.create('div', 'title', this._activeContainer);
-    title.innerHTML = 'BASEMAP';
-    this._activeText = L.DomUtil.create('div', 'baselayer-name', this._activeContainer);
-    this._button = L.DomUtil.create('button', undefined, container);
-    this._button.innerHTML = 'Change';
-    this._button.setAttribute('aria-expanded', false);
-    this._button.setAttribute('aria-haspopup', true);
-    this._button.setAttribute('aria-label', 'Switch base maps');
-    this._button.setAttribute('aria-owns', 'basemap_listbox');
-    this._button.setAttribute('role', 'combobox');
-    L.DomEvent.addListener(this._button, 'click', this._toggleList, this);
-    L.DomEvent.addListener(this._listShadowBox, 'click', this._toggleList, this);
-
-    if (this._map.getContainer().clientWidth < 600) {
-      this.collapse();
-    }
+    this._listContainer.appendChild(section);
   },
   collapse: function () {
     this._activeContainer.style.display = 'none';
@@ -93,7 +110,7 @@ var SwitcherControl = L.Control.extend({
 
     if (!L.DomUtil.hasClass(target, 'selected')) {
       var added = false;
-      var children = util.getChildElementsByNodeName(this._list, 'section');
+      var children = util.getChildElementsByNodeName(this._listContainer, 'section');
       var removed = false;
       var selectedId = SwitcherControl.SELECTED_ID;
       var i;
@@ -174,40 +191,16 @@ var SwitcherControl = L.Control.extend({
     this._activeText.innerHTML = baseLayer.name;
   },
   _toggleList: function () {
-    var bottomControls = document.getElementsByClassName('leaflet-bottom');
-    var topRightControls = document.getElementsByClassName('leaflet-top leaflet-right');
-    var i;
-    var mapHeight = this._map.getContainer().offsetHeight;
-    var mapWidth = this._map.getContainer().offsetWidth;
-
-    this._list.style.height = mapHeight + 'px';
-    this._listShadowBox.style.height = mapHeight + 'px';
-    this._listShadowBox.style.width = mapWidth + 'px';
-
-    if (this._list.style.visibility && this._list.style.visibility === 'hidden') {
-      for (i = 0; i < topRightControls.length; i++) {
-        topRightControls[i].style.visibility = 'hidden';
-      }
-
-      for (i = 0; i < bottomControls.length; i++) {
-        bottomControls[i].style.display = 'none';
-      }
-
-      this._listShadowBox.style.visibility = 'visible';
-      this._list.style.visibility = 'visible';
-      this._list.setAttribute('aria-expanded', true);
+    if (this._listContainer.style.display === 'none') {
+      this._listContainer.setAttribute('aria-expanded', true);
+      this._listContainer.style.display = 'block';
+      this._map._hideAllControls();
+      this._modalBackdrop.style.display = 'block';
     } else {
-      for (i = 0; i < topRightControls.length; i++) {
-        topRightControls[i].style.visibility = 'visible';
-      }
-
-      for (i = 0; i < bottomControls.length; i++) {
-        bottomControls[i].style.display = '';
-      }
-
-      this._listShadowBox.style.visibility = 'hidden';
-      this._list.style.visibility = 'hidden';
-      this._list.setAttribute('aria-expanded', false);
+      this._listContainer.setAttribute('aria-expanded', false);
+      this._listContainer.style.display = 'none';
+      this._map._showAllControls();
+      this._modalBackdrop.style.display = 'none';
     }
   },
   _update: function () {
@@ -215,7 +208,7 @@ var SwitcherControl = L.Control.extend({
     var i;
 
     this._activeText.innerHTML = '';
-    this._list.innerHTML = '';
+    this._listContainer.innerHTML = '';
 
     for (i = 0; i < this._baseLayers.length; i++) {
       var baseLayer = this._baseLayers[i];
@@ -227,31 +220,17 @@ var SwitcherControl = L.Control.extend({
       }
     }
 
-    children = util.getChildElementsByNodeName(this._list, 'section');
+    children = util.getChildElementsByNodeName(this._listContainer, 'section');
 
     for (i = 0; i < children.length; i++) {
       L.DomEvent.addListener(children[i], 'click', this._onClick, this);
     }
-  },
-  onAdd: function (map) {
-    this._initLayout();
-    this._update();
-
-    return this._container;
   }
 });
 
 L.Map.addInitHook(function () {
   if (this.options.baseLayers && this.options.baseLayers.length > 1) {
     this.switcherControl = L.outerspatial.control.switcher(this.options.baseLayers).addTo(this);
-
-    this.on('resize', function (e) {
-      if (e.newSize.x > 598) {
-        this.switcherControl.expand();
-      } else {
-        this.switcherControl.collapse();
-      }
-    });
   }
 });
 

@@ -1,15 +1,19 @@
 /* global L */
 /* jshint camelcase: false */
 
-var version = require('./package.json').version;
+var config = require('./package.json');
+var devBasePath = config.devBasePath;
+var version = config.version;
 
-window.L.Icon.Default.imagePath = 'https://cdn.outerspatial.com/libs/outerspatial-map-library/' + version + '/images';
+window.L.Icon.Default.imagePath = (devBasePath || 'https://cdn.outerspatial.com/libs/outerspatial-map-library/' + version) + '/images';
 L.outerspatial = module.exports = {
   VERSION: version,
   // Preserve order of controls because it affects the display hierarchy.
   control: {
     switcher: require('./src/control/switcher'),
+    legend: require('./src/control/legend'),
     geocoder: require('./src/control/geocoder'),
+    filter: require('./src/control/filter'),
     download: require('./src/control/download'),
     home: require('./src/control/home'),
     smallzoom: require('./src/control/smallzoom'),
@@ -19,7 +23,6 @@ L.outerspatial = module.exports = {
     fullscreen: require('./src/control/fullscreen'),
     hash: require('./src/control/hash'),
     infobox: require('./src/control/infobox'),
-    legend: require('./src/control/legend'),
     overview: require('./src/control/overview'),
     print: require('./src/control/print'),
     scale: require('./src/control/scale'),

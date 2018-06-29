@@ -4,8 +4,8 @@ window.OuterSpatial = {
     lng: -110.554
   },
   baseLayers: [
-    'mapbox-outdoors',
-    'mapbox-satellite'
+    'outerspatial-landscape',
+    'outerspatial-satellite'
   ],
   div: 'map',
   hashControl: true,

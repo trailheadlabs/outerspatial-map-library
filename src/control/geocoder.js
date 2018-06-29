@@ -2,12 +2,14 @@
 
 'use strict';
 
+// TODO: Request access to user's location and use it to present results
+
 var geocode = require('../util/geocode');
 var util = require('../util/util');
 var GeocoderControl = L.Control.extend({
   options: {
     position: 'topleft',
-    provider: 'esri'
+    provider: 'mapbox'
   },
   statics: {
     ATTRIBUTIONS: {
@@ -24,6 +26,7 @@ var GeocoderControl = L.Control.extend({
   },
   initialize: function (options) {
     L.Util.setOptions(this, options);
+
     return this;
   },
   onAdd: function (map) {
@@ -44,6 +47,9 @@ var GeocoderControl = L.Control.extend({
       .on(this._button, 'click', this._geocodeRequest, this)
       .on(this._button, 'mousewheel', stopPropagation)
       .on(this._input, 'focus', function () {
+        if (map.isDockedPopupOpen) {
+          map.closeDockedPopup();
+        }
         this.value = this.value;
         if (me._results) {
           me._resultsReady(this.value, me._results);
@@ -166,9 +172,25 @@ var GeocoderControl = L.Control.extend({
             var first = result.results[0];
 
             if (first.bounds) {
-              me._map.fitBounds(first.bounds);
+              if (me._map.options.maxBounds) {
+                if (me._map.options.maxBounds.contains(first.bounds)) {
+                  me._map.fitBounds(first.bounds);
+                } else {
+                  me._map.notify.danger('The result was located outside the boundary of the map.');
+                }
+              } else {
+                me._map.fitBounds(first.bounds);
+              }
             } else if (first.latLng) {
-              me._map.setView(first.latLng, 17);
+              if (me._map.options.maxBounds) {
+                if (me._map.options.maxBounds.contains(first.latLng)) {
+                  me._map.setView(first.latLng, 17);
+                } else {
+                  me._map.notify.danger('The result was located outside the boundary of the map.');
+                }
+              } else {
+                me._map.setView(first.latLng, 17);
+              }
             } else {
               me._map.notify.danger('There was an error finding that location. Please try again.');
             }
@@ -188,19 +210,62 @@ var GeocoderControl = L.Control.extend({
   _handleSelect: function (li) {
     var id = li.id;
     var me = this;
+    var map = me._map;
+    var latLng = me._results[id].latLng;
+    var layer = me._results[id].layer;
+    var properties = layer.feature.properties;
+    var html = L.outerspatial.popup()._resultToHtml(properties, layer.options.popup, null, null, map.options.popup, layer);
+    var usesDockedPopup = layer.options.dockedPopup;
+
+    if (typeof html === 'string') {
+      html = util.unescapeHtml(html);
+    }
 
     this._clearResults();
     this._isDirty = false;
     this._input.setAttribute('aria-activedescendant', id);
 
-    if (me._results[id].latLng) {
-      me._map.setView(me._results[id].latLng, 17);
+    if (latLng) {
+      if (usesDockedPopup) {
+        setTimeout(function () {
+          var project = map.project(latLng, 17).add([
+            -150,
+            0
+          ]);
+          var unproject = map.unproject(project, 17);
+
+          map.setView(unproject, 17);
+        }, 300);
+      } else {
+        map.setView(latLng, 17);
+      }
     } else {
-      me._map.fitBounds(me._results[id].bounds);
+      if (usesDockedPopup) {
+        setTimeout(function () {
+          map.fitBounds(layer.getBounds(), {
+            paddingTopLeft: [
+              300,
+              0
+            ],
+            paddingBottomRight: [
+              0,
+              0
+            ]
+          });
+        }, 300);
+      } else {
+        map.fitBounds(layer.getBounds());
+      }
     }
 
-    me._map.setSelectedLayer(me._results[id].layer);
-    me._map.options.div.focus();
+    map.setSelectedLayer(layer);
+
+    if (usesDockedPopup) {
+      map.setDockedPopupContent(html);
+      map.openDockedPopup();
+    }
+
+    map.options.div.focus();
   },
   _hideLoading: function () {
     L.DomEvent.on(this._button, 'click', this._geocodeRequest, this);
@@ -211,60 +276,13 @@ var GeocoderControl = L.Control.extend({
   _initalizeIndex: function () {
     var me = this;
 
-    L.DomEvent.on(me._input, 'keyup', me._debounce(function (e) {
-      var value = this.value;
-
-      if (value) {
-        var keyCode = e.keyCode;
-
-        if (keyCode !== 13 && keyCode !== 27 && keyCode !== 38 && keyCode !== 40) {
-          if (value !== me._oldValue) {
-            me._isDirty = true;
-            me._oldValue = value;
-
-            if (value.length) {
-              me._results = [];
-
-              if (window.OuterSpatial.config.overlays.constructor === Array) {
-                var overlays = window.OuterSpatial.config.overlays;
-                for (var i = 0; i < overlays.length; i++) {
-                  if (typeof overlays[i].search === 'function') {
-                    me._results = me._results.concat(overlays[i].search(value));
-                  }
-                }
-              }
-
-              me._results.sort(function (a, b) {
-                var resultA = a.name.toUpperCase();
-                var resultB = b.name.toUpperCase();
-
-                if (resultA < resultB) {
-                  return -1;
-                }
-
-                if (resultA > resultB) {
-                  return 1;
-                }
-
-                return 0;
-              });
-              me._resultsReady(value, me._results);
-            }
-          }
-        }
-      } else {
-        me._clearResults();
-      }
-    }, 250));
-
     L.DomEvent.on(me._input, 'keydown', function (e) {
       switch (e.keyCode) {
         case 13:
           if (me._selected) {
             me._handleSelect(me._selected);
-          } else {
-            me._geocodeRequest();
           }
+
           break;
         case 27:
           // Escape
@@ -308,6 +326,53 @@ var GeocoderControl = L.Control.extend({
           break;
       }
     });
+    L.DomEvent.on(me._input, 'keyup', me._debounce(function (e) {
+      var value = this.value;
+
+      if (value) {
+        var keyCode = e.keyCode;
+
+        if (keyCode !== 13 && keyCode !== 27 && keyCode !== 38 && keyCode !== 40) {
+          if (value !== me._oldValue) {
+            me._isDirty = true;
+            me._oldValue = value;
+
+            if (value.length) {
+              var overlays = window.OuterSpatial.config.overlays;
+
+              me._results = [];
+
+              if (Array.isArray(overlays)) {
+                for (var i = 0; i < overlays.length; i++) {
+                  if (typeof overlays[i].search === 'function') {
+                    me._results = me._results.concat(overlays[i].search(value));
+                  }
+                }
+              }
+
+              me._results.sort(function (a, b) {
+                var aName = a.name.toUpperCase();
+                var bName = b.name.toUpperCase();
+
+                if (aName < bName) {
+                  return -1;
+                } else if (aName > bName) {
+                  return 1;
+                } else {
+                  return 0;
+                }
+              });
+
+              console.log(me._results);
+
+              me._resultsReady(value, me._results);
+            }
+          }
+        }
+      } else {
+        me._clearResults();
+      }
+    }, 250));
   },
   _resultsReady: function (value, results) {
     var me = this;

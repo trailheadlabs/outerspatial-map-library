@@ -108,10 +108,12 @@ require('./popup.js');
     weight: style.weight
   });
 })();
+
 MapExt = L.Map.extend({
   options: {
     bounceAtZoomLimits: false,
     detectAvailablePopupSpace: true,
+    keyboard: !(/Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(navigator.userAgent)),
     wheelPxPerZoomLevel: 120,
     worldCopyJump: true,
     zoomDelta: 0.5,
@@ -120,6 +122,8 @@ MapExt = L.Map.extend({
   initialize: function (options) {
     var baseLayerSet = false;
     var container = L.DomUtil.create('div', 'outerspatial-container');
+    var dockedPopup = L.DomUtil.create('div', 'outerspatial-docked-popup-left');
+    var dockedPopupClose = L.DomUtil.create('a', 'outerspatial-docked-popup-left-close-button', dockedPopup);
     var map = L.DomUtil.create('div', 'outerspatial-map');
     var mapWrapper = L.DomUtil.create('div', 'outerspatial-map-wrapper');
     var me = this;
@@ -134,6 +138,7 @@ MapExt = L.Map.extend({
     L.Util.setOptions(this, options);
     options.div.insertBefore(outerspatial, options.div.hasChildNodes() ? options.div.childNodes[0] : null);
     outerspatial.appendChild(modules);
+    outerspatial.appendChild(dockedPopup);
     outerspatial.appendChild(container);
     toolbar.appendChild(toolbarLeft);
     toolbar.appendChild(toolbarRight);
@@ -149,30 +154,25 @@ MapExt = L.Map.extend({
     me._defaultCursor = me.getContainer().style.cursor;
     me._frame = null;
     me._selectedLayer = null;
+    L.DomUtil.create('div', 'outerspatial-docked-popup-content leaflet-popup-content', dockedPopup);
+    dockedPopupClose.innerHTML = '' +
+      '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">' +
+        '<g class="nc-icon-wrapper" fill="#ffffff">' +
+          '<path fill="#ffffff" d="M19.7,4.3c-0.4-0.4-1-0.4-1.4,0L12,10.6L5.7,4.3c-0.4-0.4-1-0.4-1.4,0s-0.4,1,0,1.4l6.3,6.3l-6.3,6.3 c-0.4,0.4-0.4,1,0,1.4C4.5,19.9,4.7,20,5,20s0.5-0.1,0.7-0.3l6.3-6.3l6.3,6.3c0.2,0.2,0.5,0.3,0.7,0.3s0.5-0.1,0.7-0.3 c0.4-0.4,0.4-1,0-1.4L13.4,12l6.3-6.3C20.1,5.3,20.1,4.7,19.7,4.3z"></path>' +
+        '</g>' +
+      '</svg>' +
+    '';
+    dockedPopupClose.addEventListener('click', function () {
+      me.closeDockedPopup();
+    }, false);
 
-    if ((window.self !== window.top) && document.referrer !== '') {
-      me._frame = window.frameElement;
-
-      if (me.options.meta && me.options.meta.title) {
-        var outerspatialContainer = container.parentNode.parentNode;
-        var titleContainer = L.DomUtil.create('li', 'title');
-        var title = L.DomUtil.create('h1', 'title');
-
-        titleContainer.appendChild(title);
-        toolbar.childNodes[0].appendChild(titleContainer);
-        title.innerHTML = me.options.meta.title;
-        toolbar.style.display = 'block';
-        util.getChildElementsByClassName(outerspatialContainer, 'outerspatial-map-wrapper')[0].style.top = '40px';
-      }
-    }
-
-    me.on('popupclose', function (e) {
-      if (e.target._selectedLayer) {
-        this.clearSelectedLayer();
-      }
-    });
     me.on('autopanstart', function () {
       me._setCursor('');
+    });
+    me.on('popupclose', function (e) {
+      if (e.target._selectedLayer) {
+        me.clearSelectedLayer();
+      }
     });
     me.notify = humane.create({
       baseCls: 'humane-bootstrap',
@@ -304,6 +304,7 @@ MapExt = L.Map.extend({
     }
 
     me._initializeModules();
+    me._setupDockedPopup();
     me._setupPopup();
     me._setupTooltip();
 
@@ -336,6 +337,24 @@ MapExt = L.Map.extend({
   },
   _createMapboxLayer: function (config) {
     return L.outerspatial.layer[config.type][config.styled === true ? 'styled' : 'tiled'](config);
+  },
+  _hideAllControls: function () {
+    var bottomControls = document.getElementsByClassName('leaflet-bottom');
+    var topLeftControls = document.getElementsByClassName('leaflet-top leaflet-left');
+    var topRightControls = document.getElementsByClassName('leaflet-top leaflet-right');
+    var i;
+
+    for (i = 0; i < bottomControls.length; i++) {
+      bottomControls[i].style.display = 'none';
+    }
+
+    for (i = 0; i < topLeftControls.length; i++) {
+      topLeftControls[i].style.display = 'none';
+    }
+
+    for (i = 0; i < topRightControls.length; i++) {
+      topRightControls[i].style.display = 'none';
+    }
   },
   _initializeModules: function () {
     if (this.options && this.options.modules && L.Util.isArray(this.options.modules) && this.options.modules.length) {
@@ -413,14 +432,15 @@ MapExt = L.Map.extend({
     }
   },
   _isCurrentlySelected: function (layer) {
-    if (this._selectedLayer && (this._selectedLayer._leaflet_id === layer._leaflet_id)) {
-      return true;
-    } else {
-      return false;
-    }
+    return this._selectedLayer && (this._selectedLayer._leaflet_id === layer._leaflet_id);
   },
   _setCursor: function (type) {
     this._container.style.cursor = type;
+  },
+  _setupDockedPopup: function () {
+    this._divWrapper = this._container.parentNode.parentNode;
+    this._divDockedPopup = util.getChildElementsByClassName(this._divWrapper.parentNode.parentNode, 'outerspatial-docked-popup-left')[0];
+    this._divDockedPopupContent = util.getChildElementsByClassName(this._divWrapper.parentNode.parentNode, 'outerspatial-docked-popup-content')[0];
   },
   _setupPopup: function () {
     var clicks = 0;
@@ -526,15 +546,20 @@ MapExt = L.Map.extend({
                 }
               }
 
-              if (actual.length && !me._popup) {
-                var popup = L.outerspatial.popup({
-                  maxHeight: (detectAvailablePopupSpace ? util._getAvailableVerticalSpace(me) : undefined),
-                  maxWidth: (detectAvailablePopupSpace ? (util._getAvailableHorizontalSpace(me) < 300 ? util._getAvailableHorizontalSpace(me) : 300) : 300)
-                });
+              if (actual.length) {
+                var html = L.outerspatial.popup()._handleResults(actual, me.options.popup);
 
-                popup
-                  .setContent(popup._handleResults(actual, me.options.popup))
-                  .setLatLng(latLng).openOn(me);
+                if (me.options.dockedPopups === true) {
+                  me.setDockedPopupContent(html);
+                  me.openDockedPopup();
+                } else if (!me._popup) {
+                  L.outerspatial.popup({
+                    maxHeight: (detectAvailablePopupSpace ? util._getAvailableVerticalSpace(me) : undefined),
+                    maxWidth: (detectAvailablePopupSpace ? (util._getAvailableHorizontalSpace(me) < 300 ? util._getAvailableHorizontalSpace(me) : 300) : 300)
+                  })
+                    .setContent(html)
+                    .setLatLng(latLng).openOn(me);
+                }
               }
             }
           }
@@ -548,23 +573,28 @@ MapExt = L.Map.extend({
       changed = true;
     }
 
-    me.on('dblclick', function () {
-      clicks++;
-    });
     me.on('click', function (e) {
       clicks = 0;
 
       if (me._controllingInteractivity === 'map') {
         setTimeout(function () {
           if (!clicks) {
+            if (me.isDockedPopupOpen) {
+              me.closeDockedPopup();
+            }
+
             go(e);
           }
         }, 200);
       }
     });
+    me.on('dblclick', function () {
+      clicks++;
+    });
   },
   _setupTooltip: function () {
     var me = this;
+    var isMobile = L.Browser.mobile;
     var overData = [];
     var tooltip = (me.infoboxControl ? me.infoboxControl : L.outerspatial.tooltip({
       map: me
@@ -686,62 +716,83 @@ MapExt = L.Map.extend({
     }
 
     me._tooltips = [];
-    L.DomEvent.on(util.getChildElementsByClassName(me.getContainer(), 'leaflet-popup-pane')[0], 'mousemove', function (e) {
-      L.DomEvent.stopPropagation(e);
-      tooltip.hide();
-    });
-    me.on('mousemove', function (e) {
-      me._cursorEvent = e;
 
-      if (me._controllingCursor === 'map') {
-        handle();
+    if (!isMobile) {
+      L.DomEvent.on(util.getChildElementsByClassName(me.getContainer(), 'leaflet-popup-pane')[0], 'mousemove', function (e) {
+        L.DomEvent.stopPropagation(e);
+        tooltip.hide();
+      });
+      me.on('mousemove', function (e) {
+        me._cursorEvent = e;
 
-        for (var layerId in me._layers) {
-          var layer = me._layers[layerId];
+        if (me._controllingCursor === 'map') {
+          handle();
 
-          if (typeof layer._handleMousemove === 'function' && layer._hasInteractivity !== false) {
-            layer._handleMousemove(me._cursorEvent.latlng.wrap(), function (result) {
-              if (result.results !== 'loading') {
-                var l = result.layer;
-                var leafletId = l._leaflet_id;
+          for (var layerId in me._layers) {
+            var layer = me._layers[layerId];
 
-                removeOverData(leafletId);
-                removeTooltip(leafletId);
+            if (typeof layer._handleMousemove === 'function' && layer._hasInteractivity !== false) {
+              layer._handleMousemove(me._cursorEvent.latlng.wrap(), function (result) {
+                if (result.results !== 'loading') {
+                  var l = result.layer;
+                  var leafletId = l._leaflet_id;
 
-                if (result.results) {
-                  overData.push(leafletId);
+                  removeOverData(leafletId);
+                  removeTooltip(leafletId);
 
-                  if (l.options && l.options.tooltip) {
-                    for (var i = 0; i < result.results.length; i++) {
-                      var data = result.results[i];
-                      var tip;
+                  if (result.results) {
+                    overData.push(leafletId);
 
-                      if (typeof l.options.tooltip === 'function') {
-                        tip = util.handlebars(l.options.tooltip(data));
-                      } else if (typeof l.options.tooltip === 'string') {
-                        tip = util.unescapeHtml(util.handlebars(l.options.tooltip, data));
-                      }
+                    if (l.options && l.options.tooltip) {
+                      for (var i = 0; i < result.results.length; i++) {
+                        var data = result.results[i];
+                        var tip;
 
-                      if (tip && me._tooltips.indexOf(tip) === -1) {
-                        me._tooltips.push({
-                          html: tip,
-                          layerId: leafletId
-                        });
+                        if (typeof l.options.tooltip === 'function') {
+                          tip = util.handlebars(l.options.tooltip(data));
+                        } else if (typeof l.options.tooltip === 'string') {
+                          tip = util.unescapeHtml(util.handlebars(l.options.tooltip, data));
+                        }
+
+                        if (tip && me._tooltips.indexOf(tip) === -1) {
+                          me._tooltips.push({
+                            html: tip,
+                            layerId: leafletId
+                          });
+                        }
                       }
                     }
                   }
-                }
 
-                handle();
-              }
-            });
+                  handle();
+                }
+              });
+            }
           }
         }
-      }
-    });
-    me.on('mouseout', function () {
-      tooltip.hide();
-    });
+      });
+      me.on('mouseout', function () {
+        tooltip.hide();
+      });
+    }
+  },
+  _showAllControls: function () {
+    var bottomControls = document.getElementsByClassName('leaflet-bottom');
+    var topLeftControls = document.getElementsByClassName('leaflet-top leaflet-left');
+    var topRightControls = document.getElementsByClassName('leaflet-top leaflet-right');
+    var i;
+
+    for (i = 0; i < bottomControls.length; i++) {
+      bottomControls[i].style.display = 'block';
+    }
+
+    for (i = 0; i < topLeftControls.length; i++) {
+      topLeftControls[i].style.display = 'block';
+    }
+
+    for (i = 0; i < topRightControls.length; i++) {
+      topRightControls[i].style.display = 'block';
+    }
   },
   _toLeaflet: function (config) {
     if (!config.div) {
@@ -789,7 +840,7 @@ MapExt = L.Map.extend({
         if (visible) {
           return config.baseLayers;
         } else {
-          var active = util.clone(baselayerPresets.mapbox.outdoors);
+          var active = util.clone(baselayerPresets.outerspatial.landscape);
           active.visible = true;
           active.zIndex = 0;
           return [
@@ -874,6 +925,15 @@ MapExt = L.Map.extend({
       this._selectedLayer = null;
     }
   },
+  closeDockedPopup: function () {
+    var map = this;
+
+    map.clearSelectedLayer();
+    this._divDockedPopup.style.left = '-324px';
+    this.isDockedPopupOpen = false;
+    map._divDockedPopupContent.scrollTop = 0;
+    map._divDockedPopupContent.innerHTML = '';
+  },
   closeModules: function () {
     var buttons = this._divModuleButtons.childNodes;
 
@@ -889,6 +949,20 @@ MapExt = L.Map.extend({
     }
 
     this.invalidateSize();
+  },
+  openDockedPopup: function () {
+    var mapWidth = util.getOuterDimensions(this._divWrapper).width;
+
+    if (mapWidth < 340) {
+      this._divDockedPopup.style.width = (mapWidth - 40) + 'px';
+    }
+
+    this._divDockedPopup.style.left = 0;
+    this.isDockedPopupOpen = true;
+  },
+  setDockedPopupContent: function (html) {
+    this._divDockedPopupContent.appendChild(html);
+    this._divDockedPopupContent.scrollTop = 0;
   },
   setSelectedLayer: function (layer) {
     if (!this._isCurrentlySelected(layer)) {

@@ -7,6 +7,7 @@
   line-height: 1.42857143;
   position: relative;
   width: 100%;
+  overflow: hidden;
 }
   .outerspatial * {
     box-sizing: content-box;
@@ -70,6 +71,67 @@
   .outerspatial-hidden-xs {
     display: none !important;
   }
+}
+
+/* Modal Backdrop */
+.outerspatial-modal-backdrop {
+  background-image: linear-gradient(90deg, rgba(0,0,0,0) 0%, #000000 100%);
+  bottom: 0;
+  display: none;
+  left: 0;
+  opacity: 0.4;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 999;
+}
+
+/* Docked Popup */
+.outerspatial-docked-popup-content {
+  height: 100%;
+  overflow-y: auto;
+  width: 100%;
+}
+.outerspatial-docked-popup-bottom {
+  background-color: #fff;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+}
+.outerspatial-docked-popup-left {
+  background-color: #fff;
+  left: -324px;
+  box-shadow: 0 0 2px rgba(0, 0, 0, .2);
+  height: 100%;
+  position: absolute;
+  transition: left 300ms;
+  top: 0;
+  width: 300px;
+  z-index: 2;
+}
+.outerspatial-docked-popup-left.show {
+  transform: translateX(100%)
+}
+.outerspatial-docked-popup-left a.outerspatial-docked-popup-left-close-button {
+  background: #3bafda;
+  border-bottom-right-radius: 4px;
+  border-top-right-radius: 4px;
+  height: 24px;
+  pointer-events: auto;
+  position: absolute;
+  right: -24px;
+  text-align: center;
+  top: 16px;
+  width: 24px;
+  z-index: -1;
+}
+.outerspatial-docked-popup-left a.outerspatial-docked-popup-left-close-button:focus,
+.outerspatial-docked-popup-left a.outerspatial-docked-popup-left-close-button:hover {
+  background-color: #67cdf6;
+}
+.outerspatial-docked-popup-left a svg {
+  height: 14px;
+  margin-top: 5px;
+  width: 14px;
 }
 
 /* Modules */
@@ -240,6 +302,20 @@
     .outerspatial-toolbar button:focus {
       outline-offset: -3px;
     }
+
+/* Location Access Dialog */
+.outerspatial-location-access-dialog {
+  background-color: #7da836;
+  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.3);
+  color: #fff;
+  padding: 16px;
+}
+  .outerspatial-location-access-dialog button {
+    background-color: #fff;
+    color: #7da836;
+    padding: 16px;
+    text-transform: uppercase;
+  }
 
 /* Buttons and Forms */
 .outerspatial button,
@@ -539,8 +615,13 @@
   top: -10px;
   width: 21px;
 }
+  .outerspatial .leaflet-container a.leaflet-popup-close-button svg {
+    height: 11px;
+    margin-left: -1px;
+    width: 11px;
+  }
 .outerspatial .leaflet-container a.leaflet-popup-close-button:focus,
-.leaflet-container a.leaflet-popup-close-button:hover {
+.outerspatial .leaflet-container a.leaflet-popup-close-button:hover {
   background-color: #67cdf6;
   color: #fff;
   text-decoration: none;
@@ -576,7 +657,7 @@
     padding-left: 15px;
   }
     .outerspatial .leaflet-popup-content .content li {
-      margin-bottom: 6px;
+      margin-bottom: 3px;
     }
   .outerspatial .leaflet-popup-content p {
     margin: 0;
@@ -692,6 +773,7 @@
     .outerspatial .leaflet-popup-content .layer .sublayer {
       clear: both;
       margin-bottom: 8px;
+      padding: 8px 12px;
     }
     .outerspatial .leaflet-popup-content .layer .sublayer:first-child {
       margin-top: -6px;
@@ -726,12 +808,18 @@
     right: 0;
     position: absolute;
   }
+  .outerspatial .leaflet-popup-content .sublayer:first-child {
+    margin-bottom: 0;
+  }
   .outerspatial .leaflet-popup-content .sublayer .title {
     font-size: 18px;
     font-style: italic;
     font-weight: normal;
     line-height: 20px;
-    padding-left: 0;
+    padding: 8px 0;
+  }
+  .outerspatial .leaflet-popup-content .sublayer .content {
+    padding: 8px 0;
   }
   .outerspatial .leaflet-popup-content .responsive-container {
     padding-top: 100%;
@@ -982,6 +1070,80 @@
   cursor: pointer;
 }
 
+/* Filter Control */
+.outerspatial .leaflet-control-filter {
+  background-color: #fff;
+  border-radius: 1px;
+  font-size: 14px;
+  z-index: 8;
+}
+  .outerspatial .leaflet-control-filter div:first-child {
+    border-right: solid 1px #d8d8d8;
+    box-sizing: border-box;
+    color: #73bd3d;
+    float: left;
+    height: 40px;
+    line-height: 40px;
+    padding: 0 10px;
+    text-align: center;
+    width: 57px;
+  }
+  .outerspatial .leaflet-control-filter div:last-child {
+    float: right;
+    height: 40px;
+    overflow: hidden;
+    position: relative;
+    width: 183px;
+  }
+    .outerspatial .leaflet-control-filter div:last-child button {
+      border: none;
+      border-right: solid 1px #d8d8d8;
+      box-sizing: border-box;
+      height: 100%;
+      padding: 0;
+      width: 45.75px;
+    }
+      .outerspatial .leaflet-control-filter div:last-child button.more {
+        bottom: 0;
+        position: absolute;
+        top: 0;
+        width: 22.875px !important;
+      }
+        .outerspatial .leaflet-control-filter div:last-child button.more:disabled {
+          background-color: #6c757d !important;
+          border-right: solid 1px #6c757d !important;
+        }
+        .outerspatial .leaflet-control-filter div:last-child button.more:hover {
+          /*
+          background-color: #9b9b9b;
+          border-right: solid 1px #9b9b9b;
+          */
+
+          background-color: #9aca41;
+          border-right: solid 1px #9aca41;
+        }
+        .outerspatial .leaflet-control-filter div:last-child button.more-previous {
+          left: 0;
+        }
+        .outerspatial .leaflet-control-filter div:last-child button.more-next {
+          right: 0;
+        }
+    .outerspatial .leaflet-control-filter div:last-child ul {
+      height: 40px;
+      list-style-type: none;
+      margin: 0 22.875px;
+      padding: 0;
+    }
+      .outerspatial .leaflet-control-filter div:last-child ul li {
+        cursor: pointer;
+        float: left;
+        height: 40px;
+        text-align: center;
+      }
+        .outerspatial .leaflet-control-filter div:last-child ul li button:hover {
+          background-color: #9aca41;
+        }
+
 /* Geocoder Control */
 .outerspatial .leaflet-control-geocoder {
   border-radius: 1px;
@@ -992,16 +1154,16 @@
   .outerspatial .leaflet-control-geocoder button:hover {
     background-clip: padding-box;
     border: none;
-    border-left: 1px solid #d8d8d8;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 1px;
+    border-right: 1px solid #d8d8d8;
     border-top-left-radius: 0;
     border-top-right-radius: 1px;
     box-sizing: border-box;
     float: right;
     height: 40px;
     outline-offset: -1px;
-    width: 40px;
+    width: 45.75px;
   }
   .outerspatial .leaflet-control-geocoder button:focus {
     position: relative;
@@ -1011,14 +1173,16 @@
     border: none;
     border-bottom-left-radius: 1px;
     border-bottom-right-radius: 0;
+    border-right: solid 1px #d8d8d8;
     border-top-left-radius: 1px;
     border-top-right-radius: 0;
     box-sizing: border-box;
+    float: left;
     height: 40px;
     outline-offset: -1px;
     text-overflow: ellipsis;
     white-space: nowrap;
-    width: 200px;
+    width: 194.25px;
   }
   .outerspatial .leaflet-control-geocoder input:focus {
     position: relative;
@@ -1076,21 +1240,47 @@
 }
 
 /* Legend Control */
-.outerspatial .leaflet-control-legend {
-  background-color: #f2f2f2;
-  background-color: rgba(242, 242, 242, .8);
-  padding: 10px;
+.outerspatial-control-legend {
+  background-color: #fff;
+  border-top: 1px solid #d8d8d8;
+  box-shadow: 2px 2px 4px -2px rgba(0,0,0,.3), -2px 2px 4px -2px rgba(0,0,0,.3);
+  box-sizing: border-box;
+  padding: 5px;
+  width: 280px;
 }
-  .outerspatial .leaflet-control-legend h3 {
-    margin: 0 0 8px 0;
+.outerspatial-control-legend .title {
+  margin-bottom: 10px;
+  text-align: center;
+}
+.outerspatial-control-legend button {
+  background-color: #fff;
+  border: 1px solid #7da836;
+  border-radius: 3px;
+  box-sizing: border-box !important;
+  color: #7da836;
+  float: right;
+  font-size: 12px !important;
+  line-height: 14px !important;
+  margin-top: 2px;
+  padding: 5px;
+  width: 53.53px;
+}
+  .outerspatial-control-legend button:hover {
+    background-color: #7da836;
+    color: #fff;
   }
-  .outerspatial .leaflet-control-legend ul {
-    margin: 0;
-    padding-left: 0;
-  }
-    .outerspatial .leaflet-control-legend ul li {
-      list-style-type: none;
-    }
+.outerspatial-control-legend-content {
+  background-color: #fff;
+  bottom: 0;
+  display: none;
+  overflow: auto;
+  padding: 10px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 252px;
+  z-index: 9991;
+}
 
 /* Measure Control */
 .outerspatial-control-measure ul {
@@ -1260,13 +1450,6 @@
   max-width: 205px;
   padding-right: 12px;
 }
-.outerspatial-control-switcher .list-shadow {
-  background-image: linear-gradient(90deg, rgba(0,0,0,0) 0%, #000000 100%);
-  opacity: 0.4;
-  position: absolute;
-  right: -16px;
-  top: -16px;
-}
 .outerspatial-control-switcher button {
   background-color: #fff;
   border: 1px solid #7da836;
@@ -1281,17 +1464,19 @@
   background-color: #7da836;
   color: #fff;
 }
-.outerspatial-control-switcher .list-container {
+.outerspatial-control-switcher-list-container {
+  bottom: 0;
   box-sizing: border-box;
   color: #6c6d70;
   overflow-x: hidden;
   overflow-y: auto;
   padding: 20px;
   position: absolute;
-  right: -16px;
-  top: -16px;
+  right: 0;
+  top: 0;
+  z-index: 9991;
 }
-  .outerspatial-control-switcher section {
+  .outerspatial-control-switcher-list-container section {
     border-radius: 2px;
     box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.3);
     cursor: pointer;
@@ -1299,36 +1484,36 @@
     margin-bottom: 12px;
     width: 232px;
   }
-    .outerspatial-control-switcher section.selected {
+    .outerspatial-control-switcher-list-container section.selected {
       box-shadow: 0 0 4px 3px #7da836;
     }
-    .outerspatial-control-switcher section:hover {
+    .outerspatial-control-switcher-list-container section:hover {
       box-shadow: 0 0 4px 3px #7da836;
     }
-    .outerspatial-control-switcher section:last-child {
+    .outerspatial-control-switcher-list-container section:last-child {
       margin-bottom: 0;
     }
-    .outerspatial-control-switcher section .baselayer-image-container {
+    .outerspatial-control-switcher-list-container section .baselayer-image-container {
       border-radius: 2px 2px 0 0;
       height: 103px;
       overflow: hidden;
       pointer-events: none;
       width: 100%;
     }
-    .outerspatial-control-switcher section .baselayer-image {
+    .outerspatial-control-switcher-list-container section .baselayer-image {
       border-radius: 2px 2px 0 0;
       bottom: 90px;
       pointer-events: none;
       position: relative;
       width: 232px;
     }
-    .outerspatial-control-switcher section .baselayer-name {
+    .outerspatial-control-switcher-list-container section .baselayer-name {
       background-color: #fff;
       font-weight: bold;
       padding: 8px 12px 0;
       pointer-events: none;
     }
-    .outerspatial-control-switcher section .baselayer-description {
+    .outerspatial-control-switcher-list-container section .baselayer-description {
       background-color: #fff;
       border-radius: 0 0 2px 2px;
       font-size: 12px;
@@ -1354,18 +1539,21 @@
 .outerspatial .humane,
 .outerspatial .humane-bootstrap {
   background-color: #fff;
-  border: 1px solid transparent;
+  border-bottom: 1px solid #000;
+  border-right: 1px solid #000;
+  border-top: 1px solid #000;
+  border-bottom-right-radius: 2px;
+  border-top-right-radius: 2px;
   box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.3);
   display: table;
   font-size: 14px;
-  left: 100px;
-  margin-left: -100px;
+  max-width: 223px;
   opacity: 0;
-  padding: 10px;
+  padding: 18px 16px;
   text-align: left;
-  top: 5%;
-  transform: translateX(-100px);
-  width: 178px;
+  top: 16px;
+  transform: translateX(-100%);
+  width: auto;
 }
 .outerspatial .humane p, .outerspatial .humane-bootstrap p,
 .outerspatial .humane ul,
@@ -1378,8 +1566,8 @@
 }
 .outerspatial .humane.humane-bootstrap-success,
 .outerspatial .humane-bootstrap.humane-bootstrap-success {
-  background-color: #dff0d8;
-  border-color: #d6e9c6;
+  background-color: #e0f2c2;
+  border-color: #5e793a;
   color: #468847;
 }
 .outerspatial .humane.humane-bootstrap-info,

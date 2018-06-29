@@ -10,7 +10,7 @@ window.OuterSpatial = {
   div: 'map',
   geocoderControl: true,
   overlays: [{
-    locationType: 'points_of_interest',
+    locationType: 'primary_points_of_interest',
     organizationId: 6372,
     preset: 'outerspatial',
     dockedPopup: true,
@@ -20,18 +20,6 @@ window.OuterSpatial = {
         type: 'directions'
       }]
     }
-  }, {
-    locationType: 'campgrounds',
-    organizationId: 6372,
-    dockedPopup: true,
-    preset: 'outerspatial',
-    searchable: true
-  }, {
-    locationType: 'trailheads',
-    organizationId: 6372,
-    dockedPopup: true,
-    preset: 'outerspatial',
-    searchable: true
   }, {
     locationType: 'trails',
     organizationId: 6372,

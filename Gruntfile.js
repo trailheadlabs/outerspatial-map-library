@@ -264,12 +264,21 @@ module.exports = function (grunt) {
     'browserify',
     'usebanner'
   ]);
-  grunt.registerTask('deploy-production', [
-    's3:production'
-  ]);
-  grunt.registerTask('deploy-staging', [
-    's3:staging'
-  ]);
+  // https://stackoverflow.com/a/32586729/27540
+  grunt.registerTask('deploy-production', function () {
+    if (pkg.devBasePath !== null) {
+      console.error('"devBasePath" in package.json is not null!');
+    } else {
+      grunt.task.run('s3:production');
+    }
+  });
+  grunt.registerTask('deploy-staging', function () {
+    if (pkg.devBasePath !== null) {
+      console.error('"devBasePath" in package.json is not null!');
+    } else {
+      grunt.task.run('s3:staging');
+    }
+  });
   grunt.registerTask('examples', [
     'clean:examples',
     'copy:examples-data',
@@ -286,7 +295,6 @@ module.exports = function (grunt) {
       grunt.file.copy('./keys.sample.json', './keys.json');
     }
   });
-  grunt.registerTask('purge', []);
   grunt.registerTask('generate-examples', 'Internal.', function () {
     var categories = {
       'Getting Started': [],

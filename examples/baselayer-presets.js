@@ -1,6 +1,7 @@
-window.OuterSpatial =  {
+window.OuterSpatial = {
   baseLayers: [
-    'outerspatial-outdoors',
+    'outerspatial-landscape',
+    'outerspatial-satellite',
     'bing-aerial',
     'bing-aerialLabels',
     'bing-roads',

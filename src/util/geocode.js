@@ -57,16 +57,22 @@ module.exports = ({
     var center = result.center;
 
     return {
-      bounds: [
-        [
-          bbox[1],
-          bbox[0]
-        ],
-        [
-          bbox[3],
-          bbox[2]
-        ]
-      ],
+      bounds: (function () {
+        if (bbox) {
+          return [
+            [
+              bbox[1],
+              bbox[0]
+            ],
+            [
+              bbox[3],
+              bbox[2]
+            ]
+          ];
+        } else {
+          return null;
+        }
+      })(),
       latLng: [
         center[1],
         center[0]
@@ -212,6 +218,8 @@ module.exports = ({
   mapbox: function (value, callback) {
     var me = this;
 
+    console.log(value);
+
     reqwest({
       error: function () {
         callback({
@@ -220,6 +228,8 @@ module.exports = ({
         });
       },
       success: function (response) {
+        console.log(response);
+
         if (response) {
           if (response.features && response.features.length) {
             var results = [];
