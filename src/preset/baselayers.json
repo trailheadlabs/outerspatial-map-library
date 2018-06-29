@@ -5,7 +5,7 @@
       "icon":"topo",
       "id": "trailheadlabs.cjevt1tj61qqy2rpgknasxjqi",
       "maxZoom": 22,
-      "minZoom": 0,
+      "minZoom": 0.1,
       "name": "OuterSpatial Landscape",
       "styled": true,
       "type": "mapbox"
@@ -15,7 +15,7 @@
       "icon": "topo",
       "id": "trailheadlabs.cj5wmcjku2mls2stllpydix9b",
       "maxZoom": 22,
-      "minZoom": 0,
+      "minZoom": 0.1,
       "name": "OuterSpatial Outdoors",
       "styled": true,
       "type": "mapbox"
@@ -25,7 +25,7 @@
       "icon": "aerial",
       "id": "trailheadlabs.cjhezcype0ihq2rl71l9rp47j",
       "maxZoom": 22,
-      "minZoom": 0,
+      "minZoom": 0.1,
       "name": "OuterSpatial Satellite",
       "styled": true,
       "type": "mapbox"

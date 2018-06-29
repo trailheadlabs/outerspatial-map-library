@@ -359,19 +359,10 @@ module.exports = {
             }
 
             if (layer._popup) {
-              console.log('here');
               layer._popup.remove();
             } else if (layer._map.options.dockedPopups === true) {
               layer._map.closeDockedPopup();
             }
-
-            // TODO: Also handle docked popup
-
-            // console.log(typeof layer._popup);
-            // console.log(typeof this._popup);
-            // console.log(typeof e.target._popup);
-
-            // e.target._popup.remove();
           }
         });
 

@@ -19,7 +19,6 @@ var Module = L.Class.extend({
   },
   addTo: function (map) {
     this._map = map;
-    console.log(map);
 
     return this;
   }

@@ -25,12 +25,6 @@
   "include": true,
   "title": "Basic"
 }, {
-  "category": "Controls",
-  "description": "",
-  "id": "bootstrap-loader",
-  "include": true,
-  "title": "Bootstrap Loader"
-}, {
   "category": "Layers",
   "description": "",
   "id": "bing-layer",

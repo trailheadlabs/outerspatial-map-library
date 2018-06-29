@@ -218,8 +218,6 @@ module.exports = ({
   mapbox: function (value, callback) {
     var me = this;
 
-    console.log(value);
-
     reqwest({
       error: function () {
         callback({
@@ -228,8 +226,6 @@ module.exports = ({
         });
       },
       success: function (response) {
-        console.log(response);
-
         if (response) {
           if (response.features && response.features.length) {
             var results = [];

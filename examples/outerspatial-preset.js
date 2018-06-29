@@ -12,38 +12,28 @@ window.OuterSpatial = {
   overlays: [{
     locationType: 'points_of_interest',
     organizationId: 6372,
-    preset: 'outerspatial',
-    dockedPopup: true,
-    searchable: true,
     popup: {
       actions: [{
         type: 'directions'
       }]
-    }
+    },
+    preset: 'outerspatial'
   }, {
     locationType: 'campgrounds',
     organizationId: 6372,
-    dockedPopup: true,
-    preset: 'outerspatial',
-    searchable: true
+    preset: 'outerspatial'
   }, {
     locationType: 'trailheads',
     organizationId: 6372,
-    dockedPopup: true,
-    preset: 'outerspatial',
-    searchable: true
+    preset: 'outerspatial'
   }, {
     locationType: 'trails',
     organizationId: 6372,
-    dockedPopup: true,
-    preset: 'outerspatial',
-    searchable: true
+    preset: 'outerspatial'
   }, {
     locationType: 'areas',
-    dockedPopup: true,
     organizationId: 6372,
-    preset: 'outerspatial',
-    searchable: true
+    preset: 'outerspatial'
   }],
   zoom: 7
 };

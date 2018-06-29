@@ -154,8 +154,8 @@ var OverviewControl = L.Control.extend({
       if (fromMaintoMini) {
         var zoom = this._mainMap.getZoom() + this.options.zoomLevelOffset;
 
-        if (zoom < 0) {
-          zoom = 0;
+        if (zoom < 0.5) {
+          zoom = 0.5;
         }
 
         return zoom;

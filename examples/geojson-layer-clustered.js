@@ -21,7 +21,7 @@ window.OuterSpatial = {
     url: 'data/gateway-points-of-interest.geojson'
   }, {
     cluster: {
-      clusterIcon: '#000',
+      clusterIcon: '#da4353',
       maxClusterRadius: 70
     },
     popup: {
