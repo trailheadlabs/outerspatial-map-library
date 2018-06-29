@@ -93,11 +93,8 @@
     "type": "git",
     "url": "https://github.com/trailheadlabs/outerspatial-map-library.git"
   },
-<<<<<<< HEAD
-=======
   "scripts": {
     "test": "grunt test"
   },
->>>>>>> docked-popups
-  "version": "7.1.14"
+  "version": "7.1.15"
 }
