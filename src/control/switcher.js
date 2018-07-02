@@ -69,6 +69,12 @@ var SwitcherControl = L.Control.extend({
     var imgContainer;
     var name;
 
+    /*
+    if (baseLayer.type === 'mapbox') {
+      // TODO: Use Mapbox Static API to get thumbnail
+    }
+    */
+
     baseLayer.name.split(' ').forEach(function (word, index) {
       if (index === 0) {
         imgFileName = word.toLowerCase();

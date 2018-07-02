@@ -183,7 +183,9 @@ var OuterSpatialLayer = L.GeoJSON.extend({
           var website = properties.website;
 
           if (description && description !== null && description !== '') {
-            content = content + '<section>' + description + '</section>';
+            content = content + '' +
+              '<section>' + description + '</section>' +
+            '';
           }
 
           if (tags) {
@@ -239,40 +241,74 @@ var OuterSpatialLayer = L.GeoJSON.extend({
             });
 
             for (var key in tagSections) {
-              if (key === 'Status') {
-                continue;
+              if (key !== 'Status') {
+                content = content + '' +
+                  '<section>' +
+                    '<h5>' + key + '</h5>' +
+                    '<span style="color:#7da836;">' + tagSections[key].sort().join(', ') + '</span>' +
+                  '</section>' +
+                '';
               }
-
-              content = content + '<section><h5>' + key + '</h5><span style="color:#7da836;">' + tagSections[key].sort().join(', ') + '</span></section>';
             }
           }
 
-          if (accessibilityDescription && accessibilityDescription !== null && accessibilityDescription !== '') {
-            content = content + '<section><h5>Accessibility Description</h5>' + accessibilityDescription + '</section>';
+          if (accessibilityDescription && accessibilityDescription !== '') {
+            content = content + '' +
+              '<section>' +
+                '<h5>Accessibility Description</h5>' +
+                accessibilityDescription +
+              '</section>' +
+            '';
           }
 
           if (contentBlocks) {
             contentBlocks.forEach(function (contentBlock) {
-              content = content + '<section><h5>' + contentBlock.title + '</h5>' + contentBlock.body + '</section>';
+              content = content + '' +
+                '<section>' +
+                  '<h5>' + contentBlock.title + '</h5>' +
+                  contentBlock.body +
+                '</section>' +
+              '';
             });
           }
 
-          if (length && length !== null && length !== '') {
-            content = content + '<section><h5>Length</h5>' + (length / 1609.34).toFixed(1) + ' mi</section>';
+          if (length && length !== '') {
+            var miles = (length / 1609.34).toFixed(1);
+
+            content = content + '' +
+              '<section>' +
+                '<h5>Length</h5>' +
+                (miles < 0.1 ? '< 0.1' : miles) + ' mi' +
+              '</section>' +
+            '';
           }
 
-          if (address && address !== null && address !== '') {
+          if (address && address !== '') {
             try {
               address = JSON.parse(address).label;
             } catch (e) {
               // Address is not JSON
             }
 
-            content = content + '<section><h5>Address</h5><div class="url"><a href="https://maps.google.com/maps?daddr=' + address + '" target="_blank">' + address + '</a></div></section>';
+            content = content + '' +
+              '<section>' +
+                '<h5>Address</h5>' +
+                '<div class="url">' +
+                  '<a href="https://maps.google.com/maps?daddr=' + address + '" target="_blank">' + address + '</a>' +
+                '</div>' +
+              '</section>' +
+            '';
           }
 
-          if (website && website !== null && website !== '') {
-            content = content + '<section><h5>Website</h5><div class="url"><a href="' + properties.website + '" target="_blank">' + properties.website + '</div></section>';
+          if (website && website !== '') {
+            content = content + '' +
+              '<section>' +
+                '<h5>Website</h5>' +
+                '<div class="url">' +
+                  '<a href="' + properties.website + '" target="_blank">' + properties.website + '</a>' +
+                '</div>' +
+              '</section>' +
+            '';
           }
 
           if (content === '') {
@@ -318,14 +354,16 @@ var OuterSpatialLayer = L.GeoJSON.extend({
 
           subtitle = (className === 'Area' || className === 'TrailSegment' ? type : type + (properties.area_id ? ' in ' + properties.area.name : ''));
 
-          if (properties['name']) {
+          if (properties.name) {
             title = '{{name}}';
           } else {
             title = 'Unnamed';
           }
 
           if (properties['tag:Status:closed'] === 'yes') {
-            banner = '<img class="banner" width=51 height=20 alt="Closed banner" src="' + window.L.Icon.Default.imagePath + '/outerspatial/closed-indicator-right' + (L.Browser.retina ? '@2x' : '') + '.png"/>';
+            banner = '' +
+              '<img alt="Closed banner" class="banner" src="' + window.L.Icon.Default.imagePath + '/outerspatial/closed-indicator-right' + (L.Browser.retina ? '@2x' : '') + '.png" style="height:20px;width:51px;" />' +
+            '';
           }
 
           return {

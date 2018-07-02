@@ -32,14 +32,38 @@ var GeocoderControl = L.Control.extend({
   onAdd: function (map) {
     var attribution = GeocoderControl.ATTRIBUTIONS[this.options.provider.toUpperCase()];
     var container = L.DomUtil.create('form', 'leaflet-control-geocoder');
+    var div = map.getContainer();
     var me = this;
     var stopPropagation = L.DomEvent.stopPropagation;
 
     this._button = L.DomUtil.create('button', 'search', container);
-    this._setIcon('search');
     this._input = L.DomUtil.create('input', undefined, container);
     this._ul = L.DomUtil.create('ul', 'leaflet-control', container);
+
+    // TODO: You should probably unhook these listeners in onRemove.
+    div.childNodes.forEach(function (childNode) {
+      childNode.onmousedown = function () {
+        me._clearResults(me);
+      };
+    });
+    div.onmousedown = function () {
+      me._clearResults(me);
+    };
+    document.getElementsByClassName('leaflet-control-container')[0].childNodes.forEach(function (a) {
+      a.childNodes.forEach(function (b) {
+        b.onmousedown = function () {
+          me._clearResults(me);
+        };
+      });
+      a.onmousedown = function () {
+        me._clearResults(me);
+      };
+    });
+    map.on('movestart', function () {
+      me._clearResults(me);
+    });
     this._initalizeIndex();
+    this._setIcon('search');
     L.DomEvent.disableClickPropagation(this._button);
     L.DomEvent.disableClickPropagation(this._input);
     L.DomEvent.disableClickPropagation(this._ul);
@@ -50,15 +74,12 @@ var GeocoderControl = L.Control.extend({
         if (map.isDockedPopupOpen) {
           map.closeDockedPopup();
         }
+
         this.value = this.value;
+
         if (me._results) {
           me._resultsReady(this.value, me._results);
         }
-      })
-      .on(this._input, 'blur', function () {
-        setTimeout(function () {
-          me._clearResults();
-        }, 500);
       })
       .on(this._input, 'mousewheel', stopPropagation)
       .on(this._ul, 'mousewheel', stopPropagation);
@@ -130,14 +151,20 @@ var GeocoderControl = L.Control.extend({
       }
     }
   },
-  _clearResults: function () {
-    this._ul.innerHTML = '';
-    this._ul.scrollTop = 0;
-    this._ul.style.display = 'none';
-    this._input.setAttribute('aria-activedescendant', null);
-    this._input.setAttribute('aria-expanded', false);
-    this._selected = null;
-    this._oldValue = '';
+  _clearResults: function (context) {
+    context._oldValue = '';
+    context._selected = null;
+
+    if (context._input) {
+      context._input.setAttribute('aria-activedescendant', null);
+      context._input.setAttribute('aria-expanded', false);
+    }
+
+    if (context._ul) {
+      context._ul.innerHTML = '';
+      context._ul.scrollTop = 0;
+      context._ul.style.display = 'none';
+    }
   },
   _debounce: function (fn, delay) {
     var timer = null;
@@ -162,7 +189,7 @@ var GeocoderControl = L.Control.extend({
     if (value.length) {
       var me = this;
 
-      me._clearResults();
+      me._clearResults(this);
       me._showLoading();
       geocode[me.options.provider](value, function (result) {
         me._hideLoading();
@@ -213,28 +240,24 @@ var GeocoderControl = L.Control.extend({
     var map = me._map;
     var latLng = me._results[id].latLng;
     var layer = me._results[id].layer;
-    var properties = layer.feature.properties;
-    var html = L.outerspatial.popup()._resultToHtml(properties, layer.options.popup, null, null, map.options.popup, layer);
-    var usesDockedPopup = layer.options.dockedPopup;
+    var html = L.outerspatial.popup()._resultToHtml(layer.feature.properties, layer.options.popup, null, null, map.options.popup, layer);
+    var usesDockedPopup = map.options.dockedPopups;
 
     if (typeof html === 'string') {
       html = util.unescapeHtml(html);
     }
 
-    this._clearResults();
+    this._clearResults(me);
     this._isDirty = false;
     this._input.setAttribute('aria-activedescendant', id);
 
     if (latLng) {
       if (usesDockedPopup) {
         setTimeout(function () {
-          var project = map.project(latLng, 17).add([
+          map.setView(map.unproject(map.project(latLng, 17).add([
             -150,
             0
-          ]);
-          var unproject = map.unproject(project, 17);
-
-          map.setView(unproject, 17);
+          ]), 17), 17);
         }, 300);
       } else {
         map.setView(latLng, 17);
@@ -279,6 +302,7 @@ var GeocoderControl = L.Control.extend({
     L.DomEvent.on(me._input, 'keydown', function (e) {
       switch (e.keyCode) {
         case 13:
+
           if (me._selected) {
             me._handleSelect(me._selected);
           }
@@ -286,7 +310,7 @@ var GeocoderControl = L.Control.extend({
           break;
         case 27:
           // Escape
-          me._clearResults();
+          me._clearResults(me);
           break;
         case 38:
           // Up
@@ -368,7 +392,7 @@ var GeocoderControl = L.Control.extend({
           }
         }
       } else {
-        me._clearResults();
+        me._clearResults(me);
       }
     }, 250));
   },
@@ -376,14 +400,14 @@ var GeocoderControl = L.Control.extend({
     var me = this;
 
     if (results.length > 0) {
-      me._clearResults();
+      me._clearResults(me);
 
       for (var i = 0; i < results.length; i++) {
         var li = L.DomUtil.create('li', null, me._ul);
         var result = results[i];
         var d = result.name;
-        var j;
         var t = result.type;
+        var j;
 
         li.className = 'outerspatial-geocoder-result-park';
         li.id = i;
@@ -398,7 +422,7 @@ var GeocoderControl = L.Control.extend({
       me._ul.style.display = 'block';
       me._input.setAttribute('aria-expanded', true);
     } else {
-      me._clearResults();
+      me._clearResults(me);
     }
   },
   _setIcon: function (icon) {
