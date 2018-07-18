@@ -23,11 +23,12 @@ var FilterControl = L.Control.extend({
       var labelDiv = L.DomUtil.create('div');
       var lis = '';
       var ul = L.DomUtil.create('ul');
+      var numberOfVisibleFilters = 3;
 
       labelDiv.innerHTML = 'Filter:';
 
       // Add previous and next buttons, if needed
-      if (filters.length > 3) {
+      if (filters.length > numberOfVisibleFilters) {
         this._nextButton = L.DomUtil.create('button', 'more more-next');
         this._nextButton.innerHTML = '' +
           '<image src="data:image/svg+xml;base64,' + window.btoa('<svg width="11" height="13" xmlns="http://www.w3.org/2000/svg"><path d="M.64.425L10.36 6.5.64 12.575z" stroke="#444" stroke-width=".81" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"/></svg>') + '" title="More"></image>' +
@@ -35,23 +36,22 @@ var FilterControl = L.Control.extend({
         this._nextButton.onclick = function () {
           var children = ul.children;
           var countVisibleButtons = 0;
-          var firstHiddenButtonIndex = -1;
+          var lastHiddenButtonIndex = -1;
 
           for (var i = 0; i < children.length; i++) {
             if (children[i].style.display === 'none') {
-              if (firstHiddenButtonIndex === -1) {
-                firstHiddenButtonIndex = i;
-              }
+              lastHiddenButtonIndex = i;
             } else {
               countVisibleButtons++;
             }
           }
 
-          ul.children[firstHiddenButtonIndex + 1].style.display = 'none';
+          ul.children[lastHiddenButtonIndex + 1].style.display = 'none';
+          countVisibleButtons--;
 
           me._previousButton.removeAttribute('disabled');
 
-          if (countVisibleButtons === 5) {
+          if (countVisibleButtons === (children.length - numberOfVisibleFilters)) {
             me._nextButton.setAttribute('disabled', true);
           }
         };
