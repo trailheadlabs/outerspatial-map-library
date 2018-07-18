@@ -107,10 +107,17 @@ var FilterControl = L.Control.extend({
       // Hook up button click handlers
       for (var k = 0; k < ul.children.length; k++) {
         L.DomEvent.on(ul.children[k].children[0], 'click', function () {
-          var fn = filters[this.getAttribute('data-index')].fn;
+          var filterFunction = filters[this.getAttribute('data-index')].filterFunction;
+          var resetFilterFunction = filters[this.getAttribute('data-index')].resetFilterFunction;
+          var activeClassName = 'active';
+          var isActive = this.classList.contains(activeClassName);
 
-          if (typeof fn === 'function') {
-            fn();
+          if (!isActive && typeof filterFunction === 'function') {
+            this.classList.add(activeClassName);
+            filterFunction();
+          } else if (typeof resetFilterFunction === 'function') {
+            this.classList.remove(activeClassName);
+            resetFilterFunction();
           }
         }, ul.children[k].children[0]);
       }

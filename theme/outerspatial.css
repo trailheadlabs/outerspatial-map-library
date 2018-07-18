@@ -1141,8 +1141,15 @@
         text-align: center;
       }
         .outerspatial .leaflet-control-filter div:last-child ul li button:hover {
+          background-color: #ff0099;
+        }
+        .outerspatial .leaflet-control-filter div:last-child ul li button:active {
+          background-color: #bada55 !important;
+        }
+        .outerspatial .leaflet-control-filter div:last-child ul li button.active {
           background-color: #9aca41;
         }
+
 
 /* Geocoder Control */
 .outerspatial .leaflet-control-geocoder {
