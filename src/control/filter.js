@@ -1,4 +1,7 @@
 /* globals L, module, require */
+// Leaflet controller module...
+// NAC map is passing config via filter control object and this is taking care of display, behaviour, et al.
+// NOTE: When I make changes to this, I need to rebuild
 
 'use strict';
 
@@ -14,6 +17,7 @@ var FilterControl = L.Control.extend({
   },
   onAdd: function (map) {
     var filters = this.options.filters;
+    var filterLabelEnabled = this.options.filterLabelEnabled;
 
     this._container = L.DomUtil.create('div', 'leaflet-control-filter');
 
@@ -22,8 +26,8 @@ var FilterControl = L.Control.extend({
       var me = this;
       var labelDiv = L.DomUtil.create('div');
       var lis = '';
-      var ul = L.DomUtil.create('ul');
-      var numberOfVisibleFilters = 3;
+      var ul = L.DomUtil.create('ul', 'leaflet-control-filter-button-wrapper');
+      var numberOfVisibleFilters = filterLabelEnabled ? 3 : 4;
 
       labelDiv.innerHTML = 'Filter:';
 
@@ -86,7 +90,12 @@ var FilterControl = L.Control.extend({
       }
 
       actionsDiv.appendChild(ul);
-      this._container.appendChild(labelDiv);
+
+      // TODO: This will need some QA on the visuals to ensure this shows correctly...
+      if (filterLabelEnabled) {
+        this._container.appendChild(labelDiv);
+      }
+
       this._container.appendChild(actionsDiv);
 
       for (var j = 0; j < filters.length; j++) {
@@ -112,11 +121,19 @@ var FilterControl = L.Control.extend({
           var activeClassName = 'active';
           var isActive = this.classList.contains(activeClassName);
 
+          // TODO: Remove the active states on all of the siblings:
+          //    div.leaflet-control-filter div ul li.active
+          var buttons = document.getElementsByClassName('leaflet-control-filter-button-wrapper')[0].children;
+          // TODO iterate over the children li's and remove the active classes...
+          for (var i = 0; i < buttons.length; i++) {
+            L.DomUtil.removeClass(buttons[i].firstElementChild, activeClassName);
+          }
+
           if (!isActive && typeof filterFunction === 'function') {
-            this.classList.add(activeClassName);
+            L.DomUtil.addClass(this, activeClassName);
+            // this.classList.add(activeClassName);
             filterFunction();
           } else if (typeof resetFilterFunction === 'function') {
-            this.classList.remove(activeClassName);
             resetFilterFunction();
           }
         }, ul.children[k].children[0]);
