@@ -1084,18 +1084,27 @@
     float: left;
     height: 40px;
     line-height: 40px;
-    padding: 0 10px;
+    padding: 0;
     text-align: center;
     width: 57px;
   }
-  .outerspatial .leaflet-control-filter div:last-child {
+  .outerspatial .leaflet-control-filter div:first-child.more {
+    padding: 0 10px;
+  }
+  .outerspatial .leaflet-control-filter div:last-child.actions {
     float: right;
-    height: 40px;
     overflow: hidden;
     position: relative;
+    height: 40px;
+    width: 229px;
+  }
+  .outerspatial .leaflet-control-filter div:last-child.actions.more {
+    width: 240px;
+  }
+  .outerspatial .leaflet-control-filter div:last-child.actions.more.has-label {
     width: 183px;
   }
-    .outerspatial .leaflet-control-filter div:last-child button {
+    .outerspatial .leaflet-control-filter .actions button {
       border: none;
       border-right: solid 1px #d8d8d8;
       box-sizing: border-box;
@@ -1103,51 +1112,43 @@
       padding: 0;
       width: 45.75px;
     }
-      .outerspatial .leaflet-control-filter div:last-child button.more {
+      .outerspatial .leaflet-control-filter .actions button.more {
         bottom: 0;
         position: absolute;
         top: 0;
         width: 22.875px !important;
       }
-        .outerspatial .leaflet-control-filter div:last-child button.more:disabled {
+        .outerspatial .leaflet-control-filter .actions button.more:disabled {
           background-color: #6c757d !important;
           border-right: solid 1px #6c757d !important;
         }
-        .outerspatial .leaflet-control-filter div:last-child button.more:hover {
-          /*
-          background-color: #9b9b9b;
-          border-right: solid 1px #9b9b9b;
-          */
-
+        .outerspatial .leaflet-control-filter .actions button.more:hover {
           background-color: #9aca41;
           border-right: solid 1px #9aca41;
         }
-        .outerspatial .leaflet-control-filter div:last-child button.more-previous {
+        .outerspatial .leaflet-control-filter .actions button.more-previous {
           left: 0;
         }
-        .outerspatial .leaflet-control-filter div:last-child button.more-next {
+        .outerspatial .leaflet-control-filter .actions button.more-next {
           right: 0;
         }
-    .outerspatial .leaflet-control-filter div:last-child ul {
+    .outerspatial .leaflet-control-filter .actions ul {
       height: 40px;
       list-style-type: none;
-      margin: 0 22.875px;
+      margin: 0;
       padding: 0;
     }
-      .outerspatial .leaflet-control-filter div:last-child ul li {
+    .outerspatial .leaflet-control-filter .actions.more ul {
+      margin: 0 22.875px;
+    }
+      .outerspatial .leaflet-control-filter .actions ul li {
         cursor: pointer;
         float: left;
         height: 40px;
         text-align: center;
       }
-        .outerspatial .leaflet-control-filter div:last-child ul li button:hover {
-          background-color: #ff0099;
-        }
-        .outerspatial .leaflet-control-filter div:last-child ul li button:active {
-          background-color: #bada55 !important;
-        }
-        .outerspatial .leaflet-control-filter div:last-child ul li button.active {
-          background-color: #9aca41;
+        .outerspatial .leaflet-control-filter .actions ul li button.active {
+          background-color: #aa66cc;
         }
 
 

@@ -22,12 +22,17 @@ var FilterControl = L.Control.extend({
     this._container = L.DomUtil.create('div', 'leaflet-control-filter');
 
     if (filters && filters.length) {
-      var actionsDiv = L.DomUtil.create('div');
+      var actionsDiv = L.DomUtil.create('div', 'actions');
       var me = this;
-      var labelDiv = L.DomUtil.create('div');
+      var labelDiv = L.DomUtil.create('div', 'filters-label');
       var lis = '';
       var ul = L.DomUtil.create('ul', 'leaflet-control-filter-button-wrapper');
-      var numberOfVisibleFilters = filterLabelEnabled ? 3 : 4;
+      var numberOfVisibleFilters = 5; // Default state: no label, no previous/next buttons
+      if (filterLabelEnabled) {
+        numberOfVisibleFilters = 3;
+      } else if (filters.length > numberOfVisibleFilters) {
+        numberOfVisibleFilters = 4;
+      }
 
       labelDiv.innerHTML = 'Filter:';
 
@@ -55,7 +60,7 @@ var FilterControl = L.Control.extend({
 
           me._previousButton.removeAttribute('disabled');
 
-          if (countVisibleButtons === (children.length - numberOfVisibleFilters)) {
+          if (countVisibleButtons === (numberOfVisibleFilters)) {
             me._nextButton.setAttribute('disabled', true);
           }
         };
@@ -85,8 +90,12 @@ var FilterControl = L.Control.extend({
         };
         this._previousButton.setAttribute('disabled', true);
 
+        L.DomUtil.addClass(actionsDiv, 'more');
+
         actionsDiv.appendChild(this._previousButton);
         actionsDiv.appendChild(this._nextButton);
+      } else {
+        actionsDiv.style.width = filters.length * 45.75 + 'px';
       }
 
       actionsDiv.appendChild(ul);
@@ -94,6 +103,7 @@ var FilterControl = L.Control.extend({
       // TODO: This will need some QA on the visuals to ensure this shows correctly...
       if (filterLabelEnabled) {
         this._container.appendChild(labelDiv);
+        L.DomUtil.addClass(actionsDiv, 'has-label');
       }
 
       this._container.appendChild(actionsDiv);
@@ -121,17 +131,15 @@ var FilterControl = L.Control.extend({
           var activeClassName = 'active';
           var isActive = this.classList.contains(activeClassName);
 
-          // TODO: Remove the active states on all of the siblings:
-          //    div.leaflet-control-filter div ul li.active
+          // Remove the active states on all of the siblings:
           var buttons = document.getElementsByClassName('leaflet-control-filter-button-wrapper')[0].children;
-          // TODO iterate over the children li's and remove the active classes...
           for (var i = 0; i < buttons.length; i++) {
             L.DomUtil.removeClass(buttons[i].firstElementChild, activeClassName);
           }
 
+          // Set the active state on the clicked filter
           if (!isActive && typeof filterFunction === 'function') {
             L.DomUtil.addClass(this, activeClassName);
-            // this.classList.add(activeClassName);
             filterFunction();
           } else if (typeof resetFilterFunction === 'function') {
             resetFilterFunction();
