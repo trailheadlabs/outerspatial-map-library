@@ -100,7 +100,6 @@ var FilterControl = L.Control.extend({
 
       actionsDiv.appendChild(ul);
 
-      // TODO: This will need some QA on the visuals to ensure this shows correctly...
       if (filterLabelEnabled) {
         this._container.appendChild(labelDiv);
         L.DomUtil.addClass(actionsDiv, 'has-label');
