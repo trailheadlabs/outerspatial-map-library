@@ -35,30 +35,40 @@ var GeocoderControl = L.Control.extend({
     var div = map.getContainer();
     var me = this;
     var stopPropagation = L.DomEvent.stopPropagation;
+    var childNodes = div.childNodes;
 
     this._button = L.DomUtil.create('button', 'search', container);
     this._input = L.DomUtil.create('input', undefined, container);
     this._ul = L.DomUtil.create('ul', 'leaflet-control', container);
 
     // TODO: You should probably unhook these listeners in onRemove.
-    div.childNodes.forEach(function (childNode) {
-      childNode.onmousedown = function () {
-        me._clearResults(me);
-      };
-    });
-    div.onmousedown = function () {
-      me._clearResults(me);
-    };
-    document.getElementsByClassName('leaflet-control-container')[0].childNodes.forEach(function (a) {
-      a.childNodes.forEach(function (b) {
-        b.onmousedown = function () {
+    if (childNodes && Array.isArray(childNodes) && childNodes.length) {
+      childNodes.forEach(function (childNode) {
+        childNode.onmousedown = function () {
           me._clearResults(me);
         };
       });
-      a.onmousedown = function () {
-        me._clearResults(me);
-      };
-    });
+    }
+
+    div.onmousedown = function () {
+      me._clearResults(me);
+    };
+
+    childNodes = document.getElementsByClassName('leaflet-control-container')[0].childNodes;
+
+    if (childNodes && Array.isArray(childNodes) && childNodes.length) {
+      childNodes.forEach(function (a) {
+        a.childNodes.forEach(function (b) {
+          b.onmousedown = function () {
+            me._clearResults(me);
+          };
+        });
+        a.onmousedown = function () {
+          me._clearResults(me);
+        };
+      });
+    }
+
     map.on('movestart', function () {
       me._clearResults(me);
     });
