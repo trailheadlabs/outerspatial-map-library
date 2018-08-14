@@ -269,6 +269,7 @@ module.exports = function (grunt) {
     if (pkg.devBasePath !== null) {
       console.error('"devBasePath" in package.json is not null!');
     } else {
+      grunt.task.run('build');
       grunt.task.run('s3:production');
     }
   });
@@ -277,6 +278,7 @@ module.exports = function (grunt) {
       console.log('"devBasePath" in package.json is not null');
     }
 
+    grunt.task.run('build');
     grunt.task.run('s3:staging');
   });
   grunt.registerTask('examples', [
