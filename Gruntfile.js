@@ -274,10 +274,10 @@ module.exports = function (grunt) {
   });
   grunt.registerTask('deploy-staging', function () {
     if (pkg.devBasePath !== null) {
-      console.error('"devBasePath" in package.json is not null!');
-    } else {
-      grunt.task.run('s3:staging');
+      console.log('"devBasePath" in package.json is not null');
     }
+
+    grunt.task.run('s3:staging');
   });
   grunt.registerTask('examples', [
     'clean:examples',

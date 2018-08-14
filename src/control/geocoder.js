@@ -36,6 +36,8 @@ var GeocoderControl = L.Control.extend({
     var me = this;
     var stopPropagation = L.DomEvent.stopPropagation;
     var childNodes = div.childNodes;
+    var divContainer;
+    var i;
 
     this._button = L.DomUtil.create('button', 'search', container);
     this._input = L.DomUtil.create('input', undefined, container);
@@ -43,30 +45,41 @@ var GeocoderControl = L.Control.extend({
 
     // TODO: You should probably unhook these listeners in onRemove.
     if (childNodes && Array.isArray(childNodes) && childNodes.length) {
-      childNodes.forEach(function (childNode) {
+      for (i = 0; i < childNodes.length; i++) {
+        var childNode = childNodes[i];
+
         childNode.onmousedown = function () {
           me._clearResults(me);
         };
-      });
+      }
     }
 
     div.onmousedown = function () {
       me._clearResults(me);
     };
 
-    childNodes = document.getElementsByClassName('leaflet-control-container')[0].childNodes;
+    divContainer = document.getElementsByClassName('leaflet-control-container');
+
+    if (divContainer[0]) {
+      childNodes = divContainer[0].childNodes;
+    }
 
     if (childNodes && Array.isArray(childNodes) && childNodes.length) {
-      childNodes.forEach(function (a) {
-        a.childNodes.forEach(function (b) {
-          b.onmousedown = function () {
-            me._clearResults(me);
-          };
-        });
+      for (i = 0; i < childNodes.length; i++) {
+        var a = childNodes[i];
+
+        if (a.childNodes && Array.isArray(a.childNodes) && a.childNodes.length) {
+          for (var j = 0; j < a.childNodes.length; j++) {
+            a.childNodes[j].onmousedown = function () {
+              me._clearResults(me);
+            };
+          }
+        }
+
         a.onmousedown = function () {
           me._clearResults(me);
         };
-      });
+      }
     }
 
     map.on('movestart', function () {
@@ -109,7 +122,7 @@ var GeocoderControl = L.Control.extend({
 
     if (attribution) {
       if (L.Util.isArray(attribution)) {
-        for (var i = 0; i < attribution.length; i++) {
+        for (i = 0; i < attribution.length; i++) {
           map.attributionControl.addAttribution(attribution[i]);
         }
       } else {
