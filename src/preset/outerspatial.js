@@ -119,7 +119,11 @@ var OuterSpatialLayer = L.GeoJSON.extend({
     require('../mixin/geojson')
   ],
   options: {
-    environment: 'production',
+    environment: 'staging',
+
+
+
+
     formatPopups: true, // TODO: Just check for "popups" config property
     searchable: true
   },
@@ -135,6 +139,10 @@ var OuterSpatialLayer = L.GeoJSON.extend({
     };
 
     function fetch (environment, organizationId, locationType) {
+      if (locationType === 'campgrounds' || locationType === 'trailheads') {
+        locationType = 'points_of_interest';
+      }
+
       return reqwest({
         type: 'json',
         url: 'https://' + (environment === 'production' ? '' : 'staging-') + 'cdn.outerspatial.com/static_data/organizations/' + organizationId + '/api_v2/' + locationType + '.geojson'
@@ -345,7 +353,7 @@ var OuterSpatialLayer = L.GeoJSON.extend({
           var type;
 
           if (className === 'PointOfInterest') {
-            type = 'Point of Interest';
+            type = properties.point_type ? properties.point_type : 'Point of Interest';
           } else if (className === 'TrailSegment') {
             type = 'Trail Segment';
           } else {
