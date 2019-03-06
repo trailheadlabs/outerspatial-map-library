@@ -79,9 +79,13 @@ var FullscreenControl = L.Control.extend({
       this._button = L.DomUtil.create('button', undefined, this._container);
       this._setIcon('enterFullscreen');
       this._button.setAttribute('alt', 'Enter fullscreen');
-      L.DomEvent.addListener(this._button, 'click', this.fullscreen, this);
       this._isFullscreen = false;
       this._map = map;
+
+      L.DomEvent
+        .disableClickPropagation(this._button)
+        .on(this._button, 'click', L.DomEvent.preventDefault)
+        .on(this._button, 'click', this.fullscreen, this);
 
       return this._container;
     }
