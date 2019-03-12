@@ -11,7 +11,7 @@ window.OuterSpatial = {
   geocoderControl: true,
   overlays: [{
     locationType: 'points_of_interest',
-    organizationId: 6372,
+    organizationId: 6465,
     popup: {
       actions: [{
         type: 'directions'
@@ -20,19 +20,19 @@ window.OuterSpatial = {
     preset: 'outerspatial'
   }, {
     locationType: 'campgrounds',
-    organizationId: 6372,
+    organizationId: 6465,
     preset: 'outerspatial'
   }, {
     locationType: 'trailheads',
-    organizationId: 6372,
+    organizationId: 6465,
     preset: 'outerspatial'
   }, {
     locationType: 'trails',
-    organizationId: 6372,
+    organizationId: 6465,
     preset: 'outerspatial'
   }, {
     locationType: 'areas',
-    organizationId: 6372,
+    organizationId: 6465,
     preset: 'outerspatial'
   }],
   zoom: 7

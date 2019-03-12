@@ -47,18 +47,6 @@ var OuterSpatialLayer = L.GeoJSON.extend({
     maxZoom: 22,
     minZoom: 14,
     priority: 4,
-    symbol: 'letter-x',
-    type: null
-  }, {
-    maxZoom: 22,
-    minZoom: 14,
-    priority: 4,
-    symbol: 'letter-x',
-    type: ''
-  }, {
-    maxZoom: 22,
-    minZoom: 14,
-    priority: 4,
     symbol: 'parking',
     type: 'Parking'
   }, {
@@ -71,7 +59,7 @@ var OuterSpatialLayer = L.GeoJSON.extend({
     maxZoom: 22,
     minZoom: 14,
     priority: 4,
-    symbol: 'dot',
+    symbol: null,
     type: 'POI'
   }, {
     maxZoom: 22,
@@ -112,8 +100,6 @@ var OuterSpatialLayer = L.GeoJSON.extend({
     priority: 1,
     symbol: 'visitor-center',
     type: 'Visitor Center'
-
-    // TODO: Add trails
   }],
   includes: [
     require('../mixin/geojson')
@@ -611,7 +597,8 @@ var OuterSpatialLayer = L.GeoJSON.extend({
         if (me.options.locationType === 'points_of_interest') {
           me.getLayers().forEach(function (layer) {
             config = (function () {
-              var c;
+              // Default
+              var c = null;
 
               for (var i = 0; i < me._include.length; i++) {
                 if (me._include[i].type === layer.feature.properties.point_type) {
@@ -620,9 +607,14 @@ var OuterSpatialLayer = L.GeoJSON.extend({
                 }
               }
 
-              if (c) {
-                return c;
+              if (c === null) {
+                layer.feature.properties.point_type = 'POI';
+                c = me._include.filter(function (obj) {
+                  return obj.type === 'POI';
+                })[0];
               }
+
+              return c;
             })();
 
             if (layer.options.styles) {
