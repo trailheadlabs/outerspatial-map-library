@@ -490,7 +490,13 @@ var OuterSpatialLayer = L.GeoJSON.extend({
     L.Util.setOptions(this, this._toLeaflet(options));
 
     if (this.options.locationType === 'primary_points_of_interest') {
-      var campgrounds = fetch(me.options.environment, me.options.organizationId, 'campgrounds');
+      var campgrounds = fetch(me.options.environment, me.options.organizationId, 'campgrounds').then(function (geojson) {
+        geojson.features = geojson.features.filter(function (feature) {
+          return feature.properties.point_type === 'Campground';
+        });
+
+        return geojson;
+      });
       var pointsOfInterest = fetch(me.options.environment, me.options.organizationId, 'points_of_interest').then(function (geojson) {
         geojson.features = geojson.features.filter(function (feature) {
           var poiType = feature.properties.point_type;
@@ -500,7 +506,13 @@ var OuterSpatialLayer = L.GeoJSON.extend({
 
         return geojson;
       });
-      var trailheads = fetch(me.options.environment, me.options.organizationId, 'trailheads');
+      var trailheads = fetch(me.options.environment, me.options.organizationId, 'trailheads').then(function (geojson) {
+        geojson.features = geojson.features.filter(function (feature) {
+          return feature.properties.point_type === 'Trailhead';
+        });
+
+        return geojson;
+      });
 
       Promise.all([
         campgrounds,
@@ -576,6 +588,24 @@ var OuterSpatialLayer = L.GeoJSON.extend({
       });
     } else {
       fetch(me.options.environment, me.options.organizationId, me.options.locationType).then(function (geojson) {
+        switch (me.options.locationType) {
+          case 'campgrounds':
+            geojson.features = geojson.features.filter(function (feature) {
+              return feature.properties.point_type === 'Campground';
+            });
+            break;
+          case 'points_of_interest':
+            geojson.features = geojson.features.filter(function (feature) {
+              return feature.properties.point_type !== 'Campground' && feature.properties.point_type !== 'Trailhead';
+            });
+            break;
+          case 'trailheads':
+            geojson.features = geojson.features.filter(function (feature) {
+              return feature.properties.point_type === 'Trailhead';
+            });
+            break;
+        }
+
         L.GeoJSON.prototype.initialize.call(me, geojson, me.options);
 
         if (me.options.locationType === 'points_of_interest') {
