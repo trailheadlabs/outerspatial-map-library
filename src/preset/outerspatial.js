@@ -119,11 +119,7 @@ var OuterSpatialLayer = L.GeoJSON.extend({
     require('../mixin/geojson')
   ],
   options: {
-    environment: 'staging',
-
-
-
-
+    environment: 'production',
     formatPopups: true, // TODO: Just check for "popups" config property
     searchable: true
   },
